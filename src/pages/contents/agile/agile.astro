@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 ---
 
 <!DOCTYPE html>
@@ -73,7 +73,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
   <div id="menubar_hdr" class="close"></div>
     <!--メニューの開閉処理条件設定　800px以下-->
     <script>
-      import {OCwindowWidth, open_close} from "../../js/openclose.js";
+      import {OCwindowWidth, open_close} from "../../../js/openclose.js";
       if (OCwindowWidth() <= 800) {
         open_close("menubar_hdr", "menubar-s");
       }
