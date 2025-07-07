@@ -5,12 +5,12 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <BaseHead title="システム開発知識が集うサイト" description="Code SmellとかRDRAとか" />
+  <BaseHead title={SITE_TITLE} description="Code SmellとかRDRAとか" />
+  <Header />
   <body class="defaultbody">
     <div id="container">
-    <Header />
     <div id="contents">
     <div id="main">
       <span id="pagetop"></span>
