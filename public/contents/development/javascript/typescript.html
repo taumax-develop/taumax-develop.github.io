@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- twitter投稿用の設定 -->
+    <meta name="twitter:card" content="summary" /> <!--カード種類：summary か summary_large_image-->
+    <meta name="twitter:site" content="@taumax_" /> <!--ユーザー名-->
+    <meta property="og:url" content="https://taumax-github.github.io/contents/development/javascript/typescript.html" /> <!--記事のURL-->
+    <meta property="og:title" content="TypeScript" /> <!--記事のタイトル-->
+    <meta property="og:description" content="代表的なAltJSの一つであるTypeScriptについて" /> <!--記事の要約（ディスクリプション）-->
+    <meta property="og:image" content="https://taumax-github.github.io/images/logo.png" /> <!--画像のURL-->
+
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/print.css" media="print">
+    <script src="../../../js/openclose.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>TypeScript</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141266564-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-141266564-1');
+    </script>
+    <script data-ad-client="ca-pub-5924490903263360" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  </head>
+
+  <!--PC用（801px以上端末）で表示させるブロック-->
+  <header class="pc">
+    <h1 class="logo">
+      <a href="https://taumax-github.github.io/"><img src="../../../images/icon_twitter_card.png" alt="TOP"></a>
+    </h1>
+
+    <!--PC用（801px以上端末）メニュー-->
+    <nav id="menubar">
+      <ul class="none">
+        <li class="menuimg menu1"><a href="https://taumax-github.github.io/"><span>Home</span></a></li>
+      </ul>
+    </nav>
+    <ul class="icon">
+      <li><a href="https://twitter.com/taumax_" target="_blank"><img src="../../../images/icon_twitter.png" alt="Twitter"></a></li>
+      <li><a href="https://qiita.com/taumax" target="_blank"><img src="../../../images/icon_qiita.png" alt="Qiita"></a></li>
+    </ul>
+    <ul class="indent_no">
+      <li><a href="#firstly">はじめに</a></li>
+      <li><a href="#altjs">AltJS</a></li>
+      <li><a href="#typescript">TypeScript</a></li>
+      <li><a href="#define_type">型の定義</a></li>
+      <li><a href="#variables">変数</a></li>
+      <li><a href="#list">配列</a></li>
+      <li><a href="#object_type">ｵﾌﾞｼﾞｪｸﾄ型</a></li>
+      <li><a href="#function">関数</a></li>
+      <li><a href="#tsconfig">tsconfig.json</a></li>
+    </ul>
+  </header><!--/.pc-->
+
+  <!--小さな端末用（800px以下端末）で表示させるブロック-->
+  <header class="sh">
+    <!--小さな端末用（800px以下端末）メニュー-->
+    <div id="menubar-s">
+      <h1 class="logo">
+        <a href="https://taumax-github.github.io/"><img src="../../../images/icon_twitter_card.png" alt="SAMPLE SITE"></a>
+      </h1>
+      <nav>
+        <ul class="none">
+          <li class="menuimg menu1"><a href="https://taumax-github.github.io/"><span>Home</span></a></li>
+        </ul>
+      </nav>
+      <ul class="icon">
+        <li><a href="https://twitter.com/taumax_" target="_blank"><img src="../../../images/icon_twitter.png" alt="Twitter"></a></li>
+        <li><a href="https://qiita.com/taumax" target="_blank"><img src="../../../images/icon_qiita.png" alt="Qiita"></a></li>
+      </ul>
+      <ul class="indent_no">
+        <li><a href="#firstly">はじめに</a></li>
+        <li><a href="#altjs">AltJS</a></li>
+        <li><a href="#typescript">TypeScript</a></li>
+        <li><a href="#define_type">型の定義</a></li>
+        <li><a href="#variables">変数</a></li>
+        <li><a href="#list">配列</a></li>
+        <li><a href="#object_type">オブジェクト型</a></li>
+        <li><a href="#function">関数</a></li>
+        <li><a href="#tsconfig">tsconfig.json</a></li>
+      </ul>
+    </div><!--/#menubar-s-->
+  </header><!--/.sh-->
+
+  <body class="defaultbody">
+    <div id="container">
+    <div id="contents">
+    <div id="main">
+      <span id="pagetop"></span>
+      <section class="box">
+
+        <!-- tweetボタン -->
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <h2 class="title">TypeScript</h2>
+
+        <ul class="breadcrumb">
+          <li class="breadcrumbli"><a href="../../../index.html">ホーム</a></li>
+          <li class="breadcrumbli"> > <a href="./js_index.html">js関連技術</a></li>
+          <li class="breadcrumbli"> > TypeScript</li>
+        </ul>
+
+        <br/>
+        <!-- Google AdSense -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 横長広告 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5924490903263360"
+             data-ad-slot="6254596512"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+        <br/>
+        <span id="firstly"></span>
+        <h3 class="title">はじめに</h3>
+        <p>
+          このページは、<a href="./js_index.html">JavaScriptの進化</a>の続きのページです。<br/>
+          ここではもっとも代表的なAltJSであるTypeScriptにスポットを当てて記載していきます。<br/>
+          一応このページから読み進めても問題ないように構成したつもりですが、先のページを見てからの方が、TypeScriptが生まれるまでの背景がわかって面白いかもしれません。<br/>
+        </p>
+
+        <br/>
+        <span id="altjs"></span>
+        <h3 class="title">AltJS</h3>
+        <p>
+          AltJS（代替JavaScript言語）とは、コンパイルすることでJavaScriptが生成されるプログラミング言語です。<br/>
+          TypeScriptとCoffeeScript辺りが有名ですが、なかでもTypeScriptは<a href="./spa/spa.html">SPA(Single Page Splication)</a>のフレームワークでも対応されているほど標準的なものとして受け入れられています。<br/>
+          ここではTypeScriptについて記載していきます。<br/>
+        </p>
+
+        <br/>
+        <span id="typescript"></span>
+        <h3 class="title">TypeScript</h3>
+        <p>
+          TypeScriptは2012年に登場した、Microsoft製のAltJSです。フリーかつオープンソースで提供されており、中規模〜大規模な開発を想定しており、以下のような仕様があります。<br/>
+        </p>
+
+        <ul>
+          <li>型定義</li>
+          <li>null/undefine安全</li>
+          <li>汎用的なクラスやメソッドの型を実現するジェネリック</li>
+          <li>エディターによる入力補完</li>
+          <li>その他のECMAで定義されているJavaScriptの最新仕様</li>
+        </ul>
+
+        <p>
+          TypeScriptで記述されたソースコードはビルドツールを通じて最終的にはJavaScriptに変換されるため、JavaScriptで実装したものと比べてパフォーマンスも差異はなく、また、古いブラウザをターゲットにしたトランスパイルも可能です。このため、実行環境などが導入の障壁になることはあまりないでしょう。<br/>
+          <br/>
+          TypeScriptを採用するデメリットを挙げるとすれば以下のような点です。<br/>
+        </p>
+
+        <ul>
+          <li>プロジェクトの規模によってはコンパイルに時間がかかる</li>
+          <li>導入のための学習コストがかかる</li>
+        </ul>
+
+        <br/>
+        <!-- Google AdSense -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 横長広告 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5924490903263360"
+             data-ad-slot="6254596512"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+        <br/>
+        <spam id="define_type"></spam>
+        <h3 class="title">型の定義</h3>
+        <p>
+          TypeScriptの最大の特徴は型の定義です。型注釈(Type Annotation)と呼ばれる方情報を付与することで、変数や引数に格納する型を制限できます。<br/>
+          なお、型注釈は変数のデータ型が明らかな場合など、一部の条件では省略できます。<br/>
+
+
+<pre><code>function sayHello(name: string) {
+  console.log(name)
+}
+
+let name: string = 'aaa'
+sayHello(name)
+</code></pre>
+
+        <br/>
+        <span id="variables"></span>
+        <h4 class="title">変数の型定義</h4>
+<pre><code>const age: number = 30
+let isDone: boolean = true
+let name: string = 'abc'
+</code></pre>
+
+
+        <br/>
+        <span id="list"></span>
+        <h4 class="title">配列の型定義</h4>
+
+<pre><code>const array: string[] = ['aaa', 'bbb']
+array.push('ccc')
+array.push(1) // ←型が合わないためエラー
+</code></pre>
+
+        <br/>
+        <span id="object_type"></span>
+        <h4 class="title">オブジェクト型の型定義</h4>
+<pre><code>{ キー名1: 型1, キー名2: 型2, キー名3: 型3 }</code></pre>
+
+        <br/>
+
+<pre><code>const user: { name: string, age: number } = {
+  name: 'aaa',
+  age: 36
+}
+console.log(user.name)
+console.log(user.age)
+</code></pre>
+
+
+        <br/>
+        <span id="function"></span>
+        <h4 class="title">関数の型定義</h4>
+<pre><code>function(引数1: 型1, 引数2: 型2): 戻り値 {
+  // 
+}
+</code></pre>
+
+        <br/>
+<pre><code>function sayHello(name: string): string {
+  return `こんにちは${name}`
+}
+sayHello('aaa') // こんにちはaaa
+</code></pre>
+
+        <br/>
+        <p>
+          オプショナルや引数のデフォルト値を使用することもできます<br/>
+        </p>
+
+<pre class="title"><code class="title">オプショナル</code></pre>
+<pre><code>function sayHello(name: string, greeting?: string): string {
+  return `${greeting} ${name}`
+}
+sayHello('aaa') // aaa
+sayHello('aaa', 'hello') // hello aaa
+</code></pre>
+
+        <br/>
+<pre class="title"><code class="title">引数にデフォルト値指定</code></pre>
+<pre><code>function sayHello(name: string, greeting: string = 'hello'): string {
+  return `${greeting} ${name}`
+}
+sayHello('aaa') // hello aaa
+sayHello('aaa', 'hey') // hey aaa
+</code></pre>
+
+        <br/>
+        <!-- Google AdSense -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 横長広告 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5924490903263360"
+             data-ad-slot="6254596512"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
+        <br/>
+        <span id="tsconfig"></span>
+        <h3 class="title">tsconfig.json</h3>
+        <p>
+          TypeScriptではコンパイルに必要なオプションやコンパイル対象となるファイルの情報をtsconfig.jsonに記述します。<br/>
+          <code>tsc --init</code>コマンドを実行することでデフォルトのtsconfig.jsonが作成されます。プロジェクトルートに配置しましょう。<br/>
+          tsconfig.jsonの詳細なオプションについては以下公式ドキュメント参照<br/>
+          <a href="https://www.typescriptlang.org/tsconfig" target="_blank" rel="noopener noreferrer">TypeScript Compiler Options</a>
+        </p>
+        <br/>
+
+<pre class="title"><code class="title">tsconfig.json</code></pre>
+<pre><code>{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+</code></pre>
+
+
+        <br/><br/>
+        <hr>
+
+        <br/>
+        参考書籍<br/>
+        <ul>
+          <li><a href="https://amzn.to/4as09nr" target="_blank" rel="noopener noreferrer"><img src="./spa/img/typescript_react_next.jpg" width="200"/><br/>TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発</a></li>
+          <li><a href="https://amzn.to/3TPf5Xr" target="_blank" rel="noopener noreferrer"><img src="./img/実践TypeScript.jpg" width="200"/><br/>実践TypeScript</a></li>
+        </ul>
+
+        <br/>
+        参考サイト<br/>
+        <ul>
+          <li><a href="https://staff.persol-xtech.co.jp/hatalabo/it_engineer/222.html" target="_blank" rel="noopener noreferrer">パーソル クロステクノロジー altJS(代替JavaScript言語)とは？選び方と注意点を徹底比較！</a></li>
+          <li><a href="https://tech-camp.in/note/technology/41177/" target="_blank" rel="noopener noreferrer">TECH CAMPブログ AltJSの選び方解説！注目の代替JavaScript言語を徹底比較</a></li>
+          <li><a href="https://www.typescriptlang.org/tsconfig" target="_blank" rel="noopener noreferrer">TypeScript Compiler Options</a></li>
+        </ul>
+      </section><!-- section class="box" -->
+
+      <br/>
+      <!-- Google AdSense -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- 横長広告 -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5924490903263360"
+           data-ad-slot="6254596512"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+      <br/>
+
+      <footer>
+        <small><a href="https://taumax-github.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+        <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+      </footer>
+
+    </div><!--/#main-->
+    </div><!--/#contents-->
+    </div><!--/#container-->
+  </body>
+
+  <!--ページの上部に戻る「↑」ボタン-->
+  <p class="nav-fix-pos-pagetop"><a href="#pagetop">↑</a></p>
+
+  <!--メニュー開閉ボタン-->
+  <div id="menubar_hdr" class="close"></div>
+    <!--メニューの開閉処理条件設定　800px以下-->
+    <script>
+      if (OCwindowWidth() <= 800) {
+        open_close("menubar_hdr", "menubar-s");
+      }
+    </script>
+</html>
