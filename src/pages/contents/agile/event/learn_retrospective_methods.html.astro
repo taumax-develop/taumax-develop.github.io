@@ -2,7 +2,7 @@
 import BaseHead from '../../../../components/BaseHead.astro';
 import Header from '../../../../components/Header.astro';
 import Footer from '../../../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../../../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, BASE_URL } from '../../../../consts';
 ---
 
 <!DOCTYPE html>
@@ -77,7 +77,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../../../consts';
         <div id="firstly"></div>
         <h2 class="title">ふりかえりの手法をたくさん学ぼう</h2>
 
-        <a href="../../../index.html">ホーム</a> > <a href="../agile.html">アジャイル</a> > ふりかえりの手法をたくさん学ぼう<br><br>
+        <a href=`${BASE_URL()}/index.html`>ホーム</a> > <a href=`${BASE_URL()}/contents/agile/agile.html`>アジャイル</a> > ふりかえりの手法をたくさん学ぼう<br><br>
 
         <h3 class="title">はじめに</h3>
         <p>
