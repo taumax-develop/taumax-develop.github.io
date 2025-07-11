@@ -1,10 +1,16 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import { Image } from 'astro:assets';
+import ICON_TWITTER_CARD from '../assets/image/icon_twitter_card.png';
+import ICON_TWITTER from '../assets/image/icon_twitter.png';
+import ICON_TOGETTER from '../assets/image/icon_togetter.png';
+import ICON_QIITA from '../assets/image/icon_qiita.png';
+import ICON_SAGAMAX from '../assets/image/icon_sagamax.png';
 ---
 
     <header class="pc">
-      <h1 class="logo"><a href="https://taumax-github.github.io/"><img src="images/icon_twitter_card.png" alt="TOP"></a></h1>
+      <h1 class="logo"><a href="https://taumax-github.github.io/"><Image src={ICON_TWITTER_CARD} alt="TOP"></a></h1>
 
       <!--PC用（801px以上端末）メニュー-->
       <nav id="menubar">
@@ -13,12 +19,12 @@ import { SITE_TITLE } from '../consts';
         </ul>
       </nav>
       <ul class="icon">
-        <li><a href="https://twitter.com/taumax_" target="_blank"><img src="images/icon_twitter.png" alt="Twitter"></a></li>
-        <li><a href="https://togetter.com/id/taumax_" target="_blank"><img src="images/icon_togetter.png" alt="togetter"></a></li>
-        <li><a href="https://qiita.com/taumax" target="_blank"><img src="images/icon_qiita.png" alt="Qiita"></a></li>
+        <li><a href="https://twitter.com/taumax_" target="_blank"><Image src={ICON_TWITTER} alt="Twitter"></a></li>
+        <li><a href="https://togetter.com/id/taumax_" target="_blank"><Image src={ICON_TOGETTER} alt="togetter"></a></li>
+        <li><a href="https://qiita.com/taumax" target="_blank"><Image src={ICON_QIITA} alt="Qiita"></a></li>
       </ul>
       <ul class="icon_middle">
-        <a href="https://taumax-github.github.io/sagamax/" target="_blank"><img src="images/icon_sagamax.png" width="200"><br>ロマサガサイト</a>
+        <a href="https://taumax-github.github.io/sagamax/" target="_blank"><Image src={ICON_SAGAMAX} width="200" alt="sagamax"/><br>ロマサガサイト</a>
       </ul>
     </header>
     <!--/.pc-->
@@ -27,19 +33,19 @@ import { SITE_TITLE } from '../consts';
     <header class="sh">
       <!--小さな端末用（800px以下端末）メニュー-->
       <div id="menubar-s">
-        <h1 class="logo"><a href="https://taumax-github.github.io/"><img src="images/icon_twitter_card.png" alt="TOP"></a></h1>
+        <h1 class="logo"><a href="https://taumax-github.github.io/"><Image src={ICON_TWITTER_CARD} alt="TOP"></a></h1>
         <nav>
           <ul class="none">
             <li class="menuimg menu1"><a href="https://taumax-github.github.io/"><span>Home</span></a></li>
           </ul>
         </nav>
         <ul class="icon">
-          <li><a href="https://twitter.com/taumax_" target="_blank"><img src="images/icon_twitter.png" alt="Twitter"></a></li>
-          <li><a href="https://togetter.com/id/taumax_" target="_blank"><img src="images/icon_togetter.png" alt="togetter"></a></li>
-          <li><a href="https://qiita.com/taumax" target="_blank"><img src="images/icon_qiita.png" alt="Qiita"></a>  </li>
+          <li><a href="https://twitter.com/taumax_" target="_blank"><Image src={ICON_TWITTER} alt="Twitter"></a></li>
+          <li><a href="https://togetter.com/id/taumax_" target="_blank"><Image src={ICON_TOGETTER} alt="togetter"></a></li>
+          <li><a href="https://qiita.com/taumax" target="_blank"><Image src={ICON_QIITA} alt="Qiita"></a>  </li>
         </ul>
         <ul class="icon_middle">
-          <a href="https://taumax-github.github.io/sagamax/" target="_blank"><img src="images/icon_sagamax.png" width="200"><br>ロマサガサイト</a>
+          <a href="https://taumax-github.github.io/sagamax/" target="_blank"><Image src={ICON_SAGAMAX} width="200" alt="sagamax"><br>ロマサガサイト</a>
         </ul>
       </div><!--/#menubar-s-->
     </header><!--/.sh-->

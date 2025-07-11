@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, BASE_URL } from '../consts';
 ---
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         <br>
         <h3 class="title">開発手法</h3>
         <ul>
-          <li><a href="./contents/agile/agile.html">アジャイル</a></li>
+          <li><a href=`${BASE_URL()}/contents/agile/agile.html`>アジャイル</a></li>
         </ul>
 
         <!--
