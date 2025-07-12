@@ -1,13 +1,17 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION, BASE_URL } from '../../../consts';
+import { SITE_TITLE, BASE_URL, TWITTER_CARD_SUMMARY } from '../../../consts';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 ---
 
-<SiteLayout title={SITE_TITLE} description="ふりかえりの手法をたくさん学ぼう">
+<SiteLayout
+  title={SITE_TITLE}
+  description="アジャイル"
+  twitterCardSize={TWITTER_CARD_SUMMARY}>
+
   <div id="firstly"></div>
   <h2 class="title">アジャイル</h2>
 
-  <a href=`${BASE_URL}/index.html`>ホーム</a> > アジャイル<br><br>
+  <a href={BASE_URL}>ホーム</a> > アジャイル<br><br>
 
   <a href=`${BASE_URL}/contents/agile/event/learn_retrospective_methods.html`>ふりかえりの手法をたくさん学ぼう</a>
 </SiteLayout>

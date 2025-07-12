@@ -1,18 +1,20 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import { SITE_TITLE } from '../consts';
+import '../styles/style.css';
+import '../styles/print.css';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import type { ImageMetadata } from 'astro';
 
-interface Props {
+type Props = {
   title: string;
   description: string;
+  twitterCardSize: 'summary' | 'summary_large_image';
   image?: ImageMetadata;
-}
+};
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, twitterCardSize, image = FallbackImage } = Astro.props;
 ---
 
 <head>
@@ -26,16 +28,15 @@ const { title, description, image = FallbackImage } = Astro.props;
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- twitter投稿用の設定 -->
-  <meta name="twitter:card" content="summary" /> <!--カード種類：summary か summary_large_image-->
+  <meta name="twitter:card" content={twitterCardSize} /> <!--カード種類：summary か summary_large_image-->
   <meta name="twitter:site" content="@taumax_" /> <!--ユーザー名-->
-  <meta property="og:url" content={Astro.url} /> <!--記事のURL-->
-  <!--<meta property="og:url" content="https://taumax-github.github.io/" />--> <!--記事のURL-->
+  <meta property="og:url" content={Astro.url.href} /> <!--記事のURL-->
   <meta property="og:title" content={title} /> <!--記事のタイトル-->
   <meta property="og:description" content={description} /> <!--記事の要約（ディスクリプション）-->
   <meta property="og:image" content="https://taumax-github.github.io/images/icon_twitter_card.png" /> <!--画像のURL-->
 
-  <link rel="stylesheet" href="https://taumax-develop.github.io/styles/style.css">
-  <link rel="stylesheet" href="https://taumax-develop.github.io/styles/print.css" media="print">
+  <!-- <link rel="stylesheet" href="https://taumax-develop.github.io/styles/style.css">
+  <link rel="stylesheet" href="https://taumax-develop.github.io/styles/print.css" media="print"> -->
 
   <title>{title}</title>
 </head>

@@ -1,10 +1,14 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION, BASE_URL } from '../../../../consts';
+import { SITE_TITLE, BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../consts';
 import AdUnit from '../../../../components/AdUnit.astro';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 ---
 
-<SiteLayout title={SITE_TITLE} description="ふりかえりの手法をたくさん学ぼう">
+<SiteLayout
+  title={SITE_TITLE}
+  description="ふりかえりの手法をたくさん学ぼう"
+  twitterCardSize={TWITTER_CARD_SUMMARY}>
+
   <ul class="indent_no">
     <li><a href="#firstly">はじめに</a></li>
     <li><a href="#movie">動画</a></li>
@@ -58,7 +62,7 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
   <div id="firstly"></div>
   <h2 class="title">ふりかえりの手法をたくさん学ぼう</h2>
 
-  <a href=`${BASE_URL}/index.html`>ホーム</a> > <a href=`${BASE_URL}/contents/agile/agile.html`>アジャイル</a> > ふりかえりの手法をたくさん学ぼう<br><br>
+  <a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/agile/agile.html`>アジャイル</a> > ふりかえりの手法をたくさん学ぼう<br><br>
 
   <h3 class="title">はじめに</h3>
   <p>

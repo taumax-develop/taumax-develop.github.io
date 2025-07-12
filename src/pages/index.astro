@@ -1,10 +1,13 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION, BASE_URL } from '../consts';
-import AdUnit from '../components/AdUnit.astro';
+import { SITE_TITLE, BASE_URL, TWITTER_CARD_SUMMARY } from '../consts';
 import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<SiteLayout title={SITE_TITLE} description="ふりかえりの手法をたくさん学ぼう">
+<SiteLayout
+  title={SITE_TITLE}
+  description="indexページ"
+  twitterCardSize={TWITTER_CARD_SUMMARY}>
+
   <h2 class="title">システム開発知識が集うサイト</h2>
 
   <p>
@@ -129,10 +132,6 @@ import SiteLayout from '../layouts/SiteLayout.astro';
     <li><a href=`${BASE_URL}/contents/security/sop/sop.html`>同一生成元ポリシー(SOP：Same-Origin Policy)</a></li>
     <li><a href=`${BASE_URL}/contents/security/cvss/cvss.html`>CVSS</a></li>
   </ul>
-
-  <br>
-  <AdUnit />
-  <br>
 
   <!--
   <br><br>
