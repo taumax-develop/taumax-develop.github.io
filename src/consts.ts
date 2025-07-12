@@ -3,9 +3,10 @@
 
 export const SITE_TITLE = 'システム開発知識が集うサイト';
 export const SITE_DESCRIPTION = 'システム開発知識が集うサイト';
-export let BASE_URL = () => {
-  if (import.meta.env.PROD) {
-    return "https://taumax-develop.github.io"
+export const BASE_URL: string = function() {
+  let baseUrl = "https://taumax-develop.github.io"
+  if (import.meta.env.DEV) {
+    baseUrl = "http://localhost:4321"
   }
-  return "http://localhost:4321"
-}
+  return baseUrl
+}()
