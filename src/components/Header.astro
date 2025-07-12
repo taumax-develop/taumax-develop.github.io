@@ -5,6 +5,12 @@ import ICON_TWITTER from '../assets/images/icon_twitter.png';
 import ICON_TOGETTER from '../assets/images/icon_togetter.png';
 import ICON_QIITA from '../assets/images/icon_qiita.png';
 import ICON_SAGAMAX from '../assets/images/icon_sagamax.png';
+
+export type index = {
+  id: string;
+  name: string;
+};
+let { indexList } = Astro.props;
 ---
 
 <header class="pc">
@@ -21,9 +27,12 @@ import ICON_SAGAMAX from '../assets/images/icon_sagamax.png';
     <li><a href="https://togetter.com/id/taumax_" target="_blank"><Image src={ICON_TOGETTER} alt="togetter"></a></li>
     <li><a href="https://qiita.com/taumax" target="_blank"><Image src={ICON_QIITA} alt="Qiita"></a></li>
   </ul>
-  <ul class="icon_middle">
-    <a href="https://taumax-github.github.io/sagamax/" target="_blank"><Image src={ICON_SAGAMAX} width="200" alt="sagamax"/><br>ロマサガサイト</a>
-  </ul>
+  <nav class="indent_no">
+    {indexList?.map((item: index) => {
+      let ele = item.id? <li><a href={item.id}>{item.name}</a></li>:<p>{item.name}</p>
+      return ele
+    })}
+  </nav>
 </header>
 <!--/.pc-->
 

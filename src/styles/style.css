@@ -285,6 +285,12 @@ td {
 /*ul.disc,olタグ
 ---------------------------------------------------------------------------*/
 
+nav.indent_no {
+    list-style: disc;
+    padding: 0px;
+    margin: 0px;
+}
+
 ul.none {
     list-style-type: none;
     padding: 0px 0px 0px 0px;
@@ -364,11 +370,6 @@ iframe {
   background: #00bfff;
   border-radius: 10px;
   box-shadow: none;
-}
-
-ul.indent_no {
-  list-style: disc;
-  padding: 0px 0px 0px 20px;
 }
 
 /*リンク（全般）設定

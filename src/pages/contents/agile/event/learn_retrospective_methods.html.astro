@@ -1,69 +1,67 @@
 ---
+import { Image } from 'astro:assets';
 import { SITE_TITLE, BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../consts';
 import AdUnit from '../../../../components/AdUnit.astro';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../components/Header.astro';
+import imgAgileRetro from './img/agile_retro.jpg';
+import imgFractar from './img/fractar.png';
+import imgKpt from './img/kpt.jpg';
+
+let indexList: index[] = [
+  {id: "#firstly", name: "はじめに"},
+  {id: "#movie", name: "動画"},
+  {id: "#how_to_search", name: "振り返り手法の調べ方"},
+  {id: "#zou_sakana_outo", name: "象、死んだ魚、嘔吐"},
+  {id: "#shanikamaeru", name: "斜に構える、構えないを繰り返す"},
+  {id: "#radar", name: "Happiness Radar"},
+  {id: "#s_starfish", name: "Happiness Small Starfish"},
+  {id: "#door", name: "Happiness Door"},
+  {id: "#ondokei", name: "温度計"},
+  {id: "#color", name: "カラーコードドット"},
+  {id: "#fractaru", name: "フラクタル"},
+  {id: "#555", name: "555"},
+  {id: "#story_story", name: "story of a story"},
+  {id: "#effort_and_pain", name: "effort & pain"},
+  {id: "#vsm", name: "VSM"},
+  {id: "", name: "音声だけでも可能"},
+  {id: "#taiwa", name: "対話による学びの抽出"},
+  {id: "#q_wa", name: "質問の輪"},
+  {id: "", name: "お絵かき系"},
+  {id: "#netsukikyu", name: "熱気球・スピードカー・帆船"},
+  {id: "", name: "一人でできる"},
+  {id: "#ywt", name: "YWT"},
+  {id: "#orid", name: "ORID"},
+  {id: "#kotsu", name: "一人でも振り返りを続けるコツ"},
+  {id: "", name: "短時間でできる"},
+  {id: "#good_and_new", name: "Good & New"},
+  {id: "#kpt_as_art", name: "KPT as ART"},
+  {id: "", name: "KPTに飽きたら"},
+  {id: "#kansha", name: "360度感謝"},
+  {id: "#thanks", name: "サンクスカード"},
+  {id: "#kudos_wall", name: "kudos wall"},
+  {id: "#yaminabe", name: "闇鍋"},
+  {id: "", name: "何かをやめる"},
+  {id: "#ssc", name: "SSC"},
+  {id: "#starfish", name: "Starfish"},
+  {id: "#f_up_items", name: "Following up on Action Items"},
+  {id: "", name: "ﾁｰﾄｼｰﾄ以外"},
+  {id: "#daily_hassle", name: "デイリーハッスル"},
+  {id: "#sankou", name: "参考"}
+]
 ---
 
 <SiteLayout
   title={SITE_TITLE}
   description="ふりかえりの手法をたくさん学ぼう"
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}>
 
-  <ul class="indent_no">
-    <li><a href="#firstly">はじめに</a></li>
-    <li><a href="#movie">動画</a></li>
-    <li><a href="#how_to_search">振り返り手法の調べ方</a></li>
-    <li><a href="#zou_sakana_outo">象、死んだ魚、嘔吐</a></li>
-    <li><a href="#shanikamaeru">斜に構える、構えないを繰り返す</a></li>
-    <li><a href="#radar">Happiness Radar</a></li>
-    <li><a href="#s_starfish">Small Starfish</a></li>
-    <li><a href="#door">Happiness Door</a></li>
-    <li><a href="#ondokei">温度計</a></li>
-    <li><a href="#color">カラーコードドット</a></li>
-    <li><a href="#fractaru">フラクタル</a></li>
-    <li><a href="#555">555</a></li>
-    <li><a href="#story_story">story of a story</a></li>
-    <li><a href="#effort_and_pain">effort & pain</a></li>
-    <li><a href="#vsm">VSM</a></li>
-
-    音声だけでも可能
-    <li><a href="#taiwa">対話による学びの抽出</a></li>
-    <li><a href="#q_wa">質問の輪</a></li>
-
-    お絵かき系
-    <li><a href="#netsukikyu">熱気球・スピードカー・帆船</a></li>
-
-    一人でできる
-    <li><a href="#ywt">YWT</a></li>
-    <li><a href="#orid">ORID</a></li>
-    <li><a href="#kotsu">一人でも振り返りを続けるコツ</a></li>
-
-    短時間でできる
-    <li><a href="#good_and_new">Good & New</a></li>
-    <li><a href="#kpt_as_art">KPT as ART</a></li>
-
-    KPTに飽きたら
-    <li><a href="#kansha">360度感謝</a></li>
-    <li><a href="#thanks">サンクスカード</a></li>
-    <li><a href="#kudos_wall">kudos wall</a></li>
-    <li><a href="#yaminabe">闇鍋</a></li>
-
-    何かをやめる
-    <li><a href="#ssc">SSC</a></li>
-    <li><a href="#starfish">Starfish</a></li>
-    <li><a href="#f_up_items">Following up on Action Items</a></li>
-
-    ﾁｰﾄｼｰﾄ以外
-    <li><a href="#daily_hassle">デイリーハッスル</a></li>
-
-    <li><a href="#sankou">参考</a></li>
-  </ul>
-
-  <div id="firstly"></div>
   <h2 class="title">ふりかえりの手法をたくさん学ぼう</h2>
 
   <a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/agile/agile.html`>アジャイル</a> > ふりかえりの手法をたくさん学ぼう<br><br>
 
+  <div id="firstly"></div>
   <h3 class="title">はじめに</h3>
   <p>
     2020年10月5日、<a href="https://retrospective.connpass.com/event/190518/" target="_blanck">ふりかえりの手法をたくさん学ぼう</a>というイベントが開催されました。<br>
@@ -116,13 +114,13 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
     <li>
       アジャイルレトロスペクティブズ：40ぐらいの手法が紹介されている。<br>
       <a href="https://amzn.to/40DdKpv" target="_blank" rel="noopener noreferrer">
-        <img src="img/agile_retro.jpg" />
+        <Image src={imgAgileRetro} alt="agile_retro" />
       </a>
     </li>
     <li>
       これだけ！　ＫＰＴ<br>
       <a href="https://amzn.to/4lG5LAa" target="_blank" rel="noopener noreferrer">
-        <img src="img/kpt.jpg" />
+        <Image src={imgKpt} alt="imgKpt" />
       </a>
     </li>
     <li>
@@ -375,9 +373,9 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
     一日毎の振り返りをし終わったら、イベント全体で振り返る。<br>
     全体を通してどうだったか。イベント全体を通してもアウトプットする。<br>
     小さく振り返るのと中くらいで振り返るのと大きく振り返るのを繰り返してやるやり方。<br>
-    <img src="img/fractar.png"><br>
+    <Image src={imgFractar} alt="imgFractar" /><br>
     図は<a href="https://qiita.com/viva_tweet_x/items/bde2ad37167c595b5f7e" target="_blank">カンファレンス・研修などの学びをふりかえるフレームワークの提案：フラクタル</a>より抜粋<br>
-    
+
     <br>
     アウトプットと振り返りは強制ではない。<br>
     無理しなくていい。自分が出来るところを振り返る。辛くなったらアウトプットとかしなくてもいい。義務感を持つと続かないので。<br>

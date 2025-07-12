@@ -3,13 +3,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AdUnit from '../components/AdUnit.astro';
-const { title, description, twitterCardSize } = Astro.props;
+const { title, description, twitterCardSize, indexList } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
   <BaseHead title={title} description={description} twitterCardSize={twitterCardSize} />
-  <Header />
+  <Header indexList={indexList} />
 
   <body class="defaultbody">
     <div id="container">
