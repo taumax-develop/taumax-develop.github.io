@@ -11,14 +11,71 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <h2 class="title">システム開発知識が集うサイト</h2>
 
   <p>
-    これまで経験したプロジェクトや資格・独学の勉強で身に付けた知識を整理するために作ったサイトです。<br>
-    最近ロマサガRSというゲームにハマっており、そのサイトも運営しています（<a href="https://taumax-github.github.io/sagamax/" target="_blank">リンク</a>）。<br>
+    これまで経験したプロジェクトや資格の勉強、独学で身に付けた知識を整理するために作ったサイトです。<br>
   </p>
+
+  <br>
+  <h3 class="title">言語、プログラミング</h3>
+  <h4 class="title">JavaScript</h4>
+  <ul>
+    <!-- <li><a href=`${BASE_URL}/contents/development/javascript/js_index.html`>JavaScript</a></li> -->
+    <li><a href=`${BASE_URL}/contents/development/javascript/js_index.html`>JavaScriptについて</a></li>
+
+    <li><a href=`${BASE_URL}/contents/development/javascript/typescript.html`>TypeScript</a></li>
+
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs.html`>Node.js</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/obs.html`>Node.js×obs</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch.html`>Node.js×twitch</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitter.html`>Node.js×twitter</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made.html`>what_i_made</a></li>
+
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/react/react_next.html`>react/next.js</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/react/next_rendering.html`>Next.jsのレンダリング手法</a></li>
+
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/vue/vue_nuxt.html`>Vue.js/Nuxt</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/vue/nuxt_rendering.html`>Nuxtのレンダリング手法</a></li>
+
+    <!--
+    <li><a href="./contents/development/CodeSmell_Refactoring.html">Code Smellとリファクタリング技法</a></li>
+    <li>Effective Java</li>
+    <li>リーダブルコード</li>
+    <li>Kotlin</li>
+    <li>VBA</li>
+    <li>JavaScript</li>
+    <li>Python</li>
+    <li>SQL</li>
+      <dd style="padding-left:2em">
+      - 静的SQL<br>
+      - 動的SQL<br>
+      </dd>
+    -->
+  </ul>
+
+  <br/>
+  <h4 class="title">Java</h4>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/development/java/jjug/jjug_happy_25th_anniversary_java.html`>Java生誕25周年記念イベント</a></li>
+  </ul>
+
+  <br/>
+  <h4 class="title">コードスメルとリファクタリング</h4>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/development/codesmell/Codesmells.html`>コードスメル</a></li>
+    <li><a href=`${BASE_URL}/contents/development/refactoring/Refactoring_Technics.html`>リファクタリング技法</a></li>
+  </ul>
 
   <br>
   <h3 class="title">個人的に開発したもの</h3>
   <ul>
-    <li><a href=`${BASE_URL}/contents/bymyself/bymyself.html`>個人的に開発したものの紹介と仕組み</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/bymyself.html`>個人的に開発したものの紹介と仕組みと全体像</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/campainbot/campainbot.html`>キャンペーン対象キャラ通知bot</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/followercount/followercount.html`>公式アカウントのフォロワー数変化(Goで書いた)</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/reminderbot/reminderbot.html`>ロマサガRSイベントリマインダー</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/scrayping/scrayping.html`>twitterのスクレイピング</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/tocd/tocd.html`>GitLab で自動リリース（継続的デリバリー）</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/tocontainer/tocontainer.html`>コンテナ化</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/tohttps/tohttps.html`>https化</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/toscheduler/toscheduler.html`>cron脱却（コンテナ化を見据えて）</a></li>
     <!--
     <li>ICONIX</li>
     -->
@@ -27,7 +84,9 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <br>
   <h3 class="title">要件定義</h3>
   <ul>
-    <li><a href=`${BASE_URL}/contents/requirement/requirement.html`>要件定義</a></li>
+    <!-- <li><a href=`${BASE_URL}/contents/requirement/requirement.html`>要件定義</a></li> -->
+    <li><a href=`${BASE_URL}/contents/requirement/rdra/rdra.html`>RDRA</a></li>
+    <li><a href=`${BASE_URL}/contents/requirement/ccsr/bpstudy_ccsr.html`>CCSR</a></li>
     <!--
     <li>ICONIX</li>
     -->
@@ -36,7 +95,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <br>
   <h3 class="title">開発手法</h3>
   <ul>
-    <li><a href=`${BASE_URL}/contents/agile/agile.html`>アジャイル</a></li>
+    <li><a href=`${BASE_URL}/contents/agile/event/learn_retrospective_methods.html`>振り返り手法を学ぼう</a></li>
   </ul>
 
   <!--
@@ -67,30 +126,10 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   -->
 
   <br>
-  <h4 class="title">言語、プログラミング</h4>
+  <h3 class="title">データベース</h3>
   <ul>
-    <li><a href=`${BASE_URL}/contents/development/java/java.html`>Java</a></li>
-    <li><a href=`${BASE_URL}/contents/development/javascript/js_index.html`>JavaScript</a></li>
-    <!--
-    <li><a href="./contents/development/CodeSmell_Refactoring.html">Code Smellとリファクタリング技法</a></li>
-    <li>Effective Java</li>
-    <li>リーダブルコード</li>
-    <li>Kotlin</li>
-    <li>VBA</li>
-    <li>JavaScript</li>
-    <li>Python</li>
-    <li>SQL</li>
-      <dd style="padding-left:2em">
-      - 静的SQL<br>
-      - 動的SQL<br>
-      </dd>
-    -->
-  </ul>
-
-  <br>
-  <h4 class="title">データベース</h4>
-  <ul>
-    <li><a href=`${BASE_URL}/contents/development/database/database.html`>Database関連</a></li>
+    <!-- <li><a href=`${BASE_URL}/contents/development/database/database.html`>Database関連</a></li> -->
+    <li><a href=`${BASE_URL}/contents/development/database/db_design_night_no6/db_design_night_no6.html`>DB設計したいNight #6 正規化</a></li>
     <!--
     <li>Oracle</li>
     <li>DB2</li>
@@ -121,7 +160,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <br>
   <h3 class="title">テスト</h3>
   <ul>
-    <li><a href=`${BASE_URL}/contents/development/test/test.html`>ソフトウェアテスト</a></li>
+    <li><a href=`${BASE_URL}/contents/development/test/softwaretest/various_software_tests.html`>ソフトウェアテストについていろいろ調べたことを書いた記事</a></li>
   </ul>
 
   <br>
