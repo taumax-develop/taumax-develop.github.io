@@ -13,6 +13,8 @@ type Props = {
   image?: ImageMetadata;
 };
 
+export const TWITTER_CARD_SUMMARY = 'summary'
+export const TWITTER_CARD_LARGE = 'summary_large_image'
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, twitterCardSize, image = FallbackImage } = Astro.props;
 ---

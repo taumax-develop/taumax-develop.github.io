@@ -1,5 +1,6 @@
 ---
-import { SITE_TITLE, BASE_URL, TWITTER_CARD_SUMMARY } from '../consts';
+import { SITE_TITLE, BASE_URL } from '../consts';
+import { TWITTER_CARD_SUMMARY } from '../components/BaseHead.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
@@ -19,9 +20,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   <h4 class="title">JavaScript</h4>
   <ul>
     <!-- <li><a href=`${BASE_URL}/contents/development/javascript/js_index.html`>JavaScript</a></li> -->
-    <li><a href=`${BASE_URL}/contents/development/javascript/js_index.html`>JavaScriptについて</a></li>
-
-    <li><a href=`${BASE_URL}/contents/development/javascript/typescript.html`>TypeScript</a></li>
+    <!-- <li><a href=`${BASE_URL}/contents/development/javascript/js_index.html`>JavaScriptについて</a></li> -->
 
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs.html`>Node.js</a></li>
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made.html`>Node.jsを使って作った物</a></li>
@@ -34,6 +33,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
     <li><a href=`${BASE_URL}/contents/development/javascript/spa/vue/vue_nuxt.html`>Vue.js/Nuxt</a></li>
     <li><a href=`${BASE_URL}/contents/development/javascript/spa/vue/nuxt_rendering.html`>Nuxtのレンダリング手法</a></li>
+
+    <li><a href=`${BASE_URL}/contents/development/javascript/typescript.html`>TypeScript</a></li>
 
     <!--
     <li><a href="./contents/development/CodeSmell_Refactoring.html">Code Smellとリファクタリング技法</a></li>
@@ -57,12 +58,12 @@ import SiteLayout from '../layouts/SiteLayout.astro';
     <li><a href=`${BASE_URL}/contents/development/java/jjug/jjug_happy_25th_anniversary_java.html`>Java生誕25周年記念イベント</a></li>
   </ul>
 
-  <br/>
+  <!-- <br/>
   <h4 class="title">Code Smellとリファクタリング</h4>
   <ul>
     <li><a href=`${BASE_URL}/contents/development/codesmell/Codesmells.html`>Code Smell</a></li>
     <li><a href=`${BASE_URL}/contents/development/refactoring/Refactoring_Technics.html`>リファクタリング技法</a></li>
-  </ul>
+  </ul> -->
 
   <br>
   <h3 class="title">個人的に開発したもの</h3>
