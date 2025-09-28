@@ -1,0 +1,65 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#composingmethods', name: 'Composing Methods' },
+  { id: '#substitutealgorithm', name: 'Substitute Algorithm' }
+];
+---
+
+<SiteLayout
+  title="Substitute Algorithm"
+  description="リファクタリング技法：Substitute Algorithmの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells.html">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+  <h2 id="composingmethods">Composing Methods</h2>
+  <p><a href="https://sourcemaking.com/refactoring/composing-methods">Composing Methods</a></p>
+
+  <h2 id="substitutealgorithm">Substitute Algorithm</h2>
+  <p><a href="https://sourcemaking.com/refactoring/substitute-algorithm">Substitute Algorithm（アルゴリズムの置き換え）</a>
+  メソッドのシグニチャは変えずに本体となるアルゴリズムを新しいものに置き換えましょう。</p>
+  <pre><code class="java:リファクタリング前 language-java:リファクタリング前">{`String foundPerson(String[] people){
+  for (int i = 0; i < people.length; i++) {
+    if (people[i].equals("Don")){
+      return "Don";
+    }
+    if (people[i].equals("John")){
+      return "John";
+    }
+    if (people[i].equals("Kent")){
+      return "Kent";
+    }
+  }
+  return "";
+}
+`}</code></pre>
+<pre><code class="java:リファクタリング後 language-java:リファクタリング後">{`String foundPerson(String[] people) {
+  List candidates =
+    Arrays.asList(new String[] {"Don", "John", "Kent"});
+  for (int i=0; i < people.length; i++) {
+    if (candidates.contains(people[i])) {
+      return people[i];
+    }
+  }
+  return "";
+}
+`}</code></pre>
+
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code">Duplicate Code</a></li>
+  </ul>
+</SiteLayout>

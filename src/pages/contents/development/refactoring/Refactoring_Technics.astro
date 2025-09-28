@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#refactoring', name: 'リファクタリング技法' },
+  { id: '#composingmethods', name: 'Composing Methods' },
+  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+  { id: '#organizingdata', name: 'Organizing Data' },
+  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
+  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+  { id: '#-1', name: '予備知識' }
+];
+---
+
+<SiteLayout
+  title="リファクタリング技法"
+  description="Code Smellを解消するためのリファクタリング技法や関連知識をまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">リファクタリング技法</h2>
+
+  <p>ここでは<a href="../../codesmell/Codesmells.astro">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <h1 id="composingmethods">Composing Methods</h1>
+  <p><a href="category/Composing_methods.astro">Composing Methods</a></p>
+  <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
+  <p><a href="category/Moving_Features_between_Objects.astro">Moving Features between Objects</a></p>
+  <h1 id="organizingdata">Organizing Data</h1>
+  <p><a href="category/Organizing_Data.astro">Organizing Data</a></p>
+  <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
+  <p><a href="category/Simplifying_Conditional_Expressions.astro">Simplifying Conditional Expressions</a></p>
+  <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
+  <p><a href="category/Simplifying_Method_Calls.astro">Simplifying Method Calls</a></p>
+  <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
+  <p><a href="category/Dealing_with_Generalisation.astro">Dealing with Generalisation</a></p>
+  <h1 id="-1">予備知識</h1>
+  <p><a href="category/予備知識.astro">予備知識</a></p>
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

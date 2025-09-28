@@ -1,0 +1,22 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { type index } from '../../../../components/HeaderIndex.astro';
+
+const indexList = [] as index[];
+---
+<SiteLayout
+  title="jQuery"
+  description="jQueryについて"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">jQuery</h2>
+  <ul class="breadcrumb">
+    <li class="breadcrumbli"><a href="../../../index.html">ホーム</a></li>
+    <li class="breadcrumbli"> &gt; <a href="./js_index.html">js関連技術</a></li>
+    <li class="breadcrumbli"> &gt; jQuery</li>
+  </ul>
+  <h3 class="title">jQuery何がし</h3>
+  <p></p>
+</SiteLayout>

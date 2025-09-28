@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#bloaters', name: 'Bloaters' },
+  { id: '#longmethod', name: 'Long Method' },
+  { id: '#largeclass', name: 'Large Class' },
+  { id: '#primitiveobsession', name: 'Primitive Obsession' },
+  { id: '#longparameterlist', name: 'Long Parameter List' },
+  { id: '#dataclumps', name: 'Data Clumps' }
+];
+---
+
+<SiteLayout
+  title="Bloaters"
+  description="Bloaters（膨れ上がったコード）とその分類・参考情報をまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">Bloaters</h2>
+
+  <h2 id="bloaters">Bloaters</h2>
+  <p>
+    <a href="https://sourcemaking.com/refactoring/smells/bloaters">Bloaters（膨れ上がったコード）</a>：
+    作業が困難になってしまうほど巨大になりすぎてしまったコード、メソッド、およびクラスのこと。
+    通常、これらのCode Smellはすぐには現れず、プログラムに改修を積み重ねること（そして特に誰もそれらを根絶する努力をしないとき）で現れます。
+  </p>
+  <h3 id="longmethod">Long Method</h3>
+  <p><a href="./sub_bloaters/Long_Method.astro">Long Method（長すぎるメソッド）</a></p>
+  <h3 id="largeclass">Large Class</h3>
+  <p><a href="./sub_bloaters/Large_Class.astro">Large Class（巨大なクラス）</a></p>
+  <h3 id="primitiveobsession">Primitive Obsession</h3>
+  <p><a href="./sub_bloaters/Primitive_Obsession.astro">Primitive Obsession（基本データ型への執着）</a></p>
+  <h3 id="longparameterlist">Long Parameter List</h3>
+  <p><a href="./sub_bloaters/Long_Parameter_List.astro">Long Parameter List（長すぎるパラメータリスト）</a></p>
+  <h3 id="dataclumps">Data Clumps</h3>
+  <p><a href="./sub_bloaters/Data_Clumps.astro">Data Clumps（データの塊）</a></p>
+  <br /><br /><br />
+  書籍としてはこの辺りが参考になると思います。<br />
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

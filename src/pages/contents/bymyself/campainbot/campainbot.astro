@@ -1,0 +1,120 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import imgWhole from './img/whole_image.jpg';
+import imgComposition from './img/composition.jpg';
+import imgBgr from './img/bgr.jpg';
+import imgRgb from './img/rgb.jpg';
+import t260g from './img/t260g.jpg';
+
+const indexList = [
+  { id: "#summary", name: "概要" },
+  { id: "#whatimade", name: "作成物" },
+  { id: "#mechanism", name: "仕組み" },
+  { id: "#whatilearn", name: "学び" }
+];
+---
+
+<SiteLayout
+  title="ロマサガRSキャンペーン対象キャラ通知bot"
+  description="ロマサガRSのイベント対象キャラを自動で通知するbotの仕組みや学びをまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">ロマサガRSキャンペーン対象キャラ通知bot</h2>
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself.astro" style="color: #00bfff;">個人開発したことまとめ</a> &gt; ロマサガRSキャンペーン対象キャラ通知bot</p>
+  <div id="summary"></div>
+  <div id="summary"></div>
+  <h3 class="title">ロマサガRSキャンペーン対象キャラ通知bot</h3>
+  <p>
+    ロマサガRSというゲームで定期的にイベントが開催されるが、イベントの対象キャラが誰なのかが分かり辛過ぎるから作ってみたbot。<br />
+  </p>
+  <br /><br />
+  <div id="whatimade"></div>
+  <h3 class="title">作ったもの（実際に稼働したときのツイート）</h3>
+  <p>
+    DBに登録した情報から、イベントの対象キャラを判断してお知らせしてくれるbot<br />
+    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今2022/06/23 11:04<br />【陽】属性の技・術を持つキャラだよ！<br />画像を添付するからそれで確認してね！ <a href="https://t.co/b4Z54aRYxI">pic.twitter.com/b4Z54aRYxI</a></p>&mdash; ロマサガRS 育成応援キャンペーン情報(sagamax_bot2) (@sagamax_bot2) <a href="https://twitter.com/sagamax_bot2/status/1539791527761031168?ref_src=twsrc%5Etfw">June 23, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </p>
+  <br /><br />
+  <div id="mechanism"></div>
+  <h3 class="title">どんな仕組み？</h3>
+  <p>
+    <Image src={imgWhole} width={800} alt="全体構成" /><br />
+    <ul class="none" style="padding-left: 50px;">
+      <li>①時間になったらcronでpythonプログラムを起動</li>
+      <li>②DB(postgres)から対象キャラクタの情報を取得</li>
+      <li>③Githubに保存した画像ファイルを取得＆取得したファイルの加工</li>
+      <li>④ツイート実行</li>
+    </ul>
+    イベント情報をDBに登録する作業は手動だが、それさえやってしまえば、イベントキャンペーンの対象キャラを毎日お知らせしてくれる。<br />
+    ↓GitHub上に以下のようなキャラクタの画像を全キャラ分格納しているので、<br />
+    <Image src={t260g} alt="t260g" /><br />
+    その際、対象キャラの名前を画像に書き、各画像のサイズを合わせたうえで合成している（サイズが揃ってないとエラーになる）。<br />
+    <br />
+    対象キャラの画像を拾ってきてそれらを合成して↓以下のような1枚の画像に合成している。<br />
+    <Image src={imgComposition} width={800} alt="合成画像" /><br />
+    <br />
+    決まった文字や画像を書くだけのbotなら以下の記事参照。<br />
+    <li><a href="https://qiita.com/taumax/items/73ad47eaba64943a9c41" target="_blank">TweepyとcronでTwitterボットを作ってみた話</a></li>
+  </p>
+  <div id="whatilearn"></div>
+  <h3 class="title">ぶつかった壁とか学んだこととか</h3>
+  <h4 class="title">①画像に日本語を埋め込めない</h4>
+  <p>
+    OpenCV という python のライブラリを使って画像編集している記事があったので、それを参考にした。OpenCVで日本語テキストを表示させようとすると文字化けしてうまくいかなかった（OpenCV の仕様）ので、PillowとOpenCVを併用した（※）。
+    大まかな処理の流れは以下の通り。
+  </p>
+  <ul>
+    <li>画像ファイル読み込み(Pillow)</li>
+    <li>読み込んだ画像上部を黒四角で塗りつぶし(Pillow)</li>
+    <li>塗りつぶし部分に日本語テキストを表示(Pillow)</li>
+    <li>画像サイズを調整(OpenCV)</li>
+    <li>各画像を1つに連結(OpenCV)</li>
+  </ul>
+  <p>
+    ※全部Pillowでやればよかったんだろうけど、書いた当時はよくわかってなかった。この併用が次の問題につながる。
+  </p>
+  <h4 class="title">②妙な色の画像を生み出してしまう</h4>
+  <p>
+    正しい画像<br />
+    <Image src={imgBgr} width={300} alt="BGR画像" />
+    <br />
+    妙な色の画像<br />
+    <Image src={imgRgb} width={300} alt="RGB画像" />
+    <br />
+    Pillowでは色の順番はRGB（赤、緑、青）を前提としている。
+    OpenCVは色の順番はBGR（青、緑、赤）。
+    Pillow で読み込んだ画像を OpenCV に渡す際に赤と青が逆転した結果こうなった。Pillow から OpenCV に渡す際に RGB から BGR に変換することで対処。
+    また、OpenCV は 画像を Numpy の配列として扱っているため、 OpenCV に渡す前に np.array(readDot) でNumPy の配列に変換している。
+    Pillow, Numpy, OpenCV の違いがよくわからなくなってきたが、超個人的主観で凄く雑にまとめると
+  </p>
+  <ul>
+    <li>Pillow：一番お手軽に使用できる画像処理ライブラリ。</li>
+    <li>Numpy： Pillow＋Numpy で Pillow 単体よりはもうちょっと複雑なことができる。</li>
+    <li>OpenCV： OpenCV＋Numpy の組み合わせが一番いろいろな事ができる。顔認識もできるらしいが、環境構築がちょっと面倒。</li>
+  </ul>
+  <p>
+    というイメージ（<a href="https://note.nkmk.me/python-image-processing-pillow-numpy-opencv/" target="_blank">参考</a>）。
+    コンテナ化した際、 OpenCV が使えるようにするためにひと手間加える必要があったので実際準備に多少手間がかかってる。やりたいこと次第でもっと手間は増えると思われる。
+  </p>
+  <h4 class="title">③日本語フォントが入ってない</h4>
+  <p>
+    ローカルで動いたプログラムを linux 環境に持って行って動かしたら、画像に書き込んだ日本語が文字化けした。
+    下記コマンドで日本語フォントをインストールして、使用するフォントをプログラムで指定することで解消した。
+    <br />
+    <code>apt install 'fonts-takao-*'</code>
+  </p>
+  <p>
+    フォントの指定箇所はプログラム内で明示的に指定。
+  </p>
+  <p>
+    参考：
+    <ul>
+      <li><a href="https://linuxfan.info/ubuntu-18-04-change-ja-font" target="_blank">Ubuntu 18.04 LTSの日本語フォントを変更する！【詳細解説】</a></li>
+      <li><a href="https://beyondjapan.com/blog/2017/01/japanese-gothic-fonts-on-linux/" target="_blank">CentOSでもWindowsでも使える！ 日本語フォント（ゴシック編）</a></li>
+    </ul>
+  </p>
+</SiteLayout>

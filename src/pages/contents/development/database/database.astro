@@ -1,0 +1,19 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+
+const indexList = [] as index[];
+---
+<SiteLayout
+  title="Database"
+  description="Database関連知識のリンク"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">Database関連</h2>
+
+  <a href="../../../index.html">ホーム</a> > Database関連<br><br>
+
+  <li><a href="db_design_night_no6/db_design_night_no6.html">DB設計したいNight #6 正規化 [online]</a></li>
+</SiteLayout>

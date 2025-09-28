@@ -1,0 +1,78 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import imgBot from './img/image_bot.png';
+import imgJava from './img/image_java.png';
+import imgStageGo from './img/stage_go.png';
+import imgStagePython from './img/stage_python.png';
+import imgStageWeb from './img/stage_web.png';
+
+const indexList = [
+  { id: "#summary", name: "概要" },
+  { id: "#mechanism", name: "仕組み" },
+  { id: "#whatilearn", name: "学び" }
+];
+---
+
+<SiteLayout
+  title="自動リリース"
+  description="twitterのbotとか自動リリース機能の構築とか、自作サイト作ってそれをhttps化したりとかいろいろ自力で構築した中で得た知識を整理した記事です。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">自動リリース</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself.html" style="color: #00bfff;">個人開発したことまとめ</a> &gt; 自動リリース</p>
+
+  <br />
+  <div id="summary"></div>
+  <h3 class="title">自動リリース</h3>
+  <p>
+    ローカルのPCで作成したプログラムを手動でサーバーに配置していたが、手間を省くためにGitLabにpushしたらデプロイは自動で行ってくれる仕組みを構築した。<br />
+  </p>
+
+  <br /><br />
+  <div id="mechanism"></div>
+  <h3 class="title">どんな仕組み？</h3>
+  <p>
+    <Image src={imgBot} width={700} alt="bot自動リリース構成" /><br />
+    <br />
+    これまで開発した Go/Python の bot は上図の仕組みで自動リリース機能を実装。自分の作業は上図の①のgit pushのみ。②～④は GitLabが自動的にやってくれるようになっている。<br />
+    ③のgitlabからssh接続する部分については、<a href="https://qiita.com/fukasawah/items/9c257f0bc2dfe1d6823f" target="_blank">この記事を参考にしました</a>。<br />
+    <br /><br />
+    <Image src={imgJava} width={700} alt="Java自動リリース構成" /><br />
+    Java の Webサイトは上図のように、dockerを使わず、 Gitlab 内で maven のコマンドを実行してwar ファイルを生成し、 サーバにwarファイルを転送する方式。自分の作業は上図の①のgit pushのみである点は bot と同じ。<br />
+    <br />
+    GitLabは、.gitlab-ci.ymlに記載したコマンドを自動的に実行してくれる。以下が実際の .gitlab-ci.yml の中身。
+  </p>
+
+  <br /><br />
+  <h4 class="title">.gitlab-ci.yml(Go)</h4>
+  <script src="https://gist.github.com/taumax-github/a38a329ca1f21abbaedbc342bc1f3322.js"></script>
+  <p>
+    Goのbuild、docker build、ssh接続、docker pushすべての作業を1ステージで行っている。<br />
+    GitLabのパイプラインはこんな風になる。<br />
+    <Image src={imgStageGo} width={400} alt="Goパイプライン" /><br />
+  </p>
+
+  <br />
+  <h4 class="title">.gitlab-ci.yml(python)</h4>
+  <script src="https://gist.github.com/taumax-github/4cbd3a0754604e2cc7d37b57feec44f7.js"></script>
+  <p>
+    pythonのbuildを行ってartifactsに保存するステージと、docker build、ssh接続、docker pushするステージの2ステージに分けている。分けた理由は後述。<br />
+    GitLabのパイプラインはこんな風になる。<br />
+    <Image src={imgStagePython} width={400} alt="Pythonパイプライン" /><br />
+  </p>
+
+  <br />
+  <h4 class="title">.gitlab-ci.yml(Java)</h4>
+  <script src="https://gist.github.com/taumax-github/d7e8512dee8cf19a094231bfe14bdef3.js"></script>
+  <p>
+    warファイルを生成してartifactsに保存するステージと、ssh接続してwarファイルを所定のディレクトリに格納するステージの2ステージに分けている。<br />
+    GitLabのパイプラインはこんな風になる。<br />
+    <Image src={imgStageWeb} width={400} alt="Javaパイプライン" /><br />
+  </p>
+
+</SiteLayout>

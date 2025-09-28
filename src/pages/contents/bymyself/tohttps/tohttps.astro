@@ -1,0 +1,87 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import imgConf from './img/conf.png';
+import imgDlSert from './img/dl_sert.png';
+import imgHttpsConnection from './img/https_connection.png';
+import imgKeyChain from './img/key_chain.png';
+import imgProcess from './img/process.png';
+import imgRegistSsl from './img/regist_ssl.png';
+import imgServer from './img/server.png';
+import imgTimeout from './img/timeout.png';
+
+const indexList = [
+  { id: "#summary", name: "概要" },
+  { id: "#whatido", name: "やったこと" },
+  { id: "#whatilearn", name: "学び" }
+];
+---
+
+<SiteLayout
+  title="https化"
+  description="twitterのbotとか自動リリース機能の構築とか、自作サイト作ってそれをhttps化したりとかいろいろ自力で構築した中で得た知識を整理した記事です。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">https化（常時SSL化）</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself.html" style="color: #00bfff;">個人開発したことまとめ</a> &gt; https化</p>
+
+  <br />
+  <div id="summary"></div>
+  <h3 class="title">https化（常時SSL化）</h3>
+  <p>
+    SSL通信回りの仕組みがよくわかっていなかったので、自分のWebサイトを https 化することで勉強になるかなと思ったのでやってみた。<br />
+  </p>
+
+  <br />
+  <div id="whatido"></div>
+  <h3 class="title">やったこと</h3>
+  <p>
+    以下のサイトの手順に従って SSL証明書を導入し、 https 化してみた。<br />
+    <a href="https://qiita.com/yoshizaki_91/items/e6f39a5bfb99900b44b2" target="_blank">さくらVPSにSSL証明書を導入しHTTPS通信の構築</a>
+  </p>
+
+  <br /><br />
+  <div id="whatilearn"></div>
+  <h3 class="title">ぶつかった壁とか学んだこととか</h3>
+  <h4 class="title">①https 化の設定完了後、httpd を再起動したらエラー</h4>
+  <div class="code">
+    httpd[19419]: [Mon Dec 27 09:13:07.298143 2021] [so:warn] [pid 19419] AH01574: module ssl_module is already loaded, skipping<br />
+    httpd[19419]: AH00548: NameVirtualHost has no effect and will be removed in the next release /etc/httpd/conf.d/vhost.conf:4<br />
+    httpd[19419]: <span style="color:red">AH00526: Syntax error on line 9 of /etc/httpd/conf.d/vhost.conf:</span><br />
+    httpd[19419]: <span style="color:red">Invalid command 'SSLMutex', perhaps misspelled or defined by a module not included in the server configuration</span><br />
+    systemd[1]: httpd.service: main process exited, code=exited, status=1/FAILURE<br />
+    kill[19421]: kill: cannot find process ""<br />
+    systemd[1]: httpd.service: control process exited, code=exited status=1<br />
+    systemd[1]: Failed to start The Apache HTTP Server.<br />
+    systemd[1]: Unit httpd.service entered failed state.<br />
+    systemd[1]: httpd.service failed.<br />
+  </div>
+  <p>
+    <br />
+    上記の赤字部分について調べてみた。<a href="http://hideaki-momose.blogspot.com/2014/04/apache_9.html" target="_blank">Apache2.4.x SSLMutexが廃止</a>されたらしい。「/etc/httpd/conf.d/vhost.conf」の「SSLMutex default」をコメントアウトして「Mutex default ssl-cache」に修正。<br />
+    修正したら事象は解消したものの、次は以下のエラーが発生。<br />
+  </p>
+
+  <br />
+  <div class="code">
+    httpd[20113]: AH00548: NameVirtualHost has no effect and will be removed in the next release /etc/httpd/conf.d/vhost.conf:4<br />
+    httpd[20113]: <span style="color:red">(98)Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:443</span><br />
+    httpd[20113]: no listening sockets available, shutting down<br />
+    httpd[20113]: <span style="color:red">AH00015: Unable to open logs</span><br />
+    systemd[1]: httpd.service: main process exited, code=exited, status=1/FAILURE<br />
+    kill[20115]: kill: cannot find process ""<br />
+    systemd[1]: httpd.service: control process exited, code=exited status=1<br />
+    systemd[1]: Failed to start The Apache HTTP Server.<br />
+    systemd[1]: Unit httpd.service entered failed state.<br />
+    systemd[1]: httpd.service failed.<br />
+  </div>
+  <p>
+    <br />
+    エラーは二つ。<br />
+  </p>
+
+</SiteLayout>

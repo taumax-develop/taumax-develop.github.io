@@ -1,0 +1,55 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#longmethod', name: 'Long Method' }
+];
+---
+
+<SiteLayout
+  title="Long Method"
+  description="Long Method（長すぎるメソッド）の解説と対処法、参考情報をまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">Long Method</h2>
+  <h3 id="longmethod">Long Method</h3>
+  <p><a href="https://sourcemaking.com/refactoring/smells/long-method">Long Method（長すぎるメソッド）</a></p>
+  <p><strong><em>兆候と症状</em></strong>
+    メソッドの行数が多すぎる状態。一般に、1メソッドの行数が10行を超える場合、短くすることができないかを考える必要があります。</p>
+  <p><strong><em>問題の理由</em></strong>
+    メソッドには常に何かしらの処理が追加され続けますが、処理が削除されるということはめったにありません。コードは読むよりも書く方が簡単なので、この Code Smell は、メソッドが異常なほど大きくなるまで気付かれないままです。
+    精神的には、既存のメソッドに処理を追加するよりも新しいメソッドを作成する方が難しく感じられます。たった2行の処理を追加するためだけに新しいメソッドを1つ追加するのが難しい場合などです。このようにして既存のメソッドに追加されたコードがスパゲッティコードの始まりになります。</p>
+  <p><strong><em>対処</em></strong>
+    経験則として、メソッド内の何かにコメントする必要があると感じた場合、このコードをメソッド内から抽出して新しいメソッドを作成する必要があります。説明が必要な場合は、1行であっても別の方法に分割することができます。また、メソッドにわかりやすい名前が付けられている場合、コードを調べてその機能を確認する必要はありません。</p>
+  <ul>
+    <li>メソッド本体の長さを短くするには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使用します。</li>
+    <li>ローカル変数とパラメーターがメソッドの抽出に干渉する場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-temp-with-query">Replace Temp with Query</a>」、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object">Introduce Parameter Object</a>」、または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object">Preserve Whole Object</a>」を使用します。</li>
+    <li>上記のレシピがどれも役に立たない場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-method-with-method-object">Replace Method with Method Object</a>」を適用してメソッド全体を別のオブジェクトに移動してみてください。</li>
+    <li>条件演算子（3項演算子）とループは、コードを別のメソッドに移動できる良い手がかりです。3項演算子の場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#decompose-conditional">Decompose Conditional</a>」を使用します。ループが邪魔な場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を試してください。</li>
+  </ul>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>オブジェクト指向プログラミングにおいて、メソッドが短い方がそのクラスの寿命は長くなります。メソッドが長くなるとそれを理解することが難しくなり、メンテナンスも困難になります。</li>
+    <li>さらに、メソッドが長くなるとコードの重複を発見するのが難しくなります。</li>
+  </ul>
+  <p><strong><em>Performance</em></strong>
+    リファクタリングによってメソッドが増えることがあります。
+    多くの人は、メソッドが増えると処理性能に影響があると主張します。しかしほとんどの場合、処理性能に与える影響はごくわずかです。
+    さらに、明確で理解可能なコードが得られたので、コードが再構築され、必要に応じて実際のパフォーマンスを向上させるための真に効果的な方法を見つける可能性が高くなります。</p>
+  <br /><br /><br />
+  書籍としてはこの辺りが参考になると思います。<br />
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

@@ -1,0 +1,32 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import IconTwitterCard from "../../../assets/images/icon_twitter_card.png";
+import IconTwitter from "../../../assets/images/icon_twitter.png";
+import IconTogetter from "../../../assets/images/icon_togetter.png";
+import IconQiita from "../../../assets/images/icon_qiita.png";
+
+const title = "要件定義";
+const description = "要件定義";
+const twitterCardSize = "summary";
+const indexList = [
+  { text: "Home", href: "/" }
+];
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  indexList={indexList}>
+
+  <h2 class="title">要件定義</h2>
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../index.html" style="color: #00bfff;">ホーム</a> &gt; 要件定義</p>
+  <br />
+  <h3 class="title">要件定義</h3>
+  <p>
+    <a href="ccsr/bpstudy_ccsr.astro">CCSR</a><br />
+    <a href="rdra/rdra.astro">RDRA（ラドラ）</a><br />
+  </p>
+</SiteLayout>

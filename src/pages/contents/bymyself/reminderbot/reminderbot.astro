@@ -1,0 +1,68 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import imgWhole from './img/whole_image.jpg';
+
+const indexList = [
+  { id: "#summary", name: "概要" },
+  { id: "#whatimade", name: "作成物" },
+  { id: "#mechanism", name: "仕組み" },
+  { id: "#whatilearn", name: "学び" }
+];
+---
+
+<SiteLayout
+  title="ロマサガRSイベントリマインダーbot"
+  description="ロマサガRSのイベントを自動で通知するリマインダーbotの仕組みや学びをまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">ロマサガRSイベントリマインダーbot</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself.astro" style="color: #00bfff;">個人開発したことまとめ</a> &gt; ロマサガRSリマインダー</p>
+
+  <br />
+  <div id="summary"></div>
+  <h3 class="title">ロマサガRSイベントリマインダーbot</h3>
+  <p>
+    ゲームのイベントが多すぎて管理するのが難しいから作ってみたbot。<br />
+  </p>
+
+  <br /><br />
+  <div id="whatimade"></div>
+  <h3 class="title">作ったもの（実際に稼働したときのツイート）</h3>
+  <p>
+    開催中イベントの開始日時と終了日時をお知らせしてくれるbot<br />
+    <blockquote class="twitter-tweet" data-conversation="none"><p lang="ja" dir="ltr">今06月22日 20時だよ。<br /><br />イベント開催予定！<br />・育成 過去のサガ魂(メイン)：06/03 12:00～06/25 04:00<br />・育成 キャラ別,陽,RS1,詩人(制圧戦,メイン)：06/06 12:00～06/25 04:00<br />続きはリプ欄を見てね！ <a href="https://t.co/UMaJAsn1IG">pic.twitter.com/UMaJAsn1IG</a></p>&mdash; ロマサガRS リマインダー(sagamax_bot) (@sagamax_bot) <a href="https://twitter.com/sagamax_bot/status/1539563987838218240?ref_src=twsrc%5Etfw">June 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </p>
+
+  <br /><br />
+  <div id="mechanism"></div>
+  <h3 class="title">どんな仕組み？</h3>
+  <p>
+    <Image src={imgWhole} width={800} alt="全体構成" /><br />
+  </p>
+  <ul class="none" style="padding-left: 50px;">
+    <li>①時間になったらcronでpythonプログラムを起動</li>
+    <li>②DB(postgres)から開催中イベントの情報を取得</li>
+    <li>③対応するイベントの画像をGithubから取得</li>
+    <li>④ツイート実行</li>
+  </ul>
+  <p>
+    イベント情報をDBに登録する作業は手動だが、それさえやってしまえば、開催中のイベントの終了日を毎日お知らせしてくれる。<br />
+    決まった文字や画像を呟くだけのbotなら以下の記事参照。<br />
+    <li><a href="https://qiita.com/taumax/items/73ad47eaba64943a9c41" target="_blank">TweepyとcronでTwitterボットを作ってみた話</a></li>
+  </p>
+
+  <br /><br />
+  <h4 class="title">pythonソースコード(bot)</h4>
+  <p>
+    pythonのソースコードは以下の通り。dailyRemind() 関数が処理の入口。
+  </p>
+  <!-- Gist埋め込み -->
+  <script src="https://gist.github.com/taumax-github/991a59ce82e2687ad302c134067ecfd3.js"></script>
+  <br />
+
+</SiteLayout>

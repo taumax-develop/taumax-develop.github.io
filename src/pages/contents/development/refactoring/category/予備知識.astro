@@ -1,0 +1,64 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+
+const indexList = [] as index[];
+---
+<SiteLayout
+  title="予備知識"
+  description="リファクタリング: 予備知識 の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">リファクタリング技法</h2>
+
+  <p>ここでは<a href="../codesmell/Codesmells.html">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br>
+  リファクタリング第2版<br>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../img/refactoring.jpg" alt="refactoring" /></a>
+
+  <br>
+  レガシーコード改善ガイド<br>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1 id="">関連するリファクタリング技法</h1>
+
+  <h1 id="-1">予備知識</h1>
+  <h2 id="delegate">委譲(delegate)</h2>
+  <p>委譲と継承の違いはこれを見ればわかると思います。</p>
+  <ul>
+    <li><a href="https://tomosoft.jp/design/?p=3444">Javaによる委譲によるクラス継承とAdapterパターン例</a>
+      　⇒「委譲によるクラス継承とは」のところ</li>
+  </ul>
+  <p>※余談：転送と委譲について
+  正確に言うと、上で紹介したサイトで委譲と言っているのは厳密には「転送」と言います。コンポジット＋転送です。でも世の中のほとんどの人はこの「転送」を委譲(delegate)と呼んでいます。</p>
+  <p>参考：</p>
+  <ul>
+    <li><a href="https://qiita.com/jesus_isao/items/4b6b7846ccf5eb46b1bc">プログラマーを惑わせる３種類の委譲(委譲・Delegation／転送・Forwarding／.NET Delegates)</a></li>
+  </ul>
+  <h3 id="-2">その他の委譲の参考</h3>
+  <ul>
+    <li><a href="https://codezine.jp/article/detail/3710">【第5回】委譲</a></li>
+    <li><a href="https://gihyo.jp/dev/serial/01/practical-programming-with-processing/0017">第17回　継承と委譲</a></li>
+    <li><a href="https://qiita.com/tonluqclml/items/c0110098722763caa556">君の継承の使い方は間違っている</a></li>
+  </ul>
+  <h2 id="-3">単一責任の原則</h2>
+  <p><a href="https://qiita.com/gomi_ningen/items/02c42e2487d035f9c3c8">単一責任の原則（SRP）</a></p>
+  <h2 id="-4">リスコフの置換原則</h2>
+  <p>親子関係にあるクラス構造において、親が実現できていることは子でも必ず実現されてなければならない。という原則。</p>
+  <p>参考</p>
+  <ul>
+    <li><a href="https://nagise.hatenablog.jp/entry/20171203/1512307671">Java Generics Hell - リスコフの置換原則</a></li>
+    <li><a href="http://marupeke296.com/OOD_No7_LiskovSubstitutionPrinciple.html">その７ 親の決まりを子が破っちゃいけない原則 ： LSP</a></li>
+    <li><a href="https://qiita.com/yuu341/items/1a45048950f3b5b76bdc">リスコフの置換原則とその違反を実例を踏まえて解説</a></li>
+    <li><a href="https://note.com/erukiti/n/n88b8ed99f1e1">よくわかるSOLID原則3: L（リスコフの置換原則）</a></li>
+    <li><a href="https://ja.wikipedia.org/wiki/%E3%83%AA%E3%82%B9%E3%82%B3%E3%83%95%E3%81%AE%E7%BD%AE%E6%8F%9B%E5%8E%9F%E5%89%87">リスコフの置換原則</a></li>
+  </ul>
+  <h1 id="codesmell-1">その他Code Smellに関する参考</h1>
+  <ul>
+    <li><a href="https://so-zou.jp/software/tech/programming/tech/refactoring/code-smell.htm">コードの臭い - リファクタリングの必要性を示す兆候</a></li>
+  </ul>
+</SiteLayout>

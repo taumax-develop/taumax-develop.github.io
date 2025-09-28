@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
+const title = 'Lazy Class';
+const description = 'Code Smell: Lazy Class（怠け者クラス）';
+const twitterCardSize = 'summary_large_image';
+const indexList = [
+  { text: 'Home', href: '/' }
+];
+---
+<SiteLayout {title} {description} {twitterCardSize} {indexList}>
+  <h1 id="lazyclass">Lazy Class</h1>
+  <p><a href="https://sourcemaking.com/refactoring/smells/lazy-class">Lazy Class（怠け者クラス）</a></p>
+  <p><strong><em>兆候と症状</em></strong><br />
+    クラスを理解して維持するには、常に時間とコストがかかります。したがって、時間とコストをかける価値のないクラスは削除する必要があります。</p>
+  <p><strong><em>問題の理由</em></strong><br />
+    おそらく、最初のうちはクラスはちゃんと機能するように設計されていました。しかし、いくつかのリファクタリングの後、クラスは途方もなく小さくなりました。</p>
+  <p>あるいは、決して成し遂げられなかった将来の開発作業をサポートするために設計されたのかもしれません。</p>
+  <p><strong><em>対処</em></strong><br />
+    ほとんど役に立たないコンポーネントには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inline-class">Inline Class</a>」を行う必要があります。
+    関数が少ないサブクラスの場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#collapse-hierarchy">Collapse Hierarchy</a>」を試してください。</p>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>コードサイズを小さくすることができる。</li>
+    <li>メンテナンス性の向上。</li>
+  </ul>
+  <br /><br />
+  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
+  </p>
+</SiteLayout>

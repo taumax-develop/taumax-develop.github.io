@@ -1,0 +1,60 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: "#improve_software_develop", name: "ソフトウェア開発のやり方の改善" },
+  { id: "#rdra_with_ccsr", name: "CCSRを実現するRDRA活用法" },
+  { id: "#qa", name: "QA" }
+];
+---
+
+<SiteLayout
+  title="要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法"
+  description="要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法の発表資料とtwitterのまとめ。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../requirement.astro" style="color: #00bfff;">要件定義</a> &gt; CCSR</p>
+
+  <br />
+  <div id="improve_software_develop"></div>
+  <h3 class="title">ソフトウェア開発のやり方の改善</h3>
+  <p>
+    2020/7/30に「BPStudy#155〜要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法」というイベントが開催されました。<br />
+    <a href="https://bpstudy.connpass.com/event/181629/" target="_blank">conpassのリンク</a><br />
+    発表資料は公開されていますが、twitterでも発表者以外の知見・知識がいろいろ展開されたりします。<br />
+    公開された資料とtwitterの呟きをまとめて閲覧できるようにすることで、知識の幅を広げたり、より体系だったものとして整理できるのではないかという考えでこの記事を書きました。<br />
+    twitterまとめ自体は<a href="https://togetter.com/li/1567682" target="_blank">ここにも</a>あるのでご活用いただければ幸いです。<br />
+    twitterのハッシュタグは<a href="https://twitter.com/search?q=%23bpstudy" target="_blank">#bpstudy</a>
+  </p>
+
+  <div id="rdra_with_ccsr"></div>
+  <h3 class="title">CCSR手法</h3>
+  <ul style="list-style-type: circle;">
+    <li>CCSRは「Stepwise Refinement: 段階的改善」が肝</li>
+    <li>CCSR==継続して並行して段階的に改善</li>
+    <li>要件定義や仕様を決めていくことも必要</li>
+    <li>フェーズで切るのではなく、常に並行でやっていこうという CCSR</li>
+    <li>並行的、というところをどうやるんだろう。フェーズ切って開発しがちなので気になる</li>
+  </ul>
+
+  <div id="qa"></div>
+  <h3 class="title">QA</h3>
+  <ul style="list-style-type: circle;">
+    <li>カネがかかる割に…なコードとか</li>
+    <li>使えないドキュメントが大量に作られるケース</li>
+    <li>場当たり的に解決されるケース</li>
+    <li>どっちも不幸</li>
+  </ul>
+
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+
+</SiteLayout>

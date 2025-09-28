@@ -1,0 +1,56 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+  { id: '#introduceforeignmethod', name: 'Introduce Foreign Method' }
+];
+---
+
+<SiteLayout title="Introduce Foreign Method | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
+  <p><a href="https://sourcemaking.com/refactoring/moving-features-between-objects">Moving Features between Objects</a></p>
+
+  <h2 id="introduceforeignmethod">Introduce Foreign Method</h2>
+  <p><a href="https://sourcemaking.com/refactoring/introduce-foreign-method">Introduce Foreign Method</a></p>
+  <p>ライブラリ内のユーティリティクラスには必要なメソッドが含まれておらず、そのクラスにはメソッドを追加することもできません。
+  その場合、クライアントクラスにメソッドを追加し、ユーティリティクラスのオブジェクトを引数として渡します。</p>
+  <pre><code class="language-java">{`class Report {
+  // ...
+  void sendReport() {
+    Date nextDay = new Date(previousEnd.getYear(),
+      previousEnd.getMonth(), previousEnd.getDate() + 1);
+    // ...
+  }
+}
+`}</code></pre>
+  <pre><code class="language-java">{`class Report {
+  // ...
+  void sendReport() {
+    Date newStart = nextDay(previousEnd);
+    // ...
+  }
+  private static Date nextDay(Date arg) {
+    return new Date(arg.getYear(), arg.getMonth(), arg.getDate() + 1);
+  }
+}
+`}</code></pre>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#incomplete-library-class">Incomplete Library Class</a></li>
+  </ul>
+</SiteLayout>

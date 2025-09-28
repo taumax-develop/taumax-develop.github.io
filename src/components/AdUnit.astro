@@ -2,7 +2,7 @@
 const isProd = import.meta.env.PROD;
 ---
 
-{false && isProd && (
+{isProd && (
   // Global site tag (gtag.js) - Google Analytics
   <script
     is:inline

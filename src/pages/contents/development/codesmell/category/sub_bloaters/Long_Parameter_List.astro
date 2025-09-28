@@ -1,0 +1,51 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#longparameterlist', name: 'Long Parameter List' }
+];
+---
+
+<SiteLayout
+  title="Long Parameter List"
+  description="Long Parameter List（長すぎるパラメータリスト）の解説と対処法、参考情報をまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">Long Parameter List</h2>
+  <h3 id="longparameterlist">Long Parameter List</h3>
+  <p><a href="https://sourcemaking.com/refactoring/smells/long-parameter-list">Long Parameter List（長すぎるパラメータリスト）</a></p>
+  <p><strong><em>兆候と症状</em></strong>
+    メソッドの3つまたは4つ以上のパラメーター。</p>
+  <p><strong><em>問題の理由</em></strong>
+    Long Parameter Listは、いくつかの種類のアルゴリズムが単一のメソッドに統合された後に発生する場合があります。実行されるアルゴリズムとその方法を制御するために、Long Parameter Listが作成されている場合があります。
+    Long parameter listsは、クラスを互いに独立させる努力の副産物でもあります。たとえば、メソッドに必要な特定のオブジェクトを生成するコードをメソッド内部から呼び出し元に移動した場合、生成されたオブジェクトは引数としてメソッドに渡されます。これにより、元のクラスはオブジェクト間の関係を認識しなくなり、依存関係が減少します。ただし、このようなオブジェクトがいくつも作成された場合、各オブジェクトには独自のパラメーターが必要になります。つまり、パラメーターリストが長くなります。
+    そのようなリストを理解することは難しく、それらが長くなるにつれて矛盾し、使いにくくなります。Long parameter listsの代わりに、メソッドは自オブジェクトのデータを使用できます。現在のオブジェクトに必要なデータがすべて含まれていない場合は、必要なデータを取得する別オブジェクトをメソッドパラメーターとして渡すことができます。
+  </p>
+  <p><strong><em>対処</em></strong>
+    パラメーターに渡される値を確認します。引数の一部が別のオブジェクトのメソッド呼び出しの結果である場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-parameter-with-method-call">Replace Parameter with Method Call</a>」を使用します。このリファクタリングによって作成されたオブジェクトは、対象のクラスのフィールドに配置するか、メソッドパラメーターとして渡すことができます。</p>
+  <ul>
+    <li>別のオブジェクトから受け取ったデータのグループをパラメーターとして渡す代わりに、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object">Preserve Whole Object</a>」を使って、オブジェクト自体をメソッドに渡します。</li>
+    <li>関係のないデータ要素が複数ある場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object">Introduce Parameter Object</a>」を介してそれらを単一のパラメータオブジェクトにマージできる場合があります。</li>
+  </ul>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>コードが読みやすく、短くなる。</li>
+    <li>リファクタリングすることでコードの重複に気づくきっかけになる。</li>
+  </ul>
+  <br /><br /><br />
+  書籍としてはこの辺りが参考になると思います。<br />
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

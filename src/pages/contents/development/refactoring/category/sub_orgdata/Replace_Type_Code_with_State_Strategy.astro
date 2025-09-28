@@ -1,0 +1,40 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#organizingdata', name: 'Organizing Data' },
+  { id: '#replacetypecodewithstatestrategy', name: 'Replace Type Code with State/Strategy' }
+];
+---
+
+<SiteLayout title="Replace Type Code with State/Strategy | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells.html">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="organizingdata">Organizing Data</h1>
+  <p><a href="https://sourcemaking.com/refactoring/organizing-data">Organizing Data</a></p>
+
+  <h2 id="replacetypecodewithstatestrategy">Replace Type Code with State/Strategy</h2>
+  <p><a href="https://sourcemaking.com/refactoring/replace-type-code-with-state-strategy">Replace Type Code with State/Strategy</a>
+    クラスの中にType Codeがあり、それがプログラムの振る舞いに影響を与えるような場合で、サブクラスとして切り出すのが難しい場合、Type Codeを状態を表すオブジェクト(state object)に置き換えます。フィールドの値をType Codeに置き換える必要がある場合、別の状態オブジェクトをクラスに注入します。</p>
+  <p>※GoFのデザインパターンのStateパターンの話だと理解しました。<br />参考</p>
+  <ul>
+    <li><a href="http://www.ie.u-ryukyu.ac.jp/~e085739/java.it.21.html">State パターン (状態を表すオブジェクトを用意し, 内包するその状態オブジェクトを切り替えることにより, 処理内容 (振る舞い) を変えられるようにする)</a></li>
+  </ul>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#primitive-obsession">Primitive Obsession</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#switch-statements">Switch Statements</a></li>
+  </ul>
+</SiteLayout>

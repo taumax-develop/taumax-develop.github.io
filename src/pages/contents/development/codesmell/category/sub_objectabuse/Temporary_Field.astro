@@ -1,0 +1,88 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
+const title = 'Temporary Field';
+const description = 'Code Smell: Temporary Field';
+const twitterCardSize = 'summary_large_image';
+const indexList = [
+  { text: 'Home', href: '/' }
+];
+---
+<SiteLayout {title} {description} {twitterCardSize} {indexList}>
+  <h1 id="temporaryfield">Temporary Field</h1>
+  <p><a href="https://sourcemaking.com/refactoring/smells/temporary-field">Temporary Field</a></p>
+  <p><strong><em>兆候と症状</em></strong><br />
+    Temporary fieldsは、特定の状況下でのみ値を取得します（したがって、オブジェクトに必要です）。これらの状況以外では、それらは空です。</p>
+  <p>※Temporary Fieldに関しては<a href="https://blog.ploeh.dk/2015/09/18/temporary-field-code-smell/">この記事</a>の方が私はわかりやすかったので、兆候と症状のところはこの記事をベースに書いてみます。</p>
+  <pre><code>{`public class Estimator {
+  private readonly TimeSpan defaultEstimate;
+  private IReadOnlyCollection<TimeSpan> durations;
+  private TimeSpan average;
+  private TimeSpan standardDeviation;
+
+  public Estimator(TimeSpan defaultEstimate) {
+      this.defaultEstimate = defaultEstimate;
+  }
+
+  public TimeSpan CalculateEstimate(
+    IReadOnlyCollection<TimeSpan> durations) {
+    if (durations == null)
+      throw new ArgumentNullException(nameof(durations));
+
+    if (durations.Count == 0)
+      return this.defaultEstimate;
+
+    this.durations = durations;
+    this.CalculateAverage();
+    this.CalculateStandardDeviation();
+
+    var margin = TimeSpan.FromTicks(this.standardDeviation.Ticks * 3);
+    return this.average + margin;
+  }
+
+  private void CalculateAverage() {
+    this.average =
+        TimeSpan.FromTicks(
+            (long)this.durations.Average(ts => ts.Ticks));
+  }
+
+  private void CalculateStandardDeviation() {
+    var variance =
+        this.durations.Average(ts => 
+            Math.Pow(
+                (ts - this.average).Ticks,
+                2));
+    this.standardDeviation = 
+        TimeSpan.FromTicks((long)Math.Sqrt(variance));
+  }
+}`}</code></pre>
+  <p>上記EstimatorクラスのCalculateEstimateメソッド内でdurationsというフィールドを使っています。同時に、CalculateAverageメソッド内ではaverageを使っており、CalculateStandardDeviationメソッド内ではstandardDeviationを使っています。これらのメソッドはCalculateEstimateメソッドで呼ばれているため、CalculateEstimateは、明示的にdurationsを使い、さらに暗黙的にaverage, standardDeviationフィールドも使っています。
+  averageとstandardDeviationはdurationsに依存しています。さらに、standardDeviationはaverageに依存しています。
+  ここで、CalculateEstimateメソッド内の処理の順番を以下のように変更したらどうなるでしょうか？</p>
+  <pre><code>{`this.durations = durations;
+this.CalculateAverage();
+this.CalculateStandardDeviation();`}</code></pre>
+  <pre><code>{`this.durations = durations;
+this.CalculateStandardDeviation();
+this.CalculateAverage();`}</code></pre>
+  <p>コンパイルは通ります。CalculateEstimateを実行してもExceptionは発生しません。しかし、想定外の結果になります。
+  このコードは理解しにくいだけではなく、脆弱です（処理の順番を入れ替えただけで破綻します）。さらに、スレッドセーフでもありません。</p>
+  <p><strong><em>問題の理由</em></strong><br />
+    多くの場合、Temporary fieldsは、大量の入力を必要とするアルゴリズムで使用するために作成されます。そのため、プログラマーはメソッド内に多数のパラメーターを作成する代わりに、クラスの中にこのデータのフィールドを作成することにします。これらのフィールドはアルゴリズムでのみ使用され、それ以外では使用されません。この種のコードは理解するのが難しいです。オブジェクトフィールドにデータが表示されるはずですが、何らかの理由でほとんど常に空です。（フィールドに値を設定するメソッドが実行されるまではnullが設定されている）</p>
+  <p><strong><em>対処</em></strong><br />
+    Temporary fieldとそれらを操作するすべてのコードは、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」を介して別のクラスに入れることができます。つまり、メソッドオブジェクトを作成して、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-method-with-method-object">Replace Method with Method Object</a>」を実施します。</p>
+  <p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-null-object">Introduce Null Object</a>」を導入し、Temporary fieldの値の存在を確認するために使われた条件コードをそこに統合します。</p>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>コードが明確になり、コードの構成が改善されます。</li>
+  </ul>
+  <br /><br />
+  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
+    リファクタリング第2版<br />
+    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
+    レガシーコード改善ガイド<br />
+    <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
+  </p>
+</SiteLayout>

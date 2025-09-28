@@ -1,0 +1,39 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
+const title = 'Data Class';
+const description = 'Code Smell: Data Class（データクラス）';
+const twitterCardSize = 'summary_large_image';
+const indexList = [
+  { text: 'Home', href: '/' }
+];
+---
+<SiteLayout {title} {description} {twitterCardSize} {indexList}>
+  <h1 id="dataclass">Data Class</h1>
+  <p><a href="https://sourcemaking.com/refactoring/smells/data-class">Data Class（データクラス）</a></p>
+  <p><strong><em>兆候と症状</em></strong><br />
+    データクラスは、フィールドとそれらへのアクセサメソッド(getter/setter)のみを含むクラスを指します。これらは、他のクラスで使用される単なるデータのコンテナです。これらのクラスには追加機能は含まれておらず、所有するデータを独立して操作することはできません。</p>
+  <p><strong><em>問題の理由</em></strong><br />
+    新しく作成されたクラスに含まれるパブリックフィールドの数が少ないことは普通のことです（getter/setterが少数の場合もあります）。しかし、オブジェクトの真の力は、オブジェクト内のデータに動作タイプや操作を含めることができることです。</p>
+  <p><strong><em>対処</em></strong></p>
+  <ul>
+    <li>クラスにパブリックフィールドが含まれる場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#encapsulate-field">Encapsulate Field</a>」を使用して直接アクセスできないようにし、getter/setterを介してのみデータにアクセスできるようにしましょう。</li>
+    <li>コレクション（配列など）に格納されているデータには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#encapsulate-collection">Encapsulate Collection</a>」を使用します。</li>
+    <li>データクラスを使用しているクライアントコードを確認します。その中に、データクラス自体に配置されるべき機能があった場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method">Move Method</a>」と「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使って、その機能をデータクラスに移行します。</li>
+  </ul>
+  <p>よく考え抜かれたメソッドでクラスがいっぱいになったら、クラスデータへの過度に広範なアクセスを可能にするデータアクセスの古いメソッドを削除することができます。これには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#remove-setting-method">Remove Setting Method</a>」と「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#hide-method">Hide Method</a>」が役立つ場合があります。</p>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>コードが理解しやすくなり、構成が改善されます。特定のデータに対する操作は、コード全体で無計画に行われるのではなく、単一の場所に収集されるようになりますた。</li>
+    <li>クライアントコードの重複を見つけるのに役立ちます。</li>
+  </ul>
+  <br /><br />
+  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
+  </p>
+</SiteLayout>

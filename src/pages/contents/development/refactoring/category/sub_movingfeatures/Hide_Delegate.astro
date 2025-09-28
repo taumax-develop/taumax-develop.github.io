@@ -1,0 +1,50 @@
+---
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import img01 from './img/hide_delegate/img01.png'
+import img02 from './img/hide_delegate/img02.png'
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+  { id: '#hidedelegate', name: 'Hide Delegate' }
+];
+---
+
+<SiteLayout title="Hide Delegate | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
+  <p><a href="https://sourcemaking.com/refactoring/moving-features-between-objects">Moving Features between Objects</a></p>
+
+  <h2 id="hidedelegate">Hide Delegate</h2>
+  <p><a href="https://sourcemaking.com/refactoring/hide-delegate">Hide Delegate</a></p>
+  <p>オブジェクトAを介してオブジェクトBを取得したのち、オブジェクトBのメソッドを呼び出しているような場合、クラスAに新しいメソッドを追加し、そのメソッドがオブジェクトBのメソッドを呼び出すような形にしましょう（＝<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate">委譲(delegate)</a>）。こうすることで、クライアントはオブジェクトBの詳細について知る必要がなくなり、依存性を排除できます。</p>
+  <p>AとBは下の図でいうと、</p>
+  <ul>
+    <li>A：Person</li>
+    <li>B：Department</li>
+  </ul>
+  <p><strong><em>【リファクタリング前】</em></strong>
+  <Image src={img01} alt="img01" />
+  <a href="https://sourcemaking.com/refactoring/hide-delegate">このページ</a>より抜粋</p>
+  <p><strong><em>【リファクタリング後】</em></strong>
+  <Image src={img02} alt="img02" />
+  <a href="https://sourcemaking.com/refactoring/hide-delegate">このページ</a>より抜粋</p>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inappropriate-intimacy">Inappropriate Intimacy</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#message-chains">Message Chains</a></li>
+  </ul>
+</SiteLayout>

@@ -1,0 +1,75 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#codesmell', name: 'Code Smellとは？' },
+  { id: '#bloaters', name: 'Bloaters' },
+  { id: '#Object-Orientation Abusers', name: 'Object-Orientation Abusers' },
+  { id: '#changepreventers', name: 'Change Preventers' },
+  { id: '#dispensables', name: 'Dispensables' },
+  { id: '#couplers', name: 'Couplers' },
+  { id: '#other', name: 'Other Smells' },
+  { id: '#codesmell-1', name: 'その他参考' }
+];
+---
+
+<SiteLayout
+  title="Code Smell"
+  description="Code Smellの解説と分類、参考情報をまとめたページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">Code Smell</h2>
+
+  <h1 id="codesmell">Code Smellとは？</h1>
+  <p>以前（2019年8月頃）、CSD (Certified Scrum Developer) 研修を受講しました。非常にためになる研修で、その研修の中でCode Smellというものについて学びました。
+    Code Smellとは、ソースコードにリファクタリングすべき問題が存在することを示す何らかの兆候のことです。
+    ペアプロでTDDで開発を行い、開発したコードからCode Smellを嗅ぎ取ったらリファクタリングして取り除く。という開発の流れを教わりました。
+    研修受講後、このCode Smellについてもっと知りたいと思ってググったりしたのですが、日本語で解説しているサイトはまだ少ないと感じました。
+    英語で解説しているサイトが多く、その中でも以下のサイトがCode Smellとリファクタリングの技法について体系的にまとめていると思いました。</p>
+  <ul>
+    <li><a href="https://sourcemaking.com/refactoring/smells">Code Smells (SourceMaking)</a></li>
+  </ul>
+  <p>このサイトでは、以下5つの大分類を元に、それに関連するCode Smellを紹介しています。</p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#bloaters">Bloaters</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#object-orientation-abusers">Object-Orientation-Abusers</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#change-preventers">Change-Preventers</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#dispensables">Dispensables</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#couplers">Couplers</a></li>
+  </ul>
+  <p>ここから先は、このページをベースに、各Code Smellを翻訳したものを記載しています。このページだけだとよくわからないこともあったので、その場合は別のページと組み合わせたものを記載しています。
+    Code Smellを解消するために参考となるリファクタリング技法や、その他参考になりそうな概念もこの記事の最後の方に記載しているので合わせて見てください。</p>
+  <p>書籍としてはこの辺りが参考になると思います。<br /></p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <h2 id="bloaters">Bloaters</h2>
+  <p><a href="category/Bloaters.astro">Bloaters</a></p>
+  <h2 id="Object-Orientation Abusers">Object-Orientation Abusers</h2>
+  <p><a href="category/Object-Orientation-Abusers.astro">Object-Orientation Abusers</a></p>
+  <h2 id="changepreventers">Change Preventers</h2>
+  <p><a href="category/Change-Preventers.astro">Change Preventers</a></p>
+  <h2 id="dispensables">Dispensables</h2>
+  <p><a href="category/Dispensables.astro">Dispensables</a></p>
+  <h2 id="couplers">Couplers</h2>
+  <p><a href="category/Couplers.astro">Couplers</a></p>
+  <h2 id="other">Other Smells</h2>
+  <p><a href="category/Other-Smells.astro">Other Smells</a></p>
+  <h2 id="codesmell-1">その他Code Smellに関する参考</h2>
+  <ul>
+    <li><a href="https://so-zou.jp/software/tech/programming/tech/refactoring/code-smell.htm">コードの臭い - リファクタリングの必要性を示す兆候</a></li>
+  </ul>
+  <h2 id="codesmell-1">リファクタリング技法</h2>
+  <p>Code Smell をかぎ取ったら<a href="../../refactoring/Refactoring_Technics.astro">リファクタリング技法</a>を使ってリファクタリングする。</p>
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

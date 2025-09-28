@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+  { id: '#replaceinheritancewithdelegation', name: 'Replace Inheritance with Delegation' }
+];
+---
+
+<SiteLayout title="Replace Inheritance with Delegation | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2>リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
+  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
+
+  <h2 id="replaceinheritancewithdelegation">Replace Inheritance with Delegation</h2>
+  <p><a href="https://sourcemaking.com/refactoring/replace-inheritance-with-delegation">Replace Inheritance with Delegation</a>
+  スーパークラスの一部しか使っていないようなサブクラスがある場合、（あるいは、スーパークラスのデータをサブクラスに引き継ぐのが不適切な場合）
+  サブクラスとして定義したクラスをスーパークラスのフィールドとして定義し、サブクラスのメソッドをスーパークラスに<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate">委譲(delegate)</a>しましょう。さらに、継承関係を排除しましょう。</p>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#refused-bequest">Refused Bequest</a></li>
+  </ul>
+</SiteLayout>

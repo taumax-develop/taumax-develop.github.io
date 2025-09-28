@@ -1,0 +1,41 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import RefactoringImg from "../../../img/refactoring.jpg";
+import LegacyCodeImg from "../../../img/legacy_code.jpg";
+
+const title = "Inappropriate Intimacy";
+const description = "Code Smell: Inappropriate Intimacy";
+const twitterCardSize = "summary_large_image";
+const indexList = [
+  { text: "Home", href: "/" }
+];
+---
+
+<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+  <h3 id="inappropriateintimacy">Inappropriate Intimacy</h3>
+  <p><a href="https://sourcemaking.com/refactoring/smells/inappropriate-intimacy">Inappropriate Intimacy（不適切な親密さ）</a></p>
+  <p>Inappropriate Intimacyは、2つのクラスが互いの内部情報に過度に依存し合っている場合に発生します。</p>
+  <p><strong><em>兆候と症状</em></strong>
+    クラス同士が互いのprivateフィールドやメソッドにアクセスしている。</p>
+  <p><strong><em>問題の理由</em></strong>
+    責任の分担が不明確であったり、設計が不十分な場合に発生します。</p>
+  <p><strong><em>対処</em></strong></p>
+  <ul>
+    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method">Move Method</a>」や「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」を使って、責任を明確に分割します。</p></li>
+    <li><p>クラス間の依存関係を減らすように設計を見直します。</p></li>
+  </ul>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>責任の明確化</li>
+    <li>保守性の向上</li>
+  </ul>
+  <br /><br />
+  書籍としてはこの辺りが参考になると思います。<br />
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={RefactoringImg} alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={LegacyCodeImg} alt="legacy_code" /></a>
+</SiteLayout>

@@ -1,0 +1,38 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: "#sop", name: "SOP" }
+];
+---
+
+<SiteLayout
+  title="SOP（Same-Origin Policy）"
+  description="SOP（同一生成元ポリシー）の解説ページ。Webセキュリティの基本概念について。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">SOP（Same-Origin Policy）</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../security.astro" style="color: #00bfff;">セキュリティ</a> &gt; SOP</p>
+
+  <br />
+  <div id="sop"></div>
+  <h3 class="title">SOPとは</h3>
+  <p>
+    同一生成元ポリシー（SOP: Same-Origin Policy）は、Webブラウザで適用される情報の悪用防止策です。<br />
+    <a href="../origin.astro" target="_blank">オリジン</a>の違いによる制約を設けることで、他サイトからの不正なアクセスを防ぎます。<br />
+    <b>参考サイト</b><br />
+    <a href="https://tools.ietf.org/html/rfc6454" target="_blank">RFC6454</a><br />
+    <a href="http://www.tohoho-web.com/ex/same-origin-policy.html" target="_blank">同一生成元ポリシー(Same-Origin Policy)</a><br />
+  </p>
+
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+
+</SiteLayout>

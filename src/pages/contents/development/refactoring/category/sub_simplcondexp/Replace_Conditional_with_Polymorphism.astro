@@ -1,0 +1,43 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+  { id: '#replaceconditionalwithpolymorphism', name: 'Replace Conditional with Polymorphism' }
+];
+---
+
+<SiteLayout title="Replace Conditional with Polymorphism | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells.html">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
+  <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions">Simplifying Conditional Expressions</a></p>
+
+  <h2 id="replaceconditionalwithpolymorphism">Replace Conditional with Polymorphism</h2>
+  <p><a href="https://sourcemaking.com/refactoring/replace-conditional-with-polymorphism">Replace Conditional with Polymorphism</a>
+    switch文で条件を指定しながら処理を振り分けるような処理は、処理に対応するサブクラスを作成して呼び出し元はポリモルフィズムで実現することを検討しましょう（※）。</p>
+  <p>※Effective Java で“戦略enumパターン”という名前で紹介されていた技法も参考になると思われるので、それに関する記事をご紹介</p>
+  <ul>
+    <li>
+      <a href="https://amachang.hatenablog.com/entry/20100225/1267114471">Effective Java 読書会 8 日目 「それ enum で出来るよ」</a>
+      ⇒「switch 文の代わりに固有メソッド」と「戦略 enum」のところ
+    </li>
+    <li><a href="https://qiita.com/jver/items/f3485f4fd9c47625d7a4">Effective Java：Enum編</a></li>
+  </ul>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#switch-statements">Switch Statements</a></li>
+  </ul>
+</SiteLayout>

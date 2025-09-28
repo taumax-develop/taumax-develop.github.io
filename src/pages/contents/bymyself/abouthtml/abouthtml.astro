@@ -1,0 +1,74 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import imgMarginPadding from './img/margin_padding.png';
+
+const indexList = [
+  { id: "#summary", name: "概要" },
+  { id: "#whatimade", name: "作成物" },
+  { id: "#mechanism", name: "仕組み" },
+  { id: "#whatilearn", name: "学び" }
+];
+---
+
+<SiteLayout
+  title="htmlとcss"
+  description="twitterのbotとか自動リリース機能の構築とか、自作サイト作ってそれをhttps化したりとかいろいろ自力で構築した中で得た知識を整理した記事です。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">htmlとcss</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../bymyself.html" style="color: #00bfff;">個人開発したことまとめ</a> &gt; htmlとcss</p>
+
+  <br />
+  <div id="summary"></div>
+  <h3 class="title">htmlとcss</h3>
+  <p>
+  </p>
+
+  <br /><br />
+  <div id="whatimade"></div>
+  <h3 class="title">作ったもの（実際に稼働したときのツイート）</h3>
+  <p>
+  </p>
+
+  <br /><br />
+  <div id="mechanism"></div>
+  <h3 class="title">どんな仕組み？</h3>
+  <p>
+  </p>
+
+  <br /><br />
+  <div id="whatilearn"></div>
+  <h3 class="title">ぶつかった壁とか学んだこととか</h3>
+  <h4 class="title">margin と padding の違い</h4>
+  <p>
+    <Image src={imgMarginPadding} width={400} alt="marginとpaddingの違い" /><br />
+    <a href="http://open.shonan.bunkyo.ac.jp/~ohtan/kouza/css-margin.html" target="_blank">参考</a><br />
+  </p>
+
+  <br /><br />
+  <h4 class="title">行間</h4>
+  <p>
+    行間を指定するのは「line-height:」<br />
+    <a href="https://blog.codecamp.jp/programming-html-first-lineheight" target="_blank">参考</a><br />
+  </p>
+
+  <br /><br />
+  <h4 class="title">折り返し</h4>
+  <p>
+    white-space: nowrapは、改行を強制的に禁止<br />
+    <a href="https://uxmilk.jp/14958" target="_blank">参考</a><br />
+  </p>
+
+  <br /><br />
+  <h4 class="title">スクロール</h4>
+  <p>
+    overflow は、領域内に収まりきらない内容を、どのように処理するかを指定するプロパティです。<br />
+    <a href="https://www.tagindex.com/stylesheet/box/overflow.html" target="_blank">参考</a><br />
+  </p>
+
+</SiteLayout>

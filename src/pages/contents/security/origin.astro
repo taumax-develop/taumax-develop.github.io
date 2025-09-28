@@ -1,0 +1,45 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: "#origin", name: "オリジン" }
+];
+---
+
+<SiteLayout
+  title="オリジン"
+  description="オリジン(Origin)の解説ページ。スキーム、ホスト、ポート番号の組み合わせについて。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">オリジン</h2>
+
+  <br /><br />
+  <p style="color: #FFFFFF;"><a href="../../index.html" style="color: #00bfff;">ホーム</a> &gt; <a href="../security.astro" style="color: #00bfff;">セキュリティ</a> &gt; オリジン</p>
+
+  <br />
+  <div id="origin"></div>
+  <h3 class="title">オリジン(Origin)とは</h3>
+  <p>
+    オリジン(Origin)は、スキーム（プロトコル）、ホスト、ポート番号の組み合わせです。<br />
+    下記は全て同じオリジンとみなされます（Same-Origin）。<br />
+    1. http://site-a.example.com/<br />
+    2. http://site-a.example.com:80/<br />
+    3. http://site-a.example.com/example.html<br />
+    ※httpのウェルノウンポートが80なので、上記は全て同じオリジンとみなされる。
+  </p>
+  <p>
+    下記は異なるオリジンとみなされます（Cross-Origin）。<br />
+    1. https://site-a.example.com/      ← スキームが異なる（httpとhttps）<br />
+    2. http://site-b.example.com/       ← ホストが異なる（site-aとsite-b）<br />
+    3. http://site-a.example.com:8080/  ← ポート番号が異なる（ウェルノウンポート80と8080）<br />
+  </p>
+
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+
+</SiteLayout>

@@ -1,0 +1,40 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
+const title = 'Alternative Classes with Different Interfaces';
+const description = 'Code Smell: Alternative Classes with Different Interfaces';
+const twitterCardSize = 'summary_large_image';
+const indexList = [
+  { text: 'Home', href: '/' }
+];
+---
+<SiteLayout {title} {description} {twitterCardSize} {indexList}>
+  <h1 id="alternativeclasseswithdifferentinterfaces">Alternative Classes with Different Interfaces</h1>
+  <p><a href="https://sourcemaking.com/refactoring/smells/alternative-classes-with-different-interfaces">Alternative Classes with Different Interfaces</a></p>
+  <p><strong><em>兆候と症状</em></strong><br />
+    異なるメソッド名を有する2つのクラスが同じ機能を実装しているような状況。</p>
+  <p><strong><em>問題の理由</em></strong><br />
+    一方のクラスを作成したプログラマは、機能的に同等のクラスが既に存在することをおそらく知らなかったでしょう。</p>
+  <p><strong><em>対処</em></strong><br />
+    各クラスの共通部分をインターフェースとして抽出してみてください：
+  <ul>
+    <li>すべてのクラスでメソッド名が同じになるように「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#rename-method">Rename Method</a>」を適用します。</li>
+    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method">Move Method</a>」、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#add-parameter">Add Parameter</a>」、および「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#parameterize-method">Parameterize Method</a>」により、メソッドのシグネチャ（メソッド名、引数の数、引数の型、引数の順番）と実装を同じにします。</li>
+    <li>クラスの機能の一部のみが重複している場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-superclass">Extract Superclass</a>」を使ってみてください。この場合、既存のクラスはサブクラスになります。</li>
+    <li>使用するリファクタリング方法を決定して実装した後、クラスの1つを削除できる場合があります。</li>
+  </ul>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>不要な重複コードを排除することができます。</li>
+    <li>コードの可読性が上がり、理解しやすくなります。まったく同じ機能を実現するクラスが2つある理由を推測する必要がなくなります。</li>
+  </ul>
+  <br /><br />
+  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
+    リファクタリング第2版<br />
+    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
+    レガシーコード改善ガイド<br />
+    <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
+  </p>
+</SiteLayout>

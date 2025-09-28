@@ -1,0 +1,53 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+  { id: '#consolidateconditionalexpression', name: 'Consolidate Conditional Expression' }
+];
+---
+
+<SiteLayout title="Consolidate Conditional Expression | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells.html">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
+  <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions">Simplifying Conditional Expressions</a></p>
+
+  <h2 id="consolidateconditionalexpression">Consolidate Conditional Expression</h2>
+  <p><a href="https://sourcemaking.com/refactoring/consolidate-conditional-expression">Consolidate Conditional Expression</a>
+    複数の異なる条件分岐で同じ結果を返すような処理は一つの条件に統合しましょう。</p>
+  <pre><code class="language-java">{`double disabilityAmount() {
+  if (seniority < 2) {
+    return 0;
+  }
+  if (monthsDisabled > 12) {
+    return 0;
+  }
+  if (isPartTime) {
+    return 0;
+  }
+}
+`}</code></pre>
+  <pre><code class="language-java">{`double disabilityAmount() {
+  if (isNotEligableForDisability()) {
+    return 0;
+  }
+}
+`}</code></pre>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code">Duplicate Code</a></li>
+  </ul>
+</SiteLayout>

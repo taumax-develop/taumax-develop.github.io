@@ -1,0 +1,42 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
+import RefactoringImg from "../../../img/refactoring.jpg";
+import LegacyCodeImg from "../../../img/legacy_code.jpg";
+
+const title = "Divergent Change";
+const description = "Code Smell: Divergent Change";
+const twitterCardSize = "summary_large_image";
+const indexList = [
+  { text: "Home", href: "/" }
+];
+---
+
+<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+  <h3 id="divergentchange">Divergent Change</h3>
+  <p><a href="https://sourcemaking.com/refactoring/smells/divergent-change">Divergent Change（変更の発散）</a></p>
+  <p>※Divergent Changeは、<a href="https://sourcemaking.com/refactoring/smells/shotgun-surgery">Shotgun Surgery</a>という別のCode Smellと似ていますが、Divergent ChangeとShotgun Surgeryは真逆のものです。
+    Divergent Changeは1つのクラスに多くの変更が加えられることです。Shotgun Surgeryは一つの変更が複数クラスに対して同時に行われることを指します。</p>
+  <p><strong><em>兆候と症状</em></strong>
+    クラスに変更を加えると、多くの無関係なメソッドを変更する必要があります。たとえば、新しい製品タイプを追加する場合、製品の検索、表示、注文の方法を変更する必要があります。</p>
+  <p><strong><em>問題の理由</em></strong>
+    このように修正箇所が発散する原因は、多くの場合、不十分なプログラム構造またはコピペプログラミングによるものです。</p>
+  <p><strong><em>対処</em></strong></p>
+  <ul>
+    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」を使ってクラスの振る舞いを別クラスに分割します。</p></li>
+    <li><p>異なるクラスが同じ振る舞いを持っている場合、継承を利用してクラスを統合します（「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-superclass">Extract Superclass</a>」と「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-subclass">Extract Subclass</a>」）。</p></li>
+  </ul>
+  <p><strong><em>効果</em></strong></p>
+  <ul>
+    <li>コード構成の改善</li>
+    <li>重複コードの削減</li>
+  </ul>
+  <br /><br />
+  書籍としてはこの辺りが参考になると思います。<br />
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={RefactoringImg} alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={LegacyCodeImg} alt="legacy_code" /></a>
+</SiteLayout>

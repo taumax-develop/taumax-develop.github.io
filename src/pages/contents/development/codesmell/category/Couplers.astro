@@ -1,0 +1,47 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import refactoringImg from '../../img/refactoring.jpg';
+import legacyCodeImg from '../../img/legacy_code.jpg';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#couplers', name: 'Couplers' },
+  { id: '#featureenvy', name: 'Feature Envy' },
+  { id: '#inappropriateintimacy', name: 'Inappropriate Intimacy' },
+  { id: '#messagechains', name: 'Message Chains' },
+  { id: '#middleman', name: 'Middle Man' }
+];
+---
+<SiteLayout
+  title="Couplers"
+  description="Code Smell: Couplersの分類・参考情報をまとめたページです。"
+  twitterCardSize="summary_large_image"
+  indexList={indexList}
+>
+  <section class="box">
+    <h2 class="title">Couplers</h2>
+    <h2 id="couplers">Couplers</h2>
+    <p><a href="https://sourcemaking.com/refactoring/smells/couplers">Couplers</a></p>
+    <p>このグループのすべてのCode Smellは、クラス同士の結合度が高くなったり、結合を<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate">委譲(delegate)</a>に置き換え過ぎた場合に何が起こるかを示しています。</p>
+    <h1 id="featureenvy">Feature Envy</h1>
+    <p><a href="sub_couplers/Feature_Envy.html">Feature Envy（機能の横恋慕）</a></p>
+    <h1 id="inappropriateintimacy">Inappropriate Intimacy</h1>
+    <p><a href="sub_couplers/Inappropriate_Intimacy.html">Inappropriate Intimacy（不適切な関係）</a></p>
+    <h1 id="messagechains">Message Chains</h1>
+    <p><a href="sub_couplers/Message_Chains.html">Message Chains（メッセージの連鎖）</a></p>
+    <h1 id="middleman">Middle Man</h1>
+    <p><a href="sub_couplers/Middle_Man.html">Middle Man（仲介人）</a></p>
+    <br /><br /><br />
+    書籍としてはこの辺りが参考になると思います。<br />
+    <br />
+    リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src={refactoringImg.src} alt="refactoring" /></a>
+    <br />
+    レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src={legacyCodeImg.src} alt="legacy_code" /></a>
+  </section>
+  <footer>
+    <small><a href="/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

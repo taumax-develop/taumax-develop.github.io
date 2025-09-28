@@ -1,0 +1,44 @@
+---
+import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import img01 from './img/change_bidirectional_association_to_unidirectional/img01.png'
+import img02 from './img/change_bidirectional_association_to_unidirectional/img02.png'
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#organizingdata', name: 'Organizing Data' },
+  { id: '#changebidirectionalassociationtounidirectional', name: 'Change Bidirectional Association to Unidirectional' }
+];
+---
+
+<SiteLayout title="Change Bidirectional Association to Unidirectional | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1>関連するリファクタリング技法</h1>
+
+  <h1 id="organizingdata">Organizing Data</h1>
+  <p><a href="https://sourcemaking.com/refactoring/organizing-data">Organizing Data</a></p>
+
+  <h2 id="changebidirectionalassociationtounidirectional">Change Bidirectional Association to Unidirectional</h2>
+  <p><a href="https://sourcemaking.com/refactoring/change-bidirectional-association-to-unidirectional">Change Bidirectional Association to Unidirectional</a>
+  クラス同士が相互に依存しているが、一方のクラスは他方の機能を使用していない場合、未使用の関連を削除します。</p>
+  <p><strong><em>【リファクタリング前】</em></strong>
+  <Image src={img01} alt="image.png" />
+  <a href="https://sourcemaking.com/refactoring/change-bidirectional-association-to-unidirectional">このページ</a>より抜粋</p>
+  <p><strong><em>【リファクタリング後】</em></strong>
+  <Image src={img02} alt="image.png" />
+  <a href="https://sourcemaking.com/refactoring/change-bidirectional-association-to-unidirectional">このページ</a>より抜粋</p>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inappropriate-intimacy">Inappropriate Intimacy</a></li>
+  </ul>
+</SiteLayout>

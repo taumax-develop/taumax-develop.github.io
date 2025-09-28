@@ -1,0 +1,47 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import refactoringImg from '../../img/refactoring.jpg';
+import legacyCodeImg from '../../img/legacy_code.jpg';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#objectorientationabusers', name: 'Object-Orientation Abusers' },
+  { id: '#switchstatements', name: 'Switch Statements' },
+  { id: '#temporaryfield', name: 'Temporary Field' },
+  { id: '#refusedbequest', name: 'Refused Bequest' },
+  { id: '#alternativeclasseswithdifferentinterfaces', name: 'Alternative Classes with Different Interfaces' }
+];
+---
+<SiteLayout
+  title="Object-Orientation-Abusers"
+  description="Code Smell: Object-Orientation Abusersの分類・参考情報をまとめたページです。"
+  twitterCardSize="summary_large_image"
+  indexList={indexList}
+>
+  <section class="box">
+    <h2 class="title">Object-Orientation-Abusers</h2>
+    <h2 id="objectorientationabusers">Object-Orientation Abusers</h2>
+    <p><a href="https://sourcemaking.com/refactoring/smells/oo-abusers">Object-Orientation Abusers（オブジェクト指向の乱用）</a>
+      オブジェクト指向プログラミングの原則を不完全、不正確に適用することで発生するCode Smellです。</p>
+    <h1 id="switchstatements">Switch Statements</h1>
+    <p><a href="sub_objectabuse/Switch_Statements.html">Switch Statements</a></p>
+    <h1 id="temporaryfield">Temporary Field</h1>
+    <p><a href="sub_objectabuse/Temporary_Field.html">Temporary Field</a></p>
+    <h1 id="refusedbequest">Refused Bequest</h1>
+    <p><a href="sub_objectabuse/Refused_Bequest.html">Refused Bequest（接続拒否）</a>：</p>
+    <h1 id="alternativeclasseswithdifferentinterfaces">Alternative Classes with Different Interfaces</h1>
+    <p><a href="sub_objectabuse/Alternative_Classes_with_Different_Interfaces.html">Alternative Classes with Different Interfaces</a></p>
+    <br /><br /><br />
+    書籍としてはこの辺りが参考になると思います。<br />
+    <br />
+    リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src={refactoringImg.src} alt="refactoring" /></a>
+    <br />
+    レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src={legacyCodeImg.src} alt="legacy_code" /></a>
+  </section>
+  <footer>
+    <small><a href="/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

@@ -1,0 +1,38 @@
+---
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import refactoringImg from '../../img/refactoring.jpg';
+import legacyCodeImg from '../../img/legacy_code.jpg';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#othersmells', name: 'Other Smells' },
+  { id: '#alternativeclasseswithdifferentinterfaces', name: 'Incomplete Library Class' }
+];
+---
+<SiteLayout
+  title="Other-Smells"
+  description="Code Smell: Other Smellsの分類・参考情報をまとめたページです。"
+  twitterCardSize="summary_large_image"
+  indexList={indexList}
+>
+  <section class="box">
+    <h2 class="title">Other-Smells</h2>
+    <h2 id="othersmells">Other Smells</h2>
+    <p><a href="https://sourcemaking.com/refactoring/smells/other">Other Smells</a></p>
+    <p>どこにも分類されない Code Smell です。</p>
+    <h1 id="alternativeclasseswithdifferentinterfaces">Incomplete Library Class</h1>
+    <p><a href="sub_other/Incomplete_Library_Class.html">Incomplete Library Class</a></p>
+    <br /><br /><br />
+    書籍としてはこの辺りが参考になると思います。<br />
+    <br />
+    リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src={refactoringImg.src} alt="refactoring" /></a>
+    <br />
+    レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src={legacyCodeImg.src} alt="legacy_code" /></a>
+  </section>
+  <footer>
+    <small><a href="/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

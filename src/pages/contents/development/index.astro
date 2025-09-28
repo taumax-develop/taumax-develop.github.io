@@ -1,0 +1,30 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#codesmell', name: 'Code Smell' },
+  { id: '#refactoring', name: 'リファクタリング技法' }
+];
+---
+
+<SiteLayout
+  title="Code Smellとリファクタリング技法"
+  description="Code Smellとリファクタリング技法のまとめページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">Code Smellとリファクタリング技法</h2>
+
+  <p>ここでは Code Smell とリファクタリング技法についてご紹介します。</p>
+  <ul>
+    <li><a href="codesmell/Codesmells.astro">Code Smell</a></li>
+    <li><a href="refactoring/Refactoring_Technics.astro">リファクタリング技法</a></li>
+  </ul>
+  <br /><br />
+  <footer>
+    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+  </footer>
+</SiteLayout>

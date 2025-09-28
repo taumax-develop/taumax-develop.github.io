@@ -1,0 +1,46 @@
+---
+import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+const indexList = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+  { id: '#extractsubclass', name: 'Extract Subclass' }
+];
+---
+
+<SiteLayout
+  title="Extract Subclass"
+  description="リファクタリング技法：Extract Subclassの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href="../codesmell/Codesmells.html">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
+  <br />
+  リファクタリング第2版<br />
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <br />
+  レガシーコード改善ガイド<br />
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+
+  <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
+  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
+
+  <h2 id="extractsubclass">Extract Subclass</h2>
+  <p><a href="https://sourcemaking.com/refactoring/extract-subclass">Extract Subclass</a></p>
+  <p>特定の場合にのみ使用される機能がクラスにある場合、サブクラスを作成してその機能を使用します。</p>
+  <p>注意すべき点として、サブクラスを作ることが必ずしもコードの複雑性を回避する手段になるとは限りません。継承は使いどころを間違えると大変なことになるのでコンポジションを使うべきところと明確に分けて考えましょう。</p>
+  <p>※継承とコンポジションの違いについてはこの辺が参考になると思います。</p>
+  <ul>
+    <li><a href="http://4geek.net/difference-between-inheritance-and-composition/">継承とコンポジションをどう使い分けるか</a></li>
+    <li><a href="https://qiita.com/mikamikuh@github/items/1cdcd8b25a2e23f10525">Effective Java 16章「継承よりコンポジションを選ぶ」</a></li>
+    <li><a href="https://www.thekingsmuseum.info/entry/2015/09/16/003849">【Effective Java】項目１６：継承よりコンポジションを選ぶ</a></li>
+    <li><a href="https://postd.cc/why-composition-is-often-better-than-inheritance/">クラスの「継承」より「合成」がよい理由とは？ゲーム開発におけるコードのフレキシビリティと可読性の向上</a></li>
+  </ul>
+  <p><strong><em>関連するCode Smell</em></strong></p>
+  <ul>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#large-class">Large Class</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#divergent-change">Divergent Change</a></li>
+  </ul>
+</SiteLayout>
