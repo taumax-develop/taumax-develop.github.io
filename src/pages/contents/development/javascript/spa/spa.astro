@@ -10,6 +10,7 @@ import eee from './img/typescript_react_next.jpg';
 import fff from './img/vue3.jpg';
 import ggg from './img/nuxt3.jpg';
 import hhh from './img/vuejs入門.jpg';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [
   { id: '#firstly', name: 'はじめに' },
@@ -31,8 +32,8 @@ const indexList = [
   <h2 class="title">SPA(Single Page Application)</h2>
 
   <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href="../../../../index">ホーム</a></li>
-    <li class="breadcrumbli"> > <a href="../js_index">JavaScript</a></li>
+    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
     <li class="breadcrumbli"> > SPA</li>
   </ul>
 
@@ -40,7 +41,7 @@ const indexList = [
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、<a href="../js_index">JavaScriptの進化</a>の続きのページです。<br/>
+    このページは、<a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScriptの進化</a>の続きのページです。<br/>
     ここではSPA(Single Page Application)にスポットを当てて記載していきます。<br/>
     一応このページから読み進めても問題ないように構成したつもりですが、先のページを見てからの方が、SPAが生まれるまでの背景がわかって面白いかもしれません。<br/>
   </p>
@@ -125,8 +126,8 @@ const indexList = [
   </p>
 
   <ul>
-    <li><a href="./react/next_rendering">Next.js のレンダリング</a></li>
-    <li><a href="./vue/nuxt_rendering">Nuxt のレンダリング</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/react/next_rendering`>Next.js のレンダリング</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/vue/nuxt_rendering`>Nuxt のレンダリング</a></li>
   </ul>
   <br/>
 
@@ -154,8 +155,8 @@ const indexList = [
     React と Next.js, Vue.js と Nuxt を組わせてWebアプリケーションを構築する方法や、利用できる機能の詳細については以下リンク先参照。
   </p>
   <ul>
-    <li><a href="react/react_next">React/Next.js</a></li>
-    <li><a href="vue/vue_nuxt">Vue.js/Nuxt</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/react/react_next`>React/Next.js</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/spa/vue/vue_nuxt`>Vue.js/Nuxt</a></li>
   </ul>
 
   <br/>
@@ -209,9 +210,4 @@ const indexList = [
 
     <li><a href="https://zenn.dev/musou1500/articles/2c10efc5015778d35d76" target="_blank" rel="noopener noreferrer">Zenn Angularの新しいレンダリングエンジンで採用された "incremental-dom" とは何なのか</a></li>
   </ul>
-
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
 </SiteLayout>

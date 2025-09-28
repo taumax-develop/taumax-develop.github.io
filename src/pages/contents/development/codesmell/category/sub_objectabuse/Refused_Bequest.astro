@@ -16,23 +16,23 @@ const indexList = [
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="refusedbequest">Refused Bequest</h1>
   <p><a href="https://sourcemaking.com/refactoring/smells/refused-bequest">Refused Bequest（接続拒否）</a>：</p>
-  <p><strong><em>兆候と症状</em></strong><br />
+  <p><strong><em>兆候と症状</em></strong><br/>
     サブクラスがその親から継承したメソッドとプロパティの一部のみを使う場合、クラス階層は歪んでいます。不要なメソッドは単純に未使用になるか、再定義されて例外が発生します。</p>
-  <p><strong><em>問題の理由</em></strong><br />
+  <p><strong><em>問題の理由</em></strong><br/>
     コードを再利用したいというだけの理由でスーパークラスを作成した場合にこのCode Smellが発生します。スーパークラスとサブクラスの間には何の関連性もありません。</p>
-  <p><strong><em>対処</em></strong><br />
+  <p><strong><em>対処</em></strong><br/>
     継承に意味がなく、サブクラスにスーパークラスとの共通点がまったくない場合は、継承を削除して、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-inheritance-with-delegation">Replace Inheritance with Delegation</a>」の技術を用います。
     継承が適切な場合は、サブクラスの不要なフィールドとメソッドを取り除きます。サブクラスに必要なすべてのフィールドとメソッドを親クラスから抽出し、それらを新しいサブクラスに入れ、両方のクラスをそれから継承するように設定します（<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-superclass">Extract Superclass</a>）。</p>
   <p>※参考：<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#リスコフの置換原則">リスコフの置換原則</a></p>
-  <p><strong><em>効果</em></strong><br />
+  <p><strong><em>効果</em></strong><br/>
     コードが明確になり、クラス設計を改善します。
     DogクラスがChairクラスから継承される理由を不思議に思う必要はもうありません（両方とも4本の脚を持っていますが）。</p>
   <p><Image src={dog_chair} alt="dog_chair" /></p>
-  <br /><br />
-  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
-    リファクタリング第2版<br />
-    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
-    レガシーコード改善ガイド<br />
+  <br/><br/>
+  <p>書籍としてはこの辺りが参考になると思います。<br/><br/>
+    リファクタリング第2版<br/>
+    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br/><br/>
+    レガシーコード改善ガイド<br/>
     <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   </p>
 </SiteLayout>

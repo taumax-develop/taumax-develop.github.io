@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import refactoringImg from '../../img/refactoring.jpg';
 import legacyCodeImg from '../../img/legacy_code.jpg';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -24,24 +25,20 @@ const indexList = [
     <p><a href="https://sourcemaking.com/refactoring/smells/oo-abusers">Object-Orientation Abusers（オブジェクト指向の乱用）</a>
       オブジェクト指向プログラミングの原則を不完全、不正確に適用することで発生するCode Smellです。</p>
     <h1 id="switchstatements">Switch Statements</h1>
-    <p><a href="sub_objectabuse/Switch_Statements">Switch Statements</a></p>
+    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Switch_Statements`>Switch Statements</a></p>
     <h1 id="temporaryfield">Temporary Field</h1>
-    <p><a href="sub_objectabuse/Temporary_Field">Temporary Field</a></p>
+    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Temporary_Field`>Temporary Field</a></p>
     <h1 id="refusedbequest">Refused Bequest</h1>
-    <p><a href="sub_objectabuse/Refused_Bequest">Refused Bequest（接続拒否）</a>：</p>
+    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Refused_Bequest`>Refused Bequest（接続拒否）</a>：</p>
     <h1 id="alternativeclasseswithdifferentinterfaces">Alternative Classes with Different Interfaces</h1>
-    <p><a href="sub_objectabuse/Alternative_Classes_with_Different_Interfaces">Alternative Classes with Different Interfaces</a></p>
-    <br /><br /><br />
-    書籍としてはこの辺りが参考になると思います。<br />
-    <br />
-    リファクタリング第2版<br />
+    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Alternative_Classes_with_Different_Interfaces`>Alternative Classes with Different Interfaces</a></p>
+    <br/><br/><br/>
+    書籍としてはこの辺りが参考になると思います。<br/>
+    <br/>
+    リファクタリング第2版<br/>
   <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src={refactoringImg.src} alt="refactoring" /></a>
-    <br />
-    レガシーコード改善ガイド<br />
+    <br/>
+    レガシーコード改善ガイド<br/>
   <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src={legacyCodeImg.src} alt="legacy_code" /></a>
   </section>
-  <footer>
-    <small><a href="/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
 </SiteLayout>

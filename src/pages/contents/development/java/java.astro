@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: 'jjug', name: 'jjug Java 25周年記念' }
@@ -13,8 +14,8 @@ const indexList = [
   indexList={indexList}
 >
   <h2 class="title">Java関連</h2>
-  <a href="../../../../index.astro">ホーム</a> &gt; Java<br /><br />
+  <a href={BASE_URL}>ホーム</a> &gt; Java<br/><br/>
   <ul>
-    <li><a href="./jjug/jjug_happy_25th_anniversary_java">jjug Java 25周年記念</a></li>
+    <li><a href=`${BASE_URL}/contents/development/java/jjug/jjug_happy_25th_anniversary_java`>jjug Java 25周年記念</a></li>
   </ul>
 </SiteLayout>

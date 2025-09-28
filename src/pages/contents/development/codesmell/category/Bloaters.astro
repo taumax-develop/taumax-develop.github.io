@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -28,26 +29,22 @@ const indexList = [
     通常、これらのCode Smellはすぐには現れず、プログラムに改修を積み重ねること（そして特に誰もそれらを根絶する努力をしないとき）で現れます。
   </p>
   <h3 id="longmethod">Long Method</h3>
-  <p><a href="./sub_bloaters/Long_Method">Long Method（長すぎるメソッド）</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_bloaters/Long_Method`>Long Method（長すぎるメソッド）</a></p>
   <h3 id="largeclass">Large Class</h3>
-  <p><a href="./sub_bloaters/Large_Class">Large Class（巨大なクラス）</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_bloaters/Large_Class`>Large Class（巨大なクラス）</a></p>
   <h3 id="primitiveobsession">Primitive Obsession</h3>
-  <p><a href="./sub_bloaters/Primitive_Obsession">Primitive Obsession（基本データ型への執着）</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_bloaters/Primitive_Obsession`>Primitive Obsession（基本データ型への執着）</a></p>
   <h3 id="longparameterlist">Long Parameter List</h3>
-  <p><a href="./sub_bloaters/Long_Parameter_List">Long Parameter List（長すぎるパラメータリスト）</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_bloaters/Long_Parameter_List`>Long Parameter List（長すぎるパラメータリスト）</a></p>
   <h3 id="dataclumps">Data Clumps</h3>
-  <p><a href="./sub_bloaters/Data_Clumps">Data Clumps（データの塊）</a></p>
-  <br /><br /><br />
-  書籍としてはこの辺りが参考になると思います。<br />
-  <br />
-  リファクタリング第2版<br />
+  <p><a href=`${BASE_URL}/contents/sub_bloaters/Data_Clumps`>Data Clumps（データの塊）</a></p>
+  <br/><br/><br/>
+  書籍としてはこの辺りが参考になると思います。<br/>
+  <br/>
+  リファクタリング第2版<br/>
   <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../img/refactoring.jpg" alt="refactoring" /></a>
-  <br />
-  レガシーコード改善ガイド<br />
+  <br/>
+  レガシーコード改善ガイド<br/>
   <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../img/legacy_code.jpg" alt="legacy_code" /></a>
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
+  <br/><br/>
 </SiteLayout>

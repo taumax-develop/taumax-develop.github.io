@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import type { index } from '../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [] as index[];
 ---
@@ -13,7 +14,7 @@ const indexList = [] as index[];
 >
   <h2 class="title">Database関連</h2>
 
-  <a href="../../../index">ホーム</a> > Database関連<br><br>
+  <a href={BASE_URL}>ホーム</a> > Database関連<br><br>
 
-  <li><a href="db_design_night_no6/db_design_night_no6">DB設計したいNight #6 正規化 [online]</a></li>
+  <li><a href=`${BASE_URL}/contents/db_design_night_no6/db_design_night_no6`>DB設計したいNight #6 正規化 [online]</a></li>
 </SiteLayout>

@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#firstly", name: "はじめに" },
@@ -31,38 +32,33 @@ const indexList = [
 >
   <h2 class="title">RDRA</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../requirement.astro" style="color: #00bfff;">要件定義</a> &gt; RDRA（ラドラ）</p>
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/requirement/requirement` style="color: #00bfff;">要件定義</a> &gt; RDRA（ラドラ）</p>
 
-  <br />
+  <br/>
   <div id="firstly"></div>
   <h3 class="title">はじめに</h3>
   <p>
-    connpassに「<a href="https://kataruyube.connpass.com/" target="_blank">語る夕べ</a>」というグループがあります。2018/07/18に「<a href="https://kataruyube.connpass.com/event/92197/" target="_blank">勝手にRDRAを語る夕べ</a>」というイベントが開催され、RDRA（ラドラ）という要件定義の手法について語る会が開催されました。<br />
-    この記事は、そのイベントに私が参加した際のメモと、別の参加者がtwitterで呟いたことをまとめたものです。<br />
-    ある程度RDRAを知っている人に対して語る会なので、いきなりこの記事を読んでもよくわからないと思います。<br />
+    connpassに「<a href="https://kataruyube.connpass.com/" target="_blank">語る夕べ</a>」というグループがあります。2018/07/18に「<a href="https://kataruyube.connpass.com/event/92197/" target="_blank">勝手にRDRAを語る夕べ</a>」というイベントが開催され、RDRA（ラドラ）という要件定義の手法について語る会が開催されました。<br/>
+    この記事は、そのイベントに私が参加した際のメモと、別の参加者がtwitterで呟いたことをまとめたものです。<br/>
+    ある程度RDRAを知っている人に対して語る会なので、いきなりこの記事を読んでもよくわからないと思います。<br/>
     「◆参考資料」に記載した資料がRDRAをちゃんと整理して説明しています。RDRAを提唱している神崎さんの資料です。整理された情報が欲しい人はその資料を見て下さい。この記事は、その資料を見た後で見ると、為になるところが少しはあるかもしれない。。。という記事です。
   </p>
 
   <div id="reference_books"></div>
   <h3 class="title">◆参考資料</h3>
   <p>
-    本はこちら<br />
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B07D25W3HF/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07D25W3HF&linkCode=as2&tag=sagamax-22&linkId=cbeb1bd2c421dcfb1f91ddc7456ac877"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07D25W3HF&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=sagamax-22&l=am2&o=9&a=B07D25W3HF" width="1" height="1" style="border: #fff;" alt="" style="border:none !important; margin:0px !important;" /><br />
-    ・<a href="http://k-method.jp/index.html" target="_blank">RDRA（ラドラ）：Relationship Driven Requirement Analysys</a><br />
-    ・<a href="https://www.slideshare.net/zenjikanzaki/rdra4-bp-study" target="_blank">モデルベース要件定義　at BPStudy（発表資料）</a><br />
-    ・<a href="https://tech.nikkeibp.co.jp/it/article/Watcher/20071009/283860/" target="_blank">「要求分析ツリー」を使って要求の構より抜粋を捉える</a><br />
-    ・<a href="https://www.ipa.go.jp/files/000005375.pdf" target="_blank">要求工学知識体系(REBOK)概説</a><br />
-    ・<a href="http://www.fujitsu.com/jp/group/fri/column/news/200803/2008-3-2.html" target="_blank">合意形成手法「リザルトチェイン」適用事例</a><br />
-    ・<a href="https://t.co/2hAdf1PQUS" target="_blank">UModel におけるダイアグラム</a><br />
-    ・<a href="https://codezine.jp/article/detail/5647" target="_blank">「要件定義」の4つの構造と依存関係に着目した実践手法</a><br />
-    ・<a href="http://www.amazon.co.jp/exec/obidos/ASIN/0471042994/" target="_blank">JAD(Joint Application Development)</a><br />
+    本はこちら<br/>
+    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B07D25W3HF/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07D25W3HF&linkCode=as2&tag=sagamax-22&linkId=cbeb1bd2c421dcfb1f91ddc7456ac877"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07D25W3HF&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><img src="//ir-jp.amazon-adsystem.com/e/ir?t=sagamax-22&l=am2&o=9&a=B07D25W3HF" width="1" height="1" style="border: #fff;" alt="" style="border:none !important; margin:0px !important;" /><br/>
+    ・<a href="http://k-method.jp/index.html" target="_blank">RDRA（ラドラ）：Relationship Driven Requirement Analysys</a><br/>
+    ・<a href="https://www.slideshare.net/zenjikanzaki/rdra4-bp-study" target="_blank">モデルベース要件定義　at BPStudy（発表資料）</a><br/>
+    ・<a href="https://tech.nikkeibp.co.jp/it/article/Watcher/20071009/283860/" target="_blank">「要求分析ツリー」を使って要求の構より抜粋を捉える</a><br/>
+    ・<a href="https://www.ipa.go.jp/files/000005375.pdf" target="_blank">要求工学知識体系(REBOK)概説</a><br/>
+    ・<a href="http://www.fujitsu.com/jp/group/fri/column/news/200803/2008-3-2.html" target="_blank">合意形成手法「リザルトチェイン」適用事例</a><br/>
+    ・<a href="https://t.co/2hAdf1PQUS" target="_blank">UModel におけるダイアグラム</a><br/>
+    ・<a href="https://codezine.jp/article/detail/5647" target="_blank">「要件定義」の4つの構造と依存関係に着目した実践手法</a><br/>
+    ・<a href="http://www.amazon.co.jp/exec/obidos/ASIN/0471042994/" target="_blank">JAD(Joint Application Development)</a><br/>
   </p>
 
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
-
+  <br/><br/>
 </SiteLayout>

@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
-import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -11,13 +11,13 @@ const indexList = [
 
 <SiteLayout title="Move Field | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
   <h2 class="title">リファクタリング技法</h2>
-  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
-  <br />
-  リファクタリング第2版<br />
+  <br/>
+  リファクタリング第2版<br/>
   <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
-  <br />
-  レガシーコード改善ガイド<br />
+  <br/>
+  レガシーコード改善ガイド<br/>
   <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
 
   <h1>関連するリファクタリング技法</h1>

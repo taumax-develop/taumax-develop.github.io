@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import SiteLayout from "../../../../../layouts/SiteLayout.astro";
 import play_with_nodejs_twitter from './img/play_with_nodejs_twitter.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from "../../../../../consts";
 
 const indexList = [
   { id: "firstly", name: "はじめに" },
@@ -20,10 +21,10 @@ const indexList = [
   <h2 class="title">Node.js × Twitter</h2>
 
   <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href="../../../../index">ホーム</a></li>
-    <li class="breadcrumbli"> > <a href="../js_index">js関連技術</a></li>
-    <li class="breadcrumbli"> > <a href="./nodejs">Node.js</a></li>
-    <li class="breadcrumbli"> > <a href="./what_i_made">Node.js × Twitch, Twitter, OBS</a></li>
+    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>js関連技術</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a></li>
     <li class="breadcrumbli"> > Node.js × Twitter</li>
   </ul>
 
@@ -31,7 +32,7 @@ const indexList = [
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、 <a href="./what_i_made">Node.js × Twitch, Twitter, OBS</a> の続きです。<br/>
+    このページは、 <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a> の続きです。<br/>
     Node.js から X（旧twitter）にポストする部分について記載します。以下画像の赤枠部分です。<br/>
     <Image src={play_with_nodejs_twitter} width={800} alt="play_with_nodejs_twitter" /><br/>
 
@@ -40,8 +41,8 @@ const indexList = [
   </p>
 
   <ul>
-    <li><a href="./twitch">Node.js × twitch</a></li>
-    <li><a href="./obs">Node.js × OBS</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × twitch</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/obs`>Node.js × OBS</a></li>
   </ul>
 
   <br/>
@@ -122,7 +123,7 @@ media: {media_ids: mediaIds} // Pass the media id string
 
     <br/>
     話を戻します。<br/>
-    <a href="./twitch#webhook">Twitch の Webhook</a> を使うと配信開始のイベントを受け取ることもできるので、組み合わせることで、配信開始と同時にXに自動的にポストするということも実現できます。<br/>
+    <a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch#webhook`>Twitch の Webhook</a> を使うと配信開始のイベントを受け取ることもできるので、組み合わせることで、配信開始と同時にXに自動的にポストするということも実現できます。<br/>
     以下が実際のポストです。<br/>
   </p>
 
@@ -135,8 +136,8 @@ media: {media_ids: mediaIds} // Pass the media id string
     Node.js と X の組み合わせについては以上です。その他の組み合わせについては以下リンク先を参照してください。<br/>
   </p>
   <ul>
-    <li><a href="./twitch">Node.js × twitch</a></li>
-    <li><a href="./obs">Node.js × OBS</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × twitch</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/obs`>Node.js × OBS</a></li>
   </ul>
 
   <br/>

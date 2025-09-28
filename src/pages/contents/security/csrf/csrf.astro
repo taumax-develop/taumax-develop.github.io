@@ -4,6 +4,7 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import CSRF_flow from './CSRF_flow.png'
 import CSRF_flowDetail from './CSRF_flowDetail.png'
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#csrf", name: "CSRF" }
@@ -18,26 +19,18 @@ const indexList = [
 >
   <h2 class="title">CSRF（Cross-Site Request Forgeries）</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../security" style="color: #00bfff;">セキュリティ</a> &gt; CSRF</p>
-
-  <br />
+  <br/>
   <div id="csrf"></div>
   <h3 class="title">CSRF攻撃とは</h3>
   <p>
-    CSRF攻撃は、ログインが必要なWebサービスにログインユーザーになりすましたリクエストを送信する攻撃です。<br />
-    <Image src={CSRF_flow} alt="CSRF攻撃が成立するまで（全体の流れ）" width={900} /><br /><br />
-    <Image src={CSRF_flowDetail} alt="CSRF攻撃が成立するまで（詳細）" width={900} /><br />
-    <b>参考サイト</b><br />
-    <a href="https://www.scutum.jp/information/web_security_primer/csrf.html" target="_blank">CSRF（クロスサイトリクエストフォージェリ：リクエスト強要）って一体何？ - サイト運営者のためのWebサイトセキュリティ対策入門</a><br />
-    <a href="http://www.tohoho-web.com/ex/same-origin-policy.html" target="_blank">同一生成元ポリシー(Same-Origin Policy)</a><br />
-    <a href="http://watanabe-tsuyoshi.hatenablog.com/entry/2015/03/04/123649" target="_blank">Cross-Site Request Forgery（クロスサイトリクエストフォージェリ）って何？</a><br />
+    CSRF攻撃は、ログインが必要なWebサービスにログインユーザーになりすましたリクエストを送信する攻撃です。<br/>
+    <Image src={CSRF_flow} alt="CSRF攻撃が成立するまで（全体の流れ）" width={900} /><br/><br/>
+    <Image src={CSRF_flowDetail} alt="CSRF攻撃が成立するまで（詳細）" width={900} /><br/>
+    <b>参考サイト</b><br/>
+    <a href="https://www.scutum.jp/information/web_security_primer/csrf.html" target="_blank">CSRF（クロスサイトリクエストフォージェリ：リクエスト強要）って一体何？ - サイト運営者のためのWebサイトセキュリティ対策入門</a><br/>
+    <a href="http://www.tohoho-web.com/ex/same-origin-policy.html" target="_blank">同一生成元ポリシー(Same-Origin Policy)</a><br/>
+    <a href="http://watanabe-tsuyoshi.hatenablog.com/entry/2015/03/04/123649" target="_blank">Cross-Site Request Forgery（クロスサイトリクエストフォージェリ）って何？</a><br/>
   </p>
 
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
-
+  <br/><br/>
 </SiteLayout>

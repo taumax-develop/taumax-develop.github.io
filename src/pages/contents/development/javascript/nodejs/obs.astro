@@ -8,6 +8,7 @@ import websocker_setting3 from './img/websocker_setting3.jpg'
 import obs1 from './img/obs1.jpg'
 import obs2 from './img/obs2.jpg'
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from "../../../../../consts";
 
 const indexList = [
   { id: "obs", name: "Node.js × OBS" },
@@ -26,10 +27,10 @@ const indexList = [
   <h2 class="title">Node.js × OBS</h2>
 
   <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href="../../../../index">ホーム</a></li>
-    <li class="breadcrumbli"> > <a href="../js_index">js関連技術</a></li>
-    <li class="breadcrumbli"> > <a href="./nodejs">Node.js</a></li>
-    <li class="breadcrumbli"> > <a href="./what_i_made">Node.js × Twitch, Twitter, OBS</a></li>
+    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>js関連技術</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a></li>
     <li class="breadcrumbli"> > Node.js × OBS</li>
   </ul>
 
@@ -37,7 +38,7 @@ const indexList = [
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、 <a href="./what_i_made">Node.js × Twitch, Twitter, OBS</a> の続きです。<br/>
+    このページは、 <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a> の続きです。<br/>
     Node.js から OBS の画面を操作する処理について記載していきます。以下画像右下の赤枠部分です。<br/>
     <Image src={play_with_nodejs_obs} width={800} alt='play_with_nodejs_obs' /><br/>
 
@@ -46,8 +47,8 @@ const indexList = [
   </p>
 
   <ul>
-    <li><a href="./twitch">Node.js × twitch</a></li>
-    <li><a href="./twitter">Node.js × twitter</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × twitch</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitter`>Node.js × twitter</a></li>
   </ul>
 
   <br/>
@@ -225,8 +226,8 @@ const indexList = [
     Node.js と OBS の組み合わせについては以上です。その他の組み合わせについては以下リンク先を参照してください。<br/>
   </p>
   <ul>
-    <li><a href="./twitch">Node.js × twitch</a></li>
-    <li><a href="./twitter">Node.js × twitter</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × twitch</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitter`>Node.js × twitter</a></li>
   </ul>
 
   <br/>

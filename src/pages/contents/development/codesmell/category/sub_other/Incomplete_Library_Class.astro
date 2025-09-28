@@ -13,24 +13,24 @@ const indexList = [
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="incompletelibraryclass">Incomplete Library Class</h1>
   <p><a href="https://sourcemaking.com/refactoring/smells/incomplete-library-class">Incomplete Library Class</a></p>
-  <p><strong><em>兆候と症状</em></strong><br />
+  <p><strong><em>兆候と症状</em></strong><br/>
     遅かれ早かれ、<a href="https://en.wikipedia.org/wiki/Library_(computing)">Library</a>はユーザーのニーズを満たすことをやめます。ライブラリは読み取り専用であるため、問題の唯一の解決策であるライブラリの変更は、多くの場合不可能です。</p>
-  <p><strong><em>問題の理由</em></strong><br />
+  <p><strong><em>問題の理由</em></strong><br/>
     ライブラリの作成者は、必要な機能を提供していないか、それらの実装を拒否しています。</p>
   <p><strong><em>対処</em></strong></p>
   <ul>
     <li>ライブラリクラスにメソッドを導入するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-foreign-method">Introduce Foreign Method</a>」を使用します。</li>
     <li>クラスライブラリの大きな変更には、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-local-extension">Introduce Local Extension</a>」を使用します。</li>
   </ul>
-  <p><strong><em>効果</em></strong><br />
+  <p><strong><em>効果</em></strong><br/>
     コードの重複を削減します（独自のライブラリをゼロから作成する代わりに、既存のライブラリを流用できます）。</p>
-  <p><strong><em>When to Ignore</em></strong><br />
+  <p><strong><em>When to Ignore</em></strong><br/>
     ライブラリコードが変更された場合、拡張ライブラリに対して追加の作業が発生する可能性があります。</p>
-  <br /><br />
-  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
-    リファクタリング第2版<br />
-    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
-    レガシーコード改善ガイド<br />
+  <br/><br/>
+  <p>書籍としてはこの辺りが参考になると思います。<br/><br/>
+    リファクタリング第2版<br/>
+    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br/><br/>
+    レガシーコード改善ガイド<br/>
     <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   </p>
 </SiteLayout>

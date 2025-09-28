@@ -16,6 +16,7 @@ import about_null_08 from './img/about_null/about_null_08.png';
 import about_null_09 from './img/about_null/about_null_09.png';
 import about_null_10 from './img/about_null/about_null_10.png';
 import about_null_11 from './img/about_null/about_null_11.png';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList: index[] = [
   { id: '#just_normalization', name: 'ちょうどいい正規化の話' },
@@ -32,7 +33,7 @@ const indexList: index[] = [
 
   <h2 class="title">DB設計したいNight #6 正規化 [online]</h2>
 
-  <a href="../../../../index">ホーム</a> > <a href="../database">Database関連</a> > DB設計したいNight #6 正規化<br><br>
+  <a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/database`>Database関連</a> > DB設計したいNight #6 正規化<br><br>
 
   <p>
     2020/6/4に「DB設計したいNight #6 正規化 [online]」というイベントが開催されました。<br>

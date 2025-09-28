@@ -1,4 +1,5 @@
 ---
+import { BASE_URL } from '../../../consts';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 
 const title = "要件定義";
@@ -16,12 +17,12 @@ const indexList = [
   indexList={indexList}>
 
   <h2 class="title">要件定義</h2>
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../index" style="color: #00bfff;">ホーム</a> &gt; 要件定義</p>
-  <br />
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; 要件定義</p>
+  <br/>
   <h3 class="title">要件定義</h3>
   <p>
-    <a href="ccsr/bpstudy_ccsr">CCSR</a><br />
-    <a href="rdra/rdra">RDRA（ラドラ）</a><br />
+    <a href=`${BASE_URL}/contents/ccsr/bpstudy_ccsr`>CCSR</a><br/>
+    <a href=`${BASE_URL}/contents/rdra/rdra`>RDRA（ラドラ）</a><br/>
   </p>
 </SiteLayout>

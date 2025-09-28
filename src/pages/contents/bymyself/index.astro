@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../consts';
 
 const indexList = [
   { id: "#firstly", name: "はじめに" },
@@ -20,21 +21,21 @@ const indexList = [
   <div id="firstly"></div>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、2020年頃から私が個人的に開発して、今実際に稼働しているモノについて、どういう仕組みで動いているのか、構築するにあたってどういう壁にぶつかってどうやって解消したのかを整理したページです。<br />
+    このページは、2020年頃から私が個人的に開発して、今実際に稼働しているモノについて、どういう仕組みで動いているのか、構築するにあたってどういう壁にぶつかってどうやって解消したのかを整理したページです。<br/>
   </p>
 
   <div id="first"></div>
   <h3 class="title">やってきたことの一覧</h3>
   <ul>
-    <li><a href="bymyself">全体像</a></li>
-    <li><a href="reminderbot/reminderbot">ロマサガRSイベントリマインダー</a></li>
-    <li><a href="campainbot/campainbot">キャンペーン対象キャラ通知bot</a></li>
-    <li><a href="scrayping/scrayping">twitterのスクレイピング</a></li>
-    <li><a href="followercount/followercount">公式アカウントのフォロワー数変化(Goで書いた)</a></li>
-    <li><a href="toscheduler/toscheduler">cron脱却（コンテナ化を見据えて）</a></li>
-    <li><a href="tocontainer/tocontainer">コンテナ化</a></li>
-    <li><a href="tocd/tocd">GitLab で自動リリース</a></li>
-    <li><a href="tohttps/tohttps">https化</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/bymyself`>全体像</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/reminderbot/reminderbot`>ロマサガRSイベントリマインダー</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/campainbot/campainbot`>キャンペーン対象キャラ通知bot</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/scrayping/scrayping`>twitterのスクレイピング</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/followercount/followercount`>公式アカウントのフォロワー数変化(Goで書いた)</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/toscheduler/toscheduler`>cron脱却（コンテナ化を見据えて）</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/tocontainer/tocontainer`>コンテナ化</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/tocd/tocd`>GitLab で自動リリース</a></li>
+    <li><a href=`${BASE_URL}/contents/bymyself/tohttps/tohttps`>https化</a></li>
   </ul>
 
   <div id="products"></div>
@@ -45,11 +46,5 @@ const indexList = [
     <li><a href="https://sagamax.cyou/romasagars/pictures">イラスト集</a></li>
   </ul>
 
-  <br /><br />
-  <footer>
-    問い合わせ先：<a href="https://twitter.com/sagamax__" target="_blank">@sagamax</a><br />
-    <small><a href="https://sagamax.cyou/">sagamaxがサガと共に開発した仕組みの整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
-
+  <br/><br/>
 </SiteLayout>

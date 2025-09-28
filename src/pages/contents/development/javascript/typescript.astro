@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: '#firstly', name: 'はじめに' },
@@ -24,8 +25,8 @@ const indexList = [
   <h2 class="title">TypeScript</h2>
 
   <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href="../../../index">ホーム</a></li>
-    <li class="breadcrumbli"> > <a href="./js_index">js関連技術</a></li>
+    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/js_index`>js関連技術</a></li>
     <li class="breadcrumbli"> > TypeScript</li>
   </ul>
 
@@ -33,7 +34,7 @@ const indexList = [
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、<a href="./js_index">JavaScriptの進化</a>の続きのページです。<br/>
+    このページは、<a href=`${BASE_URL}/contents/js_index`>JavaScriptの進化</a>の続きのページです。<br/>
     ここではもっとも代表的なAltJSであるTypeScriptにスポットを当てて記載していきます。<br/>
     一応このページから読み進めても問題ないように構成したつもりですが、先のページを見てからの方が、TypeScriptが生まれるまでの背景がわかって面白いかもしれません。<br/>
   </p>
@@ -43,7 +44,7 @@ const indexList = [
   <h3 class="title">AltJS</h3>
   <p>
     AltJS（代替JavaScript言語）とは、コンパイルすることでJavaScriptが生成されるプログラミング言語です。<br/>
-    TypeScriptとCoffeeScript辺りが有名ですが、なかでもTypeScriptは<a href="./spa/spa">SPA(Single Page Splication)</a>のフレームワークでも対応されているほど標準的なものとして受け入れられています。<br/>
+    TypeScriptとCoffeeScript辺りが有名ですが、なかでもTypeScriptは<a href=`${BASE_URL}/contents/spa/spa`>SPA(Single Page Splication)</a>のフレームワークでも対応されているほど標準的なものとして受け入れられています。<br/>
     ここではTypeScriptについて記載していきます。<br/>
   </p>
 

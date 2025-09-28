@@ -13,9 +13,9 @@ const indexList = [
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="dataclass">Data Class</h1>
   <p><a href="https://sourcemaking.com/refactoring/smells/data-class">Data Class（データクラス）</a></p>
-  <p><strong><em>兆候と症状</em></strong><br />
+  <p><strong><em>兆候と症状</em></strong><br/>
     データクラスは、フィールドとそれらへのアクセサメソッド(getter/setter)のみを含むクラスを指します。これらは、他のクラスで使用される単なるデータのコンテナです。これらのクラスには追加機能は含まれておらず、所有するデータを独立して操作することはできません。</p>
-  <p><strong><em>問題の理由</em></strong><br />
+  <p><strong><em>問題の理由</em></strong><br/>
     新しく作成されたクラスに含まれるパブリックフィールドの数が少ないことは普通のことです（getter/setterが少数の場合もあります）。しかし、オブジェクトの真の力は、オブジェクト内のデータに動作タイプや操作を含めることができることです。</p>
   <p><strong><em>対処</em></strong></p>
   <ul>
@@ -29,11 +29,11 @@ const indexList = [
     <li>コードが理解しやすくなり、構成が改善されます。特定のデータに対する操作は、コード全体で無計画に行われるのではなく、単一の場所に収集されるようになりますた。</li>
     <li>クライアントコードの重複を見つけるのに役立ちます。</li>
   </ul>
-  <br /><br />
-  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
-  リファクタリング第2版<br />
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
-  レガシーコード改善ガイド<br />
+  <br/><br/>
+  <p>書籍としてはこの辺りが参考になると思います。<br/><br/>
+  リファクタリング第2版<br/>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br/><br/>
+  レガシーコード改善ガイド<br/>
   <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   </p>
 </SiteLayout>

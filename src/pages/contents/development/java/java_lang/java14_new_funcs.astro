@@ -9,6 +9,7 @@ import ddd from './img/ddd.png'
 import eee from './img/eee.png'
 import fff from './img/fff.png'
 import ggg from './img/ggg.png'
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [
   { text: 'Home', href: '/' },
@@ -22,7 +23,7 @@ const indexList = [
   twitterCardSize={TWITTER_CARD_SUMMARY}
   indexList={indexList}>
   <h1>Java 14で最低限押さえておきたい新機能をEclipseで使ってみた</h1>
-  <p><a href="../../../../index">ホーム</a> &gt; <a href="../java">Java</a> &gt; Java 14</p>
+  <p><a href={BASE_URL}>ホーム</a> &gt; <a href=`${BASE_URL}/contents/java`>Java</a> &gt; Java 14</p>
   <h2>はじめに</h2>
   <p>2020/3/17にJava 14がリリースされました。以下の機能が追加されたようです。下の表の「本記事の対象」列に〇がついているものを少し触ってみたので後で紹介します。</p>
   <table>

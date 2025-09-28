@@ -1,6 +1,6 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
-import { TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,7 +16,7 @@ const indexList = [
 
   <h2 class="title">リファクタリング技法</h2>
 
-  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
 
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>

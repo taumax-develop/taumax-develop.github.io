@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../consts';
 
 const indexList = [
   { id: "#summary", name: "概要" },
@@ -18,22 +19,17 @@ const indexList = [
 >
   <h2 class="title">Code Smellとリファクタリング技法</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../development" style="color: #00bfff;">開発まとめ</a> &gt; Code Smellとリファクタリング技法</p>
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/development` style="color: #00bfff;">開発まとめ</a> &gt; Code Smellとリファクタリング技法</p>
 
-  <br />
+  <br/>
   <div id="summary"></div>
   <h3 class="title">Code Smellとリファクタリング技法</h3>
   <p>
-    ここでは Code Smell とリファクタリング技法についてご紹介します。<br />
-    <li><a href="codesmell/Codesmells">Code Smell</a></li>
-    <li><a href="refactoring/Refactoring_Technics">リファクタリング技法</a></li>
+    ここでは Code Smell とリファクタリング技法についてご紹介します。<br/>
+    <li><a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a></li>
+    <li><a href=`${BASE_URL}/contents/refactoring/Refactoring_Technics`>リファクタリング技法</a></li>
   </p>
 
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
-
+  <br/><br/>
 </SiteLayout>

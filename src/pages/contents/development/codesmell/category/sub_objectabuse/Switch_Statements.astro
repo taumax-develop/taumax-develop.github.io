@@ -13,9 +13,9 @@ const indexList = [
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="switchstatements">Switch Statements</h1>
   <p><a href="https://sourcemaking.com/refactoring/smells/switch-statements">Switch Statements</a></p>
-  <p><strong><em>兆候と症状</em></strong><br />
+  <p><strong><em>兆候と症状</em></strong><br/>
     複雑なswitch文またはif文の連続がこのCode Smellの兆候です。</p>
-  <p><strong><em>問題の理由</em></strong><br />
+  <p><strong><em>問題の理由</em></strong><br/>
     switch/case演算子の比較的まれな使用は、オブジェクト指向コードの特徴の1つです。多くの場合、同じようなswitch文はプログラム内のさまざまな場所に散在します。新しい条件が追加されたら、すべてのスイッチコードを見つけて変更する必要があります。
     経験則として、switch文が使われている場所ではポリモルフィズムを検討する必要があります。</p>
   <p><strong><em>対処</em></strong></p>
@@ -30,17 +30,17 @@ const indexList = [
   <ul>
     <li>ソースコードの構成を改善することができます。</li>
   </ul>
-  <p><strong><em>When to Ignore</em></strong><br />
+  <p><strong><em>When to Ignore</em></strong><br/>
     以下のような場合はswitch文をリファクタリングする必要はありません。</p>
   <ul>
     <li>switch文がシンプルなものである場合。</li>
     <li>GoFのデザインパターンである <a href="https://sourcemaking.com/design_patterns/factory_method">Factory Method</a> や <a href="https://sourcemaking.com/design_patterns/abstract_factory">Abstract Factory</a> パターンを実装する場合。</li>
   </ul>
-  <br /><br />
-  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
-    リファクタリング第2版<br />
-    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
-    レガシーコード改善ガイド<br />
+  <br/><br/>
+  <p>書籍としてはこの辺りが参考になると思います。<br/><br/>
+    リファクタリング第2版<br/>
+    <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br/><br/>
+    レガシーコード改善ガイド<br/>
     <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   </p>
 </SiteLayout>

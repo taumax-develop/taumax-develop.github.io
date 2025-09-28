@@ -7,6 +7,7 @@ import imgComposition from './img/composition.jpg';
 import imgBgr from './img/bgr.jpg';
 import imgRgb from './img/rgb.jpg';
 import t260g from './img/t260g.jpg';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#summary", name: "概要" },
@@ -23,41 +24,41 @@ const indexList = [
   indexList={indexList}
 >
   <h2 class="title">ロマサガRSキャンペーン対象キャラ通知bot</h2>
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself" style="color: #00bfff;">個人開発したことまとめ</a> &gt; ロマサガRSキャンペーン対象キャラ通知bot</p>
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; ロマサガRSキャンペーン対象キャラ通知bot</p>
   <div id="summary"></div>
   <div id="summary"></div>
   <h3 class="title">ロマサガRSキャンペーン対象キャラ通知bot</h3>
   <p>
-    ロマサガRSというゲームで定期的にイベントが開催されるが、イベントの対象キャラが誰なのかが分かり辛過ぎるから作ってみたbot。<br />
+    ロマサガRSというゲームで定期的にイベントが開催されるが、イベントの対象キャラが誰なのかが分かり辛過ぎるから作ってみたbot。<br/>
   </p>
-  <br /><br />
+  <br/><br/>
   <div id="whatimade"></div>
   <h3 class="title">作ったもの（実際に稼働したときのツイート）</h3>
   <p>
-    DBに登録した情報から、イベントの対象キャラを判断してお知らせしてくれるbot<br />
-    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今2022/06/23 11:04<br />【陽】属性の技・術を持つキャラだよ！<br />画像を添付するからそれで確認してね！ <a href="https://t.co/b4Z54aRYxI">pic.twitter.com/b4Z54aRYxI</a></p>&mdash; ロマサガRS 育成応援キャンペーン情報(sagamax_bot2) (@sagamax_bot2) <a href="https://twitter.com/sagamax_bot2/status/1539791527761031168?ref_src=twsrc%5Etfw">June 23, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    DBに登録した情報から、イベントの対象キャラを判断してお知らせしてくれるbot<br/>
+    <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今2022/06/23 11:04<br/>【陽】属性の技・術を持つキャラだよ！<br/>画像を添付するからそれで確認してね！ <a href="https://t.co/b4Z54aRYxI">pic.twitter.com/b4Z54aRYxI</a></p>&mdash; ロマサガRS 育成応援キャンペーン情報(sagamax_bot2) (@sagamax_bot2) <a href="https://twitter.com/sagamax_bot2/status/1539791527761031168?ref_src=twsrc%5Etfw">June 23, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </p>
-  <br /><br />
+  <br/><br/>
   <div id="mechanism"></div>
   <h3 class="title">どんな仕組み？</h3>
   <p>
-    <Image src={imgWhole} width={800} alt="全体構成" /><br />
+    <Image src={imgWhole} width={800} alt="全体構成" /><br/>
     <ul class="none" style="padding-left: 50px;">
       <li>①時間になったらcronでpythonプログラムを起動</li>
       <li>②DB(postgres)から対象キャラクタの情報を取得</li>
       <li>③Githubに保存した画像ファイルを取得＆取得したファイルの加工</li>
       <li>④ツイート実行</li>
     </ul>
-    イベント情報をDBに登録する作業は手動だが、それさえやってしまえば、イベントキャンペーンの対象キャラを毎日お知らせしてくれる。<br />
-    ↓GitHub上に以下のようなキャラクタの画像を全キャラ分格納しているので、<br />
-    <Image src={t260g} alt="t260g" /><br />
-    その際、対象キャラの名前を画像に書き、各画像のサイズを合わせたうえで合成している（サイズが揃ってないとエラーになる）。<br />
-    <br />
-    対象キャラの画像を拾ってきてそれらを合成して↓以下のような1枚の画像に合成している。<br />
-    <Image src={imgComposition} width={800} alt="合成画像" /><br />
-    <br />
-    決まった文字や画像を書くだけのbotなら以下の記事参照。<br />
+    イベント情報をDBに登録する作業は手動だが、それさえやってしまえば、イベントキャンペーンの対象キャラを毎日お知らせしてくれる。<br/>
+    ↓GitHub上に以下のようなキャラクタの画像を全キャラ分格納しているので、<br/>
+    <Image src={t260g} alt="t260g" /><br/>
+    その際、対象キャラの名前を画像に書き、各画像のサイズを合わせたうえで合成している（サイズが揃ってないとエラーになる）。<br/>
+    <br/>
+    対象キャラの画像を拾ってきてそれらを合成して↓以下のような1枚の画像に合成している。<br/>
+    <Image src={imgComposition} width={800} alt="合成画像" /><br/>
+    <br/>
+    決まった文字や画像を書くだけのbotなら以下の記事参照。<br/>
     <li><a href="https://qiita.com/taumax/items/73ad47eaba64943a9c41" target="_blank">TweepyとcronでTwitterボットを作ってみた話</a></li>
   </p>
   <div id="whatilearn"></div>
@@ -79,12 +80,12 @@ const indexList = [
   </p>
   <h4 class="title">②妙な色の画像を生み出してしまう</h4>
   <p>
-    正しい画像<br />
+    正しい画像<br/>
     <Image src={imgBgr} width={300} alt="BGR画像" />
-    <br />
-    妙な色の画像<br />
+    <br/>
+    妙な色の画像<br/>
     <Image src={imgRgb} width={300} alt="RGB画像" />
-    <br />
+    <br/>
     Pillowでは色の順番はRGB（赤、緑、青）を前提としている。
     OpenCVは色の順番はBGR（青、緑、赤）。
     Pillow で読み込んだ画像を OpenCV に渡す際に赤と青が逆転した結果こうなった。Pillow から OpenCV に渡す際に RGB から BGR に変換することで対処。
@@ -104,7 +105,7 @@ const indexList = [
   <p>
     ローカルで動いたプログラムを linux 環境に持って行って動かしたら、画像に書き込んだ日本語が文字化けした。
     下記コマンドで日本語フォントをインストールして、使用するフォントをプログラムで指定することで解消した。
-    <br />
+    <br/>
     <code>apt install 'fonts-takao-*'</code>
   </p>
   <p>

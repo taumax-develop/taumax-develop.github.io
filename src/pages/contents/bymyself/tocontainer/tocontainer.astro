@@ -4,6 +4,7 @@ import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgTocontainer from './img/tocontainer.png';
 import imgPostgresAccess from './img/postgres_access.png';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#summary", name: "概要" },
@@ -20,44 +21,44 @@ const indexList = [
 >
   <h2 class="title">コンテナ化</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself" style="color: #00bfff;">個人開発したことまとめ</a> &gt; コンテナ化</p>
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; コンテナ化</p>
 
   <div id="summary"></div>
   <h3 class="title">コンテナ化</h3>
   <p>
-    新しく配属されたプロジェクトで Docker や GitLab で自動リリース機能構築(CD)など、これまで触れたことのない技術が大量にあったので、それらを使うことで少しでも早くその技術に慣れ、使いこなせるようになりたかった。<br />
+    新しく配属されたプロジェクトで Docker や GitLab で自動リリース機能構築(CD)など、これまで触れたことのない技術が大量にあったので、それらを使うことで少しでも早くその技術に慣れ、使いこなせるようになりたかった。<br/>
   </p>
 
-  <br /><br />
+  <br/><br/>
   <div id="mechanism"></div>
   <h3 class="title">どんな仕組み？</h3>
   <p>
-    <Image src={imgTocontainer} width={800} alt="コンテナ化構成" /><br />
-    Go の bot を動かすイメージと python の bot を動かすイメージで分けている。<br />
-    <br /><br />
+    <Image src={imgTocontainer} width={800} alt="コンテナ化構成" /><br/>
+    Go の bot を動かすイメージと python の bot を動かすイメージで分けている。<br/>
+    <br/><br/>
     <h4 class="title">Dockerfile(python)</h4>
     <script src="https://gist.github.com/taumax-github/990a5d3d89e24beb75dab9bba346e2ca.js"></script>
-    <br />
+    <br/>
     <h4 class="title">Dockerfile(Go)</h4>
     <script src="https://gist.github.com/taumax-github/a3ee7cda2b1db1ee16860185f165df5e.js"></script>
   </p>
 
-  <br /><br />
+  <br/><br/>
   <div id="whatilearn"></div>
   <h3 class="title">ぶつかった壁とか学んだこととか</h3>
   <h4 class="title">①コンテナサイズがでかい</h4>
   <p>
-    最初はコンテナに go/python のファイルをそのまま配置して動かしていた。その際のコンテナサイズは以下。<br />
+    最初はコンテナに go/python のファイルをそのまま配置して動かしていた。その際のコンテナサイズは以下。<br/>
   </p>
   <ul>
     <li>Go：941MB （使用したイメージは golang:1.17）</li>
     <li>python：1.59GB （使用したイメージは python:3.10）</li>
   </ul>
   <p>
-    ソースファイルをそのまま配置して実行する場合、その環境には Go/python など、実行に必要なものがインストールされている必要がある。しかし Go には build というコマンドがあり、コンパイルして実行ファイルを生成することが可能。この実行ファイルはそれ単体で動かすことができるため、対象の環境に Go がインストールされていなくても動かすことができる（build を実行する環境には必要）。<br />
-    これを使用すれば、実行するコンテナに Go がインストールされている必要はないため、より軽量なコンテナイメージを使用することができる。また、 build 時のコマンドの指定によってクロスコンパイル可能。例えば Windows 環境で build して linux 用のバイナリファイルを生成することができる。<br />
-    使用するイメージを golang:1.17 から alpine:3.15 に変更した結果、イメージのサイズは 941MB から 19.6MB に減少。<br />
+    ソースファイルをそのまま配置して実行する場合、その環境には Go/python など、実行に必要なものがインストールされている必要がある。しかし Go には build というコマンドがあり、コンパイルして実行ファイルを生成することが可能。この実行ファイルはそれ単体で動かすことができるため、対象の環境に Go がインストールされていなくても動かすことができる（build を実行する環境には必要）。<br/>
+    これを使用すれば、実行するコンテナに Go がインストールされている必要はないため、より軽量なコンテナイメージを使用することができる。また、 build 時のコマンドの指定によってクロスコンパイル可能。例えば Windows 環境で build して linux 用のバイナリファイルを生成することができる。<br/>
+    使用するイメージを golang:1.17 から alpine:3.15 に変更した結果、イメージのサイズは 941MB から 19.6MB に減少。<br/>
   </p>
 
 </SiteLayout>

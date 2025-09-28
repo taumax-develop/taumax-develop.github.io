@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import type { index } from '../../../../../components/HeaderIndex.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [] as index[];
 ---
@@ -13,37 +14,33 @@ const indexList = [] as index[];
 >
   <h2 class="title">リファクタリング技法</h2>
 
-  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
-  <br />
-  リファクタリング第2版<br />
+  <br/>
+  リファクタリング第2版<br/>
   <img src="../../img/refactoring.jpg" alt="refactoring" />
-  <br />
-  レガシーコード改善ガイド<br />
+  <br/>
+  レガシーコード改善ガイド<br/>
   <img src="../../img/legacy_code.jpg" alt="legacy_code" />
   <h1 id="">関連するリファクタリング技法</h1>
   <h2 id="composingmethods">Composing Methods</h2>
   <p><a href="https://sourcemaking.com/refactoring/composing-methods">Composing Methods</a></p>
   <h2 id="extractmethod">Extract Method</h2>
-  <p><a href="sub_compmeth/Extract_Method">Extract Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Extract_Method`>Extract Method</a></p>
   <h2 id="inlinemethod">Inline Method</h2>
-  <p><a href="sub_compmeth/Inline_Method">Inline Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Inline_Method`>Inline Method</a></p>
   <h2 id="extractvariable">Extract Variable</h2>
-  <p><a href="sub_compmeth/Extract_Variable">Extract Variable</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Extract_Variable`>Extract Variable</a></p>
   <h2 id="inlinetemp">Inline Temp</h2>
-  <p><a href="sub_compmeth/Inline_Temp">Inline Temp</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Inline_Temp`>Inline Temp</a></p>
   <h2 id="replacetempwithquery">Replace Temp with Query</h2>
-  <p><a href="sub_compmeth/Replace_Temp_with_Query">Replace Temp with Query</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Replace_Temp_with_Query`>Replace Temp with Query</a></p>
   <h2 id="splittemporaryvariable">Split Temporary Variable</h2>
-  <p><a href="sub_compmeth/Split_Temporary_Variable">Split Temporary Variable</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Split_Temporary_Variable`>Split Temporary Variable</a></p>
   <h2 id="removeassignmentstoparameters">Remove Assignments to Parameters</h2>
-  <p><a href="sub_compmeth/Remove_Assignments_to_Parameters">Remove Assignments to Parameters</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Remove_Assignments_to_Parameters`>Remove Assignments to Parameters</a></p>
   <h2 id="replacemethodwithmethodobject">Replace Method with Method Object</h2>
-  <p><a href="sub_compmeth/Replace_Method_with_Method_Object">Replace Method with Method Object</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Replace_Method_with_Method_Object`>Replace Method with Method Object</a></p>
   <h2 id="substitutealgorithm">Substitute Algorithm</h2>
-  <p><a href="sub_compmeth/Substitute_Algorithm">Substitute Algorithm（アルゴリズムの置き換え）</a></p>
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
+  <p><a href=`${BASE_URL}/contents/sub_compmeth/Substitute_Algorithm`>Substitute Algorithm（アルゴリズムの置き換え）</a></p>
 </SiteLayout>

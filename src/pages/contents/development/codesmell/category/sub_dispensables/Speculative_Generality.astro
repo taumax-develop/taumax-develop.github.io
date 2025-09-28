@@ -13,11 +13,11 @@ const indexList = [
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="speculativegenerality">Speculative Generality</h1>
   <p><a href="https://sourcemaking.com/refactoring/smells/speculative-generality">Speculative Generality</a></p>
-  <p><strong><em>兆候と症状</em></strong><br />
+  <p><strong><em>兆候と症状</em></strong><br/>
     未使用のクラス、メソッド、フィールド、またはパラメーターの存在。</p>
-  <p><strong><em>問題の理由</em></strong><br />
+  <p><strong><em>問題の理由</em></strong><br/>
     実装されない将来の機能をサポートするために、念のためにコードが作成されることがあります。その結果、コードの理解とサポートが難しくなります。</p>
-  <p><strong><em>対処</em></strong><br />
+  <p><strong><em>対処</em></strong><br/>
     使用されていない抽象クラスを削除するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#collapse-hierarchy">Collapse Hierarchy</a>」を試してください。</p>
   <ul>
     <li>不要な委譲処理は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inline-class">Inline Class</a>」を介して排除しましょう。</li>
@@ -29,13 +29,13 @@ const indexList = [
   <ul>
     <li>コードがスリムになります。</li>
   </ul>
-  <p><strong><em>When to Ignore</em></strong><br />
+  <p><strong><em>When to Ignore</em></strong><br/>
     フレームワークを開発している場合、フレームワークのユーザーがその機能を必要とする限り、フレームワーク自体で使用されていない機能を作成することは非常に合理的です。要素を削除する前に、それらがテストクラスで使用されていないことも確認してください。これは、テストクラスが対象クラスから内部情報を取得したり、テスト関連の特別なアクションの実行に必要な場合に発生します。</p>
-  <br /><br />
-  <p>書籍としてはこの辺りが参考になると思います。<br /><br />
-  リファクタリング第2版<br />
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br /><br />
-  レガシーコード改善ガイド<br />
+  <br/><br/>
+  <p>書籍としてはこの辺りが参考になると思います。<br/><br/>
+  リファクタリング第2版<br/>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a><br/><br/>
+  レガシーコード改善ガイド<br/>
   <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   </p>
 </SiteLayout>

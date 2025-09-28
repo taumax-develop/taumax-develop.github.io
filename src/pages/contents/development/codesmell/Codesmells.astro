@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -42,34 +43,30 @@ const indexList = [
   </ul>
   <p>ここから先は、このページをベースに、各Code Smellを翻訳したものを記載しています。このページだけだとよくわからないこともあったので、その場合は別のページと組み合わせたものを記載しています。
     Code Smellを解消するために参考となるリファクタリング技法や、その他参考になりそうな概念もこの記事の最後の方に記載しているので合わせて見てください。</p>
-  <p>書籍としてはこの辺りが参考になると思います。<br /></p>
-  <br />
-  リファクタリング第2版<br />
+  <p>書籍としてはこの辺りが参考になると思います。<br/></p>
+  <br/>
+  リファクタリング第2版<br/>
   <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../img/refactoring.jpg" alt="refactoring" /></a>
-  <br />
-  レガシーコード改善ガイド<br />
+  <br/>
+  レガシーコード改善ガイド<br/>
   <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../img/legacy_code.jpg" alt="legacy_code" /></a>
   <h2 id="bloaters">Bloaters</h2>
-  <p><a href="category/Bloaters">Bloaters</a></p>
+  <p><a href=`${BASE_URL}/contents/category/Bloaters`>Bloaters</a></p>
   <h2 id="Object-Orientation Abusers">Object-Orientation Abusers</h2>
-  <p><a href="category/Object-Orientation-Abusers">Object-Orientation Abusers</a></p>
+  <p><a href=`${BASE_URL}/contents/category/Object-Orientation-Abusers`>Object-Orientation Abusers</a></p>
   <h2 id="changepreventers">Change Preventers</h2>
-  <p><a href="category/Change-Preventers">Change Preventers</a></p>
+  <p><a href=`${BASE_URL}/contents/category/Change-Preventers`>Change Preventers</a></p>
   <h2 id="dispensables">Dispensables</h2>
-  <p><a href="category/Dispensables">Dispensables</a></p>
+  <p><a href=`${BASE_URL}/contents/category/Dispensables`>Dispensables</a></p>
   <h2 id="couplers">Couplers</h2>
-  <p><a href="category/Couplers">Couplers</a></p>
+  <p><a href=`${BASE_URL}/contents/category/Couplers`>Couplers</a></p>
   <h2 id="other">Other Smells</h2>
-  <p><a href="category/Other-Smells">Other Smells</a></p>
+  <p><a href=`${BASE_URL}/contents/category/Other-Smells`>Other Smells</a></p>
   <h2 id="codesmell-1">その他Code Smellに関する参考</h2>
   <ul>
     <li><a href="https://so-zou.jp/software/tech/programming/tech/refactoring/code-smell.htm">コードの臭い - リファクタリングの必要性を示す兆候</a></li>
   </ul>
   <h2 id="codesmell-1">リファクタリング技法</h2>
   <p>Code Smell をかぎ取ったら<a href="../../refactoring/Refactoring_Technics">リファクタリング技法</a>を使ってリファクタリングする。</p>
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
+  <br/><br/>
 </SiteLayout>

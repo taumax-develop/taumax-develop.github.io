@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import type { index } from '../../../../../components/HeaderIndex.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [] as index[];
 ---
@@ -13,7 +14,7 @@ const indexList = [] as index[];
 >
   <h2 class="title">リファクタリング技法</h2>
 
-  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>
@@ -30,38 +31,38 @@ const indexList = [] as index[];
   <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
 
   <h2 id="pullupfield">Pull Up Field</h2>
-  <p><a href="sub_dealgeneral/Pull_Up_Field">Pull Up Field</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Pull_Up_Field`>Pull Up Field</a></p>
 
   <h2 id="pullupmethod">Pull Up Method</h2>
-  <p><a href="sub_dealgeneral/Pull_Up_Method">Pull Up Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Pull_Up_Method`>Pull Up Method</a></p>
 
   <h2 id="pullupconstructorbody">Pull Up Constructor Body</h2>
-  <p><a href="sub_dealgeneral/Pull_Up_Constructor_Body">Pull Up Constructor Body</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Pull_Up_Constructor_Body`>Pull Up Constructor Body</a></p>
 
   <h2 id="pushdownmethod">Push Down Method</h2>
-  <p><a href="sub_dealgeneral/Push_Down_Method">Push Down Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Push_Down_Method`>Push Down Method</a></p>
 
   <h2 id="pushdownfield">Push Down Field</h2>
-  <p><a href="sub_dealgeneral/Push_Down_Field">Push Down Field</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Push_Down_Field`>Push Down Field</a></p>
 
   <h2 id="extractsubclass">Extract Subclass</h2>
-  <p><a href="sub_dealgeneral/Extract_Subclass">Extract Subclass</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Extract_Subclass`>Extract Subclass</a></p>
 
   <h2 id="extractsuperclass">Extract Superclass</h2>
-  <p><a href="sub_dealgeneral/Extract_Superclass">Extract Superclass</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Extract_Superclass`>Extract Superclass</a></p>
 
   <h2 id="extractinterface">Extract Interface</h2>
-  <p><a href="sub_dealgeneral/Extract_Interface">Extract Interface</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Extract_Interface`>Extract Interface</a></p>
 
   <h2 id="collapsehierarchy">Collapse Hierarchy</h2>
-  <p><a href="sub_dealgeneral/Collapse_Hierarchy">Collapse Hierarchy</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Collapse_Hierarchy`>Collapse Hierarchy</a></p>
 
   <h2 id="formtemplatemethod">Form Template Method</h2>
-  <p><a href="sub_dealgeneral/Form_Template_Method">Form Template Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Form_Template_Method`>Form Template Method</a></p>
 
   <h2 id="replaceinheritancewithdelegation">Replace Inheritance with Delegation</h2>
-  <p><a href="sub_dealgeneral/Replace_Inheritance_with_Delegation">Replace Inheritance with Delegation</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Replace_Inheritance_with_Delegation`>Replace Inheritance with Delegation</a></p>
 
   <h2 id="replacedelegationwithinheritance">Replace Delegation with Inheritance</h2>
-  <p><a href="sub_dealgeneral/Replace_Delegation_with_Inheritance">Replace Delegation with Inheritance</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_dealgeneral/Replace_Delegation_with_Inheritance`>Replace Delegation with Inheritance</a></p>
 </SiteLayout>

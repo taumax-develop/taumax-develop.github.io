@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import CORS_pathproxy from './CORS_pathproxy.png';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#cors", name: "CORS" }
@@ -17,31 +18,23 @@ const indexList = [
 >
   <h2 class="title">CORS（Cross-Origin Resource Sharing）</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../security" style="color: #00bfff;">セキュリティ</a> &gt; CORS</p>
-
-  <br />
+  <br/>
   <div id="cors"></div>
   <h3 class="title">CORSとは</h3>
   <p>
-    オリジン間リソース共有（CORS: Cross-Origin Resource Sharing）は、異なるオリジン間でリソースを共有するための仕組みです。<br />
-    <a href="../origin.astro" target="_blank">オリジン</a>の違いによる制約を緩和するために使われます。<br />
-    <Image src={CORS_pathproxy} width={800} alt="CORSの仕組み" /><br />
-    <br />
-    <b>参考サイト</b><br />
-    1. <a href="https://www.w3.org/TR/cors/" target="_blank">Cross-Origin Resource Sharing</a><br />
-    2. <a href="http://www.tohoho-web.com/ex/cors.html" target="_blank">CORS(Cross-Origin Resource Sharing)</a><br />
-    3. <a href="https://at-virtual.net/securecoding/access-control-allow-originはどれほど脆弱なのか脆弱なcors設定して/" target="_blank">オリジン間リソース共有 (CORS)</a><br />
-    4. <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">Cross-origin resource sharing</a><br />
-    <b>参考書</b><br />
-    1. <a href="https://www.amazon.co.jp/dp/4822239268/" target="_blank">絶対わかる情報処理安全確保支援士 2017年春版</a><br />
-    ※2018年度版は<a href="https://www.amazon.co.jp/dp/4822257835" target="_blank">こちら</a><br />
+    オリジン間リソース共有（CORS: Cross-Origin Resource Sharing）は、異なるオリジン間でリソースを共有するための仕組みです。<br/>
+    <a href=`${BASE_URL}/contents/security/origin` target="_blank">オリジン</a>の違いによる制約を緩和するために使われます。<br/>
+    <Image src={CORS_pathproxy} width={800} alt="CORSの仕組み" /><br/>
+    <br/>
+    <b>参考サイト</b><br/>
+    1. <a href="https://www.w3.org/TR/cors/" target="_blank">Cross-Origin Resource Sharing</a><br/>
+    2. <a href="http://www.tohoho-web.com/ex/cors.html" target="_blank">CORS(Cross-Origin Resource Sharing)</a><br/>
+    3. <a href="https://at-virtual.net/securecoding/access-control-allow-originはどれほど脆弱なのか脆弱なcors設定して/" target="_blank">オリジン間リソース共有 (CORS)</a><br/>
+    4. <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">Cross-origin resource sharing</a><br/>
+    <b>参考書</b><br/>
+    1. <a href="https://www.amazon.co.jp/dp/4822239268/" target="_blank">絶対わかる情報処理安全確保支援士 2017年春版</a><br/>
+    ※2018年度版は<a href="https://www.amazon.co.jp/dp/4822257835" target="_blank">こちら</a><br/>
   </p>
 
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
-
+  <br/><br/>
 </SiteLayout>

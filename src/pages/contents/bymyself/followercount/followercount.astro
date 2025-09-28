@@ -3,6 +3,7 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgWhole from './img/whole_image.jpg';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#summary", name: "概要" },
@@ -19,8 +20,8 @@ const indexList = [
   indexList={indexList}
 >
   <h2 class="title">公式アカウントのフォロワー数変化(Goで書いた)</h2>
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself" style="color: #00bfff;">個人開発したことまとめ</a> &gt; 公式アカウントのフォロワー数変化(Goで書いた)</p>
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; 公式アカウントのフォロワー数変化(Goで書いた)</p>
   <div id="summary"></div>
   <h3 class="title">公式アカウントのフォロワー数変化(Goで書いた)</h3>
   <p>
@@ -36,7 +37,7 @@ const indexList = [
   <h3 class="title">どんな仕組み？</h3>
   <p>
     <Image src={imgWhole} width={800} alt="全体構成" />
-    <br />Go ソースコード(bot)
+    <br/>Go ソースコード(bot)
   </p>
   <h4 class="title">ソースコード(Go)</h4>
   <p>
@@ -48,7 +49,7 @@ const indexList = [
     TweetPublicAccount 関数の中でツイート用のインスタンス生成し、変数 api に格納（36行目）。70行目でツイート実行。
     画像をツイートしたい場合は54～58行目。ツイート実行の前に api.UploadMedia で画像を upload する必要がある。引数の型が base64String なので画像を base64エンコードしている。
     そのあと、 url.Values{} の "media_ids" に格納。複数ある場合はカンマ区切りで設定。
-    <br />
+    <br/>
     参考
     <ul>
       <li><a href="https://github.com/ChimeraCoder/anaconda" target="_blank">ChimeraCoder/anaconda</a></li>
@@ -65,7 +66,7 @@ const indexList = [
     上記ソースの82行目 createGraph() 関数の中。90行目で呼び出している getData() 関数で2週間分のデータを取得。
     93行～113行目の処理で縦軸・横軸の設定、115～120行目でグラフの見栄えを調整。
     124～133行目でグラフを生成。
-    <br />
+    <br/>
     参考
     <ul>
       <li><a href="https://pkg.go.dev/gonum.org/v1/plot#example-Axis-LabelsPosition" target="_blank">gonum.org/v1/plot</a></li>
@@ -77,7 +78,7 @@ const indexList = [
   <p>
     <a href="https://pkg.go.dev/github.com/lib/pq" target="_blank">pq</a> というライブラリを使って postgres DB 接続。ライブラリは import するだけで、コード上使用するのは <a href="https://pkg.go.dev/database/sql" target="_blank">database/sql</a> という標準ライブラリ。
     専用のパッケージを import （16行目の _ "github.com/lib/pq" ）して connection 生成(42行目)してあげればあとはSQL文字列を実行するだけ。
-    <br />
+    <br/>
     参考
     <ul>
       <li><a href="https://qiita.com/hiro9/items/e6e41ec822a7077c3568" target="_blank">Go PostgreSQLにつないでみる</a></li>

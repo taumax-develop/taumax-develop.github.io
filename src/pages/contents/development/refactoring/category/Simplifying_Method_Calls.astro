@@ -2,6 +2,7 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import type { index } from '../../../../../components/HeaderIndex.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../../consts';
 
 const indexList = [] as index[];
 ---
@@ -13,7 +14,7 @@ const indexList = [] as index[];
 >
   <h2 class="title">リファクタリング技法</h2>
 
-  <p>ここでは<a href="../codesmell/Codesmells">Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
 
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>
@@ -30,44 +31,44 @@ const indexList = [] as index[];
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls">Simplifying Method Calls</a></p>
 
   <h2 id="renamemethod">Rename Method</h2>
-  <p><a href="sub_simplmethcall/Rename_Method">Rename Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Rename_Method`>Rename Method</a></p>
 
   <h2 id="addparameter">Add Parameter</h2>
-  <p><a href="sub_simplmethcall/Add_Parameter">Add Parameter</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Add_Parameter`>Add Parameter</a></p>
 
   <h2 id="removeparameter">Remove Parameter</h2>
-  <p><a href="sub_simplmethcall/Remove_Parameter">Remove Parameter</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Remove_Parameter`>Remove Parameter</a></p>
 
   <h2 id="separatequeryfrommodifier">Separate Query from Modifier</h2>
-  <p><a href="sub_simplmethcall/Separate_Query_from_Modifier">Separate Query from Modifier</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Separate_Query_from_Modifier`>Separate Query from Modifier</a></p>
 
   <h2 id="parameterizemethod">Parameterize Method</h2>
-  <p><a href="sub_simplmethcall/Parameterize_Method">Parameterize Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Parameterize_Method`>Parameterize Method</a></p>
 
   <h2 id="replaceparameterwithexplicitmethods">Replace Parameter with Explicit Methods</h2>
-  <p><a href="sub_simplmethcall/Replace_Parameter_with_Explicit_Methods">Replace Parameter with Explicit Methods</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Replace_Parameter_with_Explicit_Methods`>Replace Parameter with Explicit Methods</a></p>
 
   <h2 id="preservewholeobject">Preserve Whole Object</h2>
-  <p><a href="sub_simplmethcall/Preserve_Whole_Object">Preserve Whole Object</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Preserve_Whole_Object`>Preserve Whole Object</a></p>
 
   <h2 id="replaceparameterwithmethodcall">Replace Parameter with Method Call</h2>
-  <p><a href="sub_simplmethcall/Replace_Parameter_with_Method_Call">Replace Parameter with Method Call</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Replace_Parameter_with_Method_Call`>Replace Parameter with Method Call</a></p>
 
   <h2 id="introduceparameterobject">Introduce Parameter Object</h2>
-  <p><a href="sub_simplmethcall/Introduce_Parameter_Object">Introduce Parameter Object</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Introduce_Parameter_Object`>Introduce Parameter Object</a></p>
 
   <h2 id="removesettingmethod">Remove Setting Method</h2>
-  <p><a href="sub_simplmethcall/Remove_Setting_Method">Remove Setting Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Remove_Setting_Method`>Remove Setting Method</a></p>
 
   <h2 id="hidemethod">Hide Method</h2>
-  <p><a href="sub_simplmethcall/Hide_Method">Hide Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Hide_Method`>Hide Method</a></p>
 
   <h2 id="replaceconstructorwithfactorymethod">Replace Constructor with Factory Method</h2>
-  <p><a href="sub_simplmethcall/Replace_Constructor_with_Factory_Method">Replace Constructor with Factory Method</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Replace_Constructor_with_Factory_Method`>Replace Constructor with Factory Method</a></p>
 
   <h2 id="replaceerrorcodewithexception">Replace Error Code with Exception</h2>
-  <p><a href="sub_simplmethcall/Replace_Error_Code_with_Exception">Replace Error Code with Exception</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Replace_Error_Code_with_Exception`>Replace Error Code with Exception</a></p>
 
   <h2 id="replaceexceptionwithtest">Replace Exception with Test</h2>
-  <p><a href="sub_simplmethcall/Replace_Exception_with_Test">Replace Exception with Test</a></p>
+  <p><a href=`${BASE_URL}/contents/sub_simplmethcall/Replace_Exception_with_Test`>Replace Exception with Test</a></p>
 </SiteLayout>

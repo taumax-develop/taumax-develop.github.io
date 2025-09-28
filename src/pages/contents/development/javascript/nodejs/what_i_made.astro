@@ -5,6 +5,7 @@ import play_with_nodejs from './img/play_with_nodejs.jpg';
 import chanel_point from './img/chanel_point.jpg';
 import auto_post from './img/auto_post.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { BASE_URL } from "../../../../../consts";
 
 const indexList = [
   { id: "firstly", name: "はじめに" },
@@ -22,9 +23,9 @@ const indexList = [
   <h2 class="title">Node.js × Twitch, Twitter, OBS</h2>
 
   <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href="../../../../index">ホーム</a></li>
-    <li class="breadcrumbli"> > <a href="../js_index">js関連技術</a></li>
-    <li class="breadcrumbli"> > <a href="./nodejs">Node.js</a></li>
+    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>js関連技術</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a></li>
     <li class="breadcrumbli"> > Node.js × Twitch, Twitter, OBS</li>
   </ul>
 
@@ -33,8 +34,8 @@ const indexList = [
   <h3 class="title">はじめに</h3>
   <p>
     このページでは、自分が Node.js を使って実際に作った物について記載しています。<br/>
-    <a href="./nodejs">Node.js</a>の記事を読んだ前提で書いています。今見ているこの頁の1階層上の記事です。<br/>
-    EventEmitter という単語を見てピンと来ないようなら、<a href="./nodejs#async">非同期のイベント駆動型ランタイム</a>の部分だけでも読んでください。<br/>
+    <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a>の記事を読んだ前提で書いています。今見ているこの頁の1階層上の記事です。<br/>
+    EventEmitter という単語を見てピンと来ないようなら、<a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs#async`>非同期のイベント駆動型ランタイム</a>の部分だけでも読んでください。<br/>
   </p>
 
   <br/>
@@ -62,7 +63,7 @@ const indexList = [
       ③その台詞をトリガーにローカルの Node.js が稼働し<br/>
       ④OBS を操作することで画面に炎を表示させたり、音声を流したりしています。<br/>
     </li>
-    <iframe src="https://player.twitch.tv/?video=2098995290&time=2h9m35s&parent=taumax-github.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+    <iframe src="https://player.twitch.tv/?video=2098995290&time=2h9m35s&parent=taumax-develop.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
     <li>
       配信開始→Webhook→twitter<br/>
       配信を開始した際にもWebhookリクエストを飛ばすことができるので、それをトリガーにX（旧twitter）に配信開始を告知しています（下図の赤線の流れ）。<br/>
@@ -94,9 +95,9 @@ const indexList = [
 
   <br/>
   <ul>
-    <li><a href="./twitch">Node.js × twitch</a></li>
-    <li><a href="./twitter">Node.js × twitter</a></li>
-    <li><a href="./obs">Node.js × OBS</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × twitch</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitter`>Node.js × twitter</a></li>
+    <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/obs`>Node.js × OBS</a></li>
   </ul>
 
   <br/>

@@ -6,6 +6,7 @@ import img1st from './img/1st_step.jpg';
 import img2nd from './img/2nd_step.jpg';
 import img3rd from './img/3rd_step.jpg';
 import imgNext from './img/next_step.jpg';
+import { BASE_URL } from '../../../consts';
 
 const indexList = [
   { id: "#firstly", name: "はじめに" },
@@ -23,8 +24,8 @@ const indexList = [
   indexList={indexList}
 >
   <h2 class="title">個人開発したことまとめ</h2>
-  <br />
-  <p><a href="/">ホーム</a> &gt; 個人開発したことまとめ</p>
+  <br/>
+  <p><a href={BASE_URL}>ホーム</a> &gt; 個人開発したことまとめ</p>
   <div id="firstly"></div>
   <h3 class="title">はじめに</h3>
   <p>
@@ -48,8 +49,8 @@ const indexList = [
   <h4 class="title">作ったもの詳細</h4>
   <ul>
     <li><a href="https://qiita.com/taumax/items/11a3e67c265b6ba71838" target="_blank">Linux(CentOS)にApacheとTomcatをインストールしてJavaアプリをデプロイするまで</a></li>
-    <li><a href="reminderbot/reminderbot">ロマサガRSイベントリマインダー</a></li>
-    <li><a href="campainbot/campainbot">ロマサガRSキャンペーン対象キャラ通知bot</a></li>
+    <li><a href=`${BASE_URL}/contents/reminderbot/reminderbot`>ロマサガRSイベントリマインダー</a></li>
+    <li><a href=`${BASE_URL}/contents/campainbot/campainbot`>ロマサガRSキャンペーン対象キャラ通知bot</a></li>
   </ul>
   <div id="second"></div>
   <h3 class="title">二次</h3>
@@ -61,7 +62,7 @@ const indexList = [
   <Image src={img2nd} width={800} alt="二次構築" />
   <h4 class="title">作ったもの詳細</h4>
   <ul>
-    <li><a href="scrayping/scrayping">twitterのスクレイピング</a></li>
+    <li><a href=`${BASE_URL}/contents/scrayping/scrayping`>twitterのスクレイピング</a></li>
   </ul>
   <div id="now"></div>
   <h3 class="title">現状</h3>
@@ -71,11 +72,11 @@ const indexList = [
   <h4 class="title">やったこと・作ったモノ</h4>
   <Image src={img3rd} width={800} alt="現状" />
   <ul>
-    <li><a href="followercount/followercount">公式アカウントのフォロワー数変化(Goで書いた)</a></li>
-    <li><a href="toscheduler/toscheduler">cron脱却（コンテナ化を見据えて）</a></li>
-    <li><a href="tocontainer/tocontainer">コンテナ化</a></li>
-    <li><a href="tocd/tocd">GitLab で自動リリース</a></li>
-    <li><a href="tohttps/tohttps">https化</a></li>
+    <li><a href=`${BASE_URL}/contents/followercount/followercount`>公式アカウントのフォロワー数変化(Goで書いた)</a></li>
+    <li><a href=`${BASE_URL}/contents/toscheduler/toscheduler`>cron脱却（コンテナ化を見据えて）</a></li>
+    <li><a href=`${BASE_URL}/contents/tocontainer/tocontainer`>コンテナ化</a></li>
+    <li><a href=`${BASE_URL}/contents/tocd/tocd`>GitLab で自動リリース</a></li>
+    <li><a href=`${BASE_URL}/contents/tohttps/tohttps`>https化</a></li>
   </ul>
   <div id="doing"></div>
   <h3 class="title">今やろうとしてる</h3>

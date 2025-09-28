@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#cvss", name: "CVSS" }
@@ -15,23 +16,15 @@ const indexList = [
 >
   <h2 class="title">CVSS（Common Vulnerability Scoring System）</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../security.astro" style="color: #00bfff;">セキュリティ</a> &gt; CVSS</p>
-
-  <br />
+  <br/>
   <div id="cvss"></div>
   <h3 class="title">CVSSとは</h3>
   <p>
-    共通脆弱性評価システム（CVSS: Common Vulnerability Scoring System）は、IT製品の脆弱性に対するオープンで汎用的な評価手法です。<br />
-    <b>参考</b><br />
-    絶対わかる情報処理安全確保支援士 2017年春版 P235<br />
-    情報セキュリティスペシャリスト2016年版 P142<br />
+    共通脆弱性評価システム（CVSS: Common Vulnerability Scoring System）は、IT製品の脆弱性に対するオープンで汎用的な評価手法です。<br/>
+    <b>参考</b><br/>
+    絶対わかる情報処理安全確保支援士 2017年春版 P235<br/>
+    情報セキュリティスペシャリスト2016年版 P142<br/>
   </p>
 
-  <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
-
+  <br/><br/>
 </SiteLayout>

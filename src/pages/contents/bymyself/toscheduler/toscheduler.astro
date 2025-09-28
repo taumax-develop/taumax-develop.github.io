@@ -4,6 +4,7 @@ import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgBfrScheduler from './img/bfr_scheduler.png';
 import imgAftScheduler from './img/aft_scheduler.png';
+import { BASE_URL } from '../../../../consts';
 
 const indexList = [
   { id: "#summary", name: "概要" },
@@ -20,49 +21,49 @@ const indexList = [
 >
   <h2 class="title">cron脱却（コンテナ化を見据えて）</h2>
 
-  <br /><br />
-  <p style="color: #FFFFFF;"><a href="../../../index" style="color: #00bfff;">ホーム</a> &gt; <a href="../bymyself" style="color: #00bfff;">個人開発したことまとめ</a> &gt; cron脱却</p>
+  <br/><br/>
+  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; cron脱却</p>
 
   <div id="summary"></div>
   <h3 class="title">cron脱却（コンテナ化を見据えて）</h3>
   <p>
-    新しく配属されたプロジェクトで Docker や GitLab で自動リリース機能構築(CD)など、これまで触れたことのない技術が大量にあったので、それらを使うことで少しでも早くその技術に慣れ、使いこなせるようになりたかった。<br />
-    なので今後コンテナ化、GitLab で CD 機能を構築していくが、その前に cron から脱却し、各言語のスケジューラを使用することでコンテナ化したときの移植性を高めたい。<br />
-    稼働時間を変えたいとか、新しく bot を作った時の稼働タイミングの設定を、これまで使用していた cron から各アプリで行うように修正することで、ローカルで設定したものを GitLab に push してしまえば後は勝手にリリースされて時間になったら bot が稼働するという状態を目指したい。<br />
+    新しく配属されたプロジェクトで Docker や GitLab で自動リリース機能構築(CD)など、これまで触れたことのない技術が大量にあったので、それらを使うことで少しでも早くその技術に慣れ、使いこなせるようになりたかった。<br/>
+    なので今後コンテナ化、GitLab で CD 機能を構築していくが、その前に cron から脱却し、各言語のスケジューラを使用することでコンテナ化したときの移植性を高めたい。<br/>
+    稼働時間を変えたいとか、新しく bot を作った時の稼働タイミングの設定を、これまで使用していた cron から各アプリで行うように修正することで、ローカルで設定したものを GitLab に push してしまえば後は勝手にリリースされて時間になったら bot が稼働するという状態を目指したい。<br/>
   </p>
 
-  <br /><br />
+  <br/><br/>
   <div id="mechanism"></div>
   <h3 class="title">どんな仕組み？</h3>
   <h4 class="title">対応前</h4>
   <p>
-    <Image src={imgBfrScheduler} width={800} alt="対応前スケジューラ" /><br /><br />
-    1台1つのプログラムは別ファイルになっており、それを cron でキックしていた。<br />
+    <Image src={imgBfrScheduler} width={800} alt="対応前スケジューラ" /><br/><br/>
+    1台1つのプログラムは別ファイルになっており、それを cron でキックしていた。<br/>
   </p>
 
-  <br /><br />
+  <br/><br/>
   <h4 class="title">対応後</h4>
   <p>
-    親となるプログラムを作り、そこで稼働時間の設定を行い、時間になったら動くような仕掛けを作った。<br />
-    <Image src={imgAftScheduler} width={800} alt="対応後スケジューラ" /><br />
-    <br />
+    親となるプログラムを作り、そこで稼働時間の設定を行い、時間になったら動くような仕掛けを作った。<br/>
+    <Image src={imgAftScheduler} width={800} alt="対応後スケジューラ" /><br/>
+    <br/>
   </p>
 
-  <br /><br />
+  <br/><br/>
   <h4 class="title">Go のスケジューラと実装</h4>
   <p>
-    <a href="https://pkg.go.dev/github.com/bamzi/jobrunner" target="_blank">jobrunner</a> というライブラリを使用した。<br />
+    <a href="https://pkg.go.dev/github.com/bamzi/jobrunner" target="_blank">jobrunner</a> というライブラリを使用した。<br/>
   </p>
   <script src="https://gist.github.com/taumax-github/dfb5cf7a9edfa17844ec891c342e255e.js"></script>
 
-  <br />
+  <br/>
   <h4 class="title">python のスケジューラと実装</h4>
   <p>
-    <a href="https://schedule.readthedocs.io/en/stable/" target="_blank">schedule</a> というライブラリを使用した。<br />
+    <a href="https://schedule.readthedocs.io/en/stable/" target="_blank">schedule</a> というライブラリを使用した。<br/>
   </p>
   <script src="https://gist.github.com/taumax-github/98db979f9208da2ef655cf5e73c44ff5.js"></script>
 
-  <br /><br />
+  <br/><br/>
   参考
   <ul>
     <li><a href="https://schedule.readthedocs.io/en/stable/" target="_blank">schedule</a></li>

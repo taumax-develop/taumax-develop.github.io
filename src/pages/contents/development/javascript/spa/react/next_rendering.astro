@@ -14,6 +14,8 @@ import what_i_made2_ssglist_build from './img/rendering/what_i_made2_ssglist_bui
 import what_i_made2_ssglist_rendering from './img/rendering/what_i_made2_ssglist_rendering.jpg';
 import what_i_made2_isgdetail_build from './img/rendering/what_i_made2_isgdetail_build.jpg';
 import what_i_made2_isgdetail_rendering from './img/rendering/what_i_made2_isgdetail_rendering.jpg';
+import typescript_react_next from '../img/typescript_react_next.jpg';
+import { BASE_URL } from '../../../../../../consts';
 
 const indexList = [
   { id: '#firstly', name: 'はじめに' },
@@ -40,10 +42,10 @@ const indexList = [
   <h2 class="title">Next.jsのレンダリング</h2>
 
   <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href="../../../../../index">ホーム</a></li>
-    <li class="breadcrumbli"> > <a href="../../js_index">JavaScript</a></li>
-    <li class="breadcrumbli"> > <a href="../spa">SPA</a></li>
-    <li class="breadcrumbli"> > <a href="./react_next">React/Next.js</a></li>
+    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/spa`>SPA</a></li>
+    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/react/react_next`>React/Next.js</a></li>
     <li class="breadcrumbli"> > Next.jsのレンダリング</li>
   </ul>
 
@@ -51,7 +53,7 @@ const indexList = [
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、 <a href="./react_next#rendering">React/Next.js のレンダリング</a>の続きのページです。Next.js のレンダリング手法にスポットを当てて記載していきます。一応このページから読み進めても問題ないように構成したつもりですが、リンク先のページを見てからの方が、ReactとNext.jsについて理解が深まるかもしれません。<br/>
+    このページは、 <a href=`${BASE_URL}/contents/development/javascript/spa/react/react_next#rendering`>React/Next.js のレンダリング</a>の続きのページです。Next.js のレンダリング手法にスポットを当てて記載していきます。一応このページから読み進めても問題ないように構成したつもりですが、リンク先のページを見てからの方が、ReactとNext.jsについて理解が深まるかもしれません。<br/>
     今回は Next.js の v13.0.2 を使用していますが、v14以降（2025/3/23時点の最新は v15.2.3）、各レンダリング手法の実装方法が変わっていたり、新しいレンダリング手法が実装されたりするなど変化している模様。とは言え根本的な考え方は変わっていないはずなので主にそこを参考にしてほしいです。<br/>
   </p>
 
@@ -500,7 +502,7 @@ revalidate: 10, // In seconds
   <br/>
   参考書籍<br/>
   <ul>
-    <li><a href="https://amzn.to/4as09nr" target="_blank" rel="noopener noreferrer"><img src="../img/typescript_react_next.jpg" width="200"/><br/>TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発</a></li>
+    <li><a href="https://amzn.to/4as09nr" target="_blank" rel="noopener noreferrer"><Image src={typescript_react_next} width="200" alt="typescript_react_next" /><br/>TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発</a></li>
   </ul>
 
   <br/>
