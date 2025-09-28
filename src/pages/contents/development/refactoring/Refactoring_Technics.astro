@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../img/refactoring.jpg';
+import legacy_code from '../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -27,10 +30,14 @@ const indexList = [
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br />
   リファクタリング第2版<br />
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer">
+    <Image src={refactoring} alt="refactoring" />
+  </a>
   <br />
   レガシーコード改善ガイド<br />
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer">
+    <Image src={legacy_code} alt="legacy_code" />
+  </a>
   <h1 id="composingmethods">Composing Methods</h1>
   <p><a href="category/Composing_methods.astro">Composing Methods</a></p>
   <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
@@ -46,8 +53,4 @@ const indexList = [
   <h1 id="-1">予備知識</h1>
   <p><a href="category/予備知識.astro">予備知識</a></p>
   <br /><br />
-  <footer>
-    <small><a href="https://taumax-develop.github.io/">とあるＩＴエンジニアの知識整理</a> All Rights Reserved.</small>
-    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-  </footer>
 </SiteLayout>
