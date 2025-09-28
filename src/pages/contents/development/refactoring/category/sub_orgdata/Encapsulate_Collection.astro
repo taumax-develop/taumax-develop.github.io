@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -11,27 +14,27 @@ const indexList = [
 
 <SiteLayout title="Encapsulate Collection | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
   <h2 class="title">リファクタリング技法</h2>
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1>関連するリファクタリング技法</h1>
 
   <h1 id="organizingdata">Organizing Data</h1>
-  <p><a href="https://sourcemaking.com/refactoring/organizing-data">Organizing Data</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
   <h2 id="encapsulatecollection">Encapsulate Collection</h2>
-  <p><a href="https://sourcemaking.com/refactoring/encapsulate-collection">Encapsulate Collection</a>
+  <p><a href="https://sourcemaking.com/refactoring/encapsulate-collection" target="_blank" rel="noopener noreferrer">Encapsulate Collection</a>
   ListやSetなどのようなCollectionをカプセル化する場合、getterはread onlyなオブジェクトを返すようにしましょう。
   また、Collectionに要素を追加するためのaddメソッドやdeleteメソッドを用意しましょう。
   ※なぜこんなことをする必要があるのかわからない人はimmutableという概念について知っておきましょう。参考になりそうなサイトのリンクを下に張っておきます。
-  <p><a href="https://sourcemaking.com/refactoring/encapsulate-collection">このページ</a>では、immutableにするためにgetCourcesメソッドはUnmodifiableSetをreturnしています。UnmodifiableSetにaddやdeleteメソッドで要素を追加・削除しようとすると、実行時エラー（UnsuportedOperationException）になります。</p>
-  <p><a href="https://www.amazon.co.jp/dp/4621303252">Effective Java</a> という本の中では、<a href="https://hageyahhoo.hatenablog.com/entry/20090911/1252638495">defensive copy</a>というやり方が紹介されています。
+  <p><a href="https://sourcemaking.com/refactoring/encapsulate-collection" target="_blank" rel="noopener noreferrer">このページ</a>では、immutableにするためにgetCourcesメソッドはUnmodifiableSetをreturnしています。UnmodifiableSetにaddやdeleteメソッドで要素を追加・削除しようとすると、実行時エラー（UnsuportedOperationException）になります。</p>
+  <p><a href="https://www.amazon.co.jp/dp/4621303252" target="_blank" rel="noopener noreferrer">Effective Java</a> という本の中では、<a href="https://hageyahhoo.hatenablog.com/entry/20090911/1252638495" target="_blank" rel="noopener noreferrer">defensive copy</a>というやり方が紹介されています。
   これは、上で紹介したUnmodifiableSetをreturnするのではなく、以下のようにして、参照先の異なるオブジェクトをreturnする手法です。
   これであれば、呼び出し元でaddやdeleteメソッドを呼び出すことが可能であり、かつ、オブジェクトの参照先が異なるので元データに影響を与えることもありません。</p>
   <pre><code class="language-java">{`class Test {
@@ -43,16 +46,16 @@ const indexList = [
 `}</code></pre>
   <p>【immutableの参考】</p>
   <ul>
-    <li><a href="https://techblog.imagemagic.jp/2018/07/09/immutable%E3%81%A8%E3%81%84%E3%81%86%E6%A6%82%E5%BF%B5%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/">Immutableという概念について</a></li>
-    <li><a href="https://hageyahhoo.hatenablog.com/entry/20090910/1252572314">immutable object</a></li>
-    <li><a href="https://hageyahhoo.hatenablog.com/entry/20090911/1252638495">defensive copy</a></li>
+    <li><a href="https://techblog.imagemagic.jp/2018/07/09/immutable%E3%81%A8%E3%81%84%E3%81%86%E6%A6%82%E5%BF%B5%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" target="_blank" rel="noopener noreferrer">Immutableという概念について</a></li>
+    <li><a href="https://hageyahhoo.hatenablog.com/entry/20090910/1252572314" target="_blank" rel="noopener noreferrer">immutable object</a></li>
+    <li><a href="https://hageyahhoo.hatenablog.com/entry/20090911/1252638495" target="_blank" rel="noopener noreferrer">defensive copy</a></li>
   </ul>
   <p>ちなみに、Javaでimmutable objectの一番身近な例はStringです。</p>
   <ul>
-    <li><a href="https://qiita.com/makotoo2/items/fc3a617882916f9775f5">ミュータブルな型とイミュータブルな型の相違を知ろう</a></li>
+    <li><a href="https://qiita.com/makotoo2/items/fc3a617882916f9775f5" target="_blank" rel="noopener noreferrer">ミュータブルな型とイミュータブルな型の相違を知ろう</a></li>
   </ul>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#data-class">Data Class</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#data-class" target="_blank" rel="noopener noreferrer">Data Class</a></li>
   </ul>
 </SiteLayout>

@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,7 +19,7 @@ const indexList = [
 >
   <h2 class="title">Large Class</h2>
   <h3 id="largeclass">Large Class</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/large-class">Large Class（巨大なクラス）</a>：</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/large-class" target="_blank" rel="noopener noreferrer">Large Class（巨大なクラス）</a>：</p>
   <p><strong><em>兆候と症状</em></strong>
     多くのフィールド、メソッド、コード行数を持つクラス。</p>
   <p><strong><em>問題の理由</em></strong>
@@ -25,10 +28,10 @@ const indexList = [
   <p><strong><em>対処</em></strong>
     クラスがあまりにも多くの機能を持ってしまっている場合、それを分割することを考えてください。</p>
   <ul>
-    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」は、大きなクラスの動作の一部を別のコンポーネントに分割できる場合に役立ちます。</li>
-    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-subclass">Extract Subclass</a>」は、大きなクラスの一部を異なる方法で実装できる場合や、まれに使用される場合に役立ちます。</li>
-    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-interface">Extract Interface</a>」は、利用可能な操作と動作のリストを保持する必要がある場合に役立ちます。</li>
-    <li>大きなクラスがグラフィカルインターフェイスを担当している場合、そのデータと動作の一部を別のドメインオブジェクトに移動しようとする場合があります。その際、一部のデータのコピーを2か所に保存し、データの一貫性を保つ必要がある場合があります。「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-observed-data">Duplicate Observed Data</a>」はこれを行う方法を提供します。</li>
+    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」は、大きなクラスの動作の一部を別のコンポーネントに分割できる場合に役立ちます。</li>
+    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-subclass" target="_blank" rel="noopener noreferrer">Extract Subclass</a>」は、大きなクラスの一部を異なる方法で実装できる場合や、まれに使用される場合に役立ちます。</li>
+    <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-interface" target="_blank" rel="noopener noreferrer">Extract Interface</a>」は、利用可能な操作と動作のリストを保持する必要がある場合に役立ちます。</li>
+    <li>大きなクラスがグラフィカルインターフェイスを担当している場合、そのデータと動作の一部を別のドメインオブジェクトに移動しようとする場合があります。その際、一部のデータのコピーを2か所に保存し、データの一貫性を保つ必要がある場合があります。「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-observed-data" target="_blank" rel="noopener noreferrer">Duplicate Observed Data</a>」はこれを行う方法を提供します。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
@@ -39,9 +42,9 @@ const indexList = [
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   <br/><br/>
 </SiteLayout>

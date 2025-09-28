@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,7 +19,7 @@ const indexList = [
 >
   <h2 class="title">Long Method</h2>
   <h3 id="longmethod">Long Method</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/long-method">Long Method（長すぎるメソッド）</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/long-method" target="_blank" rel="noopener noreferrer">Long Method（長すぎるメソッド）</a></p>
   <p><strong><em>兆候と症状</em></strong>
     メソッドの行数が多すぎる状態。一般に、1メソッドの行数が10行を超える場合、短くすることができないかを考える必要があります。</p>
   <p><strong><em>問題の理由</em></strong>
@@ -25,10 +28,10 @@ const indexList = [
   <p><strong><em>対処</em></strong>
     経験則として、メソッド内の何かにコメントする必要があると感じた場合、このコードをメソッド内から抽出して新しいメソッドを作成する必要があります。説明が必要な場合は、1行であっても別の方法に分割することができます。また、メソッドにわかりやすい名前が付けられている場合、コードを調べてその機能を確認する必要はありません。</p>
   <ul>
-    <li>メソッド本体の長さを短くするには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使用します。</li>
-    <li>ローカル変数とパラメーターがメソッドの抽出に干渉する場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-temp-with-query">Replace Temp with Query</a>」、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object">Introduce Parameter Object</a>」、または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object">Preserve Whole Object</a>」を使用します。</li>
-    <li>上記のレシピがどれも役に立たない場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-method-with-method-object">Replace Method with Method Object</a>」を適用してメソッド全体を別のオブジェクトに移動してみてください。</li>
-    <li>条件演算子（3項演算子）とループは、コードを別のメソッドに移動できる良い手がかりです。3項演算子の場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#decompose-conditional">Decompose Conditional</a>」を使用します。ループが邪魔な場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を試してください。</li>
+    <li>メソッド本体の長さを短くするには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を使用します。</li>
+    <li>ローカル変数とパラメーターがメソッドの抽出に干渉する場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-temp-with-query" target="_blank" rel="noopener noreferrer">Replace Temp with Query</a>」、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object" target="_blank" rel="noopener noreferrer">Introduce Parameter Object</a>」、または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object" target="_blank" rel="noopener noreferrer">Preserve Whole Object</a>」を使用します。</li>
+    <li>上記のレシピがどれも役に立たない場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-method-with-method-object" target="_blank" rel="noopener noreferrer">Replace Method with Method Object</a>」を適用してメソッド全体を別のオブジェクトに移動してみてください。</li>
+    <li>条件演算子（3項演算子）とループは、コードを別のメソッドに移動できる良い手がかりです。3項演算子の場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#decompose-conditional" target="_blank" rel="noopener noreferrer">Decompose Conditional</a>」を使用します。ループが邪魔な場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を試してください。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
@@ -43,9 +46,9 @@ const indexList = [
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   <br/><br/>
 </SiteLayout>

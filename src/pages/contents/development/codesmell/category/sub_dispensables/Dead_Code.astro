@@ -12,13 +12,13 @@ const indexList = [
 ---
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="deadcode">Dead Code</h1>
-  <p><a href="https://sourcemaking.com/refactoring/smells/dead-code">Dead Code（到達不能コード）</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/dead-code" target="_blank" rel="noopener noreferrer">Dead Code（到達不能コード）</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     使用されない変数、パラメーター、フィールド、メソッド、またはクラス。</p>
   <p><strong><em>問題の理由</em></strong><br/>
     ソフトウェアの要件が変更されたり、修正が加えられたりすると、古いコードをクリーンアップする時間がありませんでした。このようなコードは、分岐の1つが（エラーまたは他の状況により）到達不能になったときに、複雑な条件で見つかる可能性もあります。</p>
   <p><strong><em>対処</em></strong><br/>
-    Dead Codeを見つける最も簡単な方法は、優れたIDEを使用することです。未使用のコードや不要なファイルを削除します。クラスが不要な場合で、サブクラスまたはスーパークラスは使用される場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inline-class">Inline Class</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#collapse-hierarchy">Collapse Hierarchy</a>」を適用できます。不必要なパラメーターを削除するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#remove-parameter">Remove Parameter</a>」を使用します。</p>
+    Dead Codeを見つける最も簡単な方法は、優れたIDEを使用することです。未使用のコードや不要なファイルを削除します。クラスが不要な場合で、サブクラスまたはスーパークラスは使用される場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inline-class" target="_blank" rel="noopener noreferrer">Inline Class</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#collapse-hierarchy" target="_blank" rel="noopener noreferrer">Collapse Hierarchy</a>」を適用できます。不必要なパラメーターを削除するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#remove-parameter" target="_blank" rel="noopener noreferrer">Remove Parameter</a>」を使用します。</p>
   <p><strong><em>効果</em></strong></p>
   <ul>
     <li>コードサイズの削減</li>

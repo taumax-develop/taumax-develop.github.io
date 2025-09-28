@@ -2,6 +2,10 @@
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
+
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
@@ -16,23 +20,23 @@ const indexList = [
   indexList={indexList}
 >
   <h2 class="title">リファクタリング技法</h2>
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
-  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
   <h2 id="extractsuperclass">Extract Superclass</h2>
-  <p><a href="https://sourcemaking.com/refactoring/extract-superclass">Extract Superclass</a>
+  <p><a href="https://sourcemaking.com/refactoring/extract-superclass" target="_blank" rel="noopener noreferrer">Extract Superclass</a>
   2つのクラスの共通部分（フィールドやメソッド）をスーパークラスとして再定義しましょう。</p>
   <p>※継承は必ずしも最適解ではありません。使いどころを間違えるとクラス設計がいびつなものになってしまいます。
-  先の項目にも書いた継承を使うべきか<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate">委譲(delegate)</a>を使うべきかをきちんと判断した上で継承を使うようにしましょう。</p>
+  先の項目にも書いた継承を使うべきか<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate" target="_blank" rel="noopener noreferrer">委譲(delegate)</a>を使うべきかをきちんと判断した上で継承を使うようにしましょう。</p>
   <p>・・・例えば、ゲームのスーパーマリオに出てくるファイアーマリオを実装する場合、普通のマリオをスーパークラスにしてファイアーマリオをそのサブクラスとして実装するのはおそらく違和感ないです。ファイヤーマリオの実装はおそらく「火を吐く」という部分だけを実装すれば済むでしょう。
   しかし、クッパを普通のマリオやファイアーマリオのサブクラスとして実装するのはおそらく後々厄介なことになります。
   確かにクッパはジャンプをするし、火も吐くのでマリオとの共通部分が多く、もしかしたらマリオを継承することで実装を減らせるかもしれません。
@@ -40,9 +44,9 @@ const indexList = [
   スーパークラスとサブクラスは結びつきが強いため、実装を変更するとお互いの振る舞いに影響を与えることがあります。本当に継承を使うのが適切なのかを考えてから継承を使うようにしましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#refused-bequest">Refused Bequest</a></li>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#alternative-classes-with-different-interfaces">Alternative Classes with Different Interfaces</a></li>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#divergent-change">Divergent Change</a></li>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code">Duplicate Code</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#refused-bequest" target="_blank" rel="noopener noreferrer">Refused Bequest</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#alternative-classes-with-different-interfaces" target="_blank" rel="noopener noreferrer">Alternative Classes with Different Interfaces</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#divergent-change" target="_blank" rel="noopener noreferrer">Divergent Change</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code</a></li>
   </ul>
 </SiteLayout>

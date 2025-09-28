@@ -2,6 +2,10 @@
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
+
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
@@ -16,23 +20,23 @@ const indexList = [
   indexList={indexList}
 >
   <h2 class="title">リファクタリング技法</h2>
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
-  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
   <h2 id="pullupconstructorbody">Pull Up Constructor Body</h2>
-  <p><a href="https://sourcemaking.com/refactoring/pull-up-constructor-body">Pull Up Constructor Body</a>
+  <p><a href="https://sourcemaking.com/refactoring/pull-up-constructor-body" target="_blank" rel="noopener noreferrer">Pull Up Constructor Body</a>
   ほとんど同一のコードがコンストラクタに存在する場合、スーパークラスにコンストラクタを定義してサブクラスの重複コードをスーパークラスに移動し、サブクラスのコンストラクタからスーパークラスのコンストラクタを呼び出すようにしましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code">Duplicate Code</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code</a></li>
   </ul>
 </SiteLayout>

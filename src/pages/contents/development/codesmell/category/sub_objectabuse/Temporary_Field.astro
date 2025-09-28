@@ -12,10 +12,10 @@ const indexList = [
 ---
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="temporaryfield">Temporary Field</h1>
-  <p><a href="https://sourcemaking.com/refactoring/smells/temporary-field">Temporary Field</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/temporary-field" target="_blank" rel="noopener noreferrer">Temporary Field</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     Temporary fieldsは、特定の状況下でのみ値を取得します（したがって、オブジェクトに必要です）。これらの状況以外では、それらは空です。</p>
-  <p>※Temporary Fieldに関しては<a href="https://blog.ploeh.dk/2015/09/18/temporary-field-code-smell/">この記事</a>の方が私はわかりやすかったので、兆候と症状のところはこの記事をベースに書いてみます。</p>
+  <p>※Temporary Fieldに関しては<a href="https://blog.ploeh.dk/2015/09/18/temporary-field-code-smell/" target="_blank" rel="noopener noreferrer">この記事</a>の方が私はわかりやすかったので、兆候と症状のところはこの記事をベースに書いてみます。</p>
   <pre><code>{`public class Estimator {
   private readonly TimeSpan defaultEstimate;
   private IReadOnlyCollection<TimeSpan> durations;
@@ -72,8 +72,8 @@ this.CalculateAverage();`}</code></pre>
   <p><strong><em>問題の理由</em></strong><br/>
     多くの場合、Temporary fieldsは、大量の入力を必要とするアルゴリズムで使用するために作成されます。そのため、プログラマーはメソッド内に多数のパラメーターを作成する代わりに、クラスの中にこのデータのフィールドを作成することにします。これらのフィールドはアルゴリズムでのみ使用され、それ以外では使用されません。この種のコードは理解するのが難しいです。オブジェクトフィールドにデータが表示されるはずですが、何らかの理由でほとんど常に空です。（フィールドに値を設定するメソッドが実行されるまではnullが設定されている）</p>
   <p><strong><em>対処</em></strong><br/>
-    Temporary fieldとそれらを操作するすべてのコードは、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」を介して別のクラスに入れることができます。つまり、メソッドオブジェクトを作成して、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-method-with-method-object">Replace Method with Method Object</a>」を実施します。</p>
-  <p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-null-object">Introduce Null Object</a>」を導入し、Temporary fieldの値の存在を確認するために使われた条件コードをそこに統合します。</p>
+    Temporary fieldとそれらを操作するすべてのコードは、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」を介して別のクラスに入れることができます。つまり、メソッドオブジェクトを作成して、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-method-with-method-object" target="_blank" rel="noopener noreferrer">Replace Method with Method Object</a>」を実施します。</p>
+  <p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-null-object" target="_blank" rel="noopener noreferrer">Introduce Null Object</a>」を導入し、Temporary fieldの値の存在を確認するために使われた条件コードをそこに統合します。</p>
   <p><strong><em>効果</em></strong></p>
   <ul>
     <li>コードが明確になり、コードの構成が改善されます。</li>

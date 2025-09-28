@@ -2,6 +2,9 @@
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
@@ -15,21 +18,21 @@ const indexList = [
   twitterCardSize={TWITTER_CARD_SUMMARY}
   indexList={indexList}
 >
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1>関連するリファクタリング技法</h1>
   <h2 id="composingmethods">Composing Methods</h2>
-  <p><a href="https://sourcemaking.com/refactoring/composing-methods">Composing Methods</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/composing-methods" target="_blank" rel="noopener noreferrer">Composing Methods</a></p>
 
   <h2 id="inlinemethod">Inline Method</h2>
-  <p><a href="https://sourcemaking.com/refactoring/inline-method">Inline Method</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/inline-method" target="_blank" rel="noopener noreferrer">Inline Method</a></p>
   <p>メソッドがメソッドを呼び出すような関係になっていてそれが可読性を阻害しているようであればメソッドのインライン化を検討しましょう。</p>
   <pre><code class="language-java">{`class PizzaDelivery {
 // ...
@@ -50,6 +53,6 @@ const indexList = [
 `}</code></pre>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#speculative-generality">Speculative Generality</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#speculative-generality" target="_blank" rel="noopener noreferrer">Speculative Generality</a></li>
   </ul>
 </SiteLayout>

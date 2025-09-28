@@ -12,15 +12,15 @@ const indexList = [
 ---
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="incompletelibraryclass">Incomplete Library Class</h1>
-  <p><a href="https://sourcemaking.com/refactoring/smells/incomplete-library-class">Incomplete Library Class</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/incomplete-library-class" target="_blank" rel="noopener noreferrer">Incomplete Library Class</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
-    遅かれ早かれ、<a href="https://en.wikipedia.org/wiki/Library_(computing)">Library</a>はユーザーのニーズを満たすことをやめます。ライブラリは読み取り専用であるため、問題の唯一の解決策であるライブラリの変更は、多くの場合不可能です。</p>
+    遅かれ早かれ、<a href="https://en.wikipedia.org/wiki/Library_(computing)" target="_blank" rel="noopener noreferrer">Library</a>はユーザーのニーズを満たすことをやめます。ライブラリは読み取り専用であるため、問題の唯一の解決策であるライブラリの変更は、多くの場合不可能です。</p>
   <p><strong><em>問題の理由</em></strong><br/>
     ライブラリの作成者は、必要な機能を提供していないか、それらの実装を拒否しています。</p>
   <p><strong><em>対処</em></strong></p>
   <ul>
-    <li>ライブラリクラスにメソッドを導入するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-foreign-method">Introduce Foreign Method</a>」を使用します。</li>
-    <li>クラスライブラリの大きな変更には、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-local-extension">Introduce Local Extension</a>」を使用します。</li>
+    <li>ライブラリクラスにメソッドを導入するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-foreign-method" target="_blank" rel="noopener noreferrer">Introduce Foreign Method</a>」を使用します。</li>
+    <li>クラスライブラリの大きな変更には、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-local-extension" target="_blank" rel="noopener noreferrer">Introduce Local Extension</a>」を使用します。</li>
   </ul>
   <p><strong><em>効果</em></strong><br/>
     コードの重複を削減します（独自のライブラリをゼロから作成する代わりに、既存のライブラリを流用できます）。</p>

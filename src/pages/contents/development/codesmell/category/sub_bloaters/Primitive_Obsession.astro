@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,7 +19,7 @@ const indexList = [
 >
   <h2 class="title">Primitive Obsession</h2>
   <h3 id="primitiveobsession">Primitive Obsession</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/primitive-obsession">Primitive Obsession（基本データ型への執着）</a>：</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/primitive-obsession" target="_blank" rel="noopener noreferrer">Primitive Obsession（基本データ型への執着）</a>：</p>
   <p><strong><em>兆候と症状</em></strong></p>
   <ul>
     <li>単純なタスク（通貨、範囲、電話番号用の特別な文字列など）に小さなクラスを作る代わりにプリミティブ型（intやlongなど）を使用する。</li>
@@ -29,11 +32,11 @@ const indexList = [
   <p>プリミティブは、型に”似せる”ためにもよく使用されます。個別のデータ型の代わりに、いくつかのエンティティの許容値のリストを形成する一連の数値または文字列を定数で宣言します。これらの定数には、わかりやすい名前を付けることができます。これは広く普及してしまっているやり方です。</p>
   <p>プリミティブ型を使用した別の質の悪い例は、フィールドシミュレーションです。多様なデータの大規模な配列をクラスに含め、このデータを取得するための配列インデックスとして、クラスで指定した文字列定数が使用されます。</p>
   <p><strong><em>対処</em></strong>
-    さまざまなプリミティブフィールドがある場合、それらのいくつかを論理的に独自のクラスにグループ化できる場合があります。さらに、このデータに関連付けられた振る舞いもそのクラスに移動するとより良いです。このタスクでは、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-data-value-with-object">Replace Data Value with Object</a>」を試してください。</p>
+    さまざまなプリミティブフィールドがある場合、それらのいくつかを論理的に独自のクラスにグループ化できる場合があります。さらに、このデータに関連付けられた振る舞いもそのクラスに移動するとより良いです。このタスクでは、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-data-value-with-object" target="_blank" rel="noopener noreferrer">Replace Data Value with Object</a>」を試してください。</p>
   <ul>
-    <li>プリミティブフィールドの値がメソッド引数で使用されている場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object">Introduce Parameter Object</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object">Preserve Whole Object</a>」を試してみましょう。</li>
-    <li>複雑なデータが変数でコーディングされている場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-type-code-with-class">Replace Type Code with Class</a>」, 「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-type-code-with-subclasses">Replace Type Code with Subclasses</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-type-code-with-statestrategy">Replace Type Code with State/Strategy</a>」を試してみましょう。</li>
-    <li>1つの配列に複数の型が含まれている場合は「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-array-with-object">Replace Array with Object</a>」を使用します。</li>
+    <li>プリミティブフィールドの値がメソッド引数で使用されている場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object" target="_blank" rel="noopener noreferrer">Introduce Parameter Object</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object" target="_blank" rel="noopener noreferrer">Preserve Whole Object</a>」を試してみましょう。</li>
+    <li>複雑なデータが変数でコーディングされている場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-type-code-with-class" target="_blank" rel="noopener noreferrer">Replace Type Code with Class</a>」, 「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-type-code-with-subclasses" target="_blank" rel="noopener noreferrer">Replace Type Code with Subclasses</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-type-code-with-statestrategy" target="_blank" rel="noopener noreferrer">Replace Type Code with State/Strategy</a>」を試してみましょう。</li>
+    <li>1つの配列に複数の型が含まれている場合は「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-array-with-object" target="_blank" rel="noopener noreferrer">Replace Array with Object</a>」を使用します。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
@@ -45,9 +48,9 @@ const indexList = [
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   <br/><br/>
 </SiteLayout>

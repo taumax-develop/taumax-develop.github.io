@@ -1,5 +1,7 @@
 ---
 import { Image } from 'astro:assets'
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import img01 from './img/form_template_method/img01.png'
@@ -20,29 +22,30 @@ import { BASE_URL } from '../../../../../../consts';
   indexList={indexList}
 >
   <h2 class="title">リファクタリング技法</h2>
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
-  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
   <h2 id="formtemplatemethod">Form Template Method</h2>
-  <p><a href="https://sourcemaking.com/refactoring/form-template-method">Form Template Method</a>
+  <p><a href="https://sourcemaking.com/refactoring/form-template-method" target="_blank" rel="noopener noreferrer">Form Template Method</a>
   サブクラスに似たようなステップ、順序で実行するアルゴリズムが実装されている場合、アルゴリズムの構造および同一ステップをスーパークラスに移動し、異なるステップの実装をサブクラスから排除します。</p>
-  <p><strong><em>【リファクタリング前】</em></strong>
-  <Image src={img01} width={470} alt="img01"/>
-  <a href="https://sourcemaking.com/refactoring/form-template-method">このページ</a>より抜粋</p>
-  <p><strong><em>【リファクタリング後】</em></strong>
-  <Image src={img02} width={490} alt="img02"/>
-  <a href="https://sourcemaking.com/refactoring/form-template-method">このページ</a>より抜粋</p>
+  <p><strong><em>【リファクタリング前】</em></strong><br/>
+  <Image src={img01} width={470} alt="img01"/><br/>
+  <a href="https://sourcemaking.com/refactoring/form-template-method" target="_blank" rel="noopener noreferrer">このページ</a>より抜粋</p><br/>
+  <p><strong><em>【リファクタリング後】</em></strong><br/>
+  <Image src={img02} width={490} alt="img02"/><br/>
+  <a href="https://sourcemaking.com/refactoring/form-template-method" target="_blank" rel="noopener noreferrer">このページ</a>より抜粋</p>
+  <br/>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code">Duplicate Code</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code</a></li>
   </ul>
 </SiteLayout>

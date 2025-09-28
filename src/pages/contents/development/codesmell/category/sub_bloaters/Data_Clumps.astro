@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,16 +19,16 @@ const indexList = [
 >
   <h2 class="title">Data Clumps</h2>
   <h3 id="dataclumps">Data Clumps</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/data-clumps">Data Clumps（データの塊）</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/data-clumps" target="_blank" rel="noopener noreferrer">Data Clumps（データの塊）</a></p>
   <p><strong><em>兆候と症状</em></strong>
     同一の変数グループ（データベースに接続するためのパラメーターなど）がコードの異なる部分に散らばっている場合があります。このData Clumpsは、独自のクラスに変換する必要があります。</p>
   <p><strong><em>問題の理由</em></strong>
     多くの場合、これらのデータグループは、不十分なプログラム構造またはコピペプログラミングが原因です。
     一部のデータがData Clumpsであるかどうかを確認したい場合は、データ値の1つを削除し、他の値が依然として意味をなすかどうかを確認します。意味をなさなくなった場合は、その変数グループをオブジェクトにまとめる必要があることを示す良い兆候です。</p>
   <p><strong><em>対処</em></strong>
-    繰り返しデータがクラスのフィールドで構成される場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」を使ってフィールドを独自のクラスに移動します。
-    メソッドのパラメーターで同じデータの塊が渡される場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object">Introduce Parameter Object</a>」を使ってそれらをクラスとして設定します。
-    一部のデータが他のメソッドに渡される場合、個々のフィールドだけでなく、データオブジェクト全体をメソッドに渡すことを検討してください。「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object">Preserve Whole Object</a>」がこれに役立ちます。
+    繰り返しデータがクラスのフィールドで構成される場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」を使ってフィールドを独自のクラスに移動します。
+    メソッドのパラメーターで同じデータの塊が渡される場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object" target="_blank" rel="noopener noreferrer">Introduce Parameter Object</a>」を使ってそれらをクラスとして設定します。
+    一部のデータが他のメソッドに渡される場合、個々のフィールドだけでなく、データオブジェクト全体をメソッドに渡すことを検討してください。「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object" target="_blank" rel="noopener noreferrer">Preserve Whole Object</a>」がこれに役立ちます。
     これらのフィールドで使われるコードを見てください。このコードをデータクラスに移動することをおすすめします。</p>
   <p><strong><em>効果</em></strong></p>
   <ul>
@@ -36,9 +39,9 @@ const indexList = [
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   <br/><br/>
 </SiteLayout>

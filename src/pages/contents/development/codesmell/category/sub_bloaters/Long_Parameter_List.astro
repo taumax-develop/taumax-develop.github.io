@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,7 +19,7 @@ const indexList = [
 >
   <h2 class="title">Long Parameter List</h2>
   <h3 id="longparameterlist">Long Parameter List</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/long-parameter-list">Long Parameter List（長すぎるパラメータリスト）</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/long-parameter-list" target="_blank" rel="noopener noreferrer">Long Parameter List（長すぎるパラメータリスト）</a></p>
   <p><strong><em>兆候と症状</em></strong>
     メソッドの3つまたは4つ以上のパラメーター。</p>
   <p><strong><em>問題の理由</em></strong>
@@ -25,10 +28,10 @@ const indexList = [
     そのようなリストを理解することは難しく、それらが長くなるにつれて矛盾し、使いにくくなります。Long parameter listsの代わりに、メソッドは自オブジェクトのデータを使用できます。現在のオブジェクトに必要なデータがすべて含まれていない場合は、必要なデータを取得する別オブジェクトをメソッドパラメーターとして渡すことができます。
   </p>
   <p><strong><em>対処</em></strong>
-    パラメーターに渡される値を確認します。引数の一部が別のオブジェクトのメソッド呼び出しの結果である場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-parameter-with-method-call">Replace Parameter with Method Call</a>」を使用します。このリファクタリングによって作成されたオブジェクトは、対象のクラスのフィールドに配置するか、メソッドパラメーターとして渡すことができます。</p>
+    パラメーターに渡される値を確認します。引数の一部が別のオブジェクトのメソッド呼び出しの結果である場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-parameter-with-method-call" target="_blank" rel="noopener noreferrer">Replace Parameter with Method Call</a>」を使用します。このリファクタリングによって作成されたオブジェクトは、対象のクラスのフィールドに配置するか、メソッドパラメーターとして渡すことができます。</p>
   <ul>
-    <li>別のオブジェクトから受け取ったデータのグループをパラメーターとして渡す代わりに、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object">Preserve Whole Object</a>」を使って、オブジェクト自体をメソッドに渡します。</li>
-    <li>関係のないデータ要素が複数ある場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object">Introduce Parameter Object</a>」を介してそれらを単一のパラメータオブジェクトにマージできる場合があります。</li>
+    <li>別のオブジェクトから受け取ったデータのグループをパラメーターとして渡す代わりに、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object" target="_blank" rel="noopener noreferrer">Preserve Whole Object</a>」を使って、オブジェクト自体をメソッドに渡します。</li>
+    <li>関係のないデータ要素が複数ある場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object" target="_blank" rel="noopener noreferrer">Introduce Parameter Object</a>」を介してそれらを単一のパラメータオブジェクトにマージできる場合があります。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
@@ -39,9 +42,9 @@ const indexList = [
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
   <br/><br/>
 </SiteLayout>

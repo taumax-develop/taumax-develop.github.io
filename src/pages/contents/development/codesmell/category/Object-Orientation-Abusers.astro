@@ -3,6 +3,7 @@ import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import refactoringImg from '../../img/refactoring.jpg';
 import legacyCodeImg from '../../img/legacy_code.jpg';
 import { BASE_URL } from '../../../../../consts';
+import {  Image } from 'astro:assets';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -22,23 +23,23 @@ const indexList = [
   <section class="box">
     <h2 class="title">Object-Orientation-Abusers</h2>
     <h2 id="objectorientationabusers">Object-Orientation Abusers</h2>
-    <p><a href="https://sourcemaking.com/refactoring/smells/oo-abusers">Object-Orientation Abusers（オブジェクト指向の乱用）</a>
+    <p><a href="https://sourcemaking.com/refactoring/smells/oo-abusers" target="_blank" rel="noopener noreferrer">Object-Orientation Abusers（オブジェクト指向の乱用）</a>
       オブジェクト指向プログラミングの原則を不完全、不正確に適用することで発生するCode Smellです。</p>
     <h1 id="switchstatements">Switch Statements</h1>
-    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Switch_Statements`>Switch Statements</a></p>
+    <p><a href=`${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Switch_Statements`>Switch Statements</a></p>
     <h1 id="temporaryfield">Temporary Field</h1>
-    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Temporary_Field`>Temporary Field</a></p>
+    <p><a href=`${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Temporary_Field`>Temporary Field</a></p>
     <h1 id="refusedbequest">Refused Bequest</h1>
-    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Refused_Bequest`>Refused Bequest（接続拒否）</a>：</p>
+    <p><a href=`${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Refused_Bequest`>Refused Bequest（接続拒否）</a>：</p>
     <h1 id="alternativeclasseswithdifferentinterfaces">Alternative Classes with Different Interfaces</h1>
-    <p><a href=`${BASE_URL}/contents/sub_objectabuse/Alternative_Classes_with_Different_Interfaces`>Alternative Classes with Different Interfaces</a></p>
+    <p><a href=`${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Alternative_Classes_with_Different_Interfaces`>Alternative Classes with Different Interfaces</a></p>
     <br/><br/><br/>
     書籍としてはこの辺りが参考になると思います。<br/>
     <br/>
     リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src={refactoringImg.src} alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoringImg} alt="refactoring" /></a>
     <br/>
     レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src={legacyCodeImg.src} alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacyCodeImg} alt="legacy_code" /></a>
   </section>
 </SiteLayout>

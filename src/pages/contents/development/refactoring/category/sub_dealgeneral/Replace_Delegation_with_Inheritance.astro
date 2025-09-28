@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { Image } from 'astro:assets'
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -10,26 +13,26 @@ const indexList = [
 ---
 
 <SiteLayout title="Replace Delegation with Inheritance | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2>リファクタリング技法</h2>
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <h2 class="title">リファクタリング技法</h2>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
   リファクタリング第2版<br/>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
   <br/>
   レガシーコード改善ガイド<br/>
-  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1>関連するリファクタリング技法</h1>
 
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
-  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation">Dealing with Generalisation</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
   <h2 id="replacedelegationwithinheritance">Replace Delegation with Inheritance</h2>
-  <p><a href="https://sourcemaking.com/refactoring/replace-delegation-with-inheritance">Replace Delegation with Inheritance</a>
-  他クラスのメソッドを呼び出すだけのシンプルなメソッド（<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate">委譲(delegate)</a>）を多く実装しているような場合、委譲を継承に置き換えることを検討しましょう。</p>
+  <p><a href="https://sourcemaking.com/refactoring/replace-delegation-with-inheritance" target="_blank" rel="noopener noreferrer">Replace Delegation with Inheritance</a>
+  他クラスのメソッドを呼び出すだけのシンプルなメソッド（<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate" target="_blank" rel="noopener noreferrer">委譲(delegate)</a>）を多く実装しているような場合、委譲を継承に置き換えることを検討しましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inappropriate-intimacy">Inappropriate Intimacy</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inappropriate-intimacy" target="_blank" rel="noopener noreferrer">Inappropriate Intimacy</a></li>
   </ul>
 </SiteLayout>

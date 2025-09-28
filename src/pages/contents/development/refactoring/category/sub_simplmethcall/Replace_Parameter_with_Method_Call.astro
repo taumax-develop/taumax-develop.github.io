@@ -1,6 +1,9 @@
 ---
 import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
+import { Image } from 'astro:assets';
+import refactoring from '../../../img/refactoring.jpg';
+import legacy_code from '../../../img/legacy_code.jpg';
 
 const indexList = [
   { id: '#pagetop', name: 'ページトップ' },
@@ -16,24 +19,24 @@ const indexList = [
 
   <h2 class="title">リファクタリング技法</h2>
 
-  <p>ここでは<a href=`${BASE_URL}/contents/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
+  <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
 
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>
   リファクタリング第2版<br>
-  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src="../../../img/refactoring.jpg" alt="refactoring" /></a>
+  <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><Image src={refactoring} alt="refactoring" /></a>
 
   <br>
   レガシーコード改善ガイド<br>
-  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src="../../../img/legacy_code.jpg" alt="legacy_code" /></a>
+  <a target="_blank"  href="https://amzn.to/44SixVn" rel="noopener noreferrer"><Image src={legacy_code} alt="legacy_code" /></a>
 
   <h1 id="">関連するリファクタリング技法</h1>
 
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
-  <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls">Simplifying Method Calls</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
   <h2 id="replaceparameterwithmethodcall">Replace Parameter with Method Call</h2>
-  <p><a href="https://sourcemaking.com/refactoring/replace-parameter-with-method-call">Replace Parameter with Method Call</a>
+  <p><a href="https://sourcemaking.com/refactoring/replace-parameter-with-method-call" target="_blank" rel="noopener noreferrer">Replace Parameter with Method Call</a>
   引数として値を渡す際、事前に何かしらの処理が必要なのであれば、引数ではなくメソッドの中で処理してしまうことで引数を減らすことを検討しましょう。</p>
   <pre>
     <code class="java:リファクタリング前 language-java:リファクタリング前">
@@ -51,6 +54,6 @@ const indexList = [
   </pre>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
-    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#long-parameter-list">Long Parameter List</a></li>
+    <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#long-parameter-list" target="_blank" rel="noopener noreferrer">Long Parameter List</a></li>
   </ul>
 </SiteLayout>

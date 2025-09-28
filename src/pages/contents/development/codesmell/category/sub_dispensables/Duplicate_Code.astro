@@ -12,7 +12,7 @@ const indexList = [
 ---
 <SiteLayout {title} {description} {twitterCardSize} {indexList}>
   <h1 id="duplicatecode">Duplicate Code</h1>
-  <p><a href="https://sourcemaking.com/refactoring/smells/duplicate-code">Duplicate Code（重複コード）</a></p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code（重複コード）</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     ほとんど同じようなコードが見られる場合</p>
   <p><strong><em>問題の理由</em></strong><br/>
@@ -20,18 +20,18 @@ const indexList = [
   <p>コードの特定の部分が異なって見えるが実際には同じジョブを実行する場合のように、より微妙な重複もあります。このような重複は、見つけて修正するのが難しい場合があります。</p>
   <p>意図的に重複させている場合もあります。納期に追われているようなときで、既存のコードが”ほぼ正しく”要件を満たせる場合、初心者のプログラマーは、関連するコードをコピーして貼り付ける誘惑に抵抗できないかもしれません。また、場合によっては、単にプログラマーが整理するのをさぼるようなこともあります。</p>
   <p><strong><em>対処</em></strong><br/>
-    同じクラスの2つ以上のメソッドで重複コードが見つかった場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使って新しいメソッドを作成し、両方の場所でその新しいメソッドを呼び出します。</p>
+    同じクラスの2つ以上のメソッドで重複コードが見つかった場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を使って新しいメソッドを作成し、両方の場所でその新しいメソッドを呼び出します。</p>
   <ul>
     <li>2つの同階層のサブクラスで重複コードを見つけた場合：<br/>
-      両方のクラスに「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を用いて、抽出したメソッドに対して「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#pull-up-field">Pull Up Field</a>」で使用されているフィールドを抽出します。</li>
-    <li>重複コードがコンストラクタの内部に存在する場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#pull-up-constructor-body">Pull Up Constructor Body</a>」を適用します。</li>
-    <li>重複コードが似ているが完全には一致しない場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#form-template-method">Form Template Method</a>」を適用します。</li>
-    <li>2つのメソッドが同じことを別のアルゴリズムで実現している場合、最適なアルゴリズムを選択し、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#substitute-algorithm">Substitute Algorithm</a>」を適用します。</li>
+      両方のクラスに「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を用いて、抽出したメソッドに対して「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#pull-up-field" target="_blank" rel="noopener noreferrer">Pull Up Field</a>」で使用されているフィールドを抽出します。</li>
+    <li>重複コードがコンストラクタの内部に存在する場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#pull-up-constructor-body" target="_blank" rel="noopener noreferrer">Pull Up Constructor Body</a>」を適用します。</li>
+    <li>重複コードが似ているが完全には一致しない場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#form-template-method" target="_blank" rel="noopener noreferrer">Form Template Method</a>」を適用します。</li>
+    <li>2つのメソッドが同じことを別のアルゴリズムで実現している場合、最適なアルゴリズムを選択し、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#substitute-algorithm" target="_blank" rel="noopener noreferrer">Substitute Algorithm</a>」を適用します。</li>
     <li>重複コードが異なる二つのクラスで見つかった場合：<br/>
-      対象のクラスが階層の一部ではない場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-superclass">Extract Superclass</a>」を適用して新しいスーパークラスを一つ作り、そのスーパークラスに重複コードを持たせます。</li>
-    <li>スーパークラスを作るのが難しい場合は、一方のクラスから「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class">Extract Class</a>」を使ってクラスを抽出し、もう一方のクラスは抽出したコンポーネントを使います。</li>
-    <li>多数の条件式が存在し、同じコードを実行する（条件のみが異なる）場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#consolidate-conditional-expression">Consolidate Conditional Expression</a>」を使ってこれらの演算子を単一の条件にマージし、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使って、条件を簡単な別のメソッドに配置し、分かりやすいメソッド名を付けます。</li>
-    <li>条件式のすべての分岐で同じコードが実行される場合：「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#consolidate-duplicate-conditional-fragments">Consolidate Duplicate Conditional Fragments</a>」を使って、条件ツリーの外側に同じコードを配置します。</li>
+      対象のクラスが階層の一部ではない場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-superclass" target="_blank" rel="noopener noreferrer">Extract Superclass</a>」を適用して新しいスーパークラスを一つ作り、そのスーパークラスに重複コードを持たせます。</li>
+    <li>スーパークラスを作るのが難しい場合は、一方のクラスから「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」を使ってクラスを抽出し、もう一方のクラスは抽出したコンポーネントを使います。</li>
+    <li>多数の条件式が存在し、同じコードを実行する（条件のみが異なる）場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#consolidate-conditional-expression" target="_blank" rel="noopener noreferrer">Consolidate Conditional Expression</a>」を使ってこれらの演算子を単一の条件にマージし、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を使って、条件を簡単な別のメソッドに配置し、分かりやすいメソッド名を付けます。</li>
+    <li>条件式のすべての分岐で同じコードが実行される場合：「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#consolidate-duplicate-conditional-fragments" target="_blank" rel="noopener noreferrer">Consolidate Duplicate Conditional Fragments</a>」を使って、条件ツリーの外側に同じコードを配置します。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
