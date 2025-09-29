@@ -6,6 +6,7 @@ import chanel_point from './img/chanel_point.jpg';
 import auto_post from './img/auto_post.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
+import AdUnit from "../../../../../components/AdUnit.astro";
 
 const indexList = [
   { id: "firstly", name: "はじめに" },
@@ -28,6 +29,9 @@ const indexList = [
     <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a></li>
     <li class="breadcrumbli"> > Node.js × Twitch, Twitter, OBS</li>
   </ul>
+
+  <br/>
+  <AdUnit />
 
   <br/>
   <span id="firstly"></span>
@@ -79,6 +83,9 @@ const indexList = [
   以降、この中身がどうなっているのかについて説明していきます。<br/>
 
   <br/>
+  <AdUnit />
+
+  <br/>
   <span id="impletentation"></span>
   <h3 class="title">実装</h3>
   <p>
@@ -88,9 +95,10 @@ const indexList = [
 
 <pre class="title"><code class="title">package.json</code></pre>
 <pre><code>{`{
-"private": true,
-...
-}`}</code></pre>
+  "private": true,
+  ...
+}`
+}</code></pre>
 
 
   <br/>

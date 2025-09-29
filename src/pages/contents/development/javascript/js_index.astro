@@ -49,11 +49,15 @@ const indexList = [
   <div class="youtube">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/ZTPrbAKmcdo?si=XkkOKSaf8_KVCcNJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
+
+  <br/>
   <p>
     Pythonは機械学習の分野で豊富なライブラリを提供しているから、AIの分野で現在人気なのはわかる。<br/>
     JavaScriptはなんで人気なのか？自分が入社した時代から何が変わったのか？そもそもJavaScriptってクライアントサイドで動いているものなのでは？？<br/>
     ぐらいの認識だったので、JavaScriptについて調べた上で、実際に物を作ってみました。<br/>
   </p>
+
+  <br/>
   <span id="history"></span>
   <h3 class="title">JavaScriptの歴史</h3>
   <h4 class="title">JavaScriptの生まれ</h4>
@@ -167,6 +171,7 @@ helloWorldModule();
 // 出力：Hello World！
 </code></pre>
 
+  <br/>
   <span id="es6"></span>
   <h4 class="title">ES2015(ES6)によるプログラミング言語としての進化</h4>
   <p>
@@ -188,6 +193,8 @@ helloWorld();
 // 出力：Hello World！
 `}
 </code></pre>
+
+  <br/>
   <p>
     let と const は変数の宣言に使用する構文で、これまで使用されてきた var に変わるものです。var は以下に示すように、再宣言できるという問題がありました。<br/>
   </p>
@@ -222,6 +229,8 @@ console.log(NAME); // => soarflat
 
 NAME = 'SOARFLAT'; // 再代入するとエラーになる
 </code></pre>
+
+  <br/>
   <p>
     これ以外にも、Promise というオブジェクトと Async/await という構文が追加され、非同期処理を容易に扱えることができるようになるなど、様々な機能がES2015で追加されました。<br/>
   </p>
@@ -240,10 +249,10 @@ NAME = 'SOARFLAT'; // 再代入するとエラーになる
     ここまで紹介してきたように、フロントエンドを取り巻く仕様、技術は高度化しています。これらが可能になったことで、アプリケーション、サービスにおいても複雑な要件が求められるようになります。<br/>
     アプリケーションデータフローをフロントエンド側で受け持つなど、設計段階から難易度が上がり、MVCのようなアプリケーションの構造を持ったフレームワークが必要とされるようになります。React, Vue.js, Angular, Svelte などの新たなWebアプリケーションフレームワーク、ライブラリが次々と出現します。結果、高度なフロントエンドアプリケーションの開発はjQueryで無理矢理に作るよりも構造化しやすくなりました。<br/>
     SPA(Single Page Application)という新しいWebアプリケーションの構築手法も普及してきました。<br/>
+    <br/>
+    ここまでが、JavaScriptが生まれてから現在までの歴史になります。<br/>
+    ここから先はNode.js, SPA（React, Next.jsとVue.js, Nuxt3）, AltJSの代表格であるTypeScriptについて見ていきます。<br/>
   </p>
-
-  ここまでが、JavaScriptが生まれてから現在までの歴史になります。<br/>
-  ここから先はNode.js, SPA（React, Next.jsとVue.js, Nuxt3）, AltJSの代表格であるTypeScriptについて見ていきます。<br/>
 
   <span id="detail"></span>
   <h3 class="title">関連技術詳細</h3>
@@ -254,6 +263,8 @@ NAME = 'SOARFLAT'; // 再代入するとエラーになる
     <li><a href=`${BASE_URL}/contents/development/javascript/typescript`>TypeScript</a></li>
   </ul>
   <hr />
+
+  <br/>
   参考書籍<br/>
   <ul>
     <li><a href="https://amzn.to/3x8wRfv" target="_blank" rel="noopener noreferrer"><Image src={nodejs入門} width={200} alt="nodejs入門" /><br/>Node.js入門</a></li>

@@ -9,6 +9,7 @@ import obs1 from './img/obs1.jpg'
 import obs2 from './img/obs2.jpg'
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
+import AdUnit from "../../../../../components/AdUnit.astro";
 
 const indexList = [
   { id: "obs", name: "Node.js × OBS" },
@@ -52,6 +53,9 @@ const indexList = [
   </ul>
 
   <br/>
+  <AdUnit />
+
+  <br/>
   <span id="obs"></span>
   <h3 class="title">Node.js × OBS</h3>
   <p>
@@ -91,23 +95,24 @@ const indexList = [
 
   <pre class="title"><code class="title">obs_control.js</code></pre>
   <pre><code>{`const {default: OBSWebSocket} = require('obs-websocket-js');
-
-  // インスタンス初期化
-  const obs = new OBSWebSocket();
-  // OBSに接続
-  obs.connect(
+// インスタンス初期化
+const obs = new OBSWebSocket();
+// OBSに接続
+obs.connect(
   [obs_url],
   [obs_password]
-  ).catch((err) => {
+).catch((err) => {
   console.log(err)
-  })`}
-  </code></pre>
+})`}</code></pre>
 
   <br/>
   <ul>
     <li>obs_url：WebSocket 接続情報のサーバIP:サーバーポート</li>
     <li>obs_password：サーバーパスワード</li>
   </ul>
+
+  <br/>
+  <AdUnit />
 
   <br/>
   <span id="control_obs"></span>
@@ -150,76 +155,79 @@ const indexList = [
 
   <pre class="title"><code class="title">obs_control.js</code></pre>
   <pre><code>{`const {default: OBSWebSocket} = require('obs-websocket-js');
-  const {setTimeout} = require("timers/promises");
+const {setTimeout} = require("timers/promises");
 
-  const sceneNameNormal = 'ノーマル'
+const sceneNameNormal = 'ノーマル'
 
-  // インスタンス初期化
-  const obs = new OBSWebSocket();
-  // OBSに接続
-  obs.connect(
+// インスタンス初期化
+const obs = new OBSWebSocket();
+// OBSに接続
+obs.connect(
   [obs_url],
   [obs_password]
-  ).catch((err) => {
+).catch((err) => {
   console.log(err)
-  })
+})
 
-  async function moveObsItem(sourceName) {
+async function moveObsItem(sourceName) {
   // ①コピー元アイテムの情報を取得
   let orgItem = await obs.call('GetSceneItemId', {
-  'sceneName': sceneNameNormal,
-  'sourceName': sourceName
+    'sceneName': sceneNameNormal,
+    'sourceName': sourceName
   });
   Object.values(orgItem).forEach(async (orgItemId) => {
-  // ②コピー生成
-  let dupItem = await obs.call('DuplicateSceneItem', {
-  'sceneName': sceneNameNormal,
-  'sceneItemId': orgItemId
-  });
-  Object.values(dupItem).forEach(async (dupItemId) => {
-  // ③コピーしたアイテムを表示
-  obs.call('SetSceneItemEnabled', {
-  'sceneName': sceneNameNormal,
-  'sceneItemId': dupItemId,
-  'sceneItemEnabled':true
-  });
-  // ④コピーしたアイテムの情報取得
-  let sceneItem = await obs.call('GetSceneItemTransform', {
-  'sceneName': sceneNameNormal,
-  'sceneItemId': dupItemId,
-  });
+    // ②コピー生成
+    let dupItem = await obs.call('DuplicateSceneItem', {
+      'sceneName': sceneNameNormal,
+      'sceneItemId': orgItemId
+    });
+    Object.values(dupItem).forEach(async (dupItemId) => {
+      // ③コピーしたアイテムを表示
+      obs.call('SetSceneItemEnabled', {
+        'sceneName': sceneNameNormal,
+        'sceneItemId': dupItemId,
+        'sceneItemEnabled':true
+      });
+      // ④コピーしたアイテムの情報取得
+      let sceneItem = await obs.call('GetSceneItemTransform', {
+        'sceneName': sceneNameNormal,
+        'sceneItemId': dupItemId,
+      });
 
-  // ⑤関数呼び出し（左に移動させる）
-  await moveHorizontal(dupItemId, sceneItem)
+      // ⑤関数呼び出し（左に移動させる）
+      await moveHorizontal(dupItemId, sceneItem)
 
-  // ⑥生成したコピーを消す
-  obs.call('RemoveSceneItem', {
-  'sceneName': sceneNameNormal,
-  'sceneItemId': dupItemId,
+      // ⑥生成したコピーを消す
+      obs.call('RemoveSceneItem', {
+        'sceneName': sceneNameNormal,
+        'sceneItemId': dupItemId,
+      });
+    });
   });
-  });
-  });
-  }
+}
 
-  // 左に移動させる関数
-  async function moveHorizontal(sceneItemId, sceneItem) {
+// 左に移動させる関数
+async function moveHorizontal(sceneItemId, sceneItem) {
   let posX = sceneItem.sceneItemTransform.positionX
   // 生成したアイテムを移動
-  for (let i = 1; i &lt;= 150; i++) {
-  obs.call('SetSceneItemTransform', {
-  'sceneName': sceneNameNormal,
-  'sceneItemId': sceneItemId,
-  'sceneItemTransform': {
-  'positionX': (posX + i * -5)
+  for (let i = 1; i <= 150; i++) {
+    obs.call('SetSceneItemTransform', {
+      'sceneName': sceneNameNormal,
+      'sceneItemId': sceneItemId,
+      'sceneItemTransform': {
+        'positionX': (posX + i * -5)
+      }
+    });
+    await setTimeout(10)  // 0.1秒待つ
   }
-  });
-  await setTimeout(10)  // 0.1秒待つ
-  }
-  }`}
-  </code></pre>
+}`}
+</code></pre>
 
 
-  <br/><br/>
+  <br/>
+  <AdUnit />
+
+  <br/>
   <span id="others"></span>
   <h3 class="title">その他の実装</h3>
   <p>

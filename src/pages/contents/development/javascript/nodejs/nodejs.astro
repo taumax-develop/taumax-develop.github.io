@@ -7,6 +7,7 @@ import singleThreadImg from "./img/single_thread.jpg";
 import nodejsBookImg from "./img/nodejs入門.jpg";
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../consts';
+import AdUnit from '../../../../../components/AdUnit.astro';
 
 const indexList = [
   { id: "#firstly", name: "はじめに" },
@@ -43,6 +44,9 @@ const indexList = [
   </p>
 
   <br/>
+  <AdUnit />
+
+  <br/>
   <span id="what_is_nodejs"></span>
   <h3 class="title">Node.jsとは</h3>
   <p>
@@ -55,6 +59,11 @@ const indexList = [
     V8は、Chromeに内蔵されているJavaScriptエンジンです。JavaScriptのソースコードを受け取って機械語に翻訳し、OS上で実行してくれます。<br/>
     libuvは、OSによるディスクへの書き込みや通信などの処理に関するイベントを監視し、そのステータスをNode.jsに通知する機能を持ちます。後で紹介する<a href="#async">非同期処理</a>と<a href="#single_thread_event_loop">イベントループ</a>の中核を成すライブラリです。<br/>
   </p>
+
+  <br/>
+  <AdUnit />
+
+  <br/>
   <span id="feature"></span>
   <h3 class="title">特徴</h3>
   <p>Node.jsには大きく以下3つの特徴があります。</p>
@@ -94,11 +103,11 @@ eventEmitter.on('myEvent', (arg1, arg2) => {
 eventEmitter.emit('myEvent');
 eventEmitter.emit('myEvent', 'hoge');
 eventEmitter.emit('myEvent', 'huge', 'hoga');
-</code></pre>
+`}</code></pre>
 
 <br/>
 <pre class="title"><code class="title">実行結果</code></pre>
-<pre><code>Emitted Event:arg1:undefined, arg2:undefined
+<pre><code>{`Emitted Event:arg1:undefined, arg2:undefined
 Emitted Event:arg1:hoge, arg2:undefined
 Emitted Event:arg1:huge, arg2:hoga`}
 </code></pre>
@@ -111,11 +120,16 @@ Emitted Event:arg1:huge, arg2:hoga`}
   次はNon-Blocking I/Oとシングルスレッドですが、これらの特徴について説明するためには、まず<span style="color:yellow">C10K問題（シーテンケー問題）</span>について理解しておく必要があります。<br/>
 
   <br/>
+  <AdUnit />
+
+  <br/>
   <span id="c10k"></span>
   <h3 class="title">C10K問題</h3>
   <p>
     C10K問題とは、「クライアント1万台問題」の略で、ApacheなどのWebサーバーソフトウェアとクライアントとの通信において、クライアントの同時接続数が約1万台に達すると、Webサーバーのハードウェア性能に余裕があるにもかかわらず、レスポンス性能が大きく下がる問題です。<br/>
     これには以下3つの原因があります。<br/>
+
+    <br/>
     <strong>1. プロセス数の上限</strong><br/>
     Apacheなどのソフトウェアは、1つのリクエストに対して1つのプロセスを割り当てて処理をする方式が一般的でした。<br/>
     OS内で走るプロセスにはプロセスIDが割り当てられています。例えば32bit Linuxでは32767が上限です（64bit Linuxでは100万以上まで引き上げられます）。上限を超えるプロセスは生成できないため、1リクエスト1プロセス方式ではプロセス数の上限以上のリクエストを同時に処理できません。ウェブサーバーではApacheの他にも様々なプロセスが走っているため、Apacheに割り当てられるプロセスもその分減ります。<br/>
@@ -140,6 +154,10 @@ Emitted Event:arg1:huge, arg2:hoga`}
     余談ですが、WebサーバーソフトウェアのNginxもこの方式でC10K問題に対応しており、マルチプロセスのApacheよりも高速かつ大規模サービスに向いていると言われています。<br/>
     話しをNode.jsに戻してシングルスレッドとNon-Blocking I/Oの話をしていきます。<br/>
   </p>
+
+  <br/>
+  <AdUnit />
+
   <br/>
   <span id="non_blobking"></span>
   <h3 class="title">Non-Blocking IO</h3>
@@ -159,18 +177,19 @@ Emitted Event:arg1:huge, arg2:hoga`}
     <Image src={singleThreadImg} width={400} alt="Non-Blocking IO" /><br/>
     <br/><br/>
     これをコードで体験すると以下のようになります。<br/>
-    以下のコードは、ファイルを読み込んで標準出力するコードですが、実行結果を見ると1→3→2の順に出力されています。<br/>
+    以下のコードは、ファイル(nodejs_test.txt)を読み込んで標準出力するコードですが、実行結果を見ると1→3→2の順に出力されています。<br/>
   </p>
 
 <pre class="title"><code class="title">test.js</code></pre>
-<pre><code>'use strict';
+<pre><code>{`'use strict';
 import fs from 'fs';
+
 console.log(1)
 fs.readFile('nodejs_test.txt', (err, data) => {
-console.log(2)
+  console.log(2)
 });
 console.log(3)
-</code></pre>
+`}</code></pre>
 
 <pre class="title"><code class="title">実行結果</code></pre>
 <pre><code>// 実行結果: 1, 3, 2 の順
@@ -193,10 +212,10 @@ import fs from 'fs';
 let input
 console.log(1)
 fs.readFile('nodejs_test.txt', (err, data) => {
-input = data;
+  input = data;
 });
-console.log(input);`}
-</code></pre>
+console.log(input);
+`}</code></pre>
 
 <pre class="title"><code class="title">実行結果</code></pre>
 <pre><code>1          
@@ -215,10 +234,10 @@ import fs from 'fs';
 let input
 console.log(1)
 fs.readFile('nodejs_test.txt', (err, data) => {
-input = data;
-console.log(input.toString());
-});`}
-</code></pre>
+  input = data;
+  console.log(input.toString());
+});
+`}</code></pre>
 
 <pre class="title"><code class="title">実行結果</code></pre>
 <pre><code>1          
@@ -226,6 +245,9 @@ nodejs_testファイルの中
 </code></pre>
 
   </p>
+
+  <br/>
+  <AdUnit />
 
   <br/>
   <span id="single_thread_event_loop"></span>
