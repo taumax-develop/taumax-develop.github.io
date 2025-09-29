@@ -9,7 +9,7 @@ import obs1 from './img/obs1.jpg'
 import obs2 from './img/obs2.jpg'
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
-import AdUnit from "../../../../../components/AdUnit.astro";
+import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
 
 const indexList = [
   { id: "obs", name: "Node.js × OBS" },
@@ -53,7 +53,7 @@ const indexList = [
   </ul>
 
   <br/>
-  <AdUnit />
+  <AdUnitLandscape />
 
   <br/>
   <span id="obs"></span>
@@ -112,7 +112,7 @@ obs.connect(
   </ul>
 
   <br/>
-  <AdUnit />
+  <AdUnitLandscape />
 
   <br/>
   <span id="control_obs"></span>
@@ -225,7 +225,7 @@ async function moveHorizontal(sceneItemId, sceneItem) {
 
 
   <br/>
-  <AdUnit />
+  <AdUnitLandscape />
 
   <br/>
   <span id="others"></span>
