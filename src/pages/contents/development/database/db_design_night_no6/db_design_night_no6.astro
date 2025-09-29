@@ -16,6 +16,9 @@ import about_null_08 from './img/about_null/about_null_08.png';
 import about_null_09 from './img/about_null/about_null_09.png';
 import about_null_10 from './img/about_null/about_null_10.png';
 import about_null_11 from './img/about_null/about_null_11.png';
+import tatsujin_db from './img/tatsujin_db.jpg';
+import erd_lesson from './img/erd_lesson.jpg';
+import sql_anti_pattern from './img/sql_anti_pattern.jpg';
 import { BASE_URL } from '../../../../../consts';
 
 const indexList: index[] = [
@@ -33,7 +36,7 @@ const indexList: index[] = [
 
   <h2 class="title">DB設計したいNight #6 正規化 [online]</h2>
 
-  <a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/database`>Database関連</a> > DB設計したいNight #6 正規化<br><br>
+  <a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/development/database/database`>Database関連</a> > DB設計したいNight #6 正規化<br><br>
 
   <p>
     2020/6/4に「DB設計したいNight #6 正規化 [online]」というイベントが開催されました。<br>
@@ -210,9 +213,26 @@ const indexList: index[] = [
 
   <br><br>
   <h4 class="title">お勧め本</h4>
-    <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B00EE1XPAI/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B00EE1XPAI&linkCode=as2&tag=sagamax-22&linkId=c7887c55aec585a3a7c35021854a2aea"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B00EE1XPAI&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
-    <a href="https://www.amazon.co.jp/dp/4798110663" target="_blank">楽々ERDレッスン</a><br>
-    <a href="https://www.amazon.co.jp/dp/4873115892/" target="_blank">SQLアンチパターン </a><br>
+  <ul>
+    <li>
+      <a href="https://amzn.to/46KdSpA" target="_blank" rel="noopener noreferrer">
+        達人に学ぶDB設計 徹底指南書<br/>
+        <Image src={tatsujin_db} alt='tatsujin_db' width={200} />
+      </a>
+    </li>
+    <li>
+      <a href="https://amzn.to/42V8heO" target="_blank" rel="noopener noreferrer">
+        楽々ERDレッスン<br/>
+        <Image src={erd_lesson} alt='erd_lesson' width={200} />
+      </a>
+    </li>
+    <li>
+      <a href="https://amzn.to/42gLhqB" target="_blank" rel="noopener noreferrer">
+        SQLアンチパターン<br/>
+        <Image src={sql_anti_pattern} alt='sql_anti_pattern' width={200} />
+      </a>
+    </li>
+  </ul>
 
   <br><br>
   <span id="db_fail_design"></span>

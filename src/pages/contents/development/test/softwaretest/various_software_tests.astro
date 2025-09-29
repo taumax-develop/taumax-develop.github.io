@@ -13,6 +13,9 @@ import img08 from './img/img08.png';
 import img09 from './img/img09.png';
 import img10 from './img/img10.png';
 import img11 from './img/img11.png';
+import software_test_method from './img/software_test_method.jpg';
+import software_test_textbook from './img/software_test_textbook.jpg';
+import my_first_autotest from './img/my_first_autotest.jpg';
 import { BASE_URL } from '../../../../../consts';
 
 const indexList = [
@@ -45,7 +48,7 @@ const indexList = [
 
         <h2 class="title">ソフトウェアテストについていろいろ調べたことを書いた記事</h2>
 
-<a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/test`>テスト関連</a> > ソフトウェアテスト<br><br>
+<a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/development/test/test`>テスト関連</a> > ソフトウェアテスト<br><br>
 
 <span id="firstly"></span>
 <h3 class="title">はじめに</h3>
@@ -333,7 +336,9 @@ const indexList = [
 </p>
 <p>
   Myersさんが書いた「ソフトウェア・テストの技法 第2版」という本が手元にあり、その128 page ～138 page にも、システムテスト・カテゴリについて記載があったので抜粋してみました。<br>
-  <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B07SJYG949/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07SJYG949&linkCode=as2&tag=sagamax-22&linkId=704a169f6ea54c6cb3c872c2316d45cc"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07SJYG949&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+  <a href="https://amzn.to/3KII4d8" target="_blank" rel="noopener noreferrer">ソフトウェア・テストの技法 第2版<br>
+    <Image src={software_test_method} alt="software_test_method" style="border: solid 1px #FFFFFF"/>
+  </a><br>
   この本では15個に分類されているのですが、おそらくVSTePの分類と同じものだと思います。<br>
   以下15の観点をテスト設計の際に調べる必要があるとされています。<br>
   （「システムテストの目的は、そのプログラムが目的仕様にあっていないことを示すこと」というスタンスで書かれています）
@@ -405,14 +410,19 @@ const indexList = [
 <h4>ISO/IEC 9126(ISO/IEC 25000s)の品質特性</h4>
 <p>次の「品質特性」の章参照。</p>
 <h3>参考資料</h3>
-<p>
-・<a href="https://www.qbook.jp/qptestview/description" target="_blank">テスト観点とは</a><br>
-・<a href="https://www.facebook.com/666101650178276/posts/952846604837111/" target="_blank">ソフトウェアテストの知恵袋</a><br>
-・<a href="https://webrage.jp/techblog/software_testing_point_of_view/" target="_blank">テスト観点～概要と具体的な観点～</a><br>
-・<a href="http://qualab.jp/materials/VSTeP.130510.color.pdf" target="_blank">テスト観点に基づくテスト開発方法論 VSTePの概要</a><br>
-・<a href="https://www.ipa.go.jp/files/000005144.pdf" target="_blank">高信頼化ソフトウェアのための開発手法ガイドブック</a></p><br>
-  <!-- ソフトウェア・テストの技法 第2版 -->
-・<a target="_blank"  href="https://www.amazon.co.jp/gp/product/B07SJYG949/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07SJYG949&linkCode=as2&tag=sagamax-22&linkId=704a169f6ea54c6cb3c872c2316d45cc"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07SJYG949&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<ul>
+  <li><a href="https://www.qbook.jp/qptestview/description" target="_blank">テスト観点とは</a></li>
+  <li><a href="https://www.facebook.com/666101650178276/posts/952846604837111/" target="_blank">ソフトウェアテストの知恵袋</a></li>
+  <li><a href="https://webrage.jp/techblog/software_testing_point_of_view/" target="_blank">テスト観点～概要と具体的な観点～</a></li>
+  <li><a href="http://qualab.jp/materials/VSTeP.130510.color.pdf" target="_blank">テスト観点に基づくテスト開発方法論 VSTePの概要</a></li>
+  <li><a href="https://www.ipa.go.jp/files/000005144.pdf" target="_blank">高信頼化ソフトウェアのための開発手法ガイドブック</a></li>
+  <li>
+    <!-- ソフトウェア・テストの技法 第2版 -->
+    <a href="https://amzn.to/3KII4d8" target="_blank" rel="noopener noreferrer">ソフトウェア・テストの技法 第2版<br>
+      <Image src={software_test_method} alt="software_test_method" style="border: solid 1px #FFFFFF"/>
+    </a>
+  </li>
+</ul>
 
 <span id="quality_charas"></span>
 <h2 class="title">品質特性</h2>
@@ -656,7 +666,10 @@ const indexList = [
 ・Testing：・・・正直よくわからん。探索的テストをイメージしたけどそういうことでいいのか？
 ちょっとググってたら、<a href="http://nihonbuson.hatenadiary.jp/entry/2015/10/22/004024" target="_blank">このページ</a>で和田さんがソフトウェアテストの技法を元にTestingについて説明していた（TestingとChecking（和田さん）のところ）。<br>
 【Myersの14のシステムテスト・カテゴリ】のところでも書きましたが、「ソフトウェア・テストの技法 第2版」という本は持っているので本棚から引っ張り出してみた。(6 page)</p>
-  <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B07SJYG949/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07SJYG949&linkCode=as2&tag=sagamax-22&linkId=704a169f6ea54c6cb3c872c2316d45cc"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07SJYG949&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+  <!-- ソフトウェア・テストの技法 第2版 -->
+  <a href="https://amzn.to/3KII4d8" target="_blank" rel="noopener noreferrer">ソフトウェア・テストの技法 第2版<br>
+    <Image src={software_test_method} alt="software_test_method" style="border: solid 1px #FFFFFF"/>
+  </a>
 
 <blockquote style="background-color:#333333">
   <p>
@@ -667,20 +680,27 @@ const indexList = [
 </blockquote>
 
 <h3>参考資料</h3>
-<p>
-・<a href="https://qiita.com/ledsun/items/b6c22afe321ac3052182" target="_blank">プログラマーも手動テストしようぜ 〜 忍者式テストのすすめ 〜</a><br>
-・<a href="http://jasst.jp/symposium/jasst14tohoku/pdf/S1.pdf" target="_blank">テスト、設計、自動化と。</a><br>
-・<a href="http://nihonbuson.hatenadiary.jp/entry/2015/10/22/004024" target="_blank">『クックパッドにおけるテストエンジニアのあり方』参加レポート</a><br>
-・<a href="https://www.developsense.com/blog/2009/08/testing-vs-checking/" target="_blank">Blog: Testing vs. Checking</a><br>
-・<a href="https://www.infoq.com/jp/news/2009/12/testing-or-checking/" target="_blank">あなたがやっているのはテスティングかチェッキングか？</a></p><br>
-  <!-- ソフトウェア・テストの技法 第2版 -->
-・<a target="_blank"  href="https://www.amazon.co.jp/gp/product/B07SJYG949/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B07SJYG949&linkCode=as2&tag=sagamax-22&linkId=704a169f6ea54c6cb3c872c2316d45cc"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B07SJYG949&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<ul>
+  <li><a href="https://qiita.com/ledsun/items/b6c22afe321ac3052182" target="_blank">プログラマーも手動テストしようぜ 〜 忍者式テストのすすめ 〜</a></li>
+  <li><a href="http://jasst.jp/symposium/jasst14tohoku/pdf/S1.pdf" target="_blank">テスト、設計、自動化と。</a></li>
+  <li><a href="http://nihonbuson.hatenadiary.jp/entry/2015/10/22/004024" target="_blank">『クックパッドにおけるテストエンジニアのあり方』参加レポート</a></li>
+  <li><a href="https://www.developsense.com/blog/2009/08/testing-vs-checking/" target="_blank">Blog: Testing vs. Checking</a></li>
+  <li><a href="https://www.infoq.com/jp/news/2009/12/testing-or-checking/" target="_blank">あなたがやっているのはテスティングかチェッキングか？</a></li>
+  <li>
+    <!-- ソフトウェア・テストの技法 第2版 -->
+    <a href="https://amzn.to/3KII4d8" target="_blank" rel="noopener noreferrer">ソフトウェア・テストの技法 第2版<br>
+      <Image src={software_test_method} alt="software_test_method" style="border: solid 1px #FFFFFF"/>
+    </a>
+  </li>
+</ul>
 
 <span id="validation_verification"></span>
 <h2 class="title">Validation と Verification（勝手に追加）</h2>
 <p>ブロッコリーさんの資料にはない項目ですが、Checking と Testing の中で出てきたので勝手に追加しました。
 「ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践」という本では以下のように記載されています。(10page)<br></p>
-<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4797365811/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797365811&linkCode=as2&tag=sagamax-22&linkId=27a6593d6764f478d894f743d54a7768"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4797365811&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<a href="https://amzn.to/3IwsYHd" target="_blank" rel="noopener noreferrer">ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践<br>
+<Image src={software_test_textbook} alt="software_test_textbook"/></a><br>
+<br>
 
 <blockquote style="background-color:#333333">
   <p>
@@ -722,11 +742,17 @@ const indexList = [
 </blockquote>
 
 <h3 class="title">参考資料</h3>
-<p>
-・<a href="http://sachaaaann.hatenablog.com/entry/2015/05/27/080011" target="_blank">VerifyとValidateの違い （verification と validation）</a><br>
-・<a href="http://www.pmjuken.com/pmbok/verify%E6%A4%9C%E8%A8%BC%E3%81%99%E3%82%8B%E3%81%A8validate%E5%A6%A5%E5%BD%93%E6%80%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/" target="_blank">Verify(検証する)とValidate(妥当性確認する)</a></p><br>
-  <!-- ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践 -->
-・<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4797365811/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797365811&linkCode=as2&tag=sagamax-22&linkId=27a6593d6764f478d894f743d54a7768"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4797365811&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<ul>
+  <li><a href="http://sachaaaann.hatenablog.com/entry/2015/05/27/080011" target="_blank">VerifyとValidateの違い （verification と validation）</a></li>
+  <li><a href="http://www.pmjuken.com/pmbok/verify%E6%A4%9C%E8%A8%BC%E3%81%99%E3%82%8B%E3%81%A8validate%E5%A6%A5%E5%BD%93%E6%80%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/" target="_blank">Verify(検証する)とValidate(妥当性確認する)</a></li>
+  <li>
+    <!-- ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践 -->
+    <a href="https://amzn.to/3IwsYHd" target="_blank" rel="noopener noreferrer">
+      ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践<br>
+      <Image src={software_test_textbook} alt="software_test_textbook"/>
+    </a>
+  </li>
+</ul>
 
 <span id="objetive_test_design"></span>
 <h2 class="title">テスト設計の目的</h2>
@@ -734,8 +760,12 @@ const indexList = [
 <h3 class="title">テスト設計</h3>
 <p>目的の前に、そもそもテスト設計って何？と思ったので調べてみました。
 「ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践」という本の 52pageでは以下のように記載されています。</p>
-<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4797365811/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797365811&linkCode=as2&tag=sagamax-22&linkId=27a6593d6764f478d894f743d54a7768"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4797365811&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<a href="https://amzn.to/3IwsYHd" target="_blank" rel="noopener noreferrer">
+  ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践<br>
+  <Image src={software_test_textbook} alt="software_test_textbook"/>
+</a><br/>
 
+<br/>
 <blockquote style="background-color:#333333">
   <p><strong>テスト設計</strong><br>
   そのテスト工程で実施すべきテストの種類や目的、テスト対象機能、使用するテスト技法、テストの入力・出力に何を使用するかなどを定める。また、テスト実施に必要な機材や合否判定基準などをより具体的に定める。</p>
@@ -785,20 +815,20 @@ const indexList = [
 <p>以前<a href="https://qiita.com/taumax/items/68e8636ea9878e0f4821" target="_blank">この記事</a>に書いた、<strong>【テスト対象となるシステムをどのように認識するか】</strong>がテスト設計する上で必要な考えだと感じたので転記。</p>
 
 <ul>
-  <li><strong>・目的－手段の階層構造、または目的－機能－手段の階層構造で認識する</strong><br>
+  <li><strong>目的－手段の階層構造、または目的－機能－手段の階層構造で認識する</strong><br>
     <p>
       機能階層でシステムを表現する
       要求工学のゴール指向アプローチでよく用いられる
     <p>
   </li>
-  <li><strong>・システム全体の能力をそれを構成する個々の部分の相互作用で認識する</strong><br>
+  <li><strong>システム全体の能力をそれを構成する個々の部分の相互作用で認識する</strong><br>
     <p>
       上位システムを下位システムの相互作用に分解し、その個々の下位システムをさらにその下位に分解していく。
       機能は複数のサブ機能で構成されていると認識する
       機能一覧表、機能階層図としてシステムを表現する
     </p>
   </li>
-  <li><strong>・データの流れ、データの変換過程として認識する</strong><br>
+  <li><strong>データの流れ、データの変換過程として認識する</strong><br>
     <p>
       システムを入力から出力への変換変換と認識する
       複数ステップを踏んで変換する場合、データの流れとして認識する
@@ -806,7 +836,7 @@ const indexList = [
       データフロー図でシステムを表現する
     </p>
   </li>
-  <li><strong>・刺激－反応のモデルとして認識する</strong><br>
+  <li><strong>刺激－反応のモデルとして認識する</strong><br>
     <p>
       リクエスト－レスポンスするものとして認識する
       トリガーによって、どのような反応をするのかに興味がある
@@ -814,33 +844,33 @@ const indexList = [
       ユースケース仕様書などでシステムを表現する
     </p>
   </li>
-  <li><strong>・状態の変化として認識する</strong><br>
+  <li><strong>状態の変化として認識する</strong><br>
     <p>
       状態が変化するもの、遷移するものとして認識する
       状態遷移図、状態遷移表としてシステムを表現する
     </p>
   </li>
-  <li><strong>・写像、関数として認識する</strong><br>
+  <li><strong>写像、関数として認識する</strong><br>
     <p>
       入力と出力の対応関係とみなす。
       マトリクスを用いた表現が多い
       テスト技法の同値分割を使用する場合は、この見方をしている
     </p>
   </li>
-  <li><strong>・論理の集合として認識する</strong><br>
+  <li><strong>論理の集合として認識する</strong><br>
     <p>
       ルールが集まったものとして認識する
       ビジネスルールの集合としてシステムを認識する
       デシジョンテーブルとしてシステムを表現する
     </p>
   </li>
-  <li><strong>・手順、手続き、イベントの連鎖として認識する</strong><br>
+  <li><strong>手順、手続き、イベントの連鎖として認識する</strong><br>
     <p>
       データの流れとは異なり、イベントの連鎖や実行順序に関心がある
       ユースケース仕様書や、システムシナリオなどでシステムを表現する
     </p>
   </li>
-  <li><strong>・静的な構造として認識する</strong><br>
+  <li><strong>静的な構造として認識する</strong><br>
     <p>
       クラス（補集合なし）、セット（補集合あり）としてシステムを表現する
     </p>
@@ -848,14 +878,17 @@ const indexList = [
 </ul>
 
 <h3>参考資料</h3>
-<p>
-  ・<a href="https://note.mu/yumotsuyo/n/n6e6df16b1d52" target="_blank">ソフトウェアテストにまつわるよくある疑問　テスト設計をするってどういうこと？</a><br>
-  ・<a href="https://qiita.com/taumax/items/68e8636ea9878e0f4821" target="_blank">ゆもつよメソッドを語る夕べで語られたことまとめ</a><br>
-  　※自分の記事です<br>
-  ・<a href="http://jstqb.jp/dl/JSTQB-glossary.V2.3.J02.pdf" target="_blank">JSTQBの用語集</a><br>
-    <!-- ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践 -->
-  ・<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4797365811/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797365811&linkCode=as2&tag=sagamax-22&linkId=27a6593d6764f478d894f743d54a7768"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4797365811&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
-</p>
+<ul>
+  <li><a href="https://note.mu/yumotsuyo/n/n6e6df16b1d52" target="_blank">ソフトウェアテストにまつわるよくある疑問　テスト設計をするってどういうこと？</a></li>
+  <li><a href="https://qiita.com/taumax/items/68e8636ea9878e0f4821" target="_blank">ゆもつよメソッドを語る夕べで語られたことまとめ</a></li>
+  <li><a href="http://jstqb.jp/dl/JSTQB-glossary.V2.3.J02.pdf" target="_blank">JSTQBの用語集</a></li>
+  <li>
+    <a href="https://amzn.to/3IwsYHd" target="_blank" rel="noopener noreferrer">
+      ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践<br>
+      <Image src={software_test_textbook} alt="software_test_textbook"/>
+    </a>
+  </li>
+</ul>
 
 <span id="intro_test_design"></span>
 <h2 class="title">テスト設計の紹介</h2>
@@ -928,7 +961,10 @@ const indexList = [
 
 <h3>参考資料</h3>
 <!-- ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践 -->
-<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4797365811/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4797365811&linkCode=as2&tag=sagamax-22&linkId=27a6593d6764f478d894f743d54a7768"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4797365811&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<a href="https://amzn.to/3IwsYHd" target="_blank" rel="noopener noreferrer">
+  ソフトウェアテストの教科書―品質を決定づけるテスト工程の基本と実践<br>
+  <Image src={software_test_textbook} alt="software_test_textbook"/>
+</a>
 
 <span id="high_low_testcase"></span>
 <h2 class="title">ハイレベルテストケースとローレベルテストケース</h2>
@@ -964,9 +1000,14 @@ const indexList = [
 
 <span id="piramid_auto_test"></span>
 <h2 class="title">自動テストのピラミッド</h2>
-<p>以前読んだ「初めての自動テスト ―Webシステムのための自動テスト基礎」という本の中の説明をベースに書いてみます。</p>
-<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4873118166/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873118166&linkCode=as2&tag=sagamax-22&linkId=eb51ef340a9d948c1b3f47f190f0e30c"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4873118166&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<p>
+  以前読んだ「初めての自動テスト ―Webシステムのための自動テスト基礎」という本の中の説明をベースに書いてみます。<br/>
+  <a href="https://amzn.to/42TkWyO" target="_blank" rel="noopener noreferrer">
+    <Image src={my_first_autotest} alt="my_first_autotest" width={300} />
+  </a>
+</p>
 
+<br/>
 <h3>テストのピラミッド</h3>
 <p><Image src={img05} alt="img05" /></p>
 
@@ -1029,11 +1070,17 @@ const indexList = [
 <a href="https://speakerdeck.com/nihonbuson/flakytests?slide=21" target="_blank">Flakyとその判別方法の解説</a></p>
 
 <h3>参考資料</h3>
-<p>
-・<a href="https://notta55.hatenablog.com/entry/2015/05/03/161631" target="_blank">アジャイルテストの4象限とテスト自動化のピラミッド</a><br>
-・<a href="https://speakerdeck.com/nihonbuson/flakytests?slide=21" target="_blank">Flakyとその判別方法の解説</a></p><br>
-  <!-- 初めての自動テスト ―Webシステムのための自動テスト基礎 -->
-・<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4873118166/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873118166&linkCode=as2&tag=sagamax-22&linkId=eb51ef340a9d948c1b3f47f190f0e30c"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4873118166&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a>
+<ul>
+  <li><a href="https://notta55.hatenablog.com/entry/2015/05/03/161631" target="_blank">アジャイルテストの4象限とテスト自動化のピラミッド</a></li>
+  <li><a href="https://speakerdeck.com/nihonbuson/flakytests?slide=21" target="_blank">Flakyとその判別方法の解説</a></li>
+  <li>
+    <!-- 初めての自動テスト ―Webシステムのための自動テスト基礎 -->
+    <a href="https://amzn.to/42TkWyO" target="_blank" rel="noopener noreferrer">
+      初めての自動テスト ―Webシステムのための自動テスト基礎</br>
+      <Image src={my_first_autotest} alt="my_first_autotest" width={300} />
+    </a>
+  </li>
+</ul>
 
 <span id="8principles_auto_test"></span>
 <h2 class="title">自動テストの8原則</h2>
@@ -1094,8 +1141,11 @@ JJUG CCC 2019 Spring の発表で「品質と自動化コストの損益分岐�
 <span id="search_test"></span>
 <h2 class="title">探索的テスト（勝手に追加）</h2>
 <p>先に書いた「初めての自動テスト ―Webシステムのための自動テスト基礎」という本の中で以下のような記載(16 page)があります。</p>
-<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4873118166/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873118166&linkCode=as2&tag=sagamax-22&linkId=eb51ef340a9d948c1b3f47f190f0e30c"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4873118166&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
+<a href="https://amzn.to/42TkWyO" target="_blank" rel="noopener noreferrer">
+  <Image src={my_first_autotest} alt="my_first_autotest" width={300} />
+</a><br/>
 
+<br/>
 <blockquote style="background-color:#333333">
   <p>
     自動テストによって再テストに費やす時間が削減できたら、探索的テストに多くの時間を費やしましょう。<br>
@@ -1133,15 +1183,22 @@ JJUG CCC 2019 Spring の発表で「品質と自動化コストの損益分岐�
 </blockquote>
 
 <h3>参考資料</h3>
-<p>
-  ・<a href="https://en.wikipedia.org/wiki/Exploratory_testing" target="_blank">Exploratory testing</a><br>
+<ul>
+  <li>
+    <a href="https://en.wikipedia.org/wiki/Exploratory_testing" target="_blank">Exploratory testing</a><br>
   　⇒右クリック→日本語に翻訳<br>
-  ・<a href="http://jstqb.jp/dl/JSTQB-glossary.V2.3.J02.pdf" target="_blank">ソフトウェアテスト標準用語集</a><br>
-  ・<a href="https://www.slideshare.net/tosikawa/wacate-56868585" target="_blank">探索的テストはじめの一歩</a><br>
-  ・<a href="http://jasst.jp/symposium/jasst18tokyo/pdf/E2.pdf" target="_blank">やってみよう！探索的テスト～ハイクオリティな妄想の高速ループ～</a><br>
+  </li>
+  <li><a href="http://jstqb.jp/dl/JSTQB-glossary.V2.3.J02.pdf" target="_blank">ソフトウェアテスト標準用語集</a></li>
+  <li><a href="https://www.slideshare.net/tosikawa/wacate-56868585" target="_blank">探索的テストはじめの一歩</a></li>
+  <li><a href="http://jasst.jp/symposium/jasst18tokyo/pdf/E2.pdf" target="_blank">やってみよう！探索的テスト～ハイクオリティな妄想の高速ループ～</a></li>
+  <li>
     <!-- 初めての自動テスト ―Webシステムのための自動テスト基礎 -->
-  ・<a target="_blank"  href="https://www.amazon.co.jp/gp/product/4873118166/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=4873118166&linkCode=as2&tag=sagamax-22&linkId=eb51ef340a9d948c1b3f47f190f0e30c"><img style="border: #fff;" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=4873118166&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br>
-</p>
+    <a href="https://amzn.to/42TkWyO" target="_blank" rel="noopener noreferrer">
+      初めての自動テスト ―Webシステムのための自動テスト基礎<br/>
+      <Image src={my_first_autotest} alt="my_first_autotest" width={300} />
+    </a><br/>
+  </li>
+</ul>
 
 <h3>その他参考</h3>
 <p>
