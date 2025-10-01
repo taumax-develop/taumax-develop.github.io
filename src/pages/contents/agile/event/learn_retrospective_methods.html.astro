@@ -1,0 +1,21 @@
+---
+import { SITE_TITLE, TWITTER_CARD_SUMMARY } from '../../../../consts';
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+
+let indexList: index[] = []
+---
+
+<SiteLayout
+  title={SITE_TITLE}
+  description="ふりかえりの手法をたくさん学ぼう"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}>
+
+  <h2 class="title">ふりかえりの手法をたくさん学ぼう</h2>
+
+  <p>
+    移動しました。自動転送します。<br>
+    <a href="https://taumax-github.github.io/contents/agile/event/learn_retrospective_methods">移動先はこちら</a>。
+  </p>
+</SiteLayout>
