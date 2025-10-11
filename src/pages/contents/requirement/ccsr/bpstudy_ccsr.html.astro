@@ -1,0 +1,23 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+
+const indexList = [] as index[];
+---
+
+<SiteLayout
+  title="要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法"
+  description="要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法の発表資料とtwitterのまとめ。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <meta http-equiv="refresh" content="3;URL=https://taumax-develop.github.io/contents/requirement/ccsr/bpstudy_ccsr"> <!-- リダイレクト -->
+
+  <h2 class="title">RDRA</h2>
+
+  <p>
+    移動しました。自動転送します。<br>
+    <a href="https://taumax-develop.github.io/contents/requirement/ccsr/bpstudy_ccsr">移動先はこちら</a>。
+  </p>
+</SiteLayout>

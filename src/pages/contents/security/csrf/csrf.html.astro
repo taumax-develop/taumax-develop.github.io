@@ -1,0 +1,24 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+
+const indexList = [] as index[];
+---
+
+<SiteLayout
+  title="CSRF（Cross-Site Request Forgeries）"
+  description="CSRF（クロスサイトリクエストフォージェリ）の解説ページ。攻撃の流れや対策について。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+
+  <meta http-equiv="refresh" content="3;URL=https://taumax-develop.github.io/contents/security/csrf/csrf"> <!-- リダイレクト -->
+
+  <h2 class="title">CSRF（Cross-Site Request Forgeries）</h2>
+
+  <p>
+    移動しました。自動転送します。<br>
+    <a href="https://taumax-develop.github.io/contents/security/csrf/csrf">移動先はこちら</a>。
+  </p>
+</SiteLayout>

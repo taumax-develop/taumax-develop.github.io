@@ -1,0 +1,23 @@
+---
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+
+const indexList = [] as index[];
+---
+
+<SiteLayout
+  title="RDRA"
+  description="勝手にRDRAを語る夕べで語られたことまとめ。要件定義の手法RDRAについて。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  indexList={indexList}
+>
+  <meta http-equiv="refresh" content="3;URL=https://taumax-develop.github.io/contents/requirement/rdra/rdra"> <!-- リダイレクト -->
+
+  <h2 class="title">RDRA</h2>
+
+  <p>
+    移動しました。自動転送します。<br>
+    <a href="https://taumax-develop.github.io/contents/requirement/rdra/rdra">移動先はこちら</a>。
+  </p>
+</SiteLayout>
