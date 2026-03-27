@@ -2,12 +2,22 @@
 import { Image } from 'astro:assets';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
-import CSRF_flow from './CSRF_flow.png'
-import CSRF_flowDetail from './CSRF_flowDetail.png'
+import CSRF_flow from './img/CSRF_flow.png'
+import CSRF_flowDetail from './img/CSRF_flowDetail.png'
+import sec_2016_fall from './img/sec_2016_fall.jpg';
+import sec_2018_spring from './img/sec_2018_spring.jpg';
+import shienshi_2019 from './img/shienshi_2019.jpg';
+import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
 import { BASE_URL } from '../../../../consts';
 
 const indexList = [
-  { id: "#csrf", name: "CSRF" }
+  { id: "#csrf", name: "CSRF" },
+  { id: "#reference", name: "参考" },
+  { id: "#csrf_damage", name: "CSRF攻撃を受けるどういった被害に合うのか？" },
+  { id: "#why", name: "なぜこのようなことが起きてしまうのか？" },
+  { id: "#what_kind", name: "どのようなWebサイトで注意が必要なのか？" },
+  { id: "#countermeasure", name: "対策" },
+  { id: "#actual_case", name: "実際に起こった事例" },
 ];
 ---
 
@@ -17,20 +27,150 @@ const indexList = [
   twitterCardSize={TWITTER_CARD_SUMMARY}
   indexList={indexList}
 >
-  <h2 class="title">CSRF（Cross-Site Request Forgeries）</h2>
+
+  <h2 class="title">クロスサイトリクエストフォージェリ(CSRF:Cross-Site Request Forgeries)</h2>
 
   <br/>
-  <div id="csrf"></div>
-  <h3 class="title">CSRF攻撃とは</h3>
+  <h3 class="title" id="csrf">CSRF攻撃とは</h3>
   <p>
-    CSRF攻撃は、ログインが必要なWebサービスにログインユーザーになりすましたリクエストを送信する攻撃です。<br/>
-    <Image src={CSRF_flow} alt="CSRF攻撃が成立するまで（全体の流れ）" width={900} /><br/><br/>
-    <Image src={CSRF_flowDetail} alt="CSRF攻撃が成立するまで（詳細）" width={900} /><br/>
-    <b>参考サイト</b><br/>
-    <a href="https://www.scutum.jp/information/web_security_primer/csrf.html" target="_blank">CSRF（クロスサイトリクエストフォージェリ：リクエスト強要）って一体何？ - サイト運営者のためのWebサイトセキュリティ対策入門</a><br/>
-    <a href="http://www.tohoho-web.com/ex/same-origin-policy.html" target="_blank">同一生成元ポリシー(Same-Origin Policy)</a><br/>
-    <a href="http://watanabe-tsuyoshi.hatenablog.com/entry/2015/03/04/123649" target="_blank">Cross-Site Request Forgery（クロスサイトリクエストフォージェリ）って何？</a><br/>
+    情報処理試験のセキュリティスペシャリスト（現：情報処理安全確保支援士）の<a href="https://www.jitec.ipa.go.jp/1_04hanni_sukiru/mondai_kaitou_2016h28.html#28haru" target="_blank">平成28年春　午後Ⅰ問1</a>でも出題されています。<br/>
   </p>
 
-  <br/><br/>
+  <AdUnitLandscape />
+
+  <br/>
+  <h3 class="title" id="csrf_damage">CSRF攻撃を受けるどういった被害に合うのか？</h3>
+  <p>
+    CSRF攻撃は、ログインが必要なWebサービスにログインユーザーに成りすましたリクエストを送信する攻撃です。<br/>
+    この攻撃を受けると、身に覚えのないコメントを投稿されたり、非公開に設定していた情報を公開に変更されるなどの被害を受ける可能性があります。<br/>
+    CSRF攻撃が成立するまでの流れは以下の図のようになっています。<br/>
+    <Image src={CSRF_flow} alt="CSRF攻撃が成立するまで（全体の流れ）" width={700} /><br/>
+
+    <br/>
+    Forgeriesは"偽造"という意味です。つまり「クロスサイトリクエストフォージェリ」を日本語に訳すと「サイトを跨いだ偽造リクエスト」です。
+    上記の図では、罠サイトからSNSなどのWebサイトへサイトを跨いでおり、偽造されたリクエストが送信されています。<br/>
+
+    <br/>
+    上記のWebサイト部分を少し具体化した流れは以下の通りです。<br/>
+    本来であれば(a) ユーザ認証→(b) 商品の選択→(c) 商品の注文→(d) 注文内容の確認→(e) 注文の確定という画面遷移を経て商品を購入するWebサイトを想定します。<br/>
+    このサイトのWebアプリケーションにCSRFの脆弱性があった場合、当該サイトの利用者が、ログイン状態を保持したまま外部のWebサイトに置かれた(e)の画面への不正なリンクを押下することにより、意図しない商品を注文させられてしまう可能性があります。<br/>
+    下図の例の他、CSRFにより、パスワードを強制的に変更させられる、会員制サービスから強制的に退会させられる、ブログや掲示板に意図しないメッセージを書き込まされる、等の問題が発生する可能性があります。<br/>
+    <Image src={CSRF_flowDetail} alt="CSRF攻撃が成立するまで（詳細）" width={700} /><br/>
+  </p>
+
+  <br/>
+  <h3 class="title" id="why">なぜこのようなことが起きてしまうのか？</h3>
+  <p>
+    図. CSRF攻撃が成立するまでの流れを見ると、別ドメインからのリクエストをWebサイトが受け取って処理していることに問題がありそうに見えますが、これは<a href=`${BASE_URL}/contents/security/sop/sop`>SOP(Same-Origin Policy：同一生成元ポリシー)</a>の仕様です。ここは問題ありません。<br/>
+    問題は、利用者が意図したリクエストかどうかをWebサイトが識別できていないことです。（参考書籍1 P113）<br/>
+  </p>
+
+  <AdUnitLandscape />
+
+  <br/>
+  <h3 class="title" id="what_kind">どのようなWebサイトで注意が必要なのか？</h3>
+  <p>
+    フォームと呼ばれる機能を持っているWebサイトは注意が必要です。特に掲示板や、コメントを入力できるようなWebサイトはCSRF対策が必須になります。<br/>
+  </p>
+
+  <br/>
+  <h3 class="title" id="countermeasure">対策</h3>
+  <h4 class="title">サイトを公開している人</h4>
+  <ul>
+    <li>
+      CSRF脆弱性に利用されやすい機能を停止する<br/>
+      CSRF脆弱性の危険があるのは掲示板やコメントフォームなど、「閲覧者が情報を書き込める機能」です。<br/>
+      その機能が必須でない場合は、一時的にその機能を無効にしてしまうことで、被害を未然に防げます。<br/>
+    </li>
+    <li>
+      コメント承認機能などがある場合はそれを有効にする<br/>
+      また、コメントや意見を書き込む機能には、その情報をWebサイトに表示する前に管理者が確認する機能がついている場合もあります。<br/>
+      そのような機能がある場合は、承認機能を有効にし、未承認の書き込みについてはWebサイトに反映させないようにしましょう。<br/>
+    </li>
+    <li>
+      プログラムの改修<br/>
+      <ol>
+        <li>
+          CSRF攻撃は、Cookieだけでセッションを維持している場合に発生する脆弱性を突いた攻撃です。<br/>
+          CookieはWebブラウザが自動で送信するため、Cookieに補完されたパラメタを確認するだけでは不十分です。<br/>
+          Cookieのパラメタが正しくても、利用者の意図したリクエストではない可能性があります。<br/>
+          対策としては、Cookie以外の情報を使って、利用者の意図したリクエストであることを確認する必要があります。<br/>
+          具体的には、利用者の要求（コメントの登録や利用者の登録情報の修正など）を確定する画面（確認画面）に遷移する前の画面（注文確定前の確認画面（画面(d)））に、<br/>
+          第三者が推測困難なランダムな値（トークン）を、hiddenフィールドの値として埋め込みます。<br/>
+          なお、Referrerログから秘密情報が漏えいしないように、この一連の処理にはPOSTメソッドを使用する必要があります。<br/>
+          セッションID等の秘密情報を埋め込む場合もあります。<br/>
+          そして、画面遷移後に受信したデータが、埋め込んだデータと一致するかを確認します。<br/>
+          一致しない場合は不正な画面遷移が発生したとして処理を中止します。（参考書籍1 P123、参考書籍2 P205）<br/>
+        </li>
+        <li>
+          確定処理の直前で再度パスワードを入力させる。（参考書籍2 P205）<br/>
+          (d)の画面で利用者に再度パスワードの入力を求め、(e)では入力されたパスワードが正しい場合のみ処理を実行するようにする。<br/>
+          これにより、パスワード入力のない注文確定リクエストを排除することが可能となる。<br/>
+          なお、この対策は上記に比べて実装が容易である反面、利用者の負担を増やすことになるという問題がある。<br/>
+        </li>
+        <li>
+          Referrerを用いてリンク元の正当性を確認する。（参考書籍2 P205）<br/>
+          (e)のリクエストのReferrer情報を確認することで、不正なサイトから送られてきたリクエストを排除することが可能になる。<br/>
+          ただし、クライアントの設定などでReferrer情報を送付しないようにしている場合には、正当なリクエストであっても排除されてしまうことになる。<br/>
+        </li>
+        <li>
+          重要な操作を行った後で、その内容を登録アドレスにメール送信する。（参考書籍2 P205）<br/>
+          CSRFの被害を防ぐことにはならないが、攻撃があった事実を利用者に気づかせることができる。<br/>
+          ただし、メールの本文に重要な情報を入れないようにする等の注意が必要である。<br/>
+        </li>
+      </ol>
+    </li>
+  </ul>
+
+  <AdUnitLandscape />
+
+  <br/>
+  <h4 class="title">サイトにアクセスする人</h4>
+  <p>
+  </p>
+
+  <br/>
+  <h3 class="title" id="actual_case">実際に起こった事例</h3>
+  <p>
+    <a href="https://www.itmedia.co.jp/enterprise/articles/0504/23/news005.html" target="_blank">大量の「はまちちゃん」を生み出したCSRFの脆弱性とは？</a><br/>
+  </p>
+
+  <AdUnitLandscape />
+
+  <br/>
+  <h3 class="title" id="reference">参考</h3>
+  <ul>
+    <li>参考にしたサイト
+      <ol>
+        <li><a href="https://www.scutum.jp/information/web_security_primer/csrf.html" target="_blank">CSRF（クロスサイトリクエストフォージェリ：リクエスト強要）って一体何？ - サイト運営者のためのWebサイトセキュリティ対策入門</a></li>
+        <li><a href="http://www.tohoho-web.com/ex/same-origin-policy.html" target="_blank">同一生成元ポリシー(Same-Origin Policy)</a></li>
+        <li><a href="http://watanabe-tsuyoshi.hatenablog.com/entry/2015/03/04/123649" target="_blank">Cross-Site Request Forgery（クロスサイトリクエストフォジェリー）って何？</a></li>
+        <li><a href="https://www.1-firststep.com/archives/4961" target="_blank">クロスサイト・リクエストフォージェリ(CSRF)攻撃とは何かを解説</a></li>
+        <li><a href="https://www.ipa.go.jp/security/vuln/vuln_contents/csrf.html" target="_blank">3. CSRF (クロスサイト・リクエスト・フォージェリ)</a></li>
+        <li><a href="https://www.shadan-kun.com/blog/measure/2640/" target="_blank">CSRF（クロスサイトリクエストフォージェリ）の意味とその対策</a></li>
+      </ol>
+    </li>
+    <li>参考にした書籍
+      <ol>
+        <li>
+          <a href="https://www.amazon.co.jp/dp/4822237842" target="_blank">
+            絶対わかるセスペ28春 2016年秋版<br/>
+            <Image src={sec_2016_fall} alt="絶対わかる情報処理安全確保支援士 2016年秋版" width="200"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://amzn.to/4s8DUfh" target="_blank" rel="noopener noreferrer">
+            絶対わかる情報処理安全確保支援士 2018年春版<br/>
+            <Image src={sec_2018_spring} alt="絶対わかる情報処理安全確保支援士 2018年春版" width="200"/>
+          </a>
+        </li>
+        <li>
+          <a href="https://amzn.to/4dFtRdp" target="_blank">
+            情報処理教科書 情報処理安全確保支援士 2019年版<br/>
+            <Image src={shienshi_2019} alt="情報処理教科書 情報処理安全確保支援士 2019年版" width="200"/>
+          </a>
+        </li>
+      </ol>
+    </li>
+  </ul>
 </SiteLayout>
