@@ -2,8 +2,8 @@
 import { Image } from 'astro:assets';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
-import CSRF_flow from './img/CSRF_flow.png'
-import CSRF_flowDetail from './img/CSRF_flowDetail.png'
+import csrf_flow from './img/csrf_flow.png'
+import csrf_flowDetail from './img/csrf_flowDetail.png'
 import sec_2016_fall from './img/sec_2016_fall.jpg';
 import sec_2018_spring from './img/sec_2018_spring.jpg';
 import shienshi_2019 from './img/shienshi_2019.jpg';
@@ -44,7 +44,7 @@ const indexList = [
     CSRF攻撃は、ログインが必要なWebサービスにログインユーザーに成りすましたリクエストを送信する攻撃です。<br/>
     この攻撃を受けると、身に覚えのないコメントを投稿されたり、非公開に設定していた情報を公開に変更されるなどの被害を受ける可能性があります。<br/>
     CSRF攻撃が成立するまでの流れは以下の図のようになっています。<br/>
-    <Image src={CSRF_flow} alt="CSRF攻撃が成立するまで（全体の流れ）" width={700} /><br/>
+    <Image src={csrf_flow} alt="CSRF攻撃が成立するまで（全体の流れ）" width={700} /><br/>
 
     <br/>
     Forgeriesは"偽造"という意味です。つまり「クロスサイトリクエストフォージェリ」を日本語に訳すと「サイトを跨いだ偽造リクエスト」です。
@@ -55,7 +55,7 @@ const indexList = [
     本来であれば(a) ユーザ認証→(b) 商品の選択→(c) 商品の注文→(d) 注文内容の確認→(e) 注文の確定という画面遷移を経て商品を購入するWebサイトを想定します。<br/>
     このサイトのWebアプリケーションにCSRFの脆弱性があった場合、当該サイトの利用者が、ログイン状態を保持したまま外部のWebサイトに置かれた(e)の画面への不正なリンクを押下することにより、意図しない商品を注文させられてしまう可能性があります。<br/>
     下図の例の他、CSRFにより、パスワードを強制的に変更させられる、会員制サービスから強制的に退会させられる、ブログや掲示板に意図しないメッセージを書き込まされる、等の問題が発生する可能性があります。<br/>
-    <Image src={CSRF_flowDetail} alt="CSRF攻撃が成立するまで（詳細）" width={700} /><br/>
+    <Image src={csrf_flowDetail} alt="CSRF攻撃が成立するまで（詳細）" width={700} /><br/>
   </p>
 
   <br/>

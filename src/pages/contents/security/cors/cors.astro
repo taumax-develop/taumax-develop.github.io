@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
-import CORS_pathproxy from './img/CORS_pathproxy.png';
+import cors_pathproxy from './img/cors_pathproxy.png';
 import sec_2017_spring from './img/sec_2017_spring.jpg';
 import sec_2018_spring from './img/sec_2018_spring.jpg';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
@@ -68,7 +68,7 @@ const indexList = [
   <p>
     上記を利用すると、不正なサイトが社内Webサーバーから情報を取得することが可能となってしまいます。<br>
     その際の流れは以下のようになっています。<br>
-    <Image src={CORS_pathproxy} width={800} alt="CORSの仕組み" /><br/>
+    <Image src={cors_pathproxy} width={800} alt="CORSの仕組み" /><br/>
 
     <br/>
     (1)社内のWebブラウザが、攻撃者のサイトにアクセスしてHTTPリクエストを送信します。<br>
