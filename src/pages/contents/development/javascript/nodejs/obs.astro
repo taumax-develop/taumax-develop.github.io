@@ -1,21 +1,21 @@
 ---
 import { Image } from "astro:assets";
 import SiteLayout from "../../../../../layouts/SiteLayout.astro";
-import play_with_nodejs_obs from './img/play_with_nodejs_obs.jpg'
-import websocker_setting1 from './img/websocker_setting1.jpg'
-import websocker_setting2 from './img/websocker_setting2.jpg'
-import websocker_setting3 from './img/websocker_setting3.jpg'
-import obs1 from './img/obs1.jpg'
-import obs2 from './img/obs2.jpg'
+import play_with_nodejs_obs from './img/obs/play_with_nodejs_obs.jpg'
+import websocker_setting1 from './img/obs/websocker_setting1.jpg'
+import websocker_setting2 from './img/obs/websocker_setting2.jpg'
+import websocker_setting3 from './img/obs/websocker_setting3.jpg'
+import obs1 from './img/obs/obs1.jpg'
+import obs2 from './img/obs/obs2.jpg'
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
 
 const indexList = [
-  { id: "obs", name: "Node.js × OBS" },
-  { id: "twitch", name: "Node.js × twitch" },
-  { id: "twitter", name: "Node.js × twitter" },
-  { id: "what_i_made", name: "Node.js × Twitch, Twitter, OBS" },
+  { id: "#obs", name: "Node.js × OBS" },
+  { id: "#twitch", name: "Node.js × twitch" },
+  { id: "#twitter", name: "Node.js × twitter" },
+  { id: "#what_i_made", name: "Node.js × Twitch, Twitter, OBS" },
 ];
 ---
 
@@ -35,16 +35,16 @@ const indexList = [
     <li class="breadcrumbli"> > Node.js × OBS</li>
   </ul>
 
-  <br/>
+  <br>
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、 <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a> の続きです。<br/>
-    Node.js から OBS の画面を操作する処理について記載していきます。以下画像右下の赤枠部分です。<br/>
-    <Image src={play_with_nodejs_obs} width={800} alt='play_with_nodejs_obs' /><br/>
+    このページは、 <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a> の続きです。<br>
+    Node.js から OBS の画面を操作する処理について記載していきます。以下画像右下の赤枠部分です。<br>
+    <Image src={play_with_nodejs_obs} width={800} alt='play_with_nodejs_obs' /><br>
 
-    <br/>
-    その他の部分については、以下リンク先に別ページでまとめています。GitLab や Linux, Docker, nginx については記載していません。
+    <br>
+    赤枠以外の部分については、以下リンク先に別ページでまとめています。GitLab や Linux, Docker, nginx については記載していません。
   </p>
 
   <ul>
@@ -52,45 +52,45 @@ const indexList = [
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitter`>Node.js × twitter</a></li>
   </ul>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
+  <br>
   <span id="obs"></span>
   <h3 class="title">Node.js × OBS</h3>
   <p>
-    <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> というライブラリを使うと Node.js から OBS の操作ができるようになります。今回は自分のチャンネルでチャンネルポイントとして実装している「1ゲト」を例にして説明してみます。<br/>
-    以下動画の9分54秒頃が1ゲトのチャンネルポイントを使用したときの実際の画面です。これを Node.js を使って実現しています。<br/>
-    ①Webhook でイベントを受信<br/>
-    ②チャットを投げる<br/>
-    ③チャットをトリガーにローカルの Node.js から OBS を操作する<br/>
-    という流れになっています。このページで説明するのは③の部分のみです。①については <a href="./twitch#webhook">Webhook</a> を、②については <a href="./twitch#tmijs">tmi.js</a> を参照してください。<br/>
+    <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> というライブラリを使うと Node.js から OBS の操作ができるようになります。今回は自分のチャンネルでチャンネルポイントとして実装している「1ゲト」を例にして説明してみます。<br>
+    以下動画の9分54秒頃が1ゲトのチャンネルポイントを使用したときの実際の画面です。これを Node.js を使って実現しています。<br>
+    ①Webhook でイベントを受信<br>
+    ②チャットを投げる<br>
+    ③チャットをトリガーにローカルの Node.js から OBS を操作する<br>
+    という流れになっています。このページで説明するのは③の部分のみです。①については <a href="./twitch#webhook">Webhook</a> を、②については <a href="./twitch#tmijs">tmi.js</a> を参照してください。<br>
     <iframe src="https://player.twitch.tv/?video=2105785157&time=0h09m54s&parent=taumax-develop.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
   </p>
 
-  <br/>
+  <br>
   <span id="websocket"></span>
   <h3 class="title">WebSocketの設定</h3>
   <p>
-    まず、 Node.js から OBS に接続できるようにするため、 OBS 側で WebSocket の設定を行います。<br/>
+    まず、 Node.js から OBS に接続できるようにするため、 OBS 側で WebSocket の設定を行います。<br>
 
-    <br/>
-    OBSを起動してツール→ WebSocket サーバー設定。<br/>
-    <Image src={websocker_setting1} width={600} alt='websocker_setting1' /><br/>
+    <br>
+    OBSを起動してツール→ WebSocket サーバー設定。<br>
+    <Image src={websocker_setting1} width={600} alt='websocker_setting1' /><br>
 
-    <br/>
-    下図赤枠部分を設定（パスワードは任意）。<br/>
-    「接続情報を表示」ボタンを押下。<br/>
-    <Image src={websocker_setting2} width={400} alt='websocker_setting2' /><br/>
+    <br>
+    下図赤枠部分を設定（パスワードは任意）。<br>
+    「接続情報を表示」ボタンを押下。<br>
+    <Image src={websocker_setting2} width={400} alt='websocker_setting2' /><br>
 
-    <br/>
-    サーバーIP、サーバーポート、サーバーパスワードを控えておく。<br/>
-    <Image src={websocker_setting3} width={400} alt='websocker_setting3' /><br/>
+    <br>
+    サーバーIP、サーバーポート、サーバーパスワードを控えておく。<br>
+    <Image src={websocker_setting3} width={400} alt='websocker_setting3' /><br>
 
-    <br/>
-    この設定ができれば、 以下のコードで OBS に接続できるようになります。<br/>
-    事前に以下コマンドで <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> をインストールしている前提です。<br/>
-    <code>npm i obs-websocket-js</code><br/>
+    <br>
+    この設定ができれば、 以下のコードで OBS に接続できるようになります。<br>
+    事前に以下コマンドで <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> をインストールしている前提です。<br>
+    <code>npm i obs-websocket-js</code><br>
   </p>
 
   <pre class="title"><code class="title">obs_control.js</code></pre>
@@ -105,29 +105,29 @@ obs.connect(
   console.log(err)
 })`}</code></pre>
 
-  <br/>
+  <br>
   <ul>
     <li>obs_url：WebSocket 接続情報のサーバIP:サーバーポート</li>
     <li>obs_password：サーバーパスワード</li>
   </ul>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
+  <br>
   <span id="control_obs"></span>
   <h3 class="title">OBS の操作</h3>
   <p>
-    上記で WebSocket の設定ができれば、後は対応する <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> の関数を呼び出すことで OBS を操作することができます。<br/>
-    関数を呼び出す際には「シーン名」と「ソース名」が必要になることが多いです。画像の赤枠部分です。<br/>
-    <Image src={obs1} width={600} alt='obs1' /><br/>
+    上記で WebSocket の設定ができれば、後は対応する <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> の関数を呼び出すことで OBS を操作することができます。<br>
+    関数を呼び出す際には「シーン名」と「ソース名」が必要になることが多いです。画像の赤枠部分です。<br>
+    <Image src={obs1} width={600} alt='obs1' /><br>
 
-    <br/>
-    操作対象のソースは予め非表示にして隠しています。以下画像は、普段は隠している「1げと」のソースを表示状態にしたもの。<br/>
-    <Image src={obs2} width={600} alt='obs2' /><br/>
+    <br>
+    操作対象のソースは予め非表示にして隠しています。以下画像は、普段は隠している「1げと」のソースを表示状態にしたもの。<br>
+    <Image src={obs2} width={600} alt='obs2' /><br>
 
-    <br/>
-    <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> にどんな関数があるかは <a href="https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.md#requests-table-of-contents" target="_blank" rel="noopener noreferrer">Requests Table of Contents</a> を参照してください。今回使用している関数は以下の通りです。<br/>
+    <br>
+    <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> にどんな関数があるかは <a href="https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.md#requests-table-of-contents" target="_blank" rel="noopener noreferrer">Requests Table of Contents</a> を参照してください。今回使用している関数は以下の通りです。<br>
   </p>
 
   <ul>
@@ -139,17 +139,17 @@ obs.connect(
     <li><a href="https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.md#removesceneitem" target="_blank" rel="noopener noreferrer">RemoveSceneItem</a>：対象ソースを削除する関数</li>
   </ul>
 
-  <br/>
+  <br>
   <p>
-    これらの関数を組み合わせて作ったソースコードが以下。<br/>
-    ①シーン名（ノーマル）とソース名（1げと）を元に、後続の処理に必要な情報を取得<br/>
-    ②①で取得した情報を元に、対象ソースのコピーを生成<br/>
-    ③コピーしたアイテムを表示に切り替え<br/>
-    ④コピーしたアイテムの情報を取得<br/>
-    ⑤左方向に移動<br/>
-    ⑥コピーを削除<br/>
-    という流れになっています。<br/>
-    コピーを生成している理由は、コピーせずに元のソースを操作すると後で移動前の状態に戻さないといけないのと、同タイミングで複数回ポイントを使用された場合でも対応できるようにするためです。<br/>
+    これらの関数を組み合わせて作ったソースコードが以下。<br>
+    ①シーン名（ノーマル）とソース名（1げと）を元に、後続の処理に必要な情報を取得<br>
+    ②①で取得した情報を元に、対象ソースのコピーを生成<br>
+    ③コピーしたアイテムを表示に切り替え<br>
+    ④コピーしたアイテムの情報を取得<br>
+    ⑤左方向に移動<br>
+    ⑥コピーを削除<br>
+    という流れになっています。<br>
+    コピーを生成している理由は、コピーせずに元のソースを操作すると後で移動前の状態に戻さないといけないのと、同タイミングで複数回ポイントを使用された場合でも対応できるようにするためです。<br>
   </p>
 
 
@@ -224,25 +224,25 @@ async function moveHorizontal(sceneItemId, sceneItem) {
 </code></pre>
 
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
+  <br>
   <span id="others"></span>
   <h3 class="title">その他の実装</h3>
   <p>
-    Node.js と OBS の組み合わせについては以上です。その他の組み合わせについては以下リンク先を参照してください。<br/>
+    Node.js と OBS の組み合わせについては以上です。その他の組み合わせについては以下リンク先を参照してください。<br>
   </p>
   <ul>
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × twitch</a></li>
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/twitter`>Node.js × twitter</a></li>
   </ul>
 
-  <br/>
+  <br>
   <hr>
 
-  <br/>
-  参考サイト<br/>
+  <br>
+  参考サイト<br>
   <ul>
     <li><a href="https://note.com/kirimin_chan/n/ne0f039f17289" target="_blank" rel="noopener noreferrer">きりみんちゃんノート node.jsからWebsockets経由でOBSを操作する</a></li>
     <li><a href="https://note.com/kirimin_chan/n/n0d44d734d3c4" target="_blank" rel="noopener noreferrer">きりみんちゃんノート OBSのYouTubeライブチャット欄のURLを自動で更新する</a></li>

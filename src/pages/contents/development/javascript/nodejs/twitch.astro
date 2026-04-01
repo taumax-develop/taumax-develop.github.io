@@ -1,18 +1,29 @@
 ---
 import { Image } from "astro:assets";
 import SiteLayout from "../../../../../layouts/SiteLayout.astro";
-import play_with_nodejs_twitch from './img/play_with_nodejs_twitch.jpg';
-import console_img from './img/console.jpg';
-import application_info_img from './img/application_info.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
+import authorization_code_grant_flow from './img/twitch/authorization_code_grant_flow.jpg';
+import console_img from './img/twitch/console.jpg';
+import play_with_nodejs_twitch from './img/twitch/play_with_nodejs_twitch.jpg';
+import application_info_img from './img/twitch/application_info.jpg';
+import client_credentials_grant_flow from './img/twitch/client_credentials_grant_flow.jpg';
+import implicit_grant_flow from './img/twitch/implicit_grant_flow.jpg';
+import CommonFlow from "../../../../../components/twitch/CommonOAuthFlow.astro";
+
+const resourceOwner = `リソースオーナーとは一般的に、『アカウントを持つユーザー本人』を指します。<br>
+OAuth 2.0認可フレームワークにおいて、保護されたデータやサービス（リソース）を所有し、そのアクセス権限を第三者（クライアント）へ付与できるユーザーまたはシステムのことです。`
 
 const indexList = [
-  { id: "obs", name: "Node.js × OBS" },
-  { id: "twitch", name: "Node.js × Twitch" },
-  { id: "twitter", name: "Node.js × Twitter" },
-  { id: "what_i_made", name: "Node.js × Twitch, Twitter, OBS" },
+  { id: "#firstly", name: "はじめに" },
+  { id: "#flow", name: "流れ" },
+  { id: "#register_application", name: "アプリケーションの登録" },
+  { id: "#token", name: "Tokenの発行" },
+  { id: "#user", name: "Twitch のユーザー" },
+  { id: "#tmijs", name: "Node.js × tmi.js" },
+  { id: "#webhook", name: "Node.js × Webhook" },
+  { id: "#api", name: "Node.js × Twitch API" },
 ];
 ---
 
@@ -32,16 +43,15 @@ const indexList = [
     <li class="breadcrumbli"> > Node.js × Twitch</li>
   </ul>
 
-  <br/>
-  <span id="firstly"></span>
-  <h3 class="title">はじめに</h3>
+  <br>
+  <h3 class="title" id="firstly">はじめに</h3>
   <p>
-    このページは、 <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a> の続きです。<br/>
-    Twitch イベントを Webhook や tmi.js というライブラリを使用して Node.js で受け取ったり、チャットを投げたりする部分について記載します。以下画像の赤枠部分です。<br/>
-    <Image src={play_with_nodejs_twitch} width={800} alt="play_with_nodejs_twitch" /><br/>
+    このページは、 <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a> の続きです。<br>
+    Twitch イベントを Webhook や tmi.js というライブラリを使用して Node.js で受け取ったり、チャットを投げたりする部分について記載します。以下画像の赤枠部分です。<br>
+    <Image src={play_with_nodejs_twitch} width={800} alt="play_with_nodejs_twitch" /><br>
 
-    <br/>
-    その他の部分については、以下リンク先に別ページでまとめています。GitLab や Linux, Docker, nginx については記載していません。
+    <br>
+    赤枠以外の部分については、以下リンク先に別ページでまとめています。GitLab や Linux, Docker, nginx については記載していません。
   </p>
 
   <ul>
@@ -49,62 +59,169 @@ const indexList = [
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/obs`>Node.js × OBS</a></li>
   </ul>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
-  <span id="register_application"></span>
-  <h3 class="title">アプリケーションの登録</h3>
+  <br>
+  <h3 class="title" id="flow">流れ</h3>
   <p>
-    Twitch の機能を使うためには、まず Twitch の developers サイトでアプリケーションを登録する必要があるのでその流れを記載します。<br/>
-    リンク先（<a href="https://dev.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch developers</a>）右上の「Log in with Twitch」ボタンから developers サイトにログイン。<br/>
-    ログイン後、右上の 「Your Console」 ボタンからコンソール画面に遷移して、「アプリケーションを登録」ボタンを押下。<br/>
-    <Image src={console_img} width={500} alt="console" /><br/>
-
-    <br/>
-    アプリケーション登録画面でアプリケーション名、リダイレクトURL( http://localhost:3000 でOK)、カテゴリーを入力。<br/>
-    「新しい秘密」ボタンを押下すると秘密鍵が生成されます。<br/>
-    秘密鍵とクライアントIDを控えて「保存」ボタンを押下すると、アプリケーションの登録が完了です。<br/>
-    <Image src={application_info_img} width={500} alt="application_info" /><br/>
-  </p>
-
-  <br/>
-  <span id="authentication"></span>
-  <h3 class="title">Twitch の認証</h3>
-  <p>
-    Twitch の Webhook や API を使うためには access token を取得する必要があります。access token には app access token と user access token の2種類があり、それぞれ用途は以下の通り。<br/>
-  </p>
-
-  <ul>
-    <li>
-      <a href="https://dev.twitch.tv/docs/authentication/#app-access-tokens" target="_blank" rel="noopener noreferrer">App access tokens</a>：ユーザー認証が不要な機能を利用する場合に使用する token。<br/>
-    </li>
-    <li>
-      <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens" target="_blank" rel="noopener noreferrer">User access tokens</a>：ユーザー認証が必要な機能を利用する場合に使用する token。<br/>
-    </li>
-  </ul>
-
-  <p>
-    access token については<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">リンク先にまとまって</a>いる通り、4種類の token 取得方法があり、使用方法に応じて取得方法が変わります。<br/>
-    今回私が自作したアプリケーションにおいては、以下2つの方法で access token を取得しています。<br/>
+    TwitchからWebhookを受信したり、APIを発行したりするには、認証サーバが発行したトークンを使用する必要があり、トークンの発行にはClient IDとClient Secretが必要になります。<br>
   </p>
   <ul>
-    <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#client-credentials-grant-flow" target="_blank" rel="noopener noreferrer">Client credentials grant flow</a>：主に Webhook を受信する際に使用。App access token が発行される。</li>
-    <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#authorization-code-grant-flow" target="_blank" rel="noopener noreferrer">Authorization code grant flow</a>：主に API を発行する際に使用。User access token が発行される。</li>
+    <li><a href="#register_application">アプリケーションの登録</a></li>
+    <li><a href="#token">Tokenの発行</a></li>
   </ul>
+
+  <br>
+  <h3 class="title" id="register_application">アプリケーションの登録</h3>
   <p>
-    具体的にどうやって token を取得するかは <a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#examples-of-the-four-flows" target="_blank" rel="noopener noreferrer">Examples of the four flows</a> に書いていますが、以下にも記載します。<br/>
+    TwitchからWebhookを受信したり、APIを発行したりするには、まず Twitch の developers サイトでアプリケーションを登録する必要があるのでその流れを記載します。<br>
+    リンク先（<a href="https://dev.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch developers</a>）右上の「Log in with Twitch」ボタンから developers サイトにログイン。<br>
+    ログイン後、右上の 「Your Console」 ボタンからコンソール画面に遷移して、「アプリケーションを登録」ボタンを押下。<br>
+    <Image src={console_img} width={500} alt="console" /><br>
+
+    <br>
+    アプリケーションの管理画面でアプリケーション名、OAuthのリダイレクトURL、カテゴリーを入力。<br>
+    「新しい秘密」ボタンを押下するとシークレット(Client Secret)が生成されます。<br>
+    シークレットとクライアントIDを控えて「保存」ボタンを押下すると、アプリケーションの登録が完了です。<br>
+    <Image src={application_info_img} width={500} alt="application_info" /><br>
   </p>
 
-  <br/>
+  <br>
+  <h3 class="title" id="token">Tokenの発行</h3>
+  <p>
+    Twitch の Webhook や API を使うためには、OAuth2.0の認証フローに従って token を取得する必要があります。<br>
+    token には App access token と User access token の2種類があり、それぞれ用途は以下の通り。<br>
+  </p>
+
+  <div style="padding-left: 1em;">
+    <table border="1">
+      <tr><th>Tokenの種類</th><th>用途</th></tr>
+      <tr>
+        <td style="white-space: nowrap;">
+          <a href="https://dev.twitch.tv/docs/authentication/#app-access-tokens" target="_blank" rel="noopener noreferrer">App access token</a>
+        </td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li>
+              ユーザー認証が不要な機能を利用する場合<br>
+              例えば<a href="https://dev.twitch.tv/docs/api/reference#get-videos" target="_blank" rel="noopener noreferrer">Get Videos API</a>は指定したIDに紐づく情報を、ユーザー認証無しで取得することができる。<br>
+              <ul style="list-style-type: circle">
+                <li>
+                  App access tokenを受け入れる殆どのAPIはUser access token も使用できるため、User access tokensで事足りる場合はApp access tokenを取得する必要はない。<br>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Webhookを使用してイベントを受信する場合<br>
+              <ul style="list-style-type: circle">
+                <li>
+                  Webhookを使用して イベントを受信する場合、リクエストにはApp access tokenを指定する必要があります。<br>
+                  User access tokenを使用すると、リクエストは失敗します。<br>
+                </li>
+                <li>
+                  イベントの種類（例：<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe" target="_blank" rel="noopener noreferrer">channel.subscribe</a>）によってはユーザー認証が必要なものもある。<br>
+                  その場合、アプリケーション (クライアント ID) にイベントを受信する権限を付与している必要があります。<br>
+                  たとえば、<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe" target="_blank" rel="noopener noreferrer">channel.subscribe</a>イベントを受信するには、channel:read:subscriptions スコープを含むUser access tokenを取得した上で、App access tokenを使用する必要がある。
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="white-space: nowrap;">
+          <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens" target="_blank" rel="noopener noreferrer">User access token</a>
+        </td>
+        <td>
+          ユーザー認証が必要なAPIを発行する場合に使用する。<br>
+          スコープを使用して、アプリケーションにアクセスを許可する範囲を指定します。<br>
+          <a href="https://dev.twitch.tv/docs/authentication/scopes/" target="_blank" rel="noopener noreferrer">Twitchのスコープ一覧</a>に記載されているスコープを指定します。<br>
+          例えば以下に示すようなPoll（投票）に関するAPIを発行する場合、 channel:manage:polls スコープを指定してUser access tokenを発行する必要があります。<br>
+          <ul>
+            <li><a href="https://dev.twitch.tv/docs/api/reference#create-poll" target="_blank" rel="noopener noreferrer">Create Poll</a></li>
+            <li><a href="https://dev.twitch.tv/docs/api/reference#end-poll" target="_blank" rel="noopener noreferrer">End Poll</a></li>
+            <li><a href="https://dev.twitch.tv/docs/api/reference#get-polls" target="_blank" rel="noopener noreferrer">Get Polls</a></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+  <p>
+    token の取得方法については<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">リンク先にまとまって</a>いる通り、4種類の認証フローがあります。<br>
+  </p>
+
+  <div style="padding-left: 1em;">
+    <table border="1">
+      <tr><th>発行するToken</th><th>認証フロー</th><th>refresh tokenの発行</th><th>有効期限</th><th>関連リンク</th></tr>
+      <tr>
+        <td>App access token</td>
+        <td><a href="#client_cred_grant_flow">Client credentials grant flow</a></td>
+        <td>無し</td>
+        <td>約2ヶ月</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#client-credentials-grant-flow" target="_blank" rel="noopener noreferrer">Client credentials grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.4" target="_blank" rel="noopener noreferrer">1.3.4. Client Credentials</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="3">User access token</td>
+        <td><a href="#auth_code_grant_flow">Authorization code grant flow</a></td>
+        <td>あり</td>
+        <td>約4時間</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#authorization-code-grant-flow" target="_blank" rel="noopener noreferrer">Authorization code grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1" target="_blank" rel="noopener noreferrer">1.3.1. Authorization Code</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="#implicit_grant_flow">Implicit grant flow</a></td>
+        <td>無し</td>
+        <td>約2ヶ月</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#implicit-grant-flow" target="_blank" rel="noopener noreferrer">Implicit grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.2" target="_blank" rel="noopener noreferrer">1.3.2. Implicit</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Device code grant flow</td>
+        <td>あり</td>
+        <td>約4時間</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#device-code-grant-flow" target="_blank" rel="noopener noreferrer">Device code grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-2.1" target="_blank" rel="noopener noreferrer">2.1. Client Types</a></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+  <p>
+    具体的にどうやって token を取得するかは <a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#examples-of-the-four-flows" target="_blank" rel="noopener noreferrer">Examples of the four flows</a> に書いていますが、以下にも記載します。<br>
+    Device code grant flowは私は使ったことがないので他の3つについて説明します。<br>
+  </p>
+
+  <br>
   <AdUnitLandscape />
 
-  <br/>
-  <span id="client_cred_grant_flow"></span>
-  <h4>Client credentials grant flow</h4>
+  <br>
+  <h4 class="title" id="client_cred_grant_flow">Client credentials grant flow</h4>
   <p>
-    Client credentials grant flow では App access token が発行され、Webhook を受信する際に使用します。<br/>
-    token 発行の手順としては、以下のような curl コマンドを発行します。<br/>
+    Client credentials grant flowは以下の図に示す流れになっています。見てわかる通りかなりシンプルです。<br>
+    <Image src={client_credentials_grant_flow} width={400} alt="client_credentials_grant_flow" /><br>
+
+    <br>
+    実行する curl コマンドは以下の通り。<br>
   </p>
 
 <pre><code>curl -X POST 'https://id.twitch.tv/oauth2/token' \
@@ -112,15 +229,16 @@ const indexList = [
 -d 'client_id=[clientID]&client_secret=[clientSecret]&grant_type=client_credentials'
 </code></pre>
 
-  <br/>
-  <ul>
-    <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
-    <li>clientSecret：<a href="#register_application">アプリケーションの登録</a>で取得した秘密鍵</li>
-  </ul>
+  <div style="padding-left: 2em;">
+    <ul>
+      <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
+      <li>clientSecret：<a href="#register_application">アプリケーションの登録</a>で取得したシークレット</li>
+    </ul>
+  </div>
 
-  <br/>
   <p>
-    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。 access_token に記載されているのが App access token です。
+    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。 access_token に記載されているのが App access token です。<br>
+    有効期限は約2ヶ月です。<br>
   </p>
 
 <pre><code>{`{
@@ -130,67 +248,89 @@ const indexList = [
 }`}
 </code></pre>
 
-  <br/>
-  <span id="auth_code_grant_flow"></span>
-  <h4>Authorization code grant flow</h4>
+
+  <br>
+  <h4 class="title" id="auth_code_grant_flow">Authorization code grant flow</h4>
   <p>
-    Authorization code grant flow では User access token が発行され、Twitch の API を発行する際に使用します。<br/>
-    token 発行の手順としては、以下のような形式の URL をブラウザに入力します。<br/>
+    Authorization code grant flowは以下の図に示す流れになっています。<br>
+    <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
+    ※<span set:html={resourceOwner} />
   </p>
 
+  <br>
+  <CommonFlow kbn="authorization" />
 
-<pre><code>https://id.twitch.tv/oauth2/authorize
-?response_type=code
-&client_id=[clientID]
-&redirect_uri=[redirectURL]
-&scope=[必要なスコープ]
-&state=[state]
+  <p>
+    <b>5. 認可コード発行</b><br>
+    アクセスが許可されると、redirect_uri に指定したURLにリダイレクトされます。<br>
+    リダイレクト先のURLに、以下のような形式で code が記載されています。これが認可コードです。<br>
+  </p>
+<pre><code>[redirectURI]
+?code=[発行された認可コード]
+&scope=[指定したスコープ]
+&state=[指定したstate]
 </code></pre>
 
-  <br/>
-  <ul>
-    <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
-    <li>redirectURL：<a href="#register_application">アプリケーションの登録</a>で設定したリダイレクトURL</li>
-    <li>必要なスコープ：<a href="https://dev.twitch.tv/docs/authentication/scopes/" target="_blank" rel="noopener noreferrer">リンク先を参考に必要なスコープを指定</a></li>
-    <li>state：任意指定項目。CSRF(Cross-Site Request Forgery)対策なので、セキュリティ的には指定した方が安全。任意の文字列を指定。<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#authorization-code-grant-flow" target="_blank" rel="noopener noreferrer">リンク先のサンプル</a> では c3ab8aa609ea11e793ae92361f002671 という文字列が設定されている。</li>
-  </ul>
-
-  <br/>
+  <br>
   <p>
-    必要なスコープは、発行する API ごとに異なります。例えば、投票を開始する API を呼び出す場合、 <a href="https://dev.twitch.tv/docs/api/polls/" target="_blank" rel="noopener noreferrer">Polls</a> を見ると「The endpoint requires a user access token with scope channel:manage:polls」とあるので、必要なスコープは「channel:manage:polls」だということがわかります。<br/>
-    この場合、URLに指定するスコープは<br/>
-  </p>
-  <pre><code>channel%3Amanage%3Apolls+channel%3Aread%3Apolls</code></pre>
-  <p>
-    となります。ここで「%3A」は「:」のURLエンコードです。「+」で二つのスコープを連結しています。<br/>
-    これを踏まえ、URL全体としては以下のようになります。<br/>
+    <b>6. トークン発行依頼</b><br>
+    発行された認可コードを使用して、以下のような形式のPOSTリクエストを送ると、アクセストークンとリフレッシュトークンが発行されます。<br>
   </p>
 
-<pre><code>https://id.twitch.tv/oauth2/authorize
-?response_type=code
-&client_id=[clientID]
-&redirect_uri=[redirectURL]
-&scope=channel%3Amanage%3Apolls+channel%3Aread%3Apolls
-&state=c3ab8aa609ea11e793ae92361f002671
+<pre><code>curl -X POST 'https://id.twitch.tv/oauth2/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-d 'client_id=[clientID]&client_secret=[clientSecret]&code=[発行された認可コード]&grant_type=authorization_code&redirect_uri=[redirectURI]'
 </code></pre>
 
-  <br/>
+  <br>
   <p>
-    上記をブラウザに入力すると、 redirect_uri に指定したURLにリダイレクトされます。リダイレクト先のURLに、以下のような形式で access_token が記載されています。これが User access token です。<br/>
+    <b>7. アクセストークン、リフレッシュトークン発行</b><br>
+    上記コマンドが成功すると、以下のレスポンスが返ってきます。<br>
+    リダイレクト先のURLに、以下のようなjsonが返ってきます。<br>
+    access_token が User access token で、refresh_token が Refresh token です。<br>
+  </p>
+
+<pre><code>{`{
+  "access_token":"[発行されたトークン]",
+  "expires_in":15668,
+  "refresh_token":"[発行されたリフレッシュトークン]",
+  "scope":[指定したスコープ],
+  "token_type":"bearer"
+}`}
+</code></pre>
+
+
+  <br>
+  <h4 class="title" id="implicit_grant_flow">Implicit grant flow</h4>
+  <p>
+    Implicit grant flow は 『認可コードを使用しない <a href="#auth_code_grant_flow">Authorization code grant flow</a>』です。<br>
+    認可コードを使う方式に比べて安全性に問題があるため OAuth としては非推奨の方式であり、OAuth 2.1からは Implicit grant は仕様自体から削除されています。<br>
+    Implicit grant flow は以下の図に示す流れでtokenを取得する方式になっています。<br>
+    <Image src={implicit_grant_flow} width={700} alt="implicit_grant_flow" /><br>
+    ※<span set:html={resourceOwner} />
+  </p>
+
+  <br>
+  <CommonFlow kbn="implicit" />
+
+  <p>
+    <b>5. アクセストークン発行</b><br>
+    アクセスが許可されると、redirect_uri に指定したURLにリダイレクトされます。<br>
+    リダイレクト先のURLに、以下のような形式で access_token が記載されています。これが User access token です。<br>
   </p>
 
 <pre><code>[指定したリダイレクトURL]/
 #access_token=[発行されたトークン]
 &scope=[指定したスコープ]
+&state=[指定したstate]
 &token_type=bearer
 </code></pre>
 
-  <br/>
-  <span id="user"></span>
-  <h3 class="title">Twitch のユーザー</h3>
+  <br>
+  <h3 class="title" id="user">Twitch のユーザー</h3>
   <p>
-    Twitch では、ユーザーを示す項目は大きく3種類あります。<br/>
-    API や Webhook を使う際に理解しておく必要があります。<br/>
+    Twitch では、ユーザーを示す項目は大きく3種類あります。<br>
+    API や Webhook を使う際に理解しておく必要があるため、ここで整理しておきます。<br>
   </p>
 
   <ul>
@@ -200,42 +340,41 @@ const indexList = [
   </ul>
 
   <p>
-    呼び方は統一されていない気がしますが、項目としてはこの3つがあります。<br/>
-    display_name が設定されているユーザーの場合、チャットしたときの名前が「あああ(aaa)」と表示されます。この「あああ」が display_name で「aaa」が user_name です。<br/>
-    Twitch の API や Webhook を使用するときは user_name と user_id を結構使うので、この違いは把握しておきたい。<br/>
-    下記リンク先から user_name と user_id を相互に変換することができます。結構使うことはあるのでブックマークしておくと良いでしょう。<br/>
+    呼び方は統一されていない気がしますが、項目としてはこの3つがあります。<br>
+    display_name が設定されているユーザーの場合、チャットしたときの名前が「あああ(aaa)」と表示されます。この「あああ」が display_name で「aaa」が user_name です。<br>
+    Twitch の API や Webhook を使用するときは user_name と user_id を結構使うので、この違いは把握しておきたい。<br>
+    下記リンク先から user_name と user_id を相互に変換することができるのでブックマークしておくと良いでしょう。<br>
 
-    <a href="https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/" target="_blank" rel="noopener noreferrer">Convert Twitch Username to Channel ID</a><br/>
+    <a href="https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/" target="_blank" rel="noopener noreferrer">Convert Twitch Username to Channel ID</a><br>
   </p>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
-  <span id="tmijs"></span>
-  <h3 class="title">Node.js × tmi.js</h3>
+  <br>
+  <h3 class="title" id="tmijs">Node.js × tmi.js</h3>
   <p>
-    <a href="https://tmijs.com/" target="_blank" rel="noopener noreferrer">tmi.js</a> というライブラリを使うと、視聴者のチャットなど、様々なイベントに反応する処理を実装できます。 Node.js の EventEmitter のような仕組みでチャットをトリガーに処理を動かすことができます。<br/>
-    また、チャットを投げることもできます。<br/>
-    tmi.js についてはこちらも参照 <a href="https://github.com/tmijs/tmi.js" target="_blank" rel="noopener noreferrer">github tmi.js</a> 。<br/>
-    EventEmitter については<a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs#async`>非同期のイベント駆動型ランタイム</a>を参照してください。<br/>
+    <a href="https://tmijs.com/" target="_blank" rel="noopener noreferrer">tmi.js</a> というライブラリを使うと、視聴者のチャットなど、様々なイベントに反応する処理を実装できます。 Node.js の EventEmitter のような仕組みでチャットをトリガーに処理を動かすことができます。<br>
+    また、チャットを投げることもできます。<br>
+    tmi.js についてはこちらも参照 <a href="https://github.com/tmijs/tmi.js" target="_blank" rel="noopener noreferrer">github tmi.js</a> 。<br>
+    EventEmitter については<a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs#async`>非同期のイベント駆動型ランタイム</a>を参照してください。<br>
 
-    <br/>
-    tmi.js はチャット以外にも様々なイベントを拾って処理を開始することができます。ここではそのすべてについては説明しません。イベントの全量は以下リンク先を参照して下さい。<br/>
-    <a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md" target="_blank" rel="noopener noreferrer">github tmijs/docs</a><br/>
+    <br>
+    tmi.js はチャット以外にも様々なイベントを拾って処理を開始することができます。ここではそのすべてについては説明しません。イベントの全量は以下リンク先を参照して下さい。<br>
+    <a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md" target="_blank" rel="noopener noreferrer">github tmijs/docs</a><br>
 
-    <br/>
-    イベントの中には Webhook で拾えるものと被っているものが結構あります。<br/>
-    Webhook よりは tmi.js を使った方が（たぶん）早いので基本的に tmi.js を使えばいいと思いますが、raid は Webhook の方が使い勝手が良いと思います。<br/>
-    tmi.js の raid だと、 display_name を設定しているユーザーの場合、display_name のみが返され user_name を取得できないからです。display_name をキーに user_name を返してくれるAPI は（たぶん）ないので、結構困ります。<br/>
-    Webhook であれば user_name と display_name の両方を取得できます。<br/>
-    tmi.js を改造して両方取得するやり方を紹介しているブログ記事もありますが、外部ライブラリを改造するとバージョンアップの度に書き直す必要があったり、改造が原因で予期せぬ挙動をすることも考えられるのであまりお勧めできません。一応当該記事のリンクを張っておきます。<br/>
-    <a href="https://zenn.dev/sushat4692/scraps/7c25d4050fcb3b" target="_blank" rel="noopener noreferrer">Zenn tmi.jsでRaidのユーザ名・表示名を別々に取得したい</a><br/>
+    <br>
+    イベントの中には Webhook で拾えるものと被っているものが結構あります。<br>
+    Webhook よりは tmi.js を使った方が（たぶん）早いので基本的に tmi.js を使えばいいと思いますが、raid は Webhook の方が使い勝手が良いと思います。<br>
+    tmi.js の raid だと、 display_name を設定しているユーザーの場合、display_name のみが返され user_name を取得できないからです。display_name をキーに user_name を返してくれるAPI は（たぶん）ないので、結構困ります。<br>
+    Webhook であれば user_name と display_name の両方を取得できます。<br>
+    tmi.js を改造して両方取得するやり方を紹介しているブログ記事もありますが、外部ライブラリを改造するとバージョンアップの度に書き直す必要があったり、改造が原因で予期せぬ挙動をすることも考えられるのであまりお勧めできません。一応当該記事のリンクを張っておきます。<br>
+    <a href="https://zenn.dev/sushat4692/scraps/7c25d4050fcb3b" target="_blank" rel="noopener noreferrer">Zenn tmi.jsでRaidのユーザ名・表示名を別々に取得したい</a><br>
 
-    <br/>
-    以下は、誰かがチャットするたびに稼働する処理の例です。<a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md#message" target="_blank" rel="noopener noreferrer">Message</a> イベントをトリガーにしています。<br/>
-    事前に以下コマンドで tmi.js をインストールしている前提です。<br/>
-    <code>npm i tmi.js</code><br/>
+    <br>
+    以下は、誰かがチャットするたびに稼働する処理の例です。<a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md#message" target="_blank" rel="noopener noreferrer">Message</a> イベントをトリガーにしています。<br>
+    事前に以下コマンドで tmi.js をインストールしている前提です。<br>
+    <code>npm i tmi.js</code><br>
   </p>
 
 <pre class="title"><code class="title">twitch_bot.js</code></pre>
@@ -266,25 +405,25 @@ twClientBot.on('message', (channel, userstate, msg, self) => {
 twClientBot.connect();`}
 </code></pre>
 
-  <br/>
+  <br>
   <p>
     "[ ]" 内には以下の値を設定します。
   </p>
   <ul>
-    <li>access_token：<a href="#auth_code_grant_flow">Authorization code grant flow</a> で取得した access_token</li>
+    <li>access_token：<a href="#token">Tokenの発行</a>で取得した User access token</li>
     <li>channel_name：対象チャンネルのチャンネル名（＝user_name）</li>
     <li>message：投稿するメッセージ</li>
   </ul>
 
-  <br/>
+  <br>
 <pre><code>{`twClientBot.on('message', (channel, userstate, msg, self) => {
   ...中略...
 });`}
 </code></pre>
 
   <p>
-    の部分はチャットが入力される度に稼働する処理です。channel にはチャンネル名、 userstate にはチャットしてくれたユーザーの情報、 msg にはチャットに入力された文言、 self は自分自身かどうかを示す bool 型の値が入っています。<br/>
-    第2引数の userstate には以下のようなユーザー情報が json 形式で入っているので、主にこの userstate と msg（ユーザーがチャットに投げた文言） を使って自由に処理を組み立てることができます。<br/>
+    の部分はチャットが入力される度に稼働する処理です。channel にはチャンネル名、 userstate にはチャットしてくれたユーザーの情報、 msg にはチャットに入力された文言、 self は自分自身かどうかを示す bool 型の値が入っています。<br>
+    第2引数の userstate には以下のようなユーザー情報が json 形式で入っているので、主にこの userstate と msg（ユーザーがチャットに投げた文言） を使って自由に処理を組み立てることができます。<br>
   </p>
 
 <pre><code>{`{
@@ -320,69 +459,69 @@ twClientBot.connect();`}
 </code></pre>
 
 
-  <br/><br/>
+  <br><br>
   <p>
     以上で tmi.js については終わりです。
   </p>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
+  <br>
   <span id="webhook"></span>
   <h3 class="title">Node.js × Webhook</h3>
   <p>
-    Webhook でイベントの通知を受け取るためには、まず受け取るサーバを構築する必要があります。以下リンク先で詳細に解説されていますが、ここでも記載します。<br/>
-    <a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/" target="_blank" rel="noopener noreferrer">Getting Events Using Webhook Callbacks</a><br/>
+    Webhook でイベントの通知を受け取るためには、まず受け取るサーバを構築する必要があります。以下リンク先で詳細に解説されていますが、ここでも記載します。<br>
+    <a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/" target="_blank" rel="noopener noreferrer">Getting Events Using Webhook Callbacks</a><br>
 
-    <br/>
+    <br>
     Webhook でイベントを受け取るためには、まず以下のような形式で curl コマンドを実行する必要があります。
   </p>
 
 <pre><code>{`curl -X POST -d '{
-  "type":"[subscription_type]", 
-  "version":"1", 
+  "type":"[subscription_type]",
+  "version":"1",
   "condition":{
     "broadcaster_user_id":"[user_id]"
-  }, 
+  },
   "transport":{
-  "method":"webhook", 
-  "callback":"[callback_url]", 
+  "method":"webhook",
+  "callback":"[callback_url]",
   "secret":"[secret]"
   }
 }'
--H "Content-Type: application/json" 
--H "Authorization: Bearer [access_token]" 
--H "client-id: [client_id]" 
+-H "Content-Type: application/json"
+-H "Authorization: Bearer [access_token]"
+-H "client-id: [client_id]"
 https://api.twitch.tv/helix/eventsub/subscriptions
 `}</code></pre>
 
-  <br/>
+  <br>
   <ul>
     <li>
-      subscription_type：<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/" target="_blank" rel="noopener noreferrer">Subscription Types</a> の Name 列の値を設定。<br/>
-      例として、配信開始なら <pre><code>'stream.online'</code></pre> を、チャンネルポイントの使用を受け取るなら <pre><code>'channel.channel_points_custom_reward_redemption.add'</code></pre> を指定。
+      subscription_type：<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/" target="_blank" rel="noopener noreferrer">Subscription Types</a> の Name 列の値を設定。<br>
+      例として、配信開始イベントを受け取るなら <code>'stream.online'</code> を、チャンネルポイントが使用されたイベントを受け取るなら <code>'channel.channel_points_custom_reward_redemption.add'</code> を指定。
     </li>
     <li>user_id：イベントを受け取りたいユーザーの user_id（基本的には自分の user_id を指定するが、他人の user_id を指定すれば、他人の配信開始などのイベントを受信することも可能）</li>
     <li>
-      callback_url：Webhook でイベントの通知を受け取りたいURL<br/>
-      (https://[ホスト名]/[パス])<br/>
+      callback_url：Webhook でイベントの通知を受け取りたいURL<br>
+      (https://[ホスト名]/[パス])<br>
       ※指定するURLは443番ポートでSSL通信を使用している必要があります。
     </li>
     <li>secret：Webhook を受け取ったサーバで認証に使用する値</li>
-    <li>access_token：<a href="#client_cred_grant_flow">Client credentials grant flow</a> で取得した access_token</li>
+    <li>access_token：<a href="#token">Tokenの発行</a>で取得した App access token</li>
     <li>client_id：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
   </ul>
-  <br/>
+  <br>
 
   <p>
-    上記 curl を実行すると callback_url に確認のリクエストが飛んでくる。<br/>
-    リクエストヘッダーの 'Twitch-Eventsub-Message-Type' に 'webhook_callback_verification' という値が入ってくるので、その場合は body 部の challenge を status 200 でそのまま返せばOK。<br/>
-    確認のリクエストを受け取るためのサーバ側の Node.js のコードは以下の通り。http サーバを構築してリクエストを受け取れるようにしています。<br/>
-    （<a href="#whole">全量のコードを後に</a>載せていますが、長いのでここでは抜粋）<br/>
-    事前に以下コマンドで express と body-parser というライブラリをインストールしている前提です。<br/>
-    <code>npm i express</code><br/>
-    <code>npm i body-parser</code><br/>
+    上記 curl を実行すると callback_url に確認のリクエストが飛んでくる。<br>
+    リクエストヘッダーの 'Twitch-Eventsub-Message-Type' に 'webhook_callback_verification' という値が入ってくるので、その場合は body 部の challenge を status 200 でそのまま返せばOK。<br>
+    確認のリクエストを受け取るためのサーバ側の Node.js のコードは以下の通り。http サーバを構築してリクエストを受け取れるようにしています。<br>
+    （<a href="#whole">全量のコードを後に</a>載せていますが、長いのでここでは抜粋）<br>
+    事前に以下コマンドで express と body-parser というライブラリをインストールしている前提です。<br>
+    <code>npm i express</code><br>
+    <code>npm i body-parser</code><br>
   </p>
 
 <pre class="title"><code class="title">確認のリクエストを受ける部分抜粋</code></pre>
@@ -411,7 +550,7 @@ const server = createServer(app);
 server.listen(8080);`}
 </code></pre>
 
-  <br/>
+  <br>
   <p>
     以下の curl コマンドを実行すると、問題なく処理されているかを確認することができます。access_token, client_id に設定する値は先の curl コマンドの時と同じです。
   </p>
@@ -421,7 +560,7 @@ server.listen(8080);`}
 -H 'Client-Id: [client_id]'
 </code></pre>
 
-<br/>
+<br>
 <p>
   以下のようなレスポンスが返ってきます。 status が enabled になっていれば問題なしです。
 </p>
@@ -447,11 +586,11 @@ server.listen(8080);`}
 }`}
 </code></pre>
 
-<br/>
+<br>
 <span id="whole"></span>
 <p>
-以下が（ほぼ）全量の Node.js のコードです。Webhook でイベントの通知を受け取った時の処理も記載しています。<br/>
-Twitch から送られてきたものであることを確認するため、HMAC認証のコードを入れています。これについては <a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#verifying-the-event-message" target="_blank" rel="noopener noreferrer">Verifying the event message</a> も参照してください。<br/>
+以下が（ほぼ）全量の Node.js のコードです。Webhook でイベントの通知を受け取った時の処理も記載しています。<br>
+Twitch から送られてきたものであることを確認するため、HMAC認証のコードを入れています。これについては <a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#verifying-the-event-message" target="_blank" rel="noopener noreferrer">Verifying the event message</a> も参照してください。<br>
 </p>
 <pre class="title"><code class="title">（ほぼ）全量</code></pre>
 <pre><code>{`'use strict';
@@ -556,23 +695,23 @@ function verifyMessage(hmac, verifySignature) {
 `}</code></pre>
 
 
-  <br/><br/>
+  <br><br>
   <p>
     以上で Webhook については終わりです。
   </p>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
+  <br>
   <span id="api"></span>
   <h3 class="title">Node.js × Twitch API</h3>
   <p>
-    Twitch には様々な API が用意されており、それを呼び出すことで様々な処理を行うことができます。<br/>
-    API の一覧と仕様は <a href="https://dev.twitch.tv/docs/api/reference/" target="_blank" rel="noopener noreferrer">Twitch API Reference</a> 参照。リクエストパラメータやリクエストボディ、レスポンスの内容、必要なスコープがわかるようになっている。<br/>
-    今回は例として、ユーザーを Ban する Node.js の関数を作ってみます。<br/>
-    user_name を引数で受け取り、<a href="https://dev.twitch.tv/docs/api/reference/#get-users" target="_blank" rel="noopener noreferrer">Get Users API</a> で user_name を元に user_id を取得し、それを使用して <a href="https://dev.twitch.tv/docs/api/reference/#ban-user" target="_blank" rel="noopener noreferrer">Ban User API</a> で ban するという流れです。<br/>
-    ※access_token やクライアントID などの機密情報は、外部ファイルに json 形式などで保存した上で、そこから取得するようにしてください。<br/>
+    Twitch には様々な API が用意されており、それを呼び出すことで様々な処理を行うことができます。<br>
+    API の一覧と仕様は <a href="https://dev.twitch.tv/docs/api/reference/" target="_blank" rel="noopener noreferrer">Twitch API Reference</a> 参照。リクエストパラメータやリクエストボディ、レスポンスの内容、必要なスコープがわかるようになっている。<br>
+    今回は例として、ユーザーを Ban する Node.js の関数を作ってみます。<br>
+    user_name を引数で受け取り、<a href="https://dev.twitch.tv/docs/api/reference/#get-users" target="_blank" rel="noopener noreferrer">Get Users API</a> で user_name を元に user_id を取得し、それを使用して <a href="https://dev.twitch.tv/docs/api/reference/#ban-user" target="_blank" rel="noopener noreferrer">Ban User API</a> で ban するという流れです。<br>
+    ※access_token やクライアントID などの機密情報は、外部ファイルに json 形式などで保存した上で、そこから取得するようにしてください。<br>
   </p>
 
 <pre><code>{`async function banUser(banUserName) {
@@ -606,28 +745,28 @@ function verifyMessage(hmac, verifySignature) {
 }
 `}</code></pre>
 
-  <br/>
+  <br>
   <p>
     "[ ]" には以下の値を設定します。
   </p>
   <ul>
-    <li>access_token：<a href="#auth_code_grant_flow">Authorization code grant flow</a>で取得した access_token</li>
+    <li>access_token：<a href="#token">Tokenの発行</a>で取得した User access token</li>
     <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
   </ul>
 
-  <br/>
+  <br>
   <p>
     以上で Twitch の API については終わりです。
   </p>
 
-  <br/>
+  <br>
   <AdUnitLandscape />
 
-  <br/>
+  <br>
   <span id="others"></span>
   <h3 class="title">その他の実装</h3>
   <p>
-    Node.js と Twitch の組み合わせについては以上です。その他の組み合わせについては以下リンク先を参照してください。<br/>
+    Node.js と Twitch の組み合わせについては以上です。その他の組み合わせについては以下リンク先を参照してください。<br>
   </p>
 
   <ul>
@@ -635,11 +774,11 @@ function verifyMessage(hmac, verifySignature) {
     <li><a href=`${BASE_URL}/contents/development/javascript/nodejs/obs`>Node.js × OBS</a></li>
   </ul>
 
-  <br/>
+  <br>
   <hr>
 
-  <br/>
-  参考サイト<br/>
+  <br>
+  参考サイト<br>
   <ul>
     <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">Twitch developers Getting OAuth Access Tokens</a></li>
     <li><a href="https://dev.twitch.tv/docs/authentication/" target="_blank" rel="noopener noreferrer">Twitch developers Authentication</a></li>
@@ -654,5 +793,7 @@ function verifyMessage(hmac, verifySignature) {
     <li><a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md" target="_blank" rel="noopener noreferrer">github tmijs/docs</a></li>
     <li><a href="https://zenn.dev/sushat4692/scraps/7c25d4050fcb3b" target="_blank" rel="noopener noreferrer">Zenn tmi.jsでRaidのユーザ名・表示名を別々に取得したい</a></li>
     <li><a href="https://qiita.com/pasta04/items/750d71d41e5edd12932b" target="_blank" rel="noopener noreferrer">Qiita Twitch APIを利用してみよう</a></li>
+    <li><a href="https://zenn.dev/calloc134/books/sikkari-oauth-oidc/viewer/20-implicit-flow" target="_blank" rel="noopener noreferrer">Zenn インプリシットフローの解説と非推奨の理由</a></li>
+    <li><a href="https://datatracker.ietf.org/doc/html/rfc9700" target="_blank" rel="noopener noreferrer">RFC 9700 Best Current Practice for OAuth 2.0 Security</a></li>
   </ul>
 </SiteLayout>
