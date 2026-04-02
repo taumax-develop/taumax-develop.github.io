@@ -10,7 +10,7 @@ import play_with_nodejs_twitch from './img/twitch/play_with_nodejs_twitch.jpg';
 import application_info_img from './img/twitch/application_info.jpg';
 import client_credentials_grant_flow from './img/twitch/client_credentials_grant_flow.jpg';
 import implicit_grant_flow from './img/twitch/implicit_grant_flow.jpg';
-import CommonFlow from "../../../../../components/twitch/CommonOAuthFlow.astro";
+import CommonOAuthFlow from "../../../../../components/twitch/CommonOAuthFlow.astro";
 
 const resourceOwner = `リソースオーナーとは一般的に、『アカウントを持つユーザー本人』を指します。<br>
 OAuth 2.0認可フレームワークにおいて、保護されたデータやサービス（リソース）を所有し、そのアクセス権限を第三者（クライアント）へ付与できるユーザーまたはシステムのことです。`
@@ -264,7 +264,7 @@ const indexList = [
   </p>
 
   <br>
-  <CommonFlow kbn="authorization" />
+  <CommonOAuthFlow kbn="authorization" />
 
   <p>
     <b>5. 認可コード発行</b><br>
@@ -320,7 +320,7 @@ const indexList = [
   </p>
 
   <br>
-  <CommonFlow kbn="implicit" />
+  <CommonOAuthFlow kbn="implicit" />
 
   <p>
     <b>5. アクセストークン発行</b><br>
