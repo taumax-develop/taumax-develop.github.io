@@ -11,6 +11,7 @@ const imp = {
   link: `<a href="#auth_code_grant_flow">Authorization code grant flow</a>の response_type が code から token に変わる以外は同じです。`,
   resType: "token",
 }
+
 const map = new Map()
 map.set("authorization", auth)
 map.set("implicit", imp)
@@ -21,11 +22,7 @@ map.set("implicit", imp)
     リソースオーナー＝自分という前提で書いています。<br>
   </p>
   <p>
-    <b>1. ログイン要求</b><br>
-    自分のTwitchアカウントでログイン<br>
-  </p>
-  <p>
-    <b>2. 認可リクエスト</b><br>
+    <b>1. 認可リクエスト</b><br>
     以下のような形式の URL をブラウザに入力します。
     <span set:html={map.get(kbn).link} /><br>
   </p>
@@ -76,6 +73,11 @@ map.set("implicit", imp)
 </code></pre>
 
   <br>
+  <p>
+    <b>2. ログイン要求</b><br>
+    Twitchにログインしていない場合、ログインを要求されます。<br>
+  </p>
+
   <p>
     <b>3. 認可確認画面</b><br>
     上記をブラウザに入力すると、以下のような認可確認画面が表示されます。<br>

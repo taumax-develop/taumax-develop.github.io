@@ -12,7 +12,7 @@ import client_credentials_grant_flow from './img/twitch/client_credentials_grant
 import implicit_grant_flow from './img/twitch/implicit_grant_flow.jpg';
 import CommonOAuthFlow from "../../../../../components/twitch/CommonOAuthFlow.astro";
 
-const resourceOwner = `リソースオーナーとは一般的に、『アカウントを持つユーザー本人』を指します。<br>
+const RESOURCE_OWNER = `リソースオーナーとは一般的に、『アカウントを持つユーザー本人』を指します。<br>
 OAuth 2.0認可フレームワークにおいて、保護されたデータやサービス（リソース）を所有し、そのアクセス権限を第三者（クライアント）へ付与できるユーザーまたはシステムのことです。`
 
 const indexList = [
@@ -71,8 +71,8 @@ const indexList = [
     大まかに以下の流れでトークンを発行します。<br>
   </p>
   <ol>
-    <li>Client IDとClient Secretの発行：<a href="#register_application">アプリケーションの登録</a></li>
-    <li>トークンの発行：<a href="#token">Tokenの発行</a></li>
+    <li>Client IDとClient Secretの発行：<a href="#register_application">アプリケーションの登録</a>にて手順説明</li>
+    <li>トークンの発行：<a href="#token">Tokenの発行</a>にて手順説明</li>
   </ol>
   <p>
     以下、その手順について説明していきます。
@@ -81,7 +81,7 @@ const indexList = [
   <br>
   <h3 class="title" id="register_application">アプリケーションの登録</h3>
   <p>
-    まず Twitch の developers サイトでアプリケーションを登録する必要があります。<br>
+    Client ID と Client Secret を発行するには、Twitch の developers サイトでアプリケーションを登録する必要があります。<br>
     リンク先（<a href="https://dev.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch developers</a>）右上の「Log in with Twitch」ボタンから developers サイトにログイン。<br>
     その後、右上の 「Your Console」 ボタンからコンソール画面に遷移して、「アプリケーションを登録」ボタンを押下。<br>
     <Image src={console_img} width={500} alt="console" /><br>
@@ -99,12 +99,13 @@ const indexList = [
   <br>
   <h3 class="title" id="token">トークンの発行</h3>
   <p>
+    Client ID と Client Secret が発行されたらトークンを発行できるようになります。<br>
     Twitchのトークンには App access token と User access token の2種類があり、それぞれ用途は以下の通り。<br>
   </p>
 
-  <div style="padding-left: 1em;">
+  <div style="padding-left: 1em;" class="slider">
     <table border="1">
-      <tr><th>トークンの種類</th><th>用途</th></tr>
+      <tr><th style="z-index: 0">トークンの種類</th><th>用途</th></tr>
       <tr>
         <td style="white-space: nowrap;">
           <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens" target="_blank" rel="noopener noreferrer">User access token</a>
@@ -156,7 +157,9 @@ const indexList = [
         </td>
       </tr>
     </table>
-    ※<span set:html={resourceOwner} />
+  </div>
+  <div style="padding-left: 1em;" class="slider">
+    ※<span set:html={RESOURCE_OWNER} />
   </div>
 
   <br>
@@ -164,9 +167,9 @@ const indexList = [
     トークンの取得方法については<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">リンク先にまとまって</a>いる通り、4種類の認証フローがあります。<br>
   </p>
 
-  <div style="padding-left: 1em;">
+  <div style="padding-left: 1em;" class="slider">
     <table border="1">
-      <tr><th>発行するトークン</th><th>認証フロー</th><th>リフレッシュトークンの発行</th><th>有効期限</th><th>関連リンク</th></tr>
+      <tr><th style="z-index: 0">発行するトークン</th><th>認証フロー</th><th>リフレッシュトークンの発行</th><th>有効期限</th><th>関連リンク</th></tr>
       <tr>
         <td>App access token</td>
         <td><a href="#client_cred_grant_flow">Client credentials grant flow</a></td>
@@ -273,7 +276,7 @@ const indexList = [
   <p>
     Authorization code grant flowは以下の図に示す流れになっています。<br>
     <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
-    ※<span set:html={resourceOwner} />
+    ※<span set:html={RESOURCE_OWNER} />
   </p>
 
   <br>
@@ -334,8 +337,8 @@ const indexList = [
     認可コードを使う方式に比べて安全性に問題があるため OAuth としては非推奨の方式であり、OAuth 2.1からは Implicit grant は仕様自体から削除されています。<br>
     （2026/4/3現在、TwitchはOAuth 2.0準拠のためImplicit grant flowは使用可能です）<br>
     Implicit grant flow は以下の図に示す流れでトークンを取得する方式になっています。<br>
-    <Image src={implicit_grant_flow} width={700} alt="implicit_grant_flow" /><br>
-    ※<span set:html={resourceOwner} />
+    <Image src={implicit_grant_flow} width={650} alt="implicit_grant_flow" /><br>
+    ※<span set:html={RESOURCE_OWNER} />
   </p>
 
   <br>
