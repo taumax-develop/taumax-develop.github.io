@@ -1,19 +1,33 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import refactoringImg from '../../img/refactoring.jpg';
 import legacyCodeImg from '../../img/legacy_code.jpg';
 import { BASE_URL } from '../../../../../consts';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { codesmellBcList } from '../Codesmells.astro';
 
 const title = "Change-Preventers";
 const description = "Code Smell: Change Preventers";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", url: "/" }
+
+export const changePreventersBc: Breadcrumb = {
+  name: "Change Preventers",
+  item: `${BASE_URL}/contents/development/codesmell/category/Change-Preventers`
+};
+export const changePreventersBcList: Breadcrumb[] = [...codesmellBcList, changePreventersBc];
+const indexList: index[] = [
+  { id: "Home", name: "/" }
 ];
 ---
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
-  <h2 class="title">Change-Preventers</h2>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={changePreventersBcList}
+  indexList={indexList}
+>
 
+  <br>
   <h2 id="changepreventers">Change Preventers</h2>
   <p><a href="https://sourcemaking.com/refactoring/smells/change-preventers" target="_blank" rel="noopener noreferrer">Change Preventers（変更を妨げるもの）</a>：
     これらのCode Smellは、コードのある場所で何かを変更すると、他の場所でも多くの変更を行う必要があることを意味します。

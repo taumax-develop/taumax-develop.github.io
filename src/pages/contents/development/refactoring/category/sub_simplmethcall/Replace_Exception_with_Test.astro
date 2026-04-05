@@ -1,26 +1,34 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplMethCallsBcList } from '../Simplifying_Method_Calls.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
+export const replaceExceptionBc: Breadcrumb = {
+  name: "Replace Exception with Test",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplmethcall/Replace_Exception_with_Test`
+};
+export const replaceExceptionBcList: Breadcrumb[] = [...smplMethCallsBcList, replaceExceptionBc];
+const indexList: index[] = [
   { id: '#replaceexceptionwithtest', name: 'Replace Exception with Test' }
 ];
 ---
 
 <SiteLayout
-  title="Replace Exception with Test | リファクタリング技法"
+  title="Replace Exception with Test"
+  description="リファクタリング技法：Replace Exception with Testの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={replaceExceptionBcList}
   indexList={indexList}
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
 
-  <h2 class="title">リファクタリング技法</h2>
+  <br>
+  <h3 class="title" id="replaceexceptionwithtest">Replace Exception with Test</h3>
 
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
-  
+
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>
   リファクタリング第2版<br>
@@ -35,7 +43,7 @@ const indexList = [
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
-  <h2 id="replaceexceptionwithtest">Replace Exception with Test</h2>
+  <h2>Replace Exception with Test</h2>
   <p><a href="https://sourcemaking.com/refactoring/replace-exception-with-test" target="_blank" rel="noopener noreferrer">Replace Exception with Test</a>
   ※関連するCode Smellがなかったためリンクのみ。</p>
 </SiteLayout>

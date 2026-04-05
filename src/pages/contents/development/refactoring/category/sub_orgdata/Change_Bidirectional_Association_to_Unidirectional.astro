@@ -3,19 +3,32 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import img01 from './img/change_bidirectional_association_to_unidirectional/img01.png'
 import img02 from './img/change_bidirectional_association_to_unidirectional/img02.png'
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { organizeDataBcList } from '../Organizing_Data.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#organizingdata', name: 'Organizing Data' },
+export const toUnidirectionalBc: Breadcrumb = {
+  name: "Change Bidirectional Association to Unidirectional",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/Change_Bidirectional_Association_to_Unidirectional`
+};
+export const toUnidirectionalBcList: Breadcrumb[] = [...organizeDataBcList, toUnidirectionalBc];
+const indexList: index[] = [
   { id: '#changebidirectionalassociationtounidirectional', name: 'Change Bidirectional Association to Unidirectional' }
 ];
 ---
 
-<SiteLayout title="Change Bidirectional Association to Unidirectional | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Change Bidirectional Association to Unidirectional"
+  description="リファクタリング: Change Bidirectional Association to Unidirectional の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={toUnidirectionalBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="changebidirectionalassociationtounidirectional">Change Bidirectional Association to Unidirectional</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -30,7 +43,7 @@ const indexList = [
   <h1 id="organizingdata">Organizing Data</h1>
   <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
-  <h2 id="changebidirectionalassociationtounidirectional">Change Bidirectional Association to Unidirectional</h2>
+  <h2>Change Bidirectional Association to Unidirectional</h2>
   <p><a href="https://sourcemaking.com/refactoring/change-bidirectional-association-to-unidirectional" target="_blank" rel="noopener noreferrer">Change Bidirectional Association to Unidirectional</a>
   クラス同士が相互に依存しているが、一方のクラスは他方の機能を使用していない場合、未使用の関連を削除します。</p>
   <p><strong><em>【リファクタリング前】</em></strong><br/>

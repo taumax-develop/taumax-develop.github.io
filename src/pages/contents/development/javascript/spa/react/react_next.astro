@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from "astro:assets";
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import next_project from './img/react_next/next_project.jpg';
@@ -12,6 +12,8 @@ import 能力詳細 from './img/react_next/能力詳細.jpg';
 import { BASE_URL } from '../../../../../../consts';
 import react_next from '../img/react_next.jpg';
 import typescript_react_next from '../img/typescript_react_next.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { spaBcList } from '../spa.astro';
 
 const reactCode = `
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -41,7 +43,12 @@ const reactCode = `
   </script>
 `
 
-const indexList = [
+export const reactNextBc: Breadcrumb = {
+  name: "React/Next.js",
+  item: `${BASE_URL}/contents/development/javascript/spa/react/react_next`
+};
+export const reactNextBcList: Breadcrumb[] = [...spaBcList, reactNextBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#react', name: 'React' },
   { id: '#jsx', name: 'JSX' },
@@ -56,20 +63,12 @@ const indexList = [
 ---
 
 <SiteLayout
-  title="Next.jsのレンダリング"
-  description="Next.jsのレンダリングについて"
+  title="React/Next.js"
+  description="ReactとNext.jsについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={reactNextBcList}
   indexList={indexList}
 >
-
-  <h2 class="title">React/Next.js</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/spa`>SPA</a></li>
-    <li class="breadcrumbli"> > React/Next.js</li>
-  </ul>
 
   <br/>
   <span id="firstly"></span>

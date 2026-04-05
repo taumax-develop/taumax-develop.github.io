@@ -1,18 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import RefactoringImg from "../../../img/refactoring.jpg";
 import LegacyCodeImg from "../../../img/legacy_code.jpg";
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { couplersBcList } from '../Couplers.astro';
 
 const title = "Feature Envy";
 const description = "Code Smell: Feature Envy";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", href: "/" }
+
+export const featureEnvyBc: Breadcrumb = {
+  name: "Feature Envy",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_couplers/Feature_Envy`
+};
+export const featureEnvyBcList: Breadcrumb[] = [...couplersBcList, featureEnvyBc];
+const indexList: index[] = [
+  { id: "Home", name: "/" }
 ];
 ---
 
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={featureEnvyBcList}
+  indexList={indexList}
+>
+
+  <br>
   <h3 id="featureenvy">Feature Envy</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/feature-envy" target="_blank" rel="noopener noreferrer">Feature Envy（フィーチャーエンビー）</a></p>
   <p>Feature Envyは、あるメソッドが自分のクラスよりも他のクラスのデータやメソッドを多用する場合に発生します。</p>

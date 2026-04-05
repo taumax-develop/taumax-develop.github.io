@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { organizeDataBcList } from '../Organizing_Data.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#organizingdata', name: 'Organizing Data' },
+export const toValueBc: Breadcrumb = {
+  name: "Change Reference to Value",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/Change_Reference_to_Value`
+};
+export const toValueBcList: Breadcrumb[] = [...organizeDataBcList, toValueBc];
+const indexList: index[] = [
   { id: '#changereferencetovalue', name: 'Change Reference to Value' }
 ];
 ---
 
-<SiteLayout title="Change Reference to Value | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Change Reference to Value"
+  description="リファクタリング: Change Reference to Value の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={toValueBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="changereferencetovalue">Change Reference to Value</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="organizingdata">Organizing Data</h1>
   <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
-  <h2 id="changereferencetovalue">Change Reference to Value</h2>
+  <h2>Change Reference to Value</h2>
   <p><a href="https://sourcemaking.com/refactoring/change-reference-to-value" target="_blank" rel="noopener noreferrer">Change Reference to Value</a>
   ※関連するCode Smellがなかったためリンクのみ。</p>
 </SiteLayout>

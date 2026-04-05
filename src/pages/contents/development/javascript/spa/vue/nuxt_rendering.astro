@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from "astro:assets";
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
@@ -11,10 +11,17 @@ import ISGの動作イメージ from './img/nuxt_rendering/ISGの動作イメー
 import vue3 from '../img/vue3.jpg';
 import nuxt3 from '../img/nuxt3.jpg';
 import vuejs入門 from '../img/vuejs入門.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { vueNuxtBcList } from './vue_nuxt.astro';
 
-const indexList = [
+export const nuxtRenderingBc: Breadcrumb = {
+  name: "Nuxt3のレンダリング",
+  item: `${BASE_URL}/contents/development/javascript/spa/vue/nuxt_rendering`
+};
+export const nuxtRenderingBcList: Breadcrumb[] = [...vueNuxtBcList, nuxtRenderingBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
-  { id: '#rendering', name: 'Next.jsのレンダリングめに' },
+  { id: '#rendering', name: 'Nuxt3のレンダリング' },
   { id: '#ssr', name: 'SSR' },
   { id: '#ssg', name: 'SSG' },
   { id: '#isg', name: 'ISG' },
@@ -28,21 +35,12 @@ const indexList = [
 ---
 
 <SiteLayout
-  title="Next.jsのレンダリング"
-  description="Next.jsのレンダリングについて"
+  title="Nuxt3のレンダリング"
+  description="Nuxt3のレンダリングについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={nuxtRenderingBcList}
   indexList={indexList}
 >
-
-  <h2 class="title">Nuxt3のレンダリング</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/spa`>SPA</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/vue/vue_nuxt`>Vue.js/Nuxt</a></li>
-    <li class="breadcrumbli"> > Nuxt3のレンダリング</li>
-  </ul>
 
   <br/>
   <span id="firstly"></span>

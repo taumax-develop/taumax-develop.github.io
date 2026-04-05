@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplCondExpressBcList } from '../Simplifying_Conditional_Expressions.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+export const decomposeCondBc: Breadcrumb = {
+  name: "Decompose Conditional",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/Decompose_Conditional`
+};
+export const decomposeCondBcList: Breadcrumb[] = [...smplCondExpressBcList, decomposeCondBc];
+const indexList: index[] = [
   { id: '#decomposeconditional', name: 'Decompose Conditional' }
 ];
 ---
 
-<SiteLayout title="Decompose Conditional | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Decompose Conditional"
+  description="リファクタリング: Decompose Conditional の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={decomposeCondBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="decomposeconditional">Decompose Conditional</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions" target="_blank" rel="noopener noreferrer">Simplifying Conditional Expressions</a></p>
 
-  <h2 id="decomposeconditional">Decompose Conditional</h2>
+  <h2>Decompose Conditional</h2>
   <p><a href="https://sourcemaking.com/refactoring/decompose-conditional" target="_blank" rel="noopener noreferrer">Decompose Conditional（条件文の分解）</a>
     複雑な分岐条件をメソッドとして切り出すこと。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

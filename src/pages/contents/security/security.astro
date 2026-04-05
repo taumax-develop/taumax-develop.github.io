@@ -1,0 +1,33 @@
+---
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../consts';
+import { indexPagebcList } from '../../index.astro';
+import type { index } from '../../../components/HeaderIndex.astro';
+
+export const securityPagebc: Breadcrumb = {
+  name: "セキュリティ",
+  item: `${BASE_URL}/contents/security/security`
+};
+export const securityBreadcrumbList = [...indexPagebcList, securityPagebc];
+const indexList = [] as index[];
+---
+
+<SiteLayout
+  title="セキュリティ"
+  description="セキュリティに関する解説ページ。CSRF、CORS、SOP、CVSS、OAuthなどの情報を提供します。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={securityBreadcrumbList}
+  indexList={indexList}
+>
+
+  <br/>
+  <h3 class="title">セキュリティ</h3>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/security/csrf/csrf`>CSRF（Cross-Site Request Forgeries: クロスサイトリクエストフォージェリ）</a></li>
+    <li><a href=`${BASE_URL}/contents/security/cors/cors`>CORS（Cross-Origin Resource Sharing: オリジン間リソース共有）</a></li>
+    <li><a href=`${BASE_URL}/contents/security/sop/sop`>SOP（Same-Origin Policy: 同一生成元ポリシー）</a></li>
+    <li><a href=`${BASE_URL}/contents/security/cvss/cvss`>CVSS</a></li>
+    <li><a href=`${BASE_URL}/contents/security/oauth/oauth2.0`>OAuth</a></li>
+  </ul>
+</SiteLayout>

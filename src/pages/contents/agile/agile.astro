@@ -1,17 +1,30 @@
 ---
-import { SITE_TITLE, BASE_URL, TWITTER_CARD_SUMMARY } from '../../../consts';
-import SiteLayout from '../../../layouts/SiteLayout.astro';
+import type { index } from '../../../components/HeaderIndex.astro';
+import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../consts';
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { indexPagebcList } from '../../index.astro';
+
+export const agilePagebc: Breadcrumb = {
+  name: "アジャイル",
+  item: `${BASE_URL}/contents/agile/agile`
+};
+export const agileBreadcrumbList: Breadcrumb[] = [...indexPagebcList, agilePagebc];
+const indexList: index[] = []
 ---
 
 <SiteLayout
-  title={SITE_TITLE}
-  description="アジャイル"
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
+  title={"アジャイル"}
+  description="アジャイル記事のインデックスページ。アジャイルに関する解説やイベントレポートなどを掲載します。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={agileBreadcrumbList}
+  indexList={indexList}
+>
 
-  <div id="firstly"></div>
-  <h2 class="title">アジャイル</h2>
+  <br>
+  <h3 class="title">アジャイル</h3>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/agile/event/learn_retrospective_methods`>ふりかえりの手法をたくさん学ぼう</a></li>
+  </ul>
 
-  <a href={BASE_URL}>ホーム</a> > アジャイル<br><br>
-
-  <a href=`${BASE_URL}/contents/agile/event/learn_retrospective_methods`>ふりかえりの手法をたくさん学ぼう</a>
+  <br><br><br><br>
 </SiteLayout>

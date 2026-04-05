@@ -1,11 +1,18 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgMarginPadding from './img/margin_padding.png';
 import { BASE_URL } from '../../../../consts';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { selfDevelopBreadcrumbList } from '../bymyself.astro';
 
-const indexList = [
+export const htmlCssPagebc: Breadcrumb = {
+  name: "htmlとcss",
+  item: `${BASE_URL}/contents/bymyself/abouthtml/abouthtml`
+};
+export const breadcrumbList: Breadcrumb[] = [...selfDevelopBreadcrumbList, htmlCssPagebc];
+const indexList: index[] = [
   { id: "#summary", name: "概要" },
   { id: "#whatimade", name: "作成物" },
   { id: "#mechanism", name: "仕組み" },
@@ -17,6 +24,7 @@ const indexList = [
   title="htmlとcss"
   description="twitterのbotとか自動リリース機能の構築とか、自作サイト作ってそれをhttps化したりとかいろいろ自力で構築した中で得た知識を整理した記事です。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
   <h2 class="title">htmlとcss</h2>

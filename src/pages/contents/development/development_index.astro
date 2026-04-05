@@ -1,0 +1,37 @@
+---
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../consts';
+import type { index } from '../../../components/HeaderIndex.astro';
+import { indexPagebcList } from '../../index.astro';
+
+export const developmentBc: Breadcrumb = {
+  name: "開発知識",
+  item: `${BASE_URL}/contents/development/development_index`
+};
+export const developmentBcList: Breadcrumb[] = [...indexPagebcList, developmentBc];
+const indexList: index[] = [
+  { id: '#pagetop', name: 'ページトップ' },
+  { id: '#codesmell', name: 'Code Smell' },
+  { id: '#refactoring', name: 'リファクタリング技法' }
+];
+---
+
+<SiteLayout
+  title="開発知識のまとめ"
+  description="開発知識のまとめページです。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={developmentBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <p>
+    ここでは 開発知識についてご紹介します。
+  </p>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a></li>
+    <li><a href=`${BASE_URL}/contents/development/refactoring/Refactoring_Technics`>リファクタリング技法</a></li>
+  </ul>
+  <br><br><br><br>
+</SiteLayout>

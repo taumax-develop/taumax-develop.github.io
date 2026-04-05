@@ -1,22 +1,42 @@
 ---
 import { SITE_TITLE, BASE_URL } from '../consts';
 import { TWITTER_CARD_SUMMARY } from '../components/BaseHead.astro';
-import SiteLayout from '../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../layouts/SiteLayout.astro';
+import type { index } from '../components/HeaderIndex.astro';
+
+export const indexPagebc: Breadcrumb = {
+  name: "トップページ",
+  item: `${BASE_URL}`
+};
+export const indexPagebcList: Breadcrumb[] = [indexPagebc];
+
+const indexList: index[] = [
+  { id: "#programming", name: "言語、プログラミング" },
+  { id: "#self_development", name: "個人開発" },
+  { id: "#requirement", name: "要件定義" },
+  { id: "#develop_method", name: "開発手法" },
+  { id: "#database", name: "データベース" },
+  { id: "#test", name: "テスト" },
+  { id: "#security", name: "セキュリティ" }
+];
 ---
 
 <SiteLayout
   title={SITE_TITLE}
   description="indexページ"
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={[]}
+  indexList={indexList}
+>
 
-  <h2 class="title">システム開発知識が集うサイト</h2>
-
+  <br>
+  <h3 class="title">はじめに</h3>
   <p>
     これまで経験したプロジェクトや資格の勉強、独学で身に付けた知識を整理するために作ったサイトです。<br>
   </p>
 
   <br>
-  <h3 class="title">言語、プログラミング</h3>
+  <h3 class="title" id="programming">言語、プログラミング</h3>
   <h4 class="title">JavaScript</h4>
   <ul>
     <li><a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScriptについて</a></li>
@@ -65,7 +85,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   </ul>
 
   <br>
-  <h3 class="title">個人的に開発したもの</h3>
+  <h3 class="title" id="self_development">個人的に開発したもの</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/bymyself/bymyself`>個人的に開発したものの紹介と仕組みと全体像</a></li>
     <li><a href=`${BASE_URL}/contents/bymyself/campainbot/campainbot`>キャンペーン対象キャラ通知bot</a></li>
@@ -82,7 +102,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   </ul>
 
   <br>
-  <h3 class="title">要件定義</h3>
+  <h3 class="title" id="requirement">要件定義</h3>
   <ul>
     <!-- <li><a href=`${BASE_URL}/contents/requirement/requirement`>要件定義</a></li> -->
     <li><a href=`${BASE_URL}/contents/requirement/rdra/rdra`>RDRA</a></li>
@@ -93,7 +113,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   </ul>
 
   <br>
-  <h3 class="title">開発手法</h3>
+  <h3 class="title" id="develop_method">開発手法</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/agile/event/learn_retrospective_methods`>振り返り手法を学ぼう</a></li>
   </ul>
@@ -126,7 +146,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   -->
 
   <br>
-  <h3 class="title">データベース</h3>
+  <h3 class="title" id="database">データベース</h3>
   <ul>
     <!-- <li><a href=`${BASE_URL}/contents/development/database/database`>Database関連</a></li> -->
     <li><a href=`${BASE_URL}/contents/development/database/db_design_night_no6/db_design_night_no6`>DB設計したいNight #6 正規化</a></li>
@@ -158,18 +178,19 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   -->
 
   <br>
-  <h3 class="title">テスト</h3>
+  <h3 class="title" id="test">テスト</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/development/test/softwaretest/various_software_tests`>ソフトウェアテストについていろいろ調べたことを書いた記事</a></li>
   </ul>
 
   <br>
-  <h3 class="title">セキュリティ</h3>
+  <h3 class="title" id="security">セキュリティ</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/security/csrf/csrf`>CSRF（Cross-Site Request Forgeries: クロスサイトリクエストフォージェリ）</a></li>
     <li><a href=`${BASE_URL}/contents/security/cors/cors`>CORS（Cross-Origin Resource Sharing: オリジン間リソース共有）</a></li>
     <li><a href=`${BASE_URL}/contents/security/sop/sop`>SOP（Same-Origin Policy: 同一生成元ポリシー）</a></li>
     <li><a href=`${BASE_URL}/contents/security/cvss/cvss`>CVSS</a></li>
+    <li><a href=`${BASE_URL}/contents/security/oauth/oauth2.0`>OAuth</a></li>
   </ul>
 
   <!--

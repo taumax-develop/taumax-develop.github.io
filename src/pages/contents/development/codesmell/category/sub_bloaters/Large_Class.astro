@@ -1,11 +1,19 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { bloatersBreadcrumbList } from '../Bloaters.astro';
 
-const indexList = [
+export const largeClassBc: Breadcrumb = {
+  name: "Large Class",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_bloaters/Large_Class`
+};
+export const largeClassBcList: Breadcrumb[] = [...bloatersBreadcrumbList, largeClassBc];
+const indexList: index[] = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#largeclass', name: 'Large Class' }
 ];
@@ -15,10 +23,12 @@ const indexList = [
   title="Large Class"
   description="Large Class（巨大なクラス）の解説と対処法、参考情報をまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={largeClassBcList}
   indexList={indexList}
 >
-  <h2 class="title">Large Class</h2>
-  <h3 id="largeclass">Large Class</h3>
+
+  <br>
+  <h3 class="title" id="largeclass">Large Class</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/large-class" target="_blank" rel="noopener noreferrer">Large Class（巨大なクラス）</a>：</p>
   <p><strong><em>兆候と症状</em></strong>
     多くのフィールド、メソッド、コード行数を持つクラス。</p>

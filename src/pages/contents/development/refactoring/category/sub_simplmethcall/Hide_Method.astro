@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplMethCallsBcList } from '../Simplifying_Method_Calls.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
+export const hideMethodBc: Breadcrumb = {
+  name: "Hide Method",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplmethcall/Hide_Method`
+};
+export const hideMethodBcList: Breadcrumb[] = [...smplMethCallsBcList, hideMethodBc];
+const indexList: index[] = [
   { id: '#hidemethod', name: 'Hide Method' }
 ];
 ---
 
-<SiteLayout title="Hide Method | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Hide Method"
+  description="リファクタリング技法：Hide Methodの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={hideMethodBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="hidemethod">Hide Method</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
-  <h2 id="hidemethod">Hide Method</h2>
+  <h2>Hide Method</h2>
   <p><a href="https://sourcemaking.com/refactoring/hide-method" target="_blank" rel="noopener noreferrer">Hide Method</a></p>
   <p>自クラス内やサブクラスでのみ使用され、他クラスからは使用されないメソッドの可視性はprivateかprotectedにしましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

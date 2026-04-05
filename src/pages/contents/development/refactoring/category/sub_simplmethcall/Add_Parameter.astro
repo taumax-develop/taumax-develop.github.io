@@ -1,20 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import type { index } from '../../../../../../components/HeaderIndex.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import { smplMethCallsBcList } from '../Simplifying_Method_Calls.astro';
 
+export const addParameterBc: Breadcrumb = {
+  name: "Add Parameter",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplmethcall/Add_Parameter`
+};
+export const addParameterBcList: Breadcrumb[] = [...smplMethCallsBcList, addParameterBc];
 const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
   { id: '#addparameter', name: 'Add Parameter' }
 ];
 ---
 
-<SiteLayout title="Add Parameter | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Add Parameter"
+  description="リファクタリング: Add Parameter の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={addParameterBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="addparameter">Add Parameter</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -29,7 +41,7 @@ const indexList: index[] = [
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
-  <h2 id="addparameter">Add Parameter</h2>
+  <h2>Add Parameter</h2>
   <p><a href="https://sourcemaking.com/refactoring/add-parameter" target="_blank" rel="noopener noreferrer">Add Parameter</a>
     処理を行うのに必要なデータが足りない場合は引数で渡すようにしましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

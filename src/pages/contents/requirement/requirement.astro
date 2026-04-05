@@ -1,28 +1,34 @@
 ---
+import type { index } from '../../../components/HeaderIndex.astro';
 import { BASE_URL } from '../../../consts';
-import SiteLayout from '../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { indexPagebcList } from '../../index.astro';
 
 const title = "要件定義";
 const description = "要件定義";
 const twitterCardSize = "summary";
-const indexList = [
-  { text: "Home", href: "/" }
-];
+
+export const requirementPagebc: Breadcrumb = {
+  name: "要件定義",
+  item: `${BASE_URL}/contents/requirement/requirement`
+};
+export const requirementBreadcrumbList: Breadcrumb[] = [...indexPagebcList, requirementPagebc];
+const indexList: index[] = [];
 ---
 
 <SiteLayout
   title={title}
   description={description}
   twitterCardSize={twitterCardSize}
-  indexList={indexList}>
+  breadcrumbList={requirementBreadcrumbList}>
+  indexList={indexList}
 
-  <h2 class="title">要件定義</h2>
-  <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; 要件定義</p>
-  <br/>
+  <br>
   <h3 class="title">要件定義</h3>
   <p>
-    <a href=`${BASE_URL}/contents/requirement/ccsr/bpstudy_ccsr`>CCSR</a><br/>
-    <a href=`${BASE_URL}/contents/requirement/rdra/rdra`>RDRA（ラドラ）</a><br/>
+    <a href=`${BASE_URL}/contents/requirement/ccsr/bpstudy_ccsr`>CCSR</a><br>
+    <a href=`${BASE_URL}/contents/requirement/rdra/rdra`>RDRA（ラドラ）</a><br>
   </p>
+
+  <br><br><br>
 </SiteLayout>

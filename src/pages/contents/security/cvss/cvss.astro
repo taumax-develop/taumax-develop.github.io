@@ -1,9 +1,16 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
+import { securityBreadcrumbList } from '../security.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
 
-const indexList = [
+export const cvssPagebc: Breadcrumb = {
+  name: "CVSS",
+  item: `${BASE_URL}/contents/security/cvss/cvss`
+};
+const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, cvssPagebc];
+const indexList: index[] = [
   { id: "#cvss", name: "CVSS" }
 ];
 ---
@@ -12,9 +19,9 @@ const indexList = [
   title="CVSS（Common Vulnerability Scoring System）"
   description="CVSS（共通脆弱性評価システム）の解説ページ。脆弱性の深刻度を評価する仕組みについて。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">CVSS（Common Vulnerability Scoring System）</h2>
 
   <br/>
   <div id="cvss"></div>

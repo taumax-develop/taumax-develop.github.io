@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import { BASE_URL } from '../../../../consts';
@@ -8,8 +8,15 @@ import vue3 from './spa/img/vue3.jpg';
 import vuejs入門 from './spa/img/vuejs入門.jpg';
 import popularity_2006q4 from './img/popularity_2006q4.jpg';
 import popularity_2025q1 from './img/popularity_2025q1.jpg';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { developmentBcList } from '../development_index.astro';
 
-const indexList = [
+export const javaScriptBc: Breadcrumb = {
+  name: "JavaScriptの進化",
+  item: `${BASE_URL}/contents/development/javascript/js_index`
+};
+export const javaScriptBcList: Breadcrumb[] = [...developmentBcList, javaScriptBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#history', name: '歴史' },
   { id: '#html5', name: 'HTML5' },
@@ -26,15 +33,10 @@ const indexList = [
   title="JavaScriptの進化"
   description="JavaScriptという言語が生まれてから近年のSPA開発に至るまで"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={javaScriptBcList}
   indexList={indexList}
 >
 
-  <h2 class="title">JavaScriptの進化</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> &gt; JavaScript</li>
-  </ul>
   <br/>
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>

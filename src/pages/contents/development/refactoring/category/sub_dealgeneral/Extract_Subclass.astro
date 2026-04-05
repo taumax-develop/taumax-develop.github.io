@@ -1,14 +1,19 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { generalisationBcList } from '../Dealing_with_Generalisation.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+export const extractSubclassBc: Breadcrumb = {
+  name: "Extract Subclass",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_dealgeneral/Extract_Subclass`
+};
+export const extractSubclassBcList: Breadcrumb[] = [...generalisationBcList, extractSubclassBc];
+const indexList: index[] = [
   { id: '#extractsubclass', name: 'Extract Subclass' }
 ];
 ---
@@ -17,9 +22,12 @@ const indexList = [
   title="Extract Subclass"
   description="リファクタリング技法：Extract Subclassの解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={extractSubclassBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
+
+  <br>
+  <h3 class="title" id="extractsubclass">Extract Subclass</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -32,7 +40,7 @@ const indexList = [
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
   <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
-  <h2 id="extractsubclass">Extract Subclass</h2>
+  <h2>Extract Subclass</h2>
   <p><a href="https://sourcemaking.com/refactoring/extract-subclass" target="_blank" rel="noopener noreferrer">Extract Subclass</a></p>
   <p>特定の場合にのみ使用される機能がクラスにある場合、サブクラスを作成してその機能を使用します。</p>
   <p>注意すべき点として、サブクラスを作ることが必ずしもコードの複雑性を回避する手段になるとは限りません。継承は使いどころを間違えると大変なことになるのでコンポジションを使うべきところと明確に分けて考えましょう。</p>

@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import img1st from './img/1st_step.jpg';
@@ -7,8 +7,15 @@ import img2nd from './img/2nd_step.jpg';
 import img3rd from './img/3rd_step.jpg';
 import imgNext from './img/next_step.jpg';
 import { BASE_URL } from '../../../consts';
+import type { index } from '../../../components/HeaderIndex.astro';
+import { indexPagebcList } from '../../index.astro';
 
-const indexList = [
+export const selfDevelopPagebc: Breadcrumb = {
+  name: "個人開発したことまとめ",
+  item: `${BASE_URL}/contents/bymyself/bymyself`
+};
+export const selfDevelopBreadcrumbList: Breadcrumb[] = [...indexPagebcList, selfDevelopPagebc];
+const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#first", name: "初期構築" },
   { id: "#second", name: "二次" },
@@ -21,11 +28,11 @@ const indexList = [
   title="個人開発したことまとめ"
   description="twitterのbotや自作サイトの構築など、個人開発で得た知識をまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={selfDevelopBreadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">個人開発したことまとめ</h2>
+
   <br/>
-  <p><a href={BASE_URL}>ホーム</a> &gt; 個人開発したことまとめ</p>
   <div id="firstly"></div>
   <h3 class="title">はじめに</h3>
   <p>

@@ -1,20 +1,37 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
 import dog_chair from './img/dog_chair.png';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { objectAbusersBcList } from '../Object-Orientation-Abusers.astro';
 
 const title = 'Refused Bequest';
 const description = 'Code Smell: Refused Bequest（接続拒否）';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const refusedBequestBc: Breadcrumb = {
+  name: "Refused Bequest",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Refused_Bequest`
+};
+export const refusedBequestBcList: Breadcrumb[] = [...objectAbusersBcList, refusedBequestBc];
+const indexList: index[] = [
+  { id: '#refusedbequest', name: 'Refused Bequest' }
 ];
 ---
 
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="refusedbequest">Refused Bequest</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={refusedBequestBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="refusedbequest">Refused Bequest</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/refused-bequest" target="_blank" rel="noopener noreferrer">Refused Bequest（接続拒否）</a>：</p>
   <p><strong><em>兆候と症状</em></strong><br/>
     サブクラスがその親から継承したメソッドとプロパティの一部のみを使う場合、クラス階層は歪んでいます。不要なメソッドは単純に未使用になるか、再定義されて例外が発生します。</p>

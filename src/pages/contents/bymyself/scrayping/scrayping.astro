@@ -1,11 +1,18 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgWhole from './img/whole_image.jpg';
 import { BASE_URL } from '../../../../consts';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { selfDevelopBreadcrumbList } from '../bymyself.astro';
 
-const indexList = [
+export const scrapingBotPagebc: Breadcrumb = {
+  name: "twitterのスクレイピングbot",
+  item: `${BASE_URL}/contents/bymyself/scrayping/scrayping`
+};
+export const breadcrumbList: Breadcrumb[] = [...selfDevelopBreadcrumbList, scrapingBotPagebc];
+const indexList: index[] = [
   { id: "#summary", name: "概要" },
   { id: "#whatimade", name: "作成物" },
   { id: "#mechanism", name: "仕組み" },
@@ -17,12 +24,9 @@ const indexList = [
   title="twitterのスクレイピングbot"
   description="twitterのスクレイピングbotの仕組みや学びをまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">twitterのスクレイピングbot</h2>
-
-  <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; twitterのスクレイピングbot</p>
 
   <br/>
   <div id="summary"></div>

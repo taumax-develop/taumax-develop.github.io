@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplCondExpressBcList } from '../Simplifying_Conditional_Expressions.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+export const introAssertBc: Breadcrumb = {
+  name: "Introduce Assertion",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/Introduce_Assertion`
+};
+export const introAssertBcList: Breadcrumb[] = [...smplCondExpressBcList, introAssertBc];
+const indexList: index[] = [
   { id: '#introduceassertion', name: 'Introduce Assertion' }
 ];
 ---
 
-<SiteLayout title="Introduce Assertion | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Introduce Assertion"
+  description="リファクタリング: Introduce Assertion の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={introAssertBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="introduceassertion">Introduce Assertion</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions" target="_blank" rel="noopener noreferrer">Simplifying Conditional Expressions</a></p>
 
-  <h2 id="introduceassertion">Introduce Assertion</h2>
+  <h2>Introduce Assertion</h2>
   <p><a href="https://sourcemaking.com/refactoring/introduce-assertion" target="_blank" rel="noopener noreferrer">Introduce Assertion</a>
     コードが正しく動作するのに必要な前提条件がある場合、assert()を使用して事前チェックするようにしましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

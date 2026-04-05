@@ -1,0 +1,387 @@
+---
+import { Image } from "astro:assets";
+import SiteLayout, { type Breadcrumb } from "../../../../layouts/SiteLayout.astro";
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from "../../../../consts";
+import AdUnitLandscape from "../../../../components/AdUnitLandscape.astro";
+import authorization_code_grant_flow from './img/authorization_code_grant_flow.jpg';
+import client_credentials_grant_flow from './img/client_credentials_grant_flow.jpg';
+import implicit_grant_flow from './img/implicit_grant_flow.jpg';
+import CommonOAuthFlow from "../../../../components/security/oauth/CommonOAuthFlow.astro";
+import { securityBreadcrumbList } from "../security.astro";
+import type { index } from "../../../../components/HeaderIndex.astro";
+
+const RESOURCE_OWNER = `リソースオーナーとは一般的に、『アカウントを持つユーザー本人』を指します。<br>
+OAuth 2.0認可フレームワークにおいて、保護されたデータやサービス（リソース）を所有し、そのアクセス権限を第三者（クライアント）へ付与できるユーザーまたはシステムのことです。`
+
+export const oauth20Pagebc: Breadcrumb = {
+  name: "OAuth 2.0",
+  item: `${BASE_URL}/contents/security/security/oauth/oauth2.0`
+};
+const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, oauth20Pagebc];
+const indexList: index[] = [
+  { id: "#firstly", name: "はじめに" },
+  { id: "#authorization_flow", name: "認証の流れ" },
+  { id: "#register_application", name: "アプリケーションの登録" },
+  { id: "#token", name: "トークン発行" },
+  { id: "#client_cred_grant_flow", name: "Client credentials grant flow" },
+  { id: "#auth_code_grant_flow", name: "Authorization code grant flow" },
+  { id: "#implicit_grant_flow", name: "Implicit grant flow" },
+  { id: "#refresh_token", name: "リフレッシュトークン" },
+];
+---
+
+<SiteLayout
+  title="OAuth2.0の認証フロー"
+  description="OAuth2.0の認証フローについて説明します。TwitchのAPIを呼び出す際の認証フローを例に、OAuth2.0の認証フローについて説明していきます。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="firstly">はじめに</h3>
+  <p>
+    このページは、OAuth2.0の認証フローについて説明するページです。<br>
+    机上の理論だけだとなかなか理解が深まらないと思うので、OAuth2.0に準拠しているTwitchの認証フローを追いながら実際にトークンを発行し、OAuth2.0の認証フローについて理解を深めていきます。<br>
+    発行されたトークンをTwitchでどう使うのかについては<a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × Twitch</a>を参照してください。<br>
+  </p>
+
+  <br>
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="token">トークンの発行</h3>
+  <p>
+    Client ID と Client Secret が発行されたらトークンを発行できるようになります。<br>
+    Twitchのトークンには App access token と User access token の2種類があり、それぞれ用途は以下の通り。<br>
+  </p>
+
+  <div style="padding-left: 1em;" class="slider">
+    <table border="1">
+      <tr><th style="z-index: 0">トークンの種類</th><th>用途</th></tr>
+      <tr>
+        <td style="white-space: nowrap;">
+          <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens" target="_blank" rel="noopener noreferrer">User access token</a>
+        </td>
+        <td>
+          User access tokenは、リソースオーナー（※）の承認が必要なAPIを発行する場合に使用します。<br>
+          <a href="https://dev.twitch.tv/docs/authentication/scopes/" target="_blank" rel="noopener noreferrer">Twitchのスコープ一覧</a>に記載されているスコープを指定して、アプリケーションにアクセスを許可するリソースの範囲を指定します。<br>
+          例えば以下に示すようなPoll（投票）に関するAPIを発行する場合、 channel:manage:polls スコープを指定してUser access tokenを発行する必要があります。<br>
+          <ul>
+            <li><a href="https://dev.twitch.tv/docs/api/reference#create-poll" target="_blank" rel="noopener noreferrer">Create Poll</a></li>
+            <li><a href="https://dev.twitch.tv/docs/api/reference#end-poll" target="_blank" rel="noopener noreferrer">End Poll</a></li>
+            <li><a href="https://dev.twitch.tv/docs/api/reference#get-polls" target="_blank" rel="noopener noreferrer">Get Polls</a></li>
+          </ul>
+          リンク先を見れば、channel:manage:polls スコープを含むUser access tokenが必要なことがわかります。
+        </td>
+      </tr>
+      <tr>
+        <td style="white-space: nowrap;">
+          <a href="https://dev.twitch.tv/docs/authentication/#app-access-tokens" target="_blank" rel="noopener noreferrer">App access token</a>
+        </td>
+        <td>
+          App access tokenは、以下のような場合に使用します。
+          <ul style="padding-left: 1em;">
+            <li>
+              リソースオーナーの承認が不要な機能を利用する場合<br>
+              例えば<a href="https://dev.twitch.tv/docs/api/reference#get-videos" target="_blank" rel="noopener noreferrer">Get Videos API</a>は指定したIDに紐づく情報を、リソースオーナーの承認無しで取得することができる。<br>
+              App access tokenが使用できるAPIであれば、自分の情報であろうが他人の情報であろうが取得可能だということです。<br>
+              <ul style="list-style-type: circle">
+                <li>
+                  App access tokenを受け入れる殆どのAPIはUser access token も使用できるため、User access tokensを既に取得している場合はApp access tokenを取得する必要はない。<br>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Webhookを使用してイベントを受信する場合<br>
+              <ul style="list-style-type: circle">
+                <li>
+                  Webhookを使用してイベントの通知を受信する場合、サブスクリプションの登録リクエストを行う必要があり、その際にはApp access tokenを使用します。<br>
+                  User access tokenを使用すると、リクエストは失敗します。<br>
+                </li>
+                <li>
+                  イベントの種類によってはリソースオーナーの承認が必要なものもある。<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe" target="_blank" rel="noopener noreferrer">channel.subscribe</a> イベントはその一つです。<br>
+                  channel.subscribe イベントを受信するには、まずリソースオーナーの承認を得るため、channel:read:subscriptions スコープを含むUser access tokenを取得します。<br>
+                  その上で、App access tokenを使用してサブスクリプションの登録リクエストを行います。
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div style="padding-left: 1em;" class="slider">
+    ※<span set:html={RESOURCE_OWNER} />
+  </div>
+
+  <br>
+  <p>
+    トークンの取得方法については<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">リンク先にまとまって</a>いる通り、4種類の認証フローがあります。<br>
+  </p>
+
+  <div style="padding-left: 1em;" class="slider">
+    <table border="1">
+      <tr><th style="z-index: 0">発行するトークン</th><th>認証フロー</th><th>リフレッシュトークンの発行</th><th>有効期限</th><th>関連リンク</th></tr>
+      <tr>
+        <td>App access token</td>
+        <td><a href="#client_cred_grant_flow">Client credentials grant flow</a></td>
+        <td>無し</td>
+        <td>約2ヶ月</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#client-credentials-grant-flow" target="_blank" rel="noopener noreferrer">Client credentials grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.4" target="_blank" rel="noopener noreferrer">1.3.4. Client Credentials</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="3">User access token</td>
+        <td><a href="#auth_code_grant_flow">Authorization code grant flow</a></td>
+        <td>あり</td>
+        <td>約4時間</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#authorization-code-grant-flow" target="_blank" rel="noopener noreferrer">Authorization code grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.1" target="_blank" rel="noopener noreferrer">1.3.1. Authorization Code</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="#implicit_grant_flow">Implicit grant flow</a></td>
+        <td>無し</td>
+        <td>約2ヶ月</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#implicit-grant-flow" target="_blank" rel="noopener noreferrer">Implicit grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.3.2" target="_blank" rel="noopener noreferrer">1.3.2. Implicit</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Device code grant flow</td>
+        <td>あり</td>
+        <td>約4時間</td>
+        <td>
+          <ul style="padding-left: 1em;">
+            <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#device-code-grant-flow" target="_blank" rel="noopener noreferrer">Device code grant flow</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc6749#section-2.1" target="_blank" rel="noopener noreferrer">2.1. Client Types</a></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+  <p>
+    具体的にどうやってトークンを取得するかは <a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#examples-of-the-four-flows" target="_blank" rel="noopener noreferrer">Examples of the four flows</a> に書いていますが、以下にも記載します。<br>
+    Device code grant flowは私は使ったことがないので他の3つについて説明します。<br>
+  </p>
+
+  <br>
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="client_cred_grant_flow">Client credentials grant flow</h3>
+  <p>
+    Client credentials grant flowは以下の図に示す流れになっています。見てわかる通りかなりシンプルです。<br>
+    <Image src={client_credentials_grant_flow} width={400} alt="client_credentials_grant_flow" /><br>
+
+    <br>
+    POSTリクエストを発行することで取得できます。curl コマンドなら以下のようになります。<br>
+  </p>
+
+<pre><code>curl -X POST 'https://id.twitch.tv/oauth2/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-d 'client_id=[clientID]&client_secret=[clientSecret]&grant_type=client_credentials'
+</code></pre>
+
+  <div style="padding-left: 2em;">
+    <ul>
+      <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
+      <li>clientSecret：<a href="#register_application">アプリケーションの登録</a>で取得したシークレット</li>
+    </ul>
+  </div>
+
+  <p>
+    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。 access_token に記載されているのが App access token です。<br>
+  </p>
+
+<pre><code>{`{
+  "access_token":"[発行されたトークン]",
+  "expires_in":[有効期限],
+  "token_type":"bearer"
+}`}
+</code></pre>
+
+  <br>
+  <p>
+    有効期限は約2ヶ月です。<br>
+    リフレッシュトークンは発行されないため、期限が切れたら再度トークンを取得する必要があります。<br>
+    POSTリクエストを送信することでトークンを取得できるので、定期的にトークンを再取得する機能を構築して自動化するのが良いと思います。<br>
+  </p>
+
+  <br>
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="auth_code_grant_flow">Authorization code grant flow</h3>
+  <p>
+    Authorization code grant flowは以下の図に示す流れになっています。<br>
+    <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
+    ※<span set:html={RESOURCE_OWNER} />
+  </p>
+
+  <br>
+  <CommonOAuthFlow kbn="authorization" />
+
+  <p>
+    <b>5. 認可コード発行</b><br>
+    アクセスが許可されると、redirect_uri に指定したURLにリダイレクトされます。<br>
+    リダイレクト先のURLに、以下のような形式で code が記載されています。これが認可コードです。<br>
+  </p>
+<pre><code>[redirectURI]
+?code=[発行された認可コード]
+&scope=[指定したスコープ]
+&state=[指定したstate]
+</code></pre>
+
+  <br>
+  <p>
+    <b>6. トークン発行依頼</b><br>
+    発行された認可コードを使用して、以下のような形式のPOSTリクエストを送ると、アクセストークンとリフレッシュトークンが発行されます。<br>
+  </p>
+
+<pre><code>curl -X POST 'https://id.twitch.tv/oauth2/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-d 'client_id=[clientID]&client_secret=[clientSecret]&code=[発行された認可コード]&grant_type=authorization_code&redirect_uri=[redirectURI]'
+</code></pre>
+
+  <br>
+  <p>
+    <b>7. アクセストークン、リフレッシュトークン発行</b><br>
+    上記コマンドが成功すると、以下のレスポンスが返ってきます。<br>
+    リダイレクト先のURLに、以下のようなjsonが返ってきます。<br>
+    access_token が User access token で、refresh_token が Refresh token です。<br>
+  </p>
+
+<pre><code>{`{
+  "access_token":"[発行されたトークン]",
+  "expires_in":15668,
+  "refresh_token":"[発行されたリフレッシュトークン]",
+  "scope":[指定したスコープ],
+  "token_type":"bearer"
+}`}
+</code></pre>
+
+  <br>
+  <p>
+    有効期限は約4時間です。<br>
+    トークンを再取得する場合は、<a href="#refresh_token">リフレッシュトークン</a>を使うか、再度Authorization code grant flowを経てトークンを発行する必要があります。<br>
+  </p>
+
+  <br>
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="implicit_grant_flow">Implicit grant flow</h3>
+  <p>
+    Implicit grant flow は 『認可コードを使用しない <a href="#auth_code_grant_flow">Authorization code grant flow</a>』です。<br>
+    認可コードを使う方式に比べて安全性に問題があるため OAuth としては非推奨の方式であり、OAuth 2.1からは Implicit grant は仕様自体から削除されています。<br>
+    （2026/4/3現在、TwitchはOAuth 2.0準拠のためImplicit grant flowは使用可能です）<br>
+    Implicit grant flow は以下の図に示す流れでトークンを取得する方式になっています。<br>
+    <Image src={implicit_grant_flow} width={650} alt="implicit_grant_flow" /><br>
+    ※<span set:html={RESOURCE_OWNER} />
+  </p>
+
+  <br>
+  <CommonOAuthFlow kbn="implicit" />
+
+  <p>
+    <b>5. アクセストークン発行</b><br>
+    アクセスが許可されると、redirect_uri に指定したURLにリダイレクトされます。<br>
+    リダイレクト先のURLに、以下のような形式で access_token が記載されています。これが User access token です。<br>
+  </p>
+
+<pre><code>[指定したリダイレクトURL]/
+#access_token=[発行されたトークン]
+&scope=[指定したスコープ]
+&state=[指定したstate]
+&token_type=bearer
+</code></pre>
+
+  <br>
+  <p>
+    有効期限は約2か月です。<br>
+    リフレッシュトークンは発行されないため、期限が切れたら再度トークンを取得する必要があります。<br>
+    このプロセスを自動化するのはなかなか難しいので、自動化したい場合は<a href="#auth_code_grant_flow">Authorization code grant flow</a>を使用するのが良いでしょう。<br>
+    セキュリティ上の理由でもそちらが推奨されます。<br>
+  </p>
+
+  <br>
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="refresh_token">リフレッシュトークン</h3>
+  <p>
+    リフレッシュトークンは、User access token を再取得するためのトークンです。<br>
+    <a href="#auth_code_grant_flow">Authorization code grant flow</a>でUser access tokenを発行するとリフレッシュトークンも同時に発行されるため、これを使えば期限切れの前にトークンを再取得することができます。<br>
+    POSTリクエストを発行することで再取得できます。curl コマンドなら以下のようになります。<br>
+  </p>
+
+<pre><code>curl -X POST 'https://id.twitch.tv/oauth2/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-d 'client_id=[clientID]&client_secret=[clientSecret]&refresh_token=[refreshToken]&grant_type=refresh_token'
+</code></pre>
+
+  <div style="padding-left: 2em;">
+    <ul>
+      <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
+      <li>clientSecret：<a href="#register_application">アプリケーションの登録</a>で取得したシークレット</li>
+      <li>refreshToken：<a href="#auth_code_grant_flow">Authorization code grant flow</a>で発行されたリフレッシュトークン</li>
+    </ul>
+  </div>
+
+  <p>
+    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。 access_token に記載されているのが User access token です。<br>
+    リフレッシュトークンも再発行されます。<br>
+  </p>
+
+<pre><code>{`{
+  "access_token":"[発行されたトークン]",
+  "expires_in":[有効期限],
+  "refresh_token":"[発行されたリフレッシュトークン]",
+  "scope":[指定したスコープ],
+  "token_type":"bearer"
+}`}
+</code></pre>
+
+  <br>
+  <p>
+    POSTリクエストを送信することでトークンを取得できるので、定期的にトークンを再取得する機能を構築して自動化するのが良いと思います。<br>
+  </p>
+
+  <br>
+  <hr>
+
+  <br>
+  参考サイト<br>
+  <ul>
+    <li><a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">Twitch developers Getting OAuth Access Tokens</a></li>
+    <li><a href="https://dev.twitch.tv/docs/authentication/" target="_blank" rel="noopener noreferrer">Twitch developers Authentication</a></li>
+    <li><a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/" target="_blank" rel="noopener noreferrer">Twitch developers Getting Events Using Webhook Callbacks</a></li>
+    <li><a href="https://dev.twitch.tv/docs/api/" target="_blank" rel="noopener noreferrer">Twitch developers Twitch API</a></li>
+    <li><a href="https://dev.twitch.tv/docs/authentication/scopes/" target="_blank" rel="noopener noreferrer">Twitch developers Twitch Access Token Scopes</a></li>
+    <li><a href="https://dev.twitch.tv/docs/api/reference/" target="_blank" rel="noopener noreferrer">Twitch developers Twitch API Reference</a></li>
+    <li><a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/" target="_blank" rel="noopener noreferrer">Twitch developers Subscription Types</a></li>
+    <li><a href="https://zenn.dev/crebo_tech/articles/article-0011-20241006" target="_blank" rel="noopener noreferrer">Zenn 図でざっくり解説 OAuth 2.0入門</a></li>
+    <li><a href="https://qiita.com/TakahikoKawasaki/items/e37caf50776e00e733be" target="_blank" rel="noopener noreferrer">Qiita 一番分かりやすい OAuth の説明</a></li>
+    <li><a href="https://zenn.dev/naginagi124/articles/58e175779ac537" target="_blank" rel="noopener noreferrer">Zenn OAuth 2.0の理解を諦めた人へ：絶対に理解させるガイド</a></li>
+    <li><a href="https://auth0.com/jp/intro-to-iam/what-is-oauth-2" target="_blank" rel="noopener noreferrer">Auth0 OAuth 2.0とは？</a></li>
+    <li><a href="https://auth0.com/docs/ja-jp/authenticate/protocols/oauth" target="_blank" rel="noopener noreferrer">Auth0 OAuth 2.0の認可フレームワーク</a></li>
+    <li><a href="https://datatracker.ietf.org/doc/html/rfc6749" target="_blank" rel="noopener noreferrer">RFC 6749 The OAuth 2.0 Authorization Framework</a></li>
+    <li><a href="https://datatracker.ietf.org/doc/html/rfc9700" target="_blank" rel="noopener noreferrer">RFC 9700 Best Current Practice for OAuth 2.0 Security</a></li>
+    <li><a href="https://zenn.dev/calloc134/books/sikkari-oauth-oidc/viewer/20-implicit-flow" target="_blank" rel="noopener noreferrer">Zenn インプリシットフローの解説と非推奨の理由</a></li>
+  </ul>
+</SiteLayout>

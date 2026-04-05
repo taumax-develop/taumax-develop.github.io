@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplCondExpressBcList } from '../Simplifying_Conditional_Expressions.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+export const replaceNestedCondBc: Breadcrumb = {
+  name: "Replace Nested Conditional with Guard Clauses",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/Replace_Nested_Conditional_with_Guard_Clauses`
+};
+export const replaceNestedCondBcList: Breadcrumb[] = [...smplCondExpressBcList, replaceNestedCondBc];
+const indexList: index[] = [
   { id: '#replacenestedconditionalwithguardclauses', name: 'Replace Nested Conditional with Guard Clauses' }
 ];
 ---
 
-<SiteLayout title="Replace Nested Conditional with Guard Clauses | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Replace Nested Conditional with Guard Clauses"
+  description="リファクタリング: Replace Nested Conditional with Guard Clauses の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={replaceNestedCondBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="replacenestedconditionalwithguardclauses">Replace Nested Conditional with Guard Clauses</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions" target="_blank" rel="noopener noreferrer">Simplifying Conditional Expressions</a></p>
 
-  <h2 id="replacenestedconditionalwithguardclauses">Replace Nested Conditional with Guard Clauses</h2>
+  <h2>Replace Nested Conditional with Guard Clauses</h2>
   <p><a href="https://sourcemaking.com/refactoring/replace-nested-conditional-with-guard-clauses" target="_blank" rel="noopener noreferrer">Replace Nested Conditional with Guard Clauses</a></p>
   <p>※関連するCode Smellがなかったためリンクのみ。</p>
 </SiteLayout>

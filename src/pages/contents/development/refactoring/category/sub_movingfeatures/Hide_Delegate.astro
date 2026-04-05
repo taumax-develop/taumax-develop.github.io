@@ -1,21 +1,34 @@
 ---
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import img01 from './img/hide_delegate/img01.png'
 import img02 from './img/hide_delegate/img02.png'
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { movingFeaturesBcList } from '../Moving_Features_between_Objects.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+export const hideDelegateBc: Breadcrumb = {
+  name: "Hide Delegate",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/Hide_Delegate`
+};
+export const hideDelegateBcList: Breadcrumb[] = [...movingFeaturesBcList, hideDelegateBc];
+const indexList: index[] = [
   { id: '#hidedelegate', name: 'Hide Delegate' }
 ];
 ---
 
-<SiteLayout title="Hide Delegate | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Hide Delegate"
+  description="リファクタリング技法：Hide Delegateの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={hideDelegateBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="hidedelegate">Hide Delegate</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -30,7 +43,7 @@ const indexList = [
   <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
   <p><a href="https://sourcemaking.com/refactoring/moving-features-between-objects" target="_blank" rel="noopener noreferrer">Moving Features between Objects</a></p>
 
-  <h2 id="hidedelegate">Hide Delegate</h2>
+  <h2>Hide Delegate</h2>
   <p><a href="https://sourcemaking.com/refactoring/hide-delegate" target="_blank" rel="noopener noreferrer">Hide Delegate</a></p>
   <p>オブジェクトAを介してオブジェクトBを取得したのち、オブジェクトBのメソッドを呼び出しているような場合、クラスAに新しいメソッドを追加し、そのメソッドがオブジェクトBのメソッドを呼び出すような形にしましょう（＝<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate" target="_blank" rel="noopener noreferrer">委譲(delegate)</a>）。こうすることで、クライアントはオブジェクトBの詳細について知る必要がなくなり、依存性を排除できます。</p>
   <p>AとBは下の図でいうと、</p>

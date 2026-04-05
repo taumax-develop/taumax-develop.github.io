@@ -62,24 +62,21 @@ img {
 }
 
 .breadcrumb {
-	display: flex;
-	flex-wrap: wrap;
-	list-style: none;
-    background: rgba(112, 107, 107, 0.5);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  background: rgba(112, 107, 107, 0.5);
+  border-radius: 20px;
+}
+
+#contents .breadcrumb li {
+  list-style-type: none;
+  background: none;
+  padding-left: 10px;
 }
 
 .breadcrumb li:not(:last-of-type)::after {
-    background: rgba(112, 107, 107, 0.5);
-}
-
-#contents li.breadcrumbli {
-	list-style-type: none;
-	background: none;
-	padding-left: 10px;
+  content: " >";
 }
 
 code {

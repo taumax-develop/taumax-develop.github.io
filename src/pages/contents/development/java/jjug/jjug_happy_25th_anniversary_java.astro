@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import img01 from './img/img00/img01.png'
@@ -36,8 +36,15 @@ import img31 from './img/img00/img31.png'
 import img32 from './img/img00/img32.png'
 import img33 from './img/img00/img33.png'
 import { BASE_URL } from '../../../../../consts';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { javaBcList } from '../java_index.astro';
 
-const indexList = [
+export const jjug25thBc: Breadcrumb = {
+  name: "JJUG 25th Anniversary",
+  item: `${BASE_URL}/contents/development/jjug/jjug_happy_25th_anniversary_java`
+};
+export const jjug25thBcList: Breadcrumb[] = [...javaBcList, jjug25thBc];
+const indexList: index[] = [
   { id: '#movie', name: '当日の動画' },
   { id: '#twitter', name: 'twitterまとめ' },
   { id: '#java14', name: 'Java14 の新機能を軽く' },
@@ -50,13 +57,12 @@ const indexList = [
   title="Java生誕25周年 記念イベント"
   description="Javaの生誕25周年を記念したイベント"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={jjug25thBcList}
   indexList={indexList}
 >
-  <h2 class="title">Java生誕25周年 記念イベント</h2>
-  <h2 class="title">はじめに</h2>
 
-  <a href={BASE_URL}>ホーム</a> &gt; <a href=`${BASE_URL}/contents/development/java/java`>Java</a> &gt; JJUG<br><br>
-
+  <br>
+  <h3 class="title">はじめに</h3>
   2020/05/23に、Javaの生誕25周年を記念したイベントがJJUGというグループで開催されました。<br>
   イベントのリンクは<a href="https://jjug.doorkeeper.jp/events/106586" target="_blank">こちら</a><br>
   このようなご時世なのでオンラインでの開催でした。<br>

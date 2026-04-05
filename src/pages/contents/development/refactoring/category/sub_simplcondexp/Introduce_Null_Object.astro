@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplCondExpressBcList } from '../Simplifying_Conditional_Expressions.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+export const introNullObjBc: Breadcrumb = {
+  name: "Introduce Null Object",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/Introduce_Null_Object`
+};
+export const introNullObjBcList: Breadcrumb[] = [...smplCondExpressBcList, introNullObjBc];
+const indexList: index[] = [
   { id: '#introducenullobject', name: 'Introduce Null Object' }
 ];
 ---
 
-<SiteLayout title="Introduce Null Object | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Introduce Null Object"
+  description="リファクタリング: Introduce Null Object の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={introNullObjBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="introducenullobject">Introduce Null Object</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions" target="_blank" rel="noopener noreferrer">Simplifying Conditional Expressions</a></p>
 
-  <h2 id="introducenullobject">Introduce Null Object</h2>
+  <h2>Introduce Null Object</h2>
   <p><a href="https://sourcemaking.com/refactoring/introduce-null-object" target="_blank" rel="noopener noreferrer">Introduce Null Object</a>
     あるメソッドがnullを返すようなことがある場合、呼び出し元でnullチェックを行う必要があります。nullの代わりにデフォルトの振る舞いを実装したオブジェクトを返すことを検討しましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

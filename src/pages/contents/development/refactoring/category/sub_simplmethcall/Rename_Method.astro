@@ -1,26 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplMethCallsBcList } from '../Simplifying_Method_Calls.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
+export const renameMethodBc: Breadcrumb = {
+  name: "Rename Method",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplmethcall/Rename_Method`
+};
+export const renameMethodBcList: Breadcrumb[] = [...smplMethCallsBcList, renameMethodBc];
+const indexList: index[] = [
   { id: '#renamemethod', name: 'Rename Method' }
 ];
 ---
 
 <SiteLayout
-  title="Rename Method | リファクタリング技法"
+  title="Rename Method"
+  description="リファクタリング技法：Rename Methodの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={renameMethodBcList}
   indexList={indexList}
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
+>
 
-  <h2 class="title">リファクタリング技法</h2>
+  <br>
+  <h3 class="title" id="renamemethod">Rename Method</h3>
 
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
-  
+
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>
   リファクタリング第2版<br>
@@ -35,7 +44,7 @@ const indexList = [
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
-  <h2 id="renamemethod">Rename Method</h2>
+  <h2>Rename Method</h2>
   <p><a href="https://sourcemaking.com/refactoring/rename-method" target="_blank" rel="noopener noreferrer">Rename Method</a>
   どのような処理を行ってくれるのかがわかるようなメソッド名を付けるように心がけましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

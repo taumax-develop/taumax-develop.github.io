@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgWhole from './img/whole_image.jpg';
@@ -8,8 +8,15 @@ import imgBgr from './img/bgr.jpg';
 import imgRgb from './img/rgb.jpg';
 import t260g from './img/t260g.jpg';
 import { BASE_URL } from '../../../../consts';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { selfDevelopBreadcrumbList } from '../bymyself.astro';
 
-const indexList = [
+export const campainBotPagebc: Breadcrumb = {
+  name: "ロマサガRSキャンペーン対象キャラ通知bot",
+  item: `${BASE_URL}/contents/bymyself/campainbot/campainbot`
+};
+export const breadcrumbList: Breadcrumb[] = [...selfDevelopBreadcrumbList, campainBotPagebc];
+const indexList: index[] = [
   { id: "#summary", name: "概要" },
   { id: "#whatimade", name: "作成物" },
   { id: "#mechanism", name: "仕組み" },
@@ -21,14 +28,11 @@ const indexList = [
   title="ロマサガRSキャンペーン対象キャラ通知bot"
   description="ロマサガRSのイベント対象キャラを自動で通知するbotの仕組みや学びをまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">ロマサガRSキャンペーン対象キャラ通知bot</h2>
+
   <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; ロマサガRSキャンペーン対象キャラ通知bot</p>
-  <div id="summary"></div>
-  <div id="summary"></div>
-  <h3 class="title">ロマサガRSキャンペーン対象キャラ通知bot</h3>
   <p>
     ロマサガRSというゲームで定期的にイベントが開催されるが、イベントの対象キャラが誰なのかが分かり辛過ぎるから作ってみたbot。<br/>
   </p>

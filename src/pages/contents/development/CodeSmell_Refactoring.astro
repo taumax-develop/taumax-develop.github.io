@@ -1,9 +1,16 @@
 ---
-import SiteLayout from '../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../consts';
+import type { index } from '../../../components/HeaderIndex.astro';
+import { developmentBcList } from './development_index.astro';
 
-const indexList = [
+export const codesmellRefactorPagebc: Breadcrumb = {
+  name: "Code Smellとリファクタ",
+  item: `${BASE_URL}/contents/development/CodeSmell_Refactoring`
+};
+export const codesmellRefactorBcList: Breadcrumb[] = [...developmentBcList, codesmellRefactorPagebc];
+const indexList: index[] = [
   { id: "#summary", name: "概要" },
   { id: "#whatimade", name: "作成物" },
   { id: "#mechanism", name: "仕組み" },
@@ -15,12 +22,9 @@ const indexList = [
   title="Code Smellとリファクタリング技法"
   description="Code Smellとリファクタリング技法の概要や学びをまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={codesmellRefactorBcList}
   indexList={indexList}
 >
-  <h2 class="title">Code Smellとリファクタリング技法</h2>
-
-  <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/development` style="color: #00bfff;">開発まとめ</a> &gt; Code Smellとリファクタリング技法</p>
 
   <br/>
   <div id="summary"></div>

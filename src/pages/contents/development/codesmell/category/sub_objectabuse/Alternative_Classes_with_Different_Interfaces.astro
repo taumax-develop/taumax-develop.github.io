@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { objectAbusersBcList } from '../Object-Orientation-Abusers.astro';
+
 const title = 'Alternative Classes with Different Interfaces';
 const description = 'Code Smell: Alternative Classes with Different Interfaces';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const alternativeClassesBc: Breadcrumb = {
+  name: "Alternative Classes with Different Interfaces",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Alternative_Classes_with_Different_Interfaces`
+};
+export const alternativeClassesBcList: Breadcrumb[] = [...objectAbusersBcList, alternativeClassesBc];
+const indexList: index[] = [
+  { id: '#alternative_classes', name: 'Alternative Classes with Different Interfaces' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="alternativeclasseswithdifferentinterfaces">Alternative Classes with Different Interfaces</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={alternativeClassesBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="alternative_classes">Alternative Classes with Different Interfaces</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/alternative-classes-with-different-interfaces" target="_blank" rel="noopener noreferrer">Alternative Classes with Different Interfaces</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     異なるメソッド名を有する2つのクラスが同じ機能を実装しているような状況。</p>

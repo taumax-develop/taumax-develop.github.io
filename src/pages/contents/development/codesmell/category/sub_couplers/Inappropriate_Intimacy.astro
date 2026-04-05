@@ -1,18 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import RefactoringImg from "../../../img/refactoring.jpg";
 import LegacyCodeImg from "../../../img/legacy_code.jpg";
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { couplersBcList } from '../Couplers.astro';
 
 const title = "Inappropriate Intimacy";
 const description = "Code Smell: Inappropriate Intimacy";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", href: "/" }
+
+export const inappropriateIntimacyBc: Breadcrumb = {
+  name: "Inappropriate Intimacy",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_couplers/Inappropriate_Intimacy`
+};
+export const inappropriateIntimacyBcList: Breadcrumb[] = [...couplersBcList, inappropriateIntimacyBc];
+const indexList: index[] = [
+  { id: "Home", name: "/" }
 ];
 ---
 
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={inappropriateIntimacyBcList}
+  indexList={indexList}
+>
+
+  <br>
   <h3 id="inappropriateintimacy">Inappropriate Intimacy</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/inappropriate-intimacy" target="_blank" rel="noopener noreferrer">Inappropriate Intimacy（不適切な親密さ）</a></p>
   <p>Inappropriate Intimacyは、2つのクラスが互いの内部情報に過度に依存し合っている場合に発生します。</p>

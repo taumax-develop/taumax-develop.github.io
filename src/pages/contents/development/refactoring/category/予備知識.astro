@@ -1,21 +1,30 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import type { index } from '../../../../../components/HeaderIndex.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../consts';
 import { Image } from 'astro:assets'
 import refactoring from '../../img/refactoring.jpg';
 import legacy_code from '../../img/legacy_code.jpg';
+import { refactoringBcList } from '../Refactoring_Technics.astro';
 
+export const preknowledgeBc: Breadcrumb = {
+  name: "予備知識",
+  item: `${BASE_URL}/contents/development/refactoring/category/予備知識`
+};
+export const preknowledgeBcList: Breadcrumb[] = [...refactoringBcList, preknowledgeBc];
 const indexList = [] as index[];
 ---
 <SiteLayout
   title="予備知識"
   description="リファクタリング: 予備知識 の解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={preknowledgeBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
+
+  <br>
+  <h3 class="title">予備知識</h3>
 
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
 

@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { organizeDataBcList } from '../Organizing_Data.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#organizingdata', name: 'Organizing Data' },
+export const dupObservedDataBc: Breadcrumb = {
+  name: "Duplicate Observed Data",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/Duplicate_Observed_Data`
+};
+export const dupObservedDataBcList: Breadcrumb[] = [...organizeDataBcList, dupObservedDataBc];
+const indexList: index[] = [
   { id: '#duplicateobserveddata', name: 'Duplicate Observed Data' }
 ];
 ---
 
-<SiteLayout title="Duplicate Observed Data | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Duplicate Observed Data"
+  description="リファクタリング: Duplicate Observed Data の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={dupObservedDataBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="duplicateobserveddata">Duplicate Observed Data</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="organizingdata">Organizing Data</h1>
   <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
-  <h2 id="duplicateobserveddata">Duplicate Observed Data</h2>
+  <h2>Duplicate Observed Data</h2>
   <p><a href="https://sourcemaking.com/refactoring/duplicate-observed-data" target="_blank" rel="noopener noreferrer">Duplicate Observed Data</a>
   GUIを担当するクラスにドメイン（＝業務）に関するデータが含まれているような場合、データを別のクラスに分離し、ドメインクラスとGUI間の接続と同期を確保することをおすすめします。
   こうすることで、プレゼンテーションレイヤーとビジネスロジックを分離することができ、プログラムを理解しやすくすることができます。</p>

@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { dispensablesBcList } from '../Dispensables.astro';
+
 const title = 'Dead Code';
 const description = 'Code Smell: Dead Code（到達不能コード）';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const deadCodeBc: Breadcrumb = {
+  name: "Dead Code",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_dispensables/Dead_Code`
+};
+export const deadCodeBcList: Breadcrumb[] = [...dispensablesBcList, deadCodeBc];
+const indexList: index[] = [
+  { id: '#deadcode', name: 'Dead Code' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="deadcode">Dead Code</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={deadCodeBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="deadcode">Dead Code</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/dead-code" target="_blank" rel="noopener noreferrer">Dead Code（到達不能コード）</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     使用されない変数、パラメーター、フィールド、メソッド、またはクラス。</p>

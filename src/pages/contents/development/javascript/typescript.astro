@@ -2,8 +2,16 @@
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
+import { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { javaScriptBcList } from './js_index.astro';
 
-const indexList = [
+export const typeScriptBc: Breadcrumb = {
+  name: "TypeScript",
+  item: `${BASE_URL}/contents/development/javascript/typescript`
+};
+export const typeScriptBcList: Breadcrumb[] = [...javaScriptBcList, typeScriptBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#altjs', name: 'AltJS' },
   { id: '#typescript', name: 'TypeScript' },
@@ -19,22 +27,15 @@ const indexList = [
   title="TypeScript"
   description="代表的なAltJSの一つであるTypeScriptについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={typeScriptBcList}
   indexList={indexList}
 >
-
-  <h2 class="title">TypeScript</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/js_index`>js関連技術</a></li>
-    <li class="breadcrumbli"> > TypeScript</li>
-  </ul>
 
   <br/>
   <span id="firstly"></span>
   <h3 class="title">はじめに</h3>
   <p>
-    このページは、<a href=`${BASE_URL}/contents/js_index`>JavaScriptの進化</a>の続きのページです。<br/>
+    このページは、<a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScriptの進化</a>の続きのページです。<br/>
     ここではもっとも代表的なAltJSであるTypeScriptにスポットを当てて記載していきます。<br/>
     一応このページから読み進めても問題ないように構成したつもりですが、先のページを見てからの方が、TypeScriptが生まれるまでの背景がわかって面白いかもしれません。<br/>
   </p>

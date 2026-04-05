@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { dispensablesBcList } from '../Dispensables.astro';
+
 const title = 'Lazy Class';
 const description = 'Code Smell: Lazy Class（怠け者クラス）';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const lazyClassBc: Breadcrumb = {
+  name: "Lazy Class",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_dispensables/Lazy_Class`
+};
+export const lazyClassBcList: Breadcrumb[] = [...dispensablesBcList, lazyClassBc];
+const indexList: index[] = [
+  { id: '#lazyclass', name: 'Lazy Class' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="lazyclass">Lazy Class</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={lazyClassBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="lazyclass">Lazy Class</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/lazy-class" target="_blank" rel="noopener noreferrer">Lazy Class（怠け者クラス）</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     クラスを理解して維持するには、常に時間とコストがかかります。したがって、時間とコストをかける価値のないクラスは削除する必要があります。</p>

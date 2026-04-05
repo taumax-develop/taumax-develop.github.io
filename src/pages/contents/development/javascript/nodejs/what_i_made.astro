@@ -1,14 +1,21 @@
 ---
 import { Image } from "astro:assets";
-import SiteLayout from "../../../../../layouts/SiteLayout.astro";
+import SiteLayout, { type Breadcrumb } from "../../../../../layouts/SiteLayout.astro";
 import play_with_nodejs from './img/made/play_with_nodejs.jpg';
 import chanel_point from './img/made/chanel_point.jpg';
 import auto_post from './img/made/auto_post.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
+import type { index } from "../../../../../components/HeaderIndex.astro";
+import { nodejsBcList } from "./nodejs.astro";
 
-const indexList = [
+export const whatimadeBc: Breadcrumb = {
+  name: "Node.js × Twitch, Twitter, OBS",
+  item: `${BASE_URL}/contents/development/javascript/nodejs/what_i_made`
+};
+export const whatimadeBcList: Breadcrumb[] = [...nodejsBcList, whatimadeBc];
+const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#what_i_made", name: "作った物" },
   { id: "#implementation", name: "実装" },
@@ -19,16 +26,9 @@ const indexList = [
   title="Node.js × Twitch, Twitter, OBS"
   description="Node.jsを使って自作したシステムについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
-  indexList={indexList}>
-
-  <h2 class="title">Node.js × Twitch, Twitter, OBS</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>js関連技術</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a></li>
-    <li class="breadcrumbli"> > Node.js × Twitch, Twitter, OBS</li>
-  </ul>
+  breadcrumbList={whatimadeBcList}
+  indexList={indexList}
+>
 
   <br>
   <AdUnitLandscape />

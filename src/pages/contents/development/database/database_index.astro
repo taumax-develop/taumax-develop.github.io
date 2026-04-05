@@ -1,0 +1,27 @@
+---
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../consts';
+import { developmentBcList } from '../development_index.astro';
+
+export const databaseBc: Breadcrumb = {
+  name: "Database",
+  item: `${BASE_URL}/contents/development/database/database_index`
+};
+export const databaseBcList: Breadcrumb[] = [...developmentBcList, databaseBc];
+const indexList: index[] = [];
+---
+<SiteLayout
+  title="Database"
+  description="Database関連知識のリンク"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={databaseBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <li><a href=`${BASE_URL}/contents/development/database/event/db_design_night_no6`>DB設計したいNight #6 正規化 [online]</a></li>
+
+  <br><br><br><br><br><br><br>
+</SiteLayout>

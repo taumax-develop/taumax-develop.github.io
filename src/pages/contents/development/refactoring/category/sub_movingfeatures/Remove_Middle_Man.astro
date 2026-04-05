@@ -3,19 +3,32 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import img01 from './img/remove_middle_man/img01.png'
 import img02 from './img/remove_middle_man/img02.png'
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { movingFeaturesBcList } from '../Moving_Features_between_Objects.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+export const removeMiddleManBc: Breadcrumb = {
+  name: "Remove Middle Man",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/Remove_Middle_Man`
+};
+export const removeMiddleManBcList: Breadcrumb[] = [...movingFeaturesBcList, removeMiddleManBc];
+const indexList: index[] = [
   { id: '#removemiddleman', name: 'Remove Middle Man' }
 ];
 ---
 
-<SiteLayout title="Remove Middle Man | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Remove Middle Man"
+  description="リファクタリング技法：Remove Middle Manの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={removeMiddleManBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="removemiddleman">Remove Middle Man</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -30,7 +43,7 @@ const indexList = [
   <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
   <p><a href="https://sourcemaking.com/refactoring/moving-features-between-objects" target="_blank" rel="noopener noreferrer">Moving Features between Objects</a></p>
 
-  <h2 id="removemiddleman">Remove Middle Man</h2>
+  <h2>Remove Middle Man</h2>
   <p><a href="https://sourcemaking.com/refactoring/remove-middle-man" target="_blank" rel="noopener noreferrer">Remove Middle Man</a>
   多くのメソッドが行っていることが他クラスへの処理の委譲である場合、それらのメソッドを削除し、クライアントクラスから直接、委譲先のメソッドを呼び出すようにしましょう。</p>
   <p><strong><em>【リファクタリング前】</em></strong><br/>

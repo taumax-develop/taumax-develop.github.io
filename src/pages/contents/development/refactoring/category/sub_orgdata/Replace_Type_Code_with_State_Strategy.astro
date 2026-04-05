@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { organizeDataBcList } from '../Organizing_Data.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#organizingdata', name: 'Organizing Data' },
+export const typeCodeStateStrategyBc: Breadcrumb = {
+  name: "Replace Type Code with State/Strategy",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/Replace_Type_Code_with_State_Strategy`
+};
+export const typeCodeStateStrategyBcList: Breadcrumb[] = [...organizeDataBcList, typeCodeStateStrategyBc];
+const indexList: index[] = [
   { id: '#replacetypecodewithstatestrategy', name: 'Replace Type Code with State/Strategy' }
 ];
 ---
 
-<SiteLayout title="Replace Type Code with State/Strategy | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Replace Type Code with State/Strategy"
+  description="リファクタリング: Replace Type Code with State/Strategy の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={typeCodeStateStrategyBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="replacetypecodewithstatestrategy">Replace Type Code with State/Strategy</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="organizingdata">Organizing Data</h1>
   <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
-  <h2 id="replacetypecodewithstatestrategy">Replace Type Code with State/Strategy</h2>
+  <h2>Replace Type Code with State/Strategy</h2>
   <p><a href="https://sourcemaking.com/refactoring/replace-type-code-with-state-strategy" target="_blank" rel="noopener noreferrer">Replace Type Code with State/Strategy</a>
     クラスの中にType Codeがあり、それがプログラムの振る舞いに影響を与えるような場合で、サブクラスとして切り出すのが難しい場合、Type Codeを状態を表すオブジェクト(state object)に置き換えます。フィールドの値をType Codeに置き換える必要がある場合、別の状態オブジェクトをクラスに注入します。</p>
   <p>※GoFのデザインパターンのStateパターンの話だと理解しました。<br/>参考</p>

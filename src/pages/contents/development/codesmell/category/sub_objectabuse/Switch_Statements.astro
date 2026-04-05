@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { objectAbusersBcList } from '../Object-Orientation-Abusers.astro';
+
 const title = 'Switch Statements';
 const description = 'Code Smell: Switch Statements';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const switchStatementsBc: Breadcrumb = {
+  name: "Switch Statements",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_objectabuse/Switch_Statements`
+};
+export const switchStatementsBcList: Breadcrumb[] = [...objectAbusersBcList, switchStatementsBc];
+const indexList: index[] = [
+  { id: '#switchstatements', name: 'Switch Statements' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="switchstatements">Switch Statements</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={switchStatementsBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="switchstatements">Switch Statements</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/switch-statements" target="_blank" rel="noopener noreferrer">Switch Statements</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     複雑なswitch文またはif文の連続がこのCode Smellの兆候です。</p>

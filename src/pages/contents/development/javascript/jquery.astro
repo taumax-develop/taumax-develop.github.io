@@ -3,21 +3,28 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { type index } from '../../../../components/HeaderIndex.astro';
 import { BASE_URL } from '../../../../consts';
+import { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
+import { javaScriptBcList } from './js_index.astro';
 
+export const jQueryBc: Breadcrumb = {
+  name: "jQuery",
+  item: `${BASE_URL}/contents/development/javascript/jquery`
+};
+export const jQueryBcList: Breadcrumb[] = [...javaScriptBcList, jQueryBc];
 const indexList = [] as index[];
 ---
+
 <SiteLayout
   title="jQuery"
   description="jQueryについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={jQueryBcList}
   indexList={indexList}
 >
-  <h2 class="title">jQuery</h2>
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> &gt; <a href=`${BASE_URL}/contents/js_index`>js関連技術</a></li>
-    <li class="breadcrumbli"> &gt; jQuery</li>
-  </ul>
+
+  <br>
   <h3 class="title">jQuery何がし</h3>
   <p></p>
+
+  <br><br><br><br><br><br>
 </SiteLayout>

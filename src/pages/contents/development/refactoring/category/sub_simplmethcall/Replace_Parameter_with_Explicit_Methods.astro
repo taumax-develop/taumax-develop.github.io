@@ -1,26 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplMethCallsBcList } from '../Simplifying_Method_Calls.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
+export const replaceParameterBc: Breadcrumb = {
+  name: "Replace Parameter with Explicit Methods",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplmethcall/Replace_Parameter_with_Explicit_Methods`
+};
+export const replaceParameterBcList: Breadcrumb[] = [...smplMethCallsBcList, replaceParameterBc];
+const indexList: index[] = [
   { id: '#replaceparameterwithexplicitmethods', name: 'Replace Parameter with Explicit Methods' }
 ];
 ---
 
 <SiteLayout
-  title="Replace Parameter with Explicit Methods | リファクタリング技法"
+  title="Replace Parameter with Explicit Methods"
+  description="リファクタリング技法：Replace Parameter with Explicit Methodsの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={replaceParameterBcList}
   indexList={indexList}
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
+>
 
-  <h2 class="title">リファクタリング技法</h2>
+  <br>
+  <h3 class="title" id="replaceparameterwithexplicitmethods">Replace Parameter with Explicit Methods</h3>
 
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
-  
+
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br>
   リファクタリング第2版<br>
@@ -35,7 +44,7 @@ const indexList = [
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
-  <h2 id="replaceparameterwithexplicitmethods">Replace Parameter with Explicit Methods</h2>
+  <h2>Replace Parameter with Explicit Methods</h2>
   <p><a href="https://sourcemaking.com/refactoring/replace-parameter-with-explicit-methods" target="_blank" rel="noopener noreferrer">Replace Parameter with Explicit Methods</a>
   メソッド内が複数の処理に分割され、各処理は条件に応じて実行されるような場合、各処理を行うメソッドを作り、それを呼び出すことを検討しましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

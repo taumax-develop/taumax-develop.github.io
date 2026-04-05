@@ -3,13 +3,47 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AdUnitLandscape from '../components/AdUnitLandscape.astro';
-const { title, description, twitterCardSize, indexList } = Astro.props;
+
+const { title,
+  description,
+  twitterCardSize,
+  indexList,
+  breadcrumbList,
+} = Astro.props;
+
+export type Breadcrumb = {
+  "@type"?: string,
+  position?: number,
+  name: string,
+  item: string
+};
+
+let bcList: Breadcrumb[] = [] as Breadcrumb[]
+breadcrumbList?.map((item: Breadcrumb, index: number) => (
+  bcList.push({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: item.item
+  })
+))
+
+let breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: bcList
+};
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
   <BaseHead title={title} description={description} twitterCardSize={twitterCardSize} />
   <Header indexList={indexList} />
+
+  <script is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumb)}
+  />
 
   <body class="defaultbody">
     <div id="container">
@@ -21,6 +55,16 @@ const { title, description, twitterCardSize, indexList } = Astro.props;
         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <!-- はてぶボタン -->
         <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+        <h2 class="title">{title}</h2>
+
+        <ul class="breadcrumb">
+          {bcList?.map((ele, i) => (
+            i === (bcList.length - 1)
+              ? <li>{ele.name}</li>
+              : <li><a href={ele.item}>{ele.name}</a></li>
+          ))}
+        </ul>
 
         <article>
           <slot /> <!-- ここにコンテンツが挿入される -->

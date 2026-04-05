@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { dispensablesBcList } from '../Dispensables.astro';
+
 const title = 'Speculative Generality';
 const description = 'Code Smell: Speculative Generality';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const speculativeGeneralityBc: Breadcrumb = {
+  name: "Speculative Generality",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_dispensables/Speculative_Generality`
+};
+export const speculativeGeneralityBcList: Breadcrumb[] = [...dispensablesBcList, speculativeGeneralityBc];
+const indexList: index[] = [
+  { id: '#speculativegenerality', name: 'Speculative Generality' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="speculativegenerality">Speculative Generality</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={speculativeGeneralityBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="speculativegenerality">Speculative Generality</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/speculative-generality" target="_blank" rel="noopener noreferrer">Speculative Generality</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     未使用のクラス、メソッド、フィールド、またはパラメーターの存在。</p>

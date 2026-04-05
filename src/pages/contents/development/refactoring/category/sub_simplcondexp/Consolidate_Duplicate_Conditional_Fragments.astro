@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplCondExpressBcList } from '../Simplifying_Conditional_Expressions.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingconditionalexpressions', name: 'Simplifying Conditional Expressions' },
+export const consolidateDupCondBc: Breadcrumb = {
+  name: "Consolidate Duplicate Conditional Fragments",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/Consolidate_Duplicate_Conditional_Fragments`
+};
+export const consolidateDupCondBcList: Breadcrumb[] = [...smplCondExpressBcList, consolidateDupCondBc];
+const indexList: index[] = [
   { id: '#consolidateduplicateconditionalfragments', name: 'Consolidate Duplicate Conditional Fragments' }
 ];
 ---
 
-<SiteLayout title="Consolidate Duplicate Conditional Fragments | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Consolidate Duplicate Conditional Fragments"
+  description="リファクタリング: Consolidate Duplicate Conditional Fragments の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={consolidateDupCondBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="consolidateduplicateconditionalfragments">Consolidate Duplicate Conditional Fragments</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="simplifyingconditionalexpressions">Simplifying Conditional Expressions</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-conditional-expressions" target="_blank" rel="noopener noreferrer">Simplifying Conditional Expressions</a></p>
 
-  <h2 id="consolidateduplicateconditionalfragments">Consolidate Duplicate Conditional Fragments</h2>
+  <h2>Consolidate Duplicate Conditional Fragments</h2>
   <p><a href="https://sourcemaking.com/refactoring/consolidate-duplicate-conditional-fragments" target="_blank" rel="noopener noreferrer">Consolidate Duplicate Conditional Fragments</a>
     条件分岐内で重複コードが存在する場合はその処理を条件分岐の外に配置しましょう。</p>
   <pre><code class="language-java">{`if (isSpecialDeal()) {

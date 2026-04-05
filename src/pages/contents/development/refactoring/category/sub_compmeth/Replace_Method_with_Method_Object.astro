@@ -1,11 +1,19 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-const indexList = [
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { composingMethodsBcList } from '../Composing_methods.astro';
+
+export const replaceMethodBc: Breadcrumb = {
+  name: "Replace Method with Method Object",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_compmeth/Replace_Method_with_Method_Object`
+};
+export const replaceMethodBcList: Breadcrumb[] = [...composingMethodsBcList, replaceMethodBc];
+const indexList: index[] = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#replacemethodwithmethodobject', name: 'Replace Method with Method Object' }
@@ -16,9 +24,12 @@ const indexList = [
   title="Replace Method with Method Object"
   description="リファクタリング技法：Replace Method with Method Objectの解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={replaceMethodBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
+
+  <br>
+  <h3 class="title">Replace Method with Method Object</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>

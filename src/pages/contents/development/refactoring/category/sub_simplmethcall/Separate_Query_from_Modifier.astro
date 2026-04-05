@@ -1,23 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { smplMethCallsBcList } from '../Simplifying_Method_Calls.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#simplifyingmethodcalls', name: 'Simplifying Method Calls' },
+export const separateQueryBc: Breadcrumb = {
+  name: "Separate Query from Modifier",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_simplmethcall/Separate_Query_from_Modifier`
+};
+export const separateQueryBcList: Breadcrumb[] = [...smplMethCallsBcList, separateQueryBc];
+const indexList: index[] = [
   { id: '#separatequeryfrommodifier', name: 'Separate Query from Modifier' }
 ];
 ---
 
 <SiteLayout
-  title="Separate Query from Modifier | リファクタリング技法"
+  title="Separate Query from Modifier"
+  description="リファクタリング技法：Separate Query from Modifierの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={separateQueryBcList}
   indexList={indexList}
-  twitterCardSize={TWITTER_CARD_SUMMARY}>
+>
 
-  <h2 class="title">リファクタリング技法</h2>
+  <br>
+  <h3 class="title" id="separatequeryfrommodifier">Separate Query from Modifier</h3>
 
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
 
@@ -35,7 +44,7 @@ const indexList = [
   <h1 id="simplifyingmethodcalls">Simplifying Method Calls</h1>
   <p><a href="https://sourcemaking.com/refactoring/simplifying-method-calls" target="_blank" rel="noopener noreferrer">Simplifying Method Calls</a></p>
 
-  <h2 id="separatequeryfrommodifier">Separate Query from Modifier</h2>
+  <h2>Separate Query from Modifier</h2>
   <p><a href="https://sourcemaking.com/refactoring/separate-query-from-modifier" target="_blank" rel="noopener noreferrer">Separate Query from Modifier</a>
   ※関連するCode Smellがなかったためリンクのみ。</p>
 </SiteLayout>

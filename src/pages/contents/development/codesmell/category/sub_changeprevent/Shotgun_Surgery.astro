@@ -1,18 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import RefactoringImg from "../../../img/refactoring.jpg";
 import LegacyCodeImg from "../../../img/legacy_code.jpg";
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { changePreventersBcList } from '../Change-Preventers.astro';
 
 const title = "Shotgun Surgery";
 const description = "Code Smell: Shotgun Surgery";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", href: "/" }
+
+export const shotgunSurgeryBc: Breadcrumb = {
+  name: "Shotgun Surgery",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_changeprevent/Shotgun_Surgery`
+};
+export const shotgunSurgeryBcList: Breadcrumb[] = [...changePreventersBcList, shotgunSurgeryBc];
+const indexList: index[] = [
+  { id: "#shotgunsurgery", name: "Shotgun Surgery" }
 ];
 ---
 
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={shotgunSurgeryBcList}
+  indexList={indexList}
+>
+
+  <br>
   <h3 id="shotgunsurgery">Shotgun Surgery</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/shotgun-surgery" target="_blank" rel="noopener noreferrer">Shotgun Surgery（ショットガンサージェリー）</a></p>
   <p>Shotgun Surgeryは、1つの変更が複数のクラスやメソッドにまたがって行われることを指ります。たとえば、ある機能を追加するために複数のクラスのコードを修正しなければならない場合です。</p>

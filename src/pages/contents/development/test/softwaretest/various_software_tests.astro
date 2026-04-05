@@ -17,8 +17,16 @@ import software_test_method from './img/software_test_method.jpg';
 import software_test_textbook from './img/software_test_textbook.jpg';
 import my_first_autotest from './img/my_first_autotest.jpg';
 import { BASE_URL } from '../../../../../consts';
+import type { Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { testBcList } from '../test_index.astro';
 
-const indexList = [
+export const softwareTestBc: Breadcrumb = {
+  name: "ソフトウェアテストについて",
+  item: `${BASE_URL}/contents/development/test/softwaretest/various_software_tests`
+};
+export const softwareTestBcList: Breadcrumb[] = [...testBcList, softwareTestBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#quality', name: '品質とは' },
   { id: '#test_objectives', name: 'テストの目的' },
@@ -43,13 +51,11 @@ const indexList = [
   title="ソフトウェアテストについて"
   description="ソフトウェアテストについて調べたことを書いた記事"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={softwareTestBcList}
   indexList={indexList}
 >
 
-        <h2 class="title">ソフトウェアテストについていろいろ調べたことを書いた記事</h2>
-
-<a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/development/test/test`>テスト関連</a> > ソフトウェアテスト<br><br>
-
+<br>
 <span id="firstly"></span>
 <h3 class="title">はじめに</h3>
 <p>

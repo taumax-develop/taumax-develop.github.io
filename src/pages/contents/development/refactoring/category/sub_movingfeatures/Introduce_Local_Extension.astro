@@ -3,19 +3,32 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import img01 from './img/introduce_local_extension/img01.png'
 import img02 from './img/introduce_local_extension/img02.png'
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { movingFeaturesBcList } from '../Moving_Features_between_Objects.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+export const introduceLocalExtensionBc: Breadcrumb = {
+  name: "Introduce Local Extension",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/Introduce_Local_Extension`
+};
+export const introduceLocalExtensionBcList: Breadcrumb[] = [...movingFeaturesBcList, introduceLocalExtensionBc];
+const indexList: index[] = [
   { id: '#introducelocalextension', name: 'Introduce Local Extension' }
 ];
 ---
 
-<SiteLayout title="Introduce Local Extension | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Introduce Local Extension"
+  description="リファクタリング技法：Introduce Local Extensionの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={introduceLocalExtensionBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="introducelocalextension">Introduce Local Extension</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -30,7 +43,7 @@ const indexList = [
   <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
   <p><a href="https://sourcemaking.com/refactoring/moving-features-between-objects" target="_blank" rel="noopener noreferrer">Moving Features between Objects</a></p>
 
-  <h2 id="introducelocalextension">Introduce Local Extension</h2>
+  <h2>Introduce Local Extension</h2>
   <p><a href="https://sourcemaking.com/refactoring/introduce-local-extension" target="_blank" rel="noopener noreferrer">Introduce Local Extension</a></p>
   <p>ライブラリのユーティリティクラスには、必要なメソッドが含まれていません。ただし、これらのメソッドをクラスに追加することはできません。
   メソッドを含む新しいクラスを作成し、それをユーティリティクラスの子またはラッパーにします。</p>

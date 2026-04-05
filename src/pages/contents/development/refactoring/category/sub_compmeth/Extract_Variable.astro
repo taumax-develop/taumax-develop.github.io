@@ -5,7 +5,16 @@ import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-const indexList = [
+import type { Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { composingMethodsBcList } from '../Composing_methods.astro';
+
+export const extractVariablesBc: Breadcrumb = {
+  name: "Extract Variable",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_compmeth/Extract_Variable`
+};
+export const extractVariablesBcList: Breadcrumb[] = [...composingMethodsBcList, extractVariablesBc];
+const indexList: index[] = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#extractvariable', name: 'Extract Variable' }
@@ -16,10 +25,12 @@ const indexList = [
   title="Extract Variable"
   description="リファクタリング技法：Extract Variableの解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={extractVariablesBcList}
   indexList={indexList}
 >
 
-  <h2 class="title">リファクタリング技法</h2>
+  <br>
+  <h3 class="title">Extract Variable</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>

@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from "astro:assets";
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import ssr from './img/rendering/ssr.jpg';
@@ -16,8 +16,15 @@ import what_i_made2_isgdetail_build from './img/rendering/what_i_made2_isgdetail
 import what_i_made2_isgdetail_rendering from './img/rendering/what_i_made2_isgdetail_rendering.jpg';
 import typescript_react_next from '../img/typescript_react_next.jpg';
 import { BASE_URL } from '../../../../../../consts';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { reactNextBcList } from './react_next.astro';
 
-const indexList = [
+export const nextRenderingBc: Breadcrumb = {
+  name: "Next.jsのレンダリング",
+  item: `${BASE_URL}/contents/development/javascript/spa/react/next_rendering`
+};
+export const nextRenderingBcList: Breadcrumb[] = [...reactNextBcList, nextRenderingBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#rendering', name: 'Next.jsのレンダリングめに' },
   { id: '#ssr', name: 'SSR' },
@@ -36,18 +43,9 @@ const indexList = [
   title="Next.jsのレンダリング"
   description="Next.jsのレンダリングについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={nextRenderingBcList}
   indexList={indexList}
 >
-
-  <h2 class="title">Next.jsのレンダリング</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/spa`>SPA</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/react/react_next`>React/Next.js</a></li>
-    <li class="breadcrumbli"> > Next.jsのレンダリング</li>
-  </ul>
 
   <br/>
   <span id="firstly"></span>

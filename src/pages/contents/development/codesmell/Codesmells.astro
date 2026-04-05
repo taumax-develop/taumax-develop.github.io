@@ -1,12 +1,19 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../img/refactoring.jpg';
 import legacy_code from '../img/legacy_code.jpg';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { codesmellRefactorBcList } from '../CodeSmell_Refactoring.astro';
 
-const indexList = [
+export const codesmellPagebc: Breadcrumb = {
+  name: "Code Smell",
+  item: `${BASE_URL}/contents/development/codesmell/Codesmells`
+};
+export const codesmellBcList: Breadcrumb[] = [...codesmellRefactorBcList, codesmellPagebc];
+const indexList: index[] = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#codesmell', name: 'Code Smellとは？' },
   { id: '#bloaters', name: 'Bloaters' },
@@ -23,10 +30,11 @@ const indexList = [
   title="Code Smell"
   description="Code Smellの解説と分類、参考情報をまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={codesmellBcList}
   indexList={indexList}
 >
-  <h2 class="title">Code Smell</h2>
 
+  <br>
   <h1 id="codesmell">Code Smellとは？</h1>
   <p>以前（2019年8月頃）、CSD (Certified Scrum Developer) 研修を受講しました。非常にためになる研修で、その研修の中でCode Smellというものについて学びました。
     Code Smellとは、ソースコードにリファクタリングすべき問題が存在することを示す何らかの兆候のことです。

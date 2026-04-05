@@ -1,11 +1,18 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
 import { Image } from 'astro:assets';
 import rdra from './img/rdra.jpg';
+import { requirementBreadcrumbList } from '../requirement.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
 
-const indexList = [
+export const requirementPagebc: Breadcrumb = {
+  name: "CCSR",
+  item: `${BASE_URL}/contents/requirement/ccsr/bpstudy_ccsr`
+};
+export const breadcrumbList: Breadcrumb[] = [...requirementBreadcrumbList, requirementPagebc];
+const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#rdra_overview", name: "RDRA概要" },
   { id: "#goals_requirements", name: "要件定義の目標" },
@@ -30,12 +37,9 @@ const indexList = [
   title="RDRA"
   description="勝手にRDRAを語る夕べで語られたことまとめ。要件定義の手法RDRAについて。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">RDRA</h2>
-
-  <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/requirement/requirement` style="color: #00bfff;">要件定義</a> &gt; RDRA（ラドラ）</p>
 
   <br/>
   <div id="firstly"></div>

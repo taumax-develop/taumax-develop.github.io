@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { organizeDataBcList } from '../Organizing_Data.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#organizingdata', name: 'Organizing Data' },
+export const encapsulateCollectionBc: Breadcrumb = {
+  name: "Encapsulate Collection",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/Encapsulate_Collection`
+};
+export const encapsulateCollectionBcList: Breadcrumb[] = [...organizeDataBcList, encapsulateCollectionBc];
+const indexList: index[] = [
   { id: '#encapsulatecollection', name: 'Encapsulate Collection' }
 ];
 ---
 
-<SiteLayout title="Encapsulate Collection | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Encapsulate Collection"
+  description="リファクタリング: Encapsulate Collection の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={encapsulateCollectionBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="encapsulatecollection">Encapsulate Collection</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="organizingdata">Organizing Data</h1>
   <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
-  <h2 id="encapsulatecollection">Encapsulate Collection</h2>
+  <h2>Encapsulate Collection</h2>
   <p><a href="https://sourcemaking.com/refactoring/encapsulate-collection" target="_blank" rel="noopener noreferrer">Encapsulate Collection</a>
   ListやSetなどのようなCollectionをカプセル化する場合、getterはread onlyなオブジェクトを返すようにしましょう。
   また、Collectionに要素を追加するためのaddメソッドやdeleteメソッドを用意しましょう。

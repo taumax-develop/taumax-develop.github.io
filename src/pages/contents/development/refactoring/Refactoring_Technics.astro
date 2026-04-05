@@ -1,13 +1,19 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../img/refactoring.jpg';
 import legacy_code from '../img/legacy_code.jpg';
 import { BASE_URL } from '../../../../consts';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { developmentBcList } from '../development_index.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
+export const refactoringBc: Breadcrumb = {
+  name: "リファクタリング技法",
+  item: `${BASE_URL}/contents/development/refactoring/Refactoring_Technics`
+};
+export const refactoringBcList: Breadcrumb[] = [...developmentBcList, refactoringBc];
+const indexList: index[] = [
   { id: '#refactoring', name: 'リファクタリング技法' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
@@ -23,10 +29,12 @@ const indexList = [
   title="リファクタリング技法"
   description="Code Smellを解消するためのリファクタリング技法や関連知識をまとめたページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={refactoringBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
 
+  <br>
+  <h3 class="title" id="refactoring">リファクタリング技法</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>

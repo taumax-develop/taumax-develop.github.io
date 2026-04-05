@@ -1,14 +1,19 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { generalisationBcList } from '../Dealing_with_Generalisation.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+export const collapseHierarchyBc: Breadcrumb = {
+  name: "Collapse Hierarchy",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_dealgeneral/Collapse_Hierarchy`
+};
+export const collapseHierarchyBcList: Breadcrumb[] = [...generalisationBcList, collapseHierarchyBc];
+const indexList: index[] = [
   { id: '#collapsehierarchy', name: 'Collapse Hierarchy' }
 ];
 ---
@@ -17,9 +22,12 @@ const indexList = [
   title="Collapse Hierarchy"
   description="リファクタリング技法：Collapse Hierarchyの解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={collapseHierarchyBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
+
+  <br>
+  <h3 class="title" id="collapsehierarchy">Collapse Hierarchy</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>

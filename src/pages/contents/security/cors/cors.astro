@@ -1,14 +1,21 @@
 ---
 import { Image } from 'astro:assets';
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
 import cors_pathproxy from './img/cors_pathproxy.png';
 import sec_2017_spring from './img/sec_2017_spring.jpg';
 import sec_2018_spring from './img/sec_2018_spring.jpg';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
+import { securityBreadcrumbList } from '../security.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
 
-const indexList = [
+export const corsPagebc: Breadcrumb = {
+  name: "CORS",
+  item: `${BASE_URL}/contents/security/cors/cors`
+};
+const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, corsPagebc];
+const indexList: index[] = [
   { id: "#cors", name: "CORS" },
   { id: "#soa_cors", name: "SOA,CORS" },
   { id: "#access_control_allow_origin", name: "Access-Control-Allow-Origin" },
@@ -22,10 +29,9 @@ const indexList = [
   title="CORS"
   description="CORS（クロスオリジンリソースシェアリング）の解説ページ。セキュリティ観点での仕組みや脆弱性について。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-
-  <h2 class="title">CORS</h2>
 
   <br/>
   工事中...<br>

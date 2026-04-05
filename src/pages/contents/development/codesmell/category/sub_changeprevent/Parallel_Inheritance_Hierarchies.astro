@@ -1,18 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import RefactoringImg from "../../../img/refactoring.jpg";
 import LegacyCodeImg from "../../../img/legacy_code.jpg";
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { changePreventersBcList } from '../Change-Preventers.astro';
 
 const title = "Parallel Inheritance Hierarchies";
 const description = "Code Smell: Parallel Inheritance Hierarchies";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", href: "/" }
+
+export const parallelInheritanceHierarchiesBc: Breadcrumb = {
+  name: "Parallel Inheritance Hierarchies",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_changeprevent/Parallel_Inheritance_Hierarchies`
+};
+export const parallelInheritanceHierarchiesBcList: Breadcrumb[] = [...changePreventersBcList, parallelInheritanceHierarchiesBc];
+const indexList: index[] = [
+  { id: "#parallelinheritancehierarchies", name: "Parallel Inheritance Hierarchies" }
 ];
 ---
 
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={parallelInheritanceHierarchiesBcList}
+  indexList={indexList}
+>
+
+  <br>
   <h3 id="parallelinheritancehierarchies">Parallel Inheritance Hierarchies</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/parallel-inheritance-hierarchies" target="_blank" rel="noopener noreferrer">Parallel Inheritance Hierarchies（並行継承階層）</a></p>
   <p>Parallel Inheritance Hierarchiesは、あるクラス階層に新しいサブクラスを追加するたびに、別のクラス階層にもサブクラスを追加しなければならない状況を指します。</p>

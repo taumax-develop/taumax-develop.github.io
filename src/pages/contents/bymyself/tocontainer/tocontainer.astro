@@ -3,10 +3,17 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgTocontainer from './img/tocontainer.png';
-import imgPostgresAccess from './img/postgres_access.png';
 import { BASE_URL } from '../../../../consts';
+import type { Breadcrumb } from '../../../../layouts/SiteLayout.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { selfDevelopBreadcrumbList } from '../bymyself.astro';
 
-const indexList = [
+export const toContainerPagebc: Breadcrumb = {
+  name: "コンテナ化",
+  item: `${BASE_URL}/contents/bymyself/tocontainer/tocontainer`
+};
+export const breadcrumbList: Breadcrumb[] = [...selfDevelopBreadcrumbList, toContainerPagebc];
+const indexList: index[] = [
   { id: "#summary", name: "概要" },
   { id: "#mechanism", name: "仕組み" },
   { id: "#whatilearn", name: "学び" }
@@ -17,13 +24,11 @@ const indexList = [
   title="コンテナ化"
   description="twitterのbotとか自動リリース機能の構築とか、自作サイト作ってそれをhttps化したりとかいろいろ自力で構築した中で得た知識を整理した記事です。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">コンテナ化</h2>
 
-  <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; コンテナ化</p>
-
+  <br/>
   <div id="summary"></div>
   <h3 class="title">コンテナ化</h3>
   <p>

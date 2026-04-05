@@ -1,9 +1,16 @@
 ---
-import SiteLayout from '../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../consts';
+import type { index } from '../../../components/HeaderIndex.astro';
+import { agileBreadcrumbList } from '../agile/agile.astro';
 
-const indexList = [
+export const selfIndexPagebc: Breadcrumb = {
+  name: "個人開発したことまとめ",
+  item: `${BASE_URL}/contents/bymyself/index`
+};
+export const breadcrumbList: Breadcrumb[] = [...agileBreadcrumbList, selfIndexPagebc];
+const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#first", name: "やってきたことの一覧" },
   { id: "#products", name: "実際に作ったもの" }
@@ -14,6 +21,7 @@ const indexList = [
   title="個人開発したことまとめ"
   description="2020年頃から個人的に開発し稼働しているモノの仕組みや壁の乗り越え方を整理したページです。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
   <h2 class="title">個人開発したことまとめ</h2>

@@ -1,19 +1,31 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { movingFeaturesBcList } from '../Moving_Features_between_Objects.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#movingfeaturesbetweenobjects', name: 'Moving Features between Objects' },
+export const extractClassBc: Breadcrumb = {
+  name: "Extract Class",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/Extract_Class`
+};
+export const extractClassBcList: Breadcrumb[] = [...movingFeaturesBcList, extractClassBc];
+const indexList: index[] = [
   { id: '#extractclass', name: 'Extract Class' }
 ];
 ---
+<SiteLayout
+  title="Extract Class"
+  description="リファクタリング技法：Extract Classの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={extractClassBcList}
+  indexList={indexList}
+>
 
-<SiteLayout title="Extract Class | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+  <br>
+  <h3 class="title" id="extractclass">Extract Class</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +40,7 @@ const indexList = [
   <h1 id="movingfeaturesbetweenobjects">Moving Features between Objects</h1>
   <p><a href="https://sourcemaking.com/refactoring/moving-features-between-objects" target="_blank" rel="noopener noreferrer">Moving Features between Objects</a></p>
 
-  <h2 id="extractclass">Extract Class</h2>
+  <h2>Extract Class</h2>
   <p><a href="https://sourcemaking.com/refactoring/extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>
   1つのクラスに複数の責任を持たせるとコードが複雑になることがあります。その場合は、新しいクラスを作成し、関連する機能を担当するフィールドとメソッドをその中に配置します。</p>
   <p>このリファクタリング方法は、<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#単一責任の原則" target="_blank" rel="noopener noreferrer">単一責任の原則</a>を守るのに役立ちます。<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#単一責任の原則" target="_blank" rel="noopener noreferrer">単一責任の原則</a>を守ることでクラスはより明確で理解しやすいものになります。</p>

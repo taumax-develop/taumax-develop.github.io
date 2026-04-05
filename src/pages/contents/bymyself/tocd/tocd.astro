@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgBot from './img/image_bot.png';
@@ -8,8 +8,15 @@ import imgStageGo from './img/stage_go.png';
 import imgStagePython from './img/stage_python.png';
 import imgStageWeb from './img/stage_web.png';
 import { BASE_URL } from '../../../../consts';
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { selfDevelopBreadcrumbList } from '../bymyself.astro';
 
-const indexList = [
+export const toCdPagebc: Breadcrumb = {
+  name: "自動リリース",
+  item: `${BASE_URL}/contents/bymyself/tocd/tocd`
+};
+export const breadcrumbList: Breadcrumb[] = [...selfDevelopBreadcrumbList, toCdPagebc];
+const indexList: index[] = [
   { id: "#summary", name: "概要" },
   { id: "#mechanism", name: "仕組み" },
   { id: "#whatilearn", name: "学び" }
@@ -20,12 +27,9 @@ const indexList = [
   title="自動リリース"
   description="twitterのbotとか自動リリース機能の構築とか、自作サイト作ってそれをhttps化したりとかいろいろ自力で構築した中で得た知識を整理した記事です。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-  <h2 class="title">自動リリース</h2>
-
-  <br/><br/>
-  <p style="color: #FFFFFF;"><a href={BASE_URL} style="color: #00bfff;">ホーム</a> &gt; <a href=`${BASE_URL}/contents/bymyself/bymyself` style="color: #00bfff;">個人開発したことまとめ</a> &gt; 自動リリース</p>
 
   <br/>
   <div id="summary"></div>

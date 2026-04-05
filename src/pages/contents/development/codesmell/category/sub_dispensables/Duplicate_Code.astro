@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { dispensablesBcList } from '../Dispensables.astro';
+
 const title = 'Duplicate Code';
 const description = 'Code Smell: Duplicate Code（重複コード）';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const duplicateCodeBc: Breadcrumb = {
+  name: "Duplicate Code",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_dispensables/Duplicate_Code`
+};
+export const duplicateCodeBcList: Breadcrumb[] = [...dispensablesBcList, duplicateCodeBc];
+const indexList: index[] = [
+  { id: '#duplicatecode', name: 'Duplicate Code' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="duplicatecode">Duplicate Code</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={duplicateCodeBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="duplicatecode">Duplicate Code</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code（重複コード）</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     ほとんど同じようなコードが見られる場合</p>

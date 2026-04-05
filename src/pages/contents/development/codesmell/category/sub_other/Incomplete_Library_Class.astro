@@ -1,17 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { otherSmellsBcList } from '../Other-Smells.astro';
+
 const title = 'Incomplete Library Class';
 const description = 'Code Smell: Incomplete Library Class';
 const twitterCardSize = 'summary_large_image';
-const indexList = [
-  { text: 'Home', href: '/' }
+
+export const incompleteLibraryBc: Breadcrumb = {
+  name: "Incomplete Library Class",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_other/Incomplete_Library_Class`
+};
+export const incompleteLibraryBcList: Breadcrumb[] = [...otherSmellsBcList, incompleteLibraryBc];
+const indexList: index[] = [
+  { id: '#incomplete_library_class', name: 'Incomplete Library Class' }
 ];
 ---
-<SiteLayout {title} {description} {twitterCardSize} {indexList}>
-  <h1 id="incompletelibraryclass">Incomplete Library Class</h1>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={incompleteLibraryBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="incomplete_library_class">Incomplete Library Class</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/incomplete-library-class" target="_blank" rel="noopener noreferrer">Incomplete Library Class</a></p>
   <p><strong><em>兆候と症状</em></strong><br/>
     遅かれ早かれ、<a href="https://en.wikipedia.org/wiki/Library_(computing)" target="_blank" rel="noopener noreferrer">Library</a>はユーザーのニーズを満たすことをやめます。ライブラリは読み取り専用であるため、問題の唯一の解決策であるライブラリの変更は、多くの場合不可能です。</p>

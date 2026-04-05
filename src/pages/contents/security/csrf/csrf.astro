@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import csrf_flow from './img/csrf_flow.png'
 import csrf_flowDetail from './img/csrf_flowDetail.png'
@@ -9,8 +9,15 @@ import sec_2018_spring from './img/sec_2018_spring.jpg';
 import shienshi_2019 from './img/shienshi_2019.jpg';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
 import { BASE_URL } from '../../../../consts';
+import { securityBreadcrumbList } from '../security.astro';
+import type { index } from '../../../../components/HeaderIndex.astro';
 
-const indexList = [
+export const csrfPagebc: Breadcrumb = {
+  name: "CSRF",
+  item: `${BASE_URL}/contents/security/csrf/csrf`
+};
+const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, csrfPagebc];
+const indexList: index[] = [
   { id: "#csrf", name: "CSRF" },
   { id: "#reference", name: "参考" },
   { id: "#csrf_damage", name: "CSRF攻撃を受けるどういった被害に合うのか？" },
@@ -25,10 +32,9 @@ const indexList = [
   title="CSRF（Cross-Site Request Forgeries）"
   description="CSRF（クロスサイトリクエストフォージェリ）の解説ページ。攻撃の流れや対策について。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
   indexList={indexList}
 >
-
-  <h2 class="title">クロスサイトリクエストフォージェリ(CSRF:Cross-Site Request Forgeries)</h2>
 
   <br/>
   <h3 class="title" id="csrf">CSRF攻撃とは</h3>

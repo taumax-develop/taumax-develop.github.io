@@ -1,35 +1,42 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import refactoringImg from '../../img/refactoring.jpg';
 import legacyCodeImg from '../../img/legacy_code.jpg';
 import { BASE_URL } from '../../../../../consts';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { codesmellBcList } from '../Codesmells.astro';
 
-const indexList = [
+export const otherSmellsBc: Breadcrumb = {
+  name: "Other Smells",
+  item: `${BASE_URL}/contents/development/codesmell/category/Other-Smells`
+};
+export const otherSmellsBcList: Breadcrumb[] = [...codesmellBcList, otherSmellsBc];
+const indexList: index[] = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#othersmells', name: 'Other Smells' },
-  { id: '#alternativeclasseswithdifferentinterfaces', name: 'Incomplete Library Class' }
+  { id: '#incompletelibraryclass', name: 'Incomplete Library Class' }
 ];
 ---
 <SiteLayout
-  title="Other-Smells"
+  title="Other Smells"
   description="Code Smell: Other Smellsの分類・参考情報をまとめたページです。"
   twitterCardSize="summary_large_image"
+  breadcrumbList={otherSmellsBcList}
   indexList={indexList}
 >
-  <section class="box">
-    <h2 class="title">Other-Smells</h2>
-    <h2 id="othersmells">Other Smells</h2>
-    <p><a href="https://sourcemaking.com/refactoring/smells/other" target="_blank" rel="noopener noreferrer">Other Smells</a></p>
-    <p>どこにも分類されない Code Smell です。</p>
-    <h1 id="alternativeclasseswithdifferentinterfaces">Incomplete Library Class</h1>
-    <p><a href=`${BASE_URL}/contents/development/codesmell/category/sub_other/Incomplete_Library_Class`>Incomplete Library Class</a></p>
-    <br/><br/><br/>
-    書籍としてはこの辺りが参考になると思います。<br/>
-    <br/>
-    リファクタリング第2版<br/>
+
+  <br>
+  <h3 class="title" id="othersmells">Other Smells</h3>
+  <p><a href="https://sourcemaking.com/refactoring/smells/other" target="_blank" rel="noopener noreferrer">Other Smells</a></p>
+  <p>どこにも分類されない Code Smell です。</p>
+  <h1 id="incompletelibraryclass">Incomplete Library Class</h1>
+  <p><a href=`${BASE_URL}/contents/development/codesmell/category/sub_other/Incomplete_Library_Class`>Incomplete Library Class</a></p>
+  <br/><br/><br/>
+  書籍としてはこの辺りが参考になると思います。<br/>
+  <br/>
+  リファクタリング第2版<br/>
   <a target="_blank" href="https://amzn.to/4m4SktG" rel="noopener noreferrer"><img src={refactoringImg.src} alt="refactoring" /></a>
     <br/>
     レガシーコード改善ガイド<br/>
   <a target="_blank" href="https://amzn.to/44SixVn" rel="noopener noreferrer"><img src={legacyCodeImg.src} alt="legacy_code" /></a>
-  </section>
 </SiteLayout>

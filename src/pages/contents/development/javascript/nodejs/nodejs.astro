@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import { Image } from "astro:assets";
 import v8LibuvImg from "./img/nodejs/v8_libuv.jpg";
 import multiThreadImg from "./img/nodejs/multi_thread.jpg";
@@ -8,8 +8,15 @@ import nodejsBookImg from "./img/nodejs入門.jpg";
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../consts';
 import AdUnitLandscape from '../../../../../components/AdUnitLandscape.astro';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { javaScriptBcList } from '../js_index.astro';
 
-const indexList = [
+export const nodejsBc: Breadcrumb = {
+  name: "Node.js",
+  item: `${BASE_URL}/contents/development/javascript/nodejs/nodejs`
+};
+export const nodejsBcList: Breadcrumb[] = [...javaScriptBcList, nodejsBc];
+const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#what_is_nodejs", name: "Node.jsとは" },
   { id: "#feature", name: "特徴" },
@@ -25,14 +32,9 @@ const indexList = [
   title="Node.jsについて"
   description="Node.jsの仕組みについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
-  indexList={indexList}>
-
-  <h2 class="title">Node.js</h2>
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> &gt; <a href=`${BASE_URL}/contents/development/javascript/js_index`>js関連技術</a></li>
-    <li class="breadcrumbli"> &gt; Node.js</li>
-  </ul>
+  breadcrumbList={nodejsBcList}
+  indexList={indexList}
+>
 
   <br>
   <span id="firstly"></span>

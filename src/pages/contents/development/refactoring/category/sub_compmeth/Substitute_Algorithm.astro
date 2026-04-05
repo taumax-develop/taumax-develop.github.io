@@ -1,11 +1,19 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-const indexList = [
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { composingMethodsBcList } from '../Composing_methods.astro';
+
+export const substituteAlgoBc: Breadcrumb = {
+  name: "Substitute Algorithm",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_compmeth/Substitute_Algorithm`
+};
+export const substituteAlgoBcList: Breadcrumb[] = [...composingMethodsBcList, substituteAlgoBc];
+const indexList: index[] = [
   { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#substitutealgorithm', name: 'Substitute Algorithm' }
@@ -16,9 +24,12 @@ const indexList = [
   title="Substitute Algorithm"
   description="リファクタリング技法：Substitute Algorithmの解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={substituteAlgoBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
+
+  <br>
+  <h3 class="title">Substitute Algorithm</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>

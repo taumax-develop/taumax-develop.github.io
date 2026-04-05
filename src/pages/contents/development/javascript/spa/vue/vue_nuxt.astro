@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from "astro:assets";
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import _app from './img/react_next/_app.jpg';
@@ -12,8 +12,15 @@ import ラジオボタン2 from './img/vue_nuxt/ラジオボタン2.jpg';
 import vue3 from '../img/vue3.jpg';
 import nuxt3 from '../img/nuxt3.jpg';
 import vuejs入門 from '../img/vuejs入門.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { spaBcList } from '../spa.astro';
 
-const indexList = [
+export const vueNuxtBc: Breadcrumb = {
+  name: "Vue.js/Nuxt",
+  item: `${BASE_URL}/contents/development/javascript/spa/vue/vue_nuxt`
+};
+export const vueNuxtBcList: Breadcrumb[] = [...spaBcList, vueNuxtBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#vue', name: 'Vue.js' },
   { id: '#sfc', name: 'SFC' },
@@ -28,20 +35,12 @@ const indexList = [
 ---
 
 <SiteLayout
-  title="Next.jsのレンダリング"
-  description="Next.jsのレンダリングについて"
+  title="Vue.js/Nuxt"
+  description="Vue.jsとNuxtについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={vueNuxtBcList}
   indexList={indexList}
 >
-
-  <h2 class="title">Vue.js/Nuxt</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/spa/spa`>SPA</a></li>
-    <li class="breadcrumbli"> > Vue.js/Nuxt</li>
-  </ul>
 
   <br/>
   <span id="firstly"></span>

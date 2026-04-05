@@ -1,19 +1,32 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets'
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { generalisationBcList } from '../Dealing_with_Generalisation.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+export const replaceInheritanceBc: Breadcrumb = {
+  name: "Replace Inheritance with Delegation",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_dealgeneral/Replace_Inheritance_with_Delegation`
+};
+export const replaceInheritanceBcList: Breadcrumb[] = [...generalisationBcList, replaceInheritanceBc];
+const indexList: index[] = [
   { id: '#replaceinheritancewithdelegation', name: 'Replace Inheritance with Delegation' }
 ];
 ---
 
-<SiteLayout title="Replace Inheritance with Delegation | リファクタリング技法" indexList={indexList} twitterCardSize={TWITTER_CARD_SUMMARY}>
-  <h2 class="title">リファクタリング技法</h2>
+<SiteLayout
+  title="Replace Inheritance with Delegation"
+  description="リファクタリング: Replace Inheritance with Delegation の解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={replaceInheritanceBcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="replaceinheritancewithdelegation">Replace Inheritance with Delegation</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -28,7 +41,7 @@ const indexList = [
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
   <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
-  <h2 id="replaceinheritancewithdelegation">Replace Inheritance with Delegation</h2>
+  <h2>Replace Inheritance with Delegation</h2>
   <p><a href="https://sourcemaking.com/refactoring/replace-inheritance-with-delegation" target="_blank" rel="noopener noreferrer">Replace Inheritance with Delegation</a>
   スーパークラスの一部しか使っていないようなサブクラスがある場合、（あるいは、スーパークラスのデータをサブクラスに引き継ぐのが不適切な場合）
   サブクラスとして定義したクラスをスーパークラスのフィールドとして定義し、サブクラスのメソッドをスーパークラスに<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate" target="_blank" rel="noopener noreferrer">委譲(delegate)</a>しましょう。さらに、継承関係を排除しましょう。</p>

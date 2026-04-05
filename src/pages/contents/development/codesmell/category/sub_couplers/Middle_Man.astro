@@ -1,18 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import RefactoringImg from "../../../img/refactoring.jpg";
 import LegacyCodeImg from "../../../img/legacy_code.jpg";
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { couplersBcList } from '../Couplers.astro';
 
 const title = "Middle Man";
 const description = "Code Smell: Middle Man";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", href: "/" }
+
+export const middleManBc: Breadcrumb = {
+  name: "Middle Man",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_couplers/Middle_Man`
+};
+export const middleManBcList: Breadcrumb[] = [...couplersBcList, middleManBc];
+const indexList: index[] = [
+  { id: "#middleman", name: "Middle Man" }
 ];
 ---
 
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={middleManBcList}
+  indexList={indexList}
+>
+
+  <br>
   <h3 id="middleman">Middle Man</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/middle-man" target="_blank" rel="noopener noreferrer">Middle Man（ミドルマン）</a></p>
   <p>Middle Manは、クラスが他のクラスのメソッドを単に呼び出すだけになっている場合に発生します。</p>

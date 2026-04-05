@@ -1,18 +1,35 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import RefactoringImg from "../../../img/refactoring.jpg";
 import LegacyCodeImg from "../../../img/legacy_code.jpg";
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { BASE_URL } from '../../../../../../consts';
+import { changePreventersBcList } from '../Change-Preventers.astro';
 
 const title = "Divergent Change";
 const description = "Code Smell: Divergent Change";
 const twitterCardSize = "summary_large_image";
-const indexList = [
-  { text: "Home", href: "/" }
+
+export const divergentChangeBc: Breadcrumb = {
+  name: "Divergent Change",
+  item: `${BASE_URL}/contents/development/codesmell/category/sub_changeprevent/Divergent_Change`
+};
+export const divergentChangeBcList: Breadcrumb[] = [...changePreventersBcList, divergentChangeBc];
+const indexList: index[] = [
+  { id: "#divergentchange", name: "Divergent Change" }
 ];
 ---
 
-<SiteLayout title={title} description={description} twitterCardSize={twitterCardSize} indexList={indexList}>
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={divergentChangeBcList}
+  indexList={indexList}
+>
+
+  <br>
   <h3 id="divergentchange">Divergent Change</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/divergent-change" target="_blank" rel="noopener noreferrer">Divergent Change（変更の発散）</a></p>
   <p>※Divergent Changeは、<a href="https://sourcemaking.com/refactoring/smells/shotgun-surgery" target="_blank" rel="noopener noreferrer">Shotgun Surgery</a>という別のCode Smellと似ていますが、Divergent ChangeとShotgun Surgeryは真逆のものです。

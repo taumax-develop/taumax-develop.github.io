@@ -1,14 +1,19 @@
 ---
-import SiteLayout from '../../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
+import type { index } from '../../../../../../components/HeaderIndex.astro';
+import { generalisationBcList } from '../Dealing_with_Generalisation.astro';
 
-const indexList = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#dealingwithgeneralisation', name: 'Dealing with Generalisation' },
+export const pullUpConstructorBc: Breadcrumb = {
+  name: "Pull Up Constructor Body",
+  item: `${BASE_URL}/contents/development/refactoring/category/sub_dealgeneral/Pull_Up_Constructor_Body`
+};
+export const pullUpConstructorBcList: Breadcrumb[] = [...generalisationBcList, pullUpConstructorBc];
+const indexList: index[] = [
   { id: '#pullupconstructorbody', name: 'Pull Up Constructor Body' }
 ];
 ---
@@ -17,9 +22,12 @@ const indexList = [
   title="Pull Up Constructor Body"
   description="リファクタリング技法：Pull Up Constructor Bodyの解説"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={pullUpConstructorBcList}
   indexList={indexList}
 >
-  <h2 class="title">リファクタリング技法</h2>
+
+  <br>
+  <h3 class="title" id="pullupconstructorbody">Pull Up Constructor Body</h3>
   <p>ここでは<a href=`${BASE_URL}/contents/development/codesmell/Codesmells`>Code Smell</a>を解消するために参考となるリファクタリング技法や、その他参考になりそうな概念を紹介していこうと思います。</p>
   <p>リファクタリングに関してはこの辺りの書籍が参考になると思います。</p>
   <br/>
@@ -32,7 +40,7 @@ const indexList = [
   <h1 id="dealingwithgeneralisation">Dealing with Generalisation</h1>
   <p><a href="https://sourcemaking.com/refactoring/dealing-with-generalisation" target="_blank" rel="noopener noreferrer">Dealing with Generalisation</a></p>
 
-  <h2 id="pullupconstructorbody">Pull Up Constructor Body</h2>
+  <h2>Pull Up Constructor Body</h2>
   <p><a href="https://sourcemaking.com/refactoring/pull-up-constructor-body" target="_blank" rel="noopener noreferrer">Pull Up Constructor Body</a>
   ほとんど同一のコードがコンストラクタに存在する場合、スーパークラスにコンストラクタを定義してサブクラスの重複コードをスーパークラスに移動し、サブクラスのコンストラクタからスーパークラスのコンストラクタを呼び出すようにしましょう。</p>
   <p><strong><em>関連するCode Smell</em></strong></p>

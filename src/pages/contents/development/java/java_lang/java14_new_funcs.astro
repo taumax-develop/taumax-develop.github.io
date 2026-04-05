@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import aaa from './img/aaa.png'
@@ -10,21 +10,28 @@ import eee from './img/eee.png'
 import fff from './img/fff.png'
 import ggg from './img/ggg.png'
 import { BASE_URL } from '../../../../../consts';
+import type { index } from '../../../../../components/HeaderIndex.astro';
+import { javaBcList } from '../java_index.astro';
 
-const indexList = [
-  { text: 'Home', href: '/' },
-  { text: 'Java', href: '/contents/development/java/java' },
-  { text: 'Java 14', href: '/contents/development/java/java_lang/java14_new_funcs' }
+export const java14Bc: Breadcrumb = {
+  name: "Java 14",
+  item: `${BASE_URL}/contents/development/java_lang/java14_new_funcs`
+};
+export const java14BcList: Breadcrumb[] = [...javaBcList, java14Bc];
+const indexList: index[] = [
+  { id: '#firstly', name: 'はじめに' },
 ];
 ---
 <SiteLayout
   title='Java 14で最低限押さえておきたい新機能をEclipseで使ってみた'
   description='Java 14の新機能をEclipseで試す手順とサンプルコード解説'
   twitterCardSize={TWITTER_CARD_SUMMARY}
-  indexList={indexList}>
-  <h1>Java 14で最低限押さえておきたい新機能をEclipseで使ってみた</h1>
-  <p><a href={BASE_URL}>ホーム</a> &gt; <a href=`${BASE_URL}/contents/java`>Java</a> &gt; Java 14</p>
-  <h2>はじめに</h2>
+  breadcrumbList={java14BcList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="firstly">はじめに</h3>
   <p>2020/3/17にJava 14がリリースされました。以下の機能が追加されたようです。下の表の「本記事の対象」列に〇がついているものを少し触ってみたので後で紹介します。</p>
   <table>
     <thead>

@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import type { index } from '../../../../../components/HeaderIndex.astro';
 import { Image } from 'astro:assets';
@@ -20,7 +20,13 @@ import tatsujin_db from './img/tatsujin_db.jpg';
 import erd_lesson from './img/erd_lesson.jpg';
 import sql_anti_pattern from './img/sql_anti_pattern.jpg';
 import { BASE_URL } from '../../../../../consts';
+import { databaseBcList } from '../database_index.astro';
 
+export const databaseDesignBc: Breadcrumb = {
+  name: "DB設計したいNight #6",
+  item: `${BASE_URL}/contents/development/database/event/db_design_night_no6`
+};
+export const databaseDesignBcList: Breadcrumb[] = [...databaseBcList, databaseDesignBc];
 const indexList: index[] = [
   { id: '#just_normalization', name: 'ちょうどいい正規化の話' },
   { id: '#db_fail_design', name: '申込におけるDB設計の失敗とたられば' },
@@ -31,13 +37,11 @@ const indexList: index[] = [
   title="DB設計したいNight #6 正規化 [online]"
   description="2020/6/4に開催された「DB設計したいNight #6 正規化 [online]」というイベントのまとめ"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={databaseDesignBcList}
   indexList={indexList}
 >
 
-  <h2 class="title">DB設計したいNight #6 正規化 [online]</h2>
-
-  <a href={BASE_URL}>ホーム</a> > <a href=`${BASE_URL}/contents/development/database/database`>Database関連</a> > DB設計したいNight #6 正規化<br><br>
-
+  <br>
   <p>
     2020/6/4に「DB設計したいNight #6 正規化 [online]」というイベントが開催されました。<br>
     <a href="https://dbnight.connpass.com/event/177859/?utm_campaign=event_participate_to_follower&utm_source=notifications&utm_medium=twitter" target="_blank">

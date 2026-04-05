@@ -1,8 +1,16 @@
 ---
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
-const indexList = [
+import type { index } from '../../../../components/HeaderIndex.astro';
+import { developmentBcList } from '../development_index.astro';
+
+export const testBc: Breadcrumb = {
+  name: "テスト関連",
+  item: `${BASE_URL}/contents/development/test/test_index`
+};
+export const testBcList: Breadcrumb[] = [...developmentBcList, testBc];
+const indexList: index[] = [
   { id: '#main', name: 'テスト関連' },
   { id: '#various_software_tests', name: 'ソフトウェアテストについて' }
 ];
@@ -11,14 +19,15 @@ const indexList = [
   title="テスト関連"
   description="ソフトウェアテストについて"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={testBcList}
   indexList={indexList}
 >
-  <h2 class="title">テスト関連</h2>
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> &gt; テスト関連</li>
-  </ul>
+
+  <br>
+  <h3 class="title">テスト関連</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/development/test/softwaretest/various_software_tests`>ソフトウェアテストについていろいろ調べたことを書いた記事</a></li>
   </ul>
+
+  <br><br><br><br>
 </SiteLayout>

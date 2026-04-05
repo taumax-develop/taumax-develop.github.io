@@ -1,12 +1,19 @@
 ---
 import { Image } from "astro:assets";
-import SiteLayout from "../../../../../layouts/SiteLayout.astro";
+import SiteLayout, { type Breadcrumb } from "../../../../../layouts/SiteLayout.astro";
 import play_with_nodejs_twitter from './img/twitter/play_with_nodejs_twitter.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
+import type { index } from "../../../../../components/HeaderIndex.astro";
+import { whatimadeBcList } from "./what_i_made.astro";
 
-const indexList = [
+export const twitterBc: Breadcrumb = {
+  name: "Node.js × X（旧Twitter）",
+  item: `${BASE_URL}/contents/development/javascript/nodejs/twitter`
+};
+export const twitterBcList: Breadcrumb[] = [...whatimadeBcList, twitterBc];
+const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#twitter", name: "Node.js × X(旧twitter)" },
   { id: "#others", name: "その他の実装" },
@@ -17,17 +24,9 @@ const indexList = [
   title="Node.js × X（旧Twitter）"
   description="Node.jsでTwitter API を呼び出す"
   twitterCardSize={TWITTER_CARD_SUMMARY}
-  indexList={indexList}>
-
-  <h2 class="title">Node.js × Twitter</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>js関連技術</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs`>Node.js</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/nodejs/what_i_made`>Node.js × Twitch, Twitter, OBS</a></li>
-    <li class="breadcrumbli"> > Node.js × Twitter</li>
-  </ul>
+  breadcrumbList={twitterBcList}
+  indexList={indexList}
+>
 
   <br>
   <span id="firstly"></span>

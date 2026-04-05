@@ -1,5 +1,5 @@
 ---
-import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import { Image } from "astro:assets";
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import aaa from './img/従来のWebアプリケーション.jpg';
@@ -11,8 +11,15 @@ import fff from './img/vue3.jpg';
 import ggg from './img/nuxt3.jpg';
 import hhh from './img/vuejs入門.jpg';
 import { BASE_URL } from '../../../../../consts';
+import { javaScriptBcList } from '../js_index.astro';
+import type { index } from '../../../../../components/HeaderIndex.astro';
 
-const indexList = [
+export const spaBc: Breadcrumb = {
+  name: "SPA",
+  item: `${BASE_URL}/contents/development/javascript/spa/spa`
+};
+export const spaBcList: Breadcrumb[] = [...javaScriptBcList, spaBc];
+const indexList: index[] = [
   { id: '#firstly', name: 'はじめに' },
   { id: '#spa', name: 'SPA' },
   { id: '#fw', name: 'フレームワーク' },
@@ -23,19 +30,12 @@ const indexList = [
 ---
 
 <SiteLayout
-  title="SPA"
+  title="SPA(Single Page Application)"
   description="SPA(Single Page Application)について"
   twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={spaBcList}
   indexList={indexList}
 >
-
-  <h2 class="title">SPA(Single Page Application)</h2>
-
-  <ul class="breadcrumb">
-    <li class="breadcrumbli"><a href={BASE_URL}>ホーム</a></li>
-    <li class="breadcrumbli"> > <a href=`${BASE_URL}/contents/development/javascript/js_index`>JavaScript</a></li>
-    <li class="breadcrumbli"> > SPA</li>
-  </ul>
 
   <br/>
   <span id="firstly"></span>
