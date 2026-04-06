@@ -5,8 +5,6 @@ import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
 import play_with_nodejs_twitch from './img/twitch/play_with_nodejs_twitch.jpg';
-import console_img from './img/twitch/console.jpg';
-import application_info_img from './img/twitch/application_info.jpg';
 import type { index } from "../../../../../components/HeaderIndex.astro";
 import { whatimadeBcList } from "./what_i_made.astro";
 
@@ -18,6 +16,7 @@ export const twitchBcList: Breadcrumb[] = [...whatimadeBcList, twitchBc];
 const indexList: index[] = [
   { id: "#firstly", name: "はじめに" },
   { id: "#authorization_flow", name: "認証の流れ" },
+  { id: "#token_flow", name: "トークン発行までの流れ" },
   { id: "#user", name: "Twitch のユーザー" },
   { id: "#tmijs", name: "Node.js × tmi.js" },
   { id: "#webhook", name: "Node.js × Webhook" },
@@ -53,45 +52,15 @@ const indexList: index[] = [
   <AdUnitLandscape />
 
   <br>
-  <h3 class="title" id="authorization_flow">認証の流れ</h3>
+  <h3 class="title" id="token_flow">トークン発行までの流れ</h3>
   <p>
     TwitchからWebhook経由でイベントの通知を受信したりAPIを発行したりするには、認証サーバが発行したトークンを使用する必要があります。<br>
     TwitchはOAuth 2.0に準拠した認証フローを採用しているため、トークンの発行手順もOAuth 2.0に従います。<br>
-    大まかに以下の流れでトークンを発行します。<br>
-  </p>
-  <ol>
-    <li>Client IDとClient Secretの発行：<a href="#register_application">アプリケーションの登録</a>にて手順説明</li>
-    <li>トークンの発行：<a href="#token">トークンの発行</a>にて手順説明</li>
-  </ol>
-  <p>
-    以下、その手順について説明していきます。
-  </p>
-
-  <br>
-  <h3 class="title" id="register_application">アプリケーションの登録</h3>
-  <p>
-    Client ID と Client Secret を発行するには、Twitch の developers サイトでアプリケーションを登録する必要があります。<br>
-    リンク先（<a href="https://dev.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch developers</a>）右上の「Log in with Twitch」ボタンから developers サイトにログイン。<br>
-    その後、右上の 「Your Console」 ボタンからコンソール画面に遷移して、「アプリケーションを登録」ボタンを押下。<br>
-    <Image src={console_img} width={500} alt="console" /><br>
-
-    <br>
-    アプリケーションの管理画面でアプリケーション名、OAuthのリダイレクトURL、カテゴリーを入力。<br>
-    「新しい秘密」ボタンを押下するとシークレット(Client Secret)が生成されます。<br>
-    シークレットとクライアントIDを控えて「保存」ボタンを押下すると、アプリケーションの登録が完了です。<br>
-    <Image src={application_info_img} width={500} alt="application_info" /><br>
+    Twitchのトークン発行手順を追いながらOAuth 2.0について理解するページを別にまとめているので、<a href=`${BASE_URL}/contents/security/oauth/oauth2.0`>手順についてはこのリンク先</a>を参照してください。<br>
   </p>
 
   <br>
   <AdUnitLandscape />
-
-  <br>
-  <h3 class="title" id="token">トークンの発行</h3>
-  <p>
-    TwitchはOAuth 2.0に準拠した認証フローを採用しているため、トークンの発行手順もOAuth 2.0に従います。<br>
-    Twitchのトークン発行手順を追いながらOAuth 2.0について理解するページを別にまとめています。<br>
-    <a href=`${BASE_URL}/contents/security/oauth/oauth2.0`>OAuth 2.0 認証フロー</a> を参照してください。<br>
-  </p>
 
   <br>
   <h3 class="title" id="user">Twitch のユーザー</h3>
