@@ -12,6 +12,8 @@ import client_credentials_grant_flow from './img/client_credentials_grant_flow.j
 import implicit_grant_flow from './img/implicit_grant_flow.jpg';
 import console_img from './img/console.jpg';
 import application_info_img from './img/application_info.jpg';
+import yokodori_img from './img/yokodori.jpg';
+import pkce_img from './img/pkce.svg?url';
 
 const RESOURCE_OWNER = `リソースオーナーとは一般的に、『アカウントを持つユーザー本人』を指します。<br>
 OAuth 2.0認可フレームワークにおいて、保護されたデータやサービス（リソース）を所有し、そのアクセス権限を第三者（クライアント）へ付与できるユーザーまたはシステムのことです。`
@@ -29,6 +31,7 @@ const indexList: index[] = [
   { id: "#auth_code_grant_flow", name: "Authorization code grant flow" },
   { id: "#implicit_grant_flow", name: "Implicit grant flow" },
   { id: "#refresh_token", name: "リフレッシュトークン" },
+  { id: "#pkce", name: "PKCE" }
 ];
 ---
 
@@ -298,6 +301,7 @@ const indexList: index[] = [
     クエリパラメータ（?code=xxx）で渡されます。<br>
     クエリパラメータはリダイレクト先のサーバーに渡るため、サーバー側で認可コードを受け取ってそのまま次のステップを処理することができます。<br>
   </p>
+
 <pre><code>[redirectURI]
 ?code=[発行された認可コード]
 &scope=[指定したスコープ]
@@ -429,6 +433,67 @@ const indexList: index[] = [
   </p>
 
   <br>
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="pkce">PKCE</h3>
+  <p>
+    PKCEとは、「Proof Key for Code Exchange by OAuth Public Clients」の略称で、「ピクシー」と読みます。<br>
+    認可コード横取り攻撃を対策するためのOAuth2.0の拡張仕様で、<a href="https://datatracker.ietf.org/doc/html/rfc7636" target="_blank" rel="noopener noreferrer">RFC7636</a>に定義されています。<br>
+    <a href="#auth_code_grant_flow">Authorization code grant flow</a>を改良したものです。<br>
+    Authorization code grant flowの概要フローは以下のようになっています。<br>
+    認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
+    概要フロー（再掲）<br>
+    <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
+
+    <br>
+    iOSでは、同じURL Schemeを持つ複数のアプリを入れることが可能となっています。<br>
+    そのため、攻撃対象者のスマホに悪意のある認可コード横取りするアプリを入れることができれば、比較的簡単に認可コードを乗っ取れます。<br>
+    <Image src={yokodori_img} width={700} alt="yokodori" /><br>
+
+    <br>
+    この対策としてPKCEでは、認可コードを発行する際に code_challenge と code_challenge_method を追加で指定し、トークン発行の際に code_verifier を指定することで認可コード横取り攻撃を防止します。<br>
+    <img src={pkce_img} width="800" alt="pkce" loading="lazy" /><br>
+  </p>
+
+  <br>
+  <p>
+    図の赤字部分が<a href="#auth_code_grant_flow">Authorization code grant flow</a>と異なる点です。<br>
+    （code_challenge_method に S256 を指定した前提で記載しています）<br>
+  </p>
+
+  <ul>
+    <li>
+      1. 認可リクエストで code_challenge_method, code_challenge を認証サーバーに送付します。<br>
+    </li>
+    <li>
+      6. トークン発行依頼で code_verifier を認証サーバーに送付します。<br>
+    </li>
+    <li>
+      認証サーバーは、code_verifier の hash 値が code_challenge と一致することを確認します。<br>
+    </li>
+  </ul>
+
+  <p>
+    各パラメータの説明は以下表の通りです。<br>
+  </p>
+  <div style="padding-left: 1em;">
+    <table border="1">
+      <tr><th>パラメータ</th><th>説明</th></tr>
+      <tr><td>code_challenge_method</td><td>plain か S256 を指定</td></tr>
+      <tr>
+        <td>code_challenge</td>
+        <td>
+          code_challenge_method が plain の場合は code_verifier と同じ。<br>
+          S256の場合はcode_verifierをSHA-256によりハッシュ化したもの。<br>
+          S256の使用が強く推奨されます。<br>
+        </td>
+      </tr>
+      <tr><td>code_verifier</td><td>43文字～128文字以内の半角英数字と[-._~]で生成されるもの</td></tr>
+    </table>
+  </div>
+
+  <br>
   <hr>
 
   <br>
@@ -450,5 +515,9 @@ const indexList: index[] = [
     <li><a href="https://datatracker.ietf.org/doc/html/rfc9700" target="_blank" rel="noopener noreferrer">RFC 9700 Best Current Practice for OAuth 2.0 Security</a></li>
     <li><a href="https://zenn.dev/calloc134/books/sikkari-oauth-oidc/viewer/20-implicit-flow" target="_blank" rel="noopener noreferrer">Zenn インプリシットフローの解説と非推奨の理由</a></li>
     <li><a href="https://www.a-frontier.jp/technology/security07/" target="_blank" rel="noopener noreferrer">A-frontier OAuth2・PKCEを用いた認可コード付与方式と認証認可フロー（OAuthダンス）</a></li>
+    <li><a href="https://qiita.com/ist-n-m/items/992c67b803ff460818ec" target="_blank" rel="noopener noreferrer">Qiita OAuth2.0 PKCEとは 〜Stateとの違い〜</a></li>
+    <li><a href="https://auth0.com/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce" target="_blank" rel="noopener noreferrer">auth0 Docs Proof Key for Code Exchange（PKCE）を使った認可コードフロー</a></li>
+    <li><a href="https://zenn.dev/hitoe_kami/articles/0060-articles-what-pkce-is" target="_blank" rel="noopener noreferrer">Zenn PKCE なにそれ？おいしいの？</a></li>
+    <li><a href="https://datatracker.ietf.org/doc/html/rfc7636" target="_blank" rel="noopener noreferrer">RFC7636 Proof Key for Code Exchange by OAuth Public Clients</a></li>
   </ul>
 </SiteLayout>
