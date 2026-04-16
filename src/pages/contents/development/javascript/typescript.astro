@@ -83,7 +83,7 @@ const indexList: index[] = [
     なお、型注釈は変数のデータ型が明らかな場合など、一部の条件では省略できます。<br/>
 
 
-<pre><code>{`function sayHello(name: string) {
+<pre><code class="copy">{`function sayHello(name: string) {
   console.log(name)
 }
 
@@ -94,7 +94,7 @@ sayHello(name)
         <br/>
         <span id="variables"></span>
         <h4 class="title">変数の型定義</h4>
-<pre><code>const age: number = 30
+<pre><code class="copy">const age: number = 30
 let isDone: boolean = true
 let name: string = 'abc'
 `}</code></pre>
@@ -104,7 +104,7 @@ let name: string = 'abc'
         <span id="list"></span>
         <h4 class="title">配列の型定義</h4>
 
-<pre><code>const array: string[] = ['aaa', 'bbb']
+<pre><code class="copy">const array: string[] = ['aaa', 'bbb']
 array.push('ccc')
 array.push(1) // ←型が合わないためエラー
 </code></pre>
@@ -112,11 +112,11 @@ array.push(1) // ←型が合わないためエラー
         <br/>
         <span id="object_type"></span>
         <h4 class="title">オブジェクト型の型定義</h4>
-<pre><code>{`{ キー名1: 型1, キー名2: 型2, キー名3: 型3 }`}</code></pre>
+<pre><code class="copy">{`{ キー名1: 型1, キー名2: 型2, キー名3: 型3 }`}</code></pre>
 
         <br/>
 
-<pre><code>{`const user: { name: string, age: number } = {
+<pre><code class="copy">{`const user: { name: string, age: number } = {
   name: 'aaa',
   age: 36
 }
@@ -129,13 +129,13 @@ console.log(user.age)
   <span id="function"></span>
   <h4 class="title">関数の型定義</h4>
 
-<pre><code>function(引数1: 型1, 引数2: 型2): 戻り値 {
+<pre><code class="copy">function(引数1: 型1, 引数2: 型2): 戻り値 {
   // 
 }
 </code></pre>
 
         <br/>
-<pre><code>{`function sayHello(name: string): string {
+<pre><code class="copy">{`function sayHello(name: string): string {
   return \`こんにちは\${name}\`
 }
 sayHello('aaa') // こんにちはaaa
@@ -147,7 +147,7 @@ sayHello('aaa') // こんにちはaaa
         </p>
 
 <pre class="title"><code class="title">オプショナル</code></pre>
-<pre><code>{`function sayHello(name: string, greeting?: string): string {
+<pre><code class="copy">{`function sayHello(name: string, greeting?: string): string {
   return \`\${greeting} \${name}\`
 }
 sayHello('aaa') // aaa
@@ -156,7 +156,7 @@ sayHello('aaa', 'hello') // hello aaa
 
         <br/>
 <pre class="title"><code class="title">引数にデフォルト値指定</code></pre>
-<pre><code>{`function sayHello(name: string, greeting: string = 'hello'): string {
+<pre><code class="copy">{`function sayHello(name: string, greeting: string = 'hello'): string {
   return \`\${greeting} \${name}\`
 }
 sayHello('aaa') // hello aaa
@@ -169,14 +169,14 @@ sayHello('aaa', 'hey') // hey aaa
   <h3 class="title">tsconfig.json</h3>
   <p>
     TypeScriptではコンパイルに必要なオプションやコンパイル対象となるファイルの情報をtsconfig.jsonに記述します。<br/>
-    <code>tsc --init</code>コマンドを実行することでデフォルトのtsconfig.jsonが作成されます。プロジェクトルートに配置しましょう。<br/>
+    <code class="copy">tsc --init</code>コマンドを実行することでデフォルトのtsconfig.jsonが作成されます。プロジェクトルートに配置しましょう。<br/>
     tsconfig.jsonの詳細なオプションについては以下公式ドキュメント参照<br/>
     <a href="https://www.typescriptlang.org/tsconfig" target="_blank" rel="noopener noreferrer">TypeScript Compiler Options</a>
   </p>
   <br/>
 
 <pre class="title"><code class="title">tsconfig.json</code></pre>
-<pre><code>{`{
+<pre><code class="copy">{`{
   "compilerOptions": {
     "target": "es5",
     "lib": [

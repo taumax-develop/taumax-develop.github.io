@@ -110,11 +110,11 @@ const indexList: index[] = [
     <br>
     以下は、誰かがチャットするたびに稼働する処理の例です。<a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md#message" target="_blank" rel="noopener noreferrer">Message</a> イベントをトリガーにしています。<br>
     事前に以下コマンドで tmi.js をインストールしている前提です。<br>
-    <code>npm i tmi.js</code><br>
+    <code class="copy">npm i tmi.js</code><br>
   </p>
 
 <pre class="title"><code class="title">twitch_bot.js</code></pre>
-<pre><code>{`'use strict';
+<pre><code class="copy">{`'use strict';
 import tmi from 'tmi.js';
 
 const opts = {
@@ -152,7 +152,7 @@ twClientBot.connect();`}
   </ul>
 
   <br>
-<pre><code>{`twClientBot.on('message', (channel, userstate, msg, self) => {
+<pre><code class="copy">{`twClientBot.on('message', (channel, userstate, msg, self) => {
   ...中略...
 });`}
 </code></pre>
@@ -162,7 +162,7 @@ twClientBot.connect();`}
     第2引数の userstate には以下のようなユーザー情報が json 形式で入っているので、主にこの userstate と msg（ユーザーがチャットに投げた文言） を使って自由に処理を組み立てることができます。<br>
   </p>
 
-<pre><code>{`{
+<pre><code class="copy">{`{
   "badge-info": {
     "subscriber": "8"
   },
@@ -214,7 +214,7 @@ twClientBot.connect();`}
     Webhook でイベントを受け取るためには、まず以下のような形式で curl コマンドを実行する必要があります。
   </p>
 
-<pre><code>{`curl -X POST -d '{
+<pre><code class="copy">{`curl -X POST -d '{
   "type":"[subscription_type]",
   "version":"1",
   "condition":{
@@ -236,7 +236,7 @@ https://api.twitch.tv/helix/eventsub/subscriptions
   <ul>
     <li>
       subscription_type：<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/" target="_blank" rel="noopener noreferrer">Subscription Types</a> の Name 列の値を設定。<br>
-      例として、配信開始イベントを受け取るなら <code>'stream.online'</code> を、チャンネルポイントが使用されたイベントを受け取るなら <code>'channel.channel_points_custom_reward_redemption.add'</code> を指定。
+      例として、配信開始イベントを受け取るなら <code class="copy">'stream.online'</code> を、チャンネルポイントが使用されたイベントを受け取るなら <code class="copy">'channel.channel_points_custom_reward_redemption.add'</code> を指定。
     </li>
     <li>user_id：イベントを受け取りたいユーザーの user_id（基本的には自分の user_id を指定するが、他人の user_id を指定すれば、他人の配信開始などのイベントを受信することも可能）</li>
     <li>
@@ -256,12 +256,12 @@ https://api.twitch.tv/helix/eventsub/subscriptions
     確認のリクエストを受け取るためのサーバ側の Node.js のコードは以下の通り。http サーバを構築してリクエストを受け取れるようにしています。<br>
     （<a href="#whole">全量のコードを後に</a>載せていますが、長いのでここでは抜粋）<br>
     事前に以下コマンドで express と body-parser というライブラリをインストールしている前提です。<br>
-    <code>npm i express</code><br>
-    <code>npm i body-parser</code><br>
+    <code class="copy">npm i express</code><br>
+    <code class="copy">npm i body-parser</code><br>
   </p>
 
 <pre class="title"><code class="title">確認のリクエストを受ける部分抜粋</code></pre>
-<pre><code>{`'use strict';
+<pre><code class="copy">{`'use strict';
 import {createServer} from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -291,7 +291,7 @@ server.listen(8080);`}
     以下の curl コマンドを実行すると、問題なく処理されているかを確認することができます。access_token, client_id に設定する値は先の curl コマンドの時と同じです。
   </p>
 
-<pre><code>curl -X GET 'https://api.twitch.tv/helix/eventsub/subscriptions' \
+<pre><code class="copy">curl -X GET 'https://api.twitch.tv/helix/eventsub/subscriptions' \
 -H 'Authorization: Bearer [access_token]' \
 -H 'Client-Id: [client_id]'
 </code></pre>
@@ -301,7 +301,7 @@ server.listen(8080);`}
   以下のようなレスポンスが返ってきます。 status が enabled になっていれば問題なしです。
 </p>
 
-<pre><code>{`{
+<pre><code class="copy">{`{
   "total":1,
   "data":[{
     "id":"xxxxxxxxxx",
@@ -333,7 +333,7 @@ server.listen(8080);`}
 Twitch から送られてきたものであることを確認するため、HMAC認証のコードを入れています。これについては <a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/#verifying-the-event-message" target="_blank" rel="noopener noreferrer">Verifying the event message</a> も参照してください。<br>
 </p>
 <pre class="title"><code class="title">（ほぼ）全量</code></pre>
-<pre><code>{`'use strict';
+<pre><code class="copy">{`'use strict';
 import crypto from 'crypto';
 import {createServer} from 'http';
 import express from 'express';
@@ -454,7 +454,7 @@ function verifyMessage(hmac, verifySignature) {
     ※access_token やクライアントID などの機密情報は、外部ファイルに json 形式などで保存した上で、そこから取得するようにしてください。<br>
   </p>
 
-<pre><code>{`async function banUser(banUserName) {
+<pre><code class="copy">{`async function banUser(banUserName) {
   // user_name から user_id を取得
   const get_users_url = \`https://api.twitch.tv/helix/users?login=$\{banUserName\}\`
   let result = await fetch(get_users_url , {

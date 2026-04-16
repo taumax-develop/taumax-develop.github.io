@@ -123,12 +123,12 @@ const indexList: index[] = [
   <span id="implementation"></span>
   <h3 class="title">各レンダリングの実装方法</h3>
   <p>
-    Nuxt3では、<code>nuxt.config.ts</code> に <code>{`"パス": {レンダリングモード}`}</code> の形式でページ毎のレンダリング方法を記述することでレンダリング方法を制御します。具体的には以下。
+    Nuxt3では、<code class="copy">nuxt.config.ts</code> に <code class="copy">{`"パス": {レンダリングモード}`}</code> の形式でページ毎のレンダリング方法を記述することでレンダリング方法を制御します。具体的には以下。
   </p>
 
 
 <pre class="title"><code class="title">nuxt.config.ts</code></pre>
-<pre><code>{`export default defineNuxtConfig({
+<pre><code class="copy">{`export default defineNuxtConfig({
 devtools: { enabled: true },
 routeRules: {
 "/spa": {ssr: false},

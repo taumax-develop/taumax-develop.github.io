@@ -264,7 +264,7 @@
           分割したファイルや、外部JSファイルを読み込みたい場合、以下のようにHTMLファイルにscriptタグを書き込むことで別ファイルを読み込んでいました。<br/>
         </p>
 
-<pre><code>&lt;script src="js/aaa_1.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
+<pre><code class="copy">&lt;script src="js/aaa_1.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
 &lt;script src="js/aaa_2.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
 &lt;script src="js/aaa_3.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
 &lt;script src="js/vender/hoge.js"&gt;&lt;/script&gt;
@@ -294,7 +294,7 @@
             package.jsonは、Node.jsプロジェクトにおいて、そのプロジェクトの情報や依存関係、スクリプトなどの設定を記述するためのファイルです。
 
 <pre class="title" style="margin-left: 0rem"><code class="title">package.json</code></pre>
-<pre style="margin-left: 0rem"><code>{
+<pre style="margin-left: 0rem"><code class="copy">{
   "type": "module",
   ...
 }
@@ -304,7 +304,7 @@
           </li>
           <li>
             --input-type=moduleをつけて実行する<br/>
-            <code>node main.js --input-type=module</code>
+            <code class="copy">node main.js --input-type=module</code>
           </li>
           <li>拡張子を.mjsに変える</li>
         </ol>
@@ -337,7 +337,7 @@
         </p>
 
 <pre class="title"><code class="title">module.js</code></pre>
-<pre><code>module.exports = function() {
+<pre><code class="copy">module.exports = function() {
   console.log('Hello World！');
 }
 </code></pre>
@@ -345,11 +345,11 @@
 
         <br/>
         <p>
-          読込む側は<code>require([ファイルパス])</code>で読み込みを行います。<br/>
+          読込む側は<code class="copy">require([ファイルパス])</code>で読み込みを行います。<br/>
         </p>
 
 <pre class="title"><code class="title">main.js</code></pre>
-<pre><code>const helloWorldModule = require('./module.js');
+<pre><code class="copy">const helloWorldModule = require('./module.js');
 helloWorldModule();
 // 出力：Hello World！
 </code></pre>
@@ -366,7 +366,7 @@ helloWorldModule();
         </p>
 
 <pre class="title"><code class="title">module.js</code></pre>
-<pre><code>export const helloWorld = function() {
+<pre><code class="copy">export const helloWorld = function() {
   console.log('Hello World！');
 }
 </code></pre>
@@ -378,7 +378,7 @@ helloWorldModule();
       </p>
 
 <pre class="title"><code class="title">main.js</code></pre>
-<pre><code>import { helloWorld } from './module'
+<pre><code class="copy">import { helloWorld } from './module'
 helloWorld();
 // 出力：Hello World！
 </code></pre>
@@ -389,7 +389,7 @@ helloWorld();
         </p>
 
 <pre class="title"><code class="title">varによる変数の宣言</code></pre>
-<pre><code>var name = 'soarflat';
+<pre><code class="copy">var name = 'soarflat';
 console.log(name); // => soarflat
 
 name = 'SoarFlat'; // 再代入する
@@ -405,7 +405,7 @@ console.log(name); // => SOARFLAT
         </p>
 
 <pre class="title"><code class="title">letによる変数の宣言</code></pre>
-<pre><code>let name = 'soarflat';
+<pre><code class="copy">let name = 'soarflat';
 console.log(name); // => soarflat
 
 name = 'SoarFlat'; // 再代入する
@@ -421,7 +421,7 @@ let name = 'SOARFLAT'; // 再宣言するとエラーになる
         </p>
 
 <pre class="title"><code class="title">constによる変数の宣言</code></pre>
-<pre><code>const NAME = 'soarflat';
+<pre><code class="copy">const NAME = 'soarflat';
 console.log(NAME); // => soarflat
 
 NAME = 'SOARFLAT'; // 再代入するとエラーになる

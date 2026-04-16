@@ -27,7 +27,7 @@ map.set("implicit", imp)
     <span set:html={map.get(kbn).link} /><br>
   </p>
 
-<pre><code>https://id.twitch.tv/oauth2/authorize
+<pre><code class="copy">https://id.twitch.tv/oauth2/authorize
 ?client_id=[clientID]
 &force_verify=false
 &redirect_uri=[redirectURI]
@@ -52,19 +52,12 @@ map.set("implicit", imp)
 
   <p>
     必要なスコープは、発行する API ごとに異なります。例えば、投票を開始する API を呼び出す場合、 <a href="https://dev.twitch.tv/docs/api/polls/" target="_blank" rel="noopener noreferrer">Polls</a> を見ると「The endpoint requires a user access token with scope channel:manage:polls」とあるので、必要なスコープは「channel:manage:polls」だということがわかります。<br>
-    この場合、URLに指定するスコープは<br>
-  </p>
-  <pre><code>channel%3Amanage%3Apolls</code></pre>
-  <p>
-    となります。ここで「%3A」は「:」のURLエンコードです。<br>
-    2つ以上のスコープを連結したい場合は「+」で二つのスコープを連結します。<br>
-  </p>
-  <pre><code>channel%3Amanage%3Apolls+channel%3Aread%3Apolls</code></pre>
-  <p>
+    この場合、URLに指定するスコープは<code>channel%3Amanage%3Apolls</code>となります。ここで「%3A」は「:」のURLエンコードです。<br>
+    2つ以上のスコープを連結したい場合は「+」で二つのスコープを連結し、<code>channel%3Amanage%3Apolls+channel%3Aread%3Apolls</code>となります。<br>
     これを踏まえ、URL全体としては以下のようになります。<br>
   </p>
 
-<pre><code>https://id.twitch.tv/oauth2/authorize
+<pre><code class="copy">https://id.twitch.tv/oauth2/authorize
 ?client_id=[clientID]
 &redirect_uri=[redirectURI]
 &response_type={map.get(kbn).resType}

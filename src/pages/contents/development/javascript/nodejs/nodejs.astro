@@ -83,17 +83,17 @@ const indexList: index[] = [
   </p>
   <br>
   <ul>
-    <li><code>on(eventName, listener)</code>関数：イベントのlistenerを登録（第二引数のlistenerにコールバック関数を実装）</li>
-    <li><code>emit(eventName, [args])</code>関数：イベント発動。第二引数以降のargsを引数としてlistenerに渡す。</li>
+    <li><code class="copy">on(eventName, listener)</code>関数：イベントのlistenerを登録（第二引数のlistenerにコールバック関数を実装）</li>
+    <li><code class="copy">emit(eventName, [args])</code>関数：イベント発動。第二引数以降のargsを引数としてlistenerに渡す。</li>
   </ul>
 
   <br>
   <p>
-    <code>on()</code>関数でイベントを登録し、<code>emit()</code>関数で登録されていた処理が実行されます。<code>on()</code>を使って登録されたlistenerは、そのイベントが発火される度に実行されます。<br>
+    <code class="copy">on()</code>関数でイベントを登録し、<code class="copy">emit()</code>関数で登録されていた処理が実行されます。<code class="copy">on()</code>を使って登録されたlistenerは、そのイベントが発火される度に実行されます。<br>
   </p>
 
 <pre class="title"><code class="title">eventemitter.js</code></pre>
-<pre><code>{`const EventEmitter = require('events');
+<pre><code class="copy">{`const EventEmitter = require('events');
 const eventEmitter = new EventEmitter(); // EventEmitterインスタンスを生成
 
 // イベントが発動された時の処理を記述する
@@ -109,7 +109,7 @@ eventEmitter.emit('myEvent', 'huge', 'hoga');
 
 <br>
 <pre class="title"><code class="title">実行結果</code></pre>
-<pre><code>{`Emitted Event:arg1:undefined, arg2:undefined
+<pre><code class="copy">{`Emitted Event:arg1:undefined, arg2:undefined
 Emitted Event:arg1:hoge, arg2:undefined
 Emitted Event:arg1:huge, arg2:hoga`}
 </code></pre>
@@ -183,7 +183,7 @@ Emitted Event:arg1:huge, arg2:hoga`}
   </p>
 
 <pre class="title"><code class="title">test.js</code></pre>
-<pre><code>{`'use strict';
+<pre><code class="copy">{`'use strict';
 import fs from 'fs';
 
 console.log(1)
@@ -194,7 +194,7 @@ console.log(3)
 `}</code></pre>
 
 <pre class="title"><code class="title">実行結果</code></pre>
-<pre><code>// 実行結果: 1, 3, 2 の順
+<pre><code class="copy">// 実行結果: 1, 3, 2 の順
 1          
 3          
 2          
@@ -202,13 +202,13 @@ console.log(3)
 
   <br>
   <p>
-    <code>fs.readFile</code>はファイルを読み込むためのI/Oを発生させます。ブロッキングI/Oを採用している場合、I/Oが完了するまで次の処理を行わないため、1→2→3の順に出力されますが、<br>
+    <code class="copy">fs.readFile</code>はファイルを読み込むためのI/Oを発生させます。ブロッキングI/Oを採用している場合、I/Oが完了するまで次の処理を行わないため、1→2→3の順に出力されますが、<br>
     Non-Blocking-I/Oの場合はファイルの読み込みが終わるのを待たずに次の処理が始まります。このため、出力順が1→3→2になっています。これがNon-Blocking-I/Oです。<br>
-    I/Oが完了してから処理を行いたい場合はCallback関数を使います。<code>fs.readFile</code>の第二引数に渡された関数がCallback関数で、ファイル読み込みが<span style="color: yellow">いつか終わったら実行されます</span>。Callback関数を使わずに、以下のようにファイルの中身を取得してコンソールに出力しようとしてもうまく出力されません。undefinedになります。<br>
+    I/Oが完了してから処理を行いたい場合はCallback関数を使います。<code class="copy">fs.readFile</code>の第二引数に渡された関数がCallback関数で、ファイル読み込みが<span style="color: yellow">いつか終わったら実行されます</span>。Callback関数を使わずに、以下のようにファイルの中身を取得してコンソールに出力しようとしてもうまく出力されません。undefinedになります。<br>
   </p>
 
 <pre class="title"><code class="title">test.js</code></pre>
-<pre><code>{`'use strict';
+<pre><code class="copy">{`'use strict';
 import fs from 'fs';
 
 let input
@@ -220,7 +220,7 @@ console.log(input);
 `}</code></pre>
 
 <pre class="title"><code class="title">実行結果</code></pre>
-<pre><code>1          
+<pre><code class="copy">1          
 undefined
 </code></pre>
 
@@ -230,7 +230,7 @@ undefined
   </p>
 
 <pre class="title"><code class="title">test.js</code></pre>
-<pre><code>{`'use strict';
+<pre><code class="copy">{`'use strict';
 import fs from 'fs';
 
 let input
@@ -242,7 +242,7 @@ fs.readFile('nodejs_test.txt', (err, data) => {
 `}</code></pre>
 
 <pre class="title"><code class="title">実行結果</code></pre>
-<pre><code>1          
+<pre><code class="copy">1          
 nodejs_testファイルの中
 </code></pre>
 

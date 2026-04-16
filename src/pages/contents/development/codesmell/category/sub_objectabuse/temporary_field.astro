@@ -34,7 +34,7 @@ const indexList: index[] = [
   <p><strong><em>兆候と症状</em></strong><br/>
     Temporary fieldsは、特定の状況下でのみ値を取得します（したがって、オブジェクトに必要です）。これらの状況以外では、それらは空です。</p>
   <p>※Temporary Fieldに関しては<a href="https://blog.ploeh.dk/2015/09/18/temporary-field-code-smell/" target="_blank" rel="noopener noreferrer">この記事</a>の方が私はわかりやすかったので、兆候と症状のところはこの記事をベースに書いてみます。</p>
-  <pre><code>{`public class Estimator {
+  <pre><code class="copy">{`public class Estimator {
   private readonly TimeSpan defaultEstimate;
   private IReadOnlyCollection<TimeSpan> durations;
   private TimeSpan average;
@@ -79,10 +79,10 @@ const indexList: index[] = [
   <p>上記EstimatorクラスのCalculateEstimateメソッド内でdurationsというフィールドを使っています。同時に、CalculateAverageメソッド内ではaverageを使っており、CalculateStandardDeviationメソッド内ではstandardDeviationを使っています。これらのメソッドはCalculateEstimateメソッドで呼ばれているため、CalculateEstimateは、明示的にdurationsを使い、さらに暗黙的にaverage, standardDeviationフィールドも使っています。
   averageとstandardDeviationはdurationsに依存しています。さらに、standardDeviationはaverageに依存しています。
   ここで、CalculateEstimateメソッド内の処理の順番を以下のように変更したらどうなるでしょうか？</p>
-  <pre><code>{`this.durations = durations;
+  <pre><code class="copy">{`this.durations = durations;
 this.CalculateAverage();
 this.CalculateStandardDeviation();`}</code></pre>
-  <pre><code>{`this.durations = durations;
+  <pre><code class="copy">{`this.durations = durations;
 this.CalculateStandardDeviation();
 this.CalculateAverage();`}</code></pre>
   <p>コンパイルは通ります。CalculateEstimateを実行してもExceptionは発生しません。しかし、想定外の結果になります。

@@ -113,7 +113,7 @@ const indexList: index[] = [
     JavaScriptが抱えていた大きな問題の一つとして、他のJSファイルを取り込む標準的な仕様が存在しなかったということが挙げられます。<br/>
     分割したファイルや、外部JSファイルを読み込みたい場合、以下のようにHTMLファイルにscriptタグを書き込むことで別ファイルを読み込んでいました。<br/>
   </p>
-  <pre><code>&lt;script src="js/aaa_1.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
+  <pre><code class="copy">&lt;script src="js/aaa_1.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
 &lt;script src="js/aaa_2.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
 &lt;script src="js/aaa_3.js"&gt;&lt;/script&gt;  //  aaa.js を分割したファイル
 &lt;script src="js/vender/hoge.js"&gt;&lt;/script&gt;
@@ -136,7 +136,7 @@ const indexList: index[] = [
       package.jsonに"type": "module"を追加する<br/>
       package.jsonは、Node.jsプロジェクトにおいて、そのプロジェクトの情報や依存関係、スクリプトなどの設定を記述するためのファイルです。
       <pre class="title" style="margin-left: 0rem"><code class="title">package.json</code></pre>
-      <pre style="margin-left: 0rem"><code>{`{
+      <pre style="margin-left: 0rem"><code class="copy">{`{
   "type": "module",
   ...
 }`}
@@ -145,7 +145,7 @@ const indexList: index[] = [
     </li>
     <li>
       --input-type=moduleをつけて実行する<br/>
-      <code>node main.js --input-type=module</code>
+      <code class="copy">node main.js --input-type=module</code>
     </li>
     <li>拡張子を.mjsに変える</li>
   </ol>
@@ -160,15 +160,15 @@ const indexList: index[] = [
     export について、モジュール側はmodule.exportsに関数やクラスなどを定義します。<br/>
   </p>
   <pre class="title"><code class="title">module.js</code></pre>
-  <pre><code>{`module.exports = function() {
+  <pre><code class="copy">{`module.exports = function() {
   console.log('Hello World！');
 }`}
 </code></pre>
   <p>
-    読込む側は<code>require([ファイルパス])</code>で読み込みを行います。<br/>
+    読込む側は<code class="copy">require([ファイルパス])</code>で読み込みを行います。<br/>
   </p>
   <pre class="title"><code class="title">main.js</code></pre>
-  <pre><code>const helloWorldModule = require('./module.js');
+  <pre><code class="copy">const helloWorldModule = require('./module.js');
 helloWorldModule();
 // 出力：Hello World！
 </code></pre>
@@ -182,7 +182,7 @@ helloWorldModule();
     ES2015では、同じ export でも CommonJS のものとは記法が違い、モジュール側では通常通り関数やクラスを定義し、頭にexportを付けます。<br/>
   </p>
   <pre class="title"><code class="title">module.js</code></pre>
-  <pre><code>{`export const helloWorld = function() {
+  <pre><code class="copy">{`export const helloWorld = function() {
   console.log('Hello World！');
 }`}
 </code></pre>
@@ -190,7 +190,7 @@ helloWorldModule();
     読み込み側ではimport文を使って先ほどのモジュールを読み込みます。<br/>
   </p>
   <pre class="title"><code class="title">main.js</code></pre>
-  <pre><code>{`import { helloWorld } from './module'
+  <pre><code class="copy">{`import { helloWorld } from './module'
 helloWorld();
 // 出力：Hello World！
 `}
@@ -201,7 +201,7 @@ helloWorld();
     let と const は変数の宣言に使用する構文で、これまで使用されてきた var に変わるものです。var は以下に示すように、再宣言できるという問題がありました。<br/>
   </p>
   <pre class="title"><code class="title">varによる変数の宣言</code></pre>
-  <pre><code>var name = 'soarflat';
+  <pre><code class="copy">var name = 'soarflat';
 console.log(name); // => soarflat
 
 name = 'SoarFlat'; // 再代入する
@@ -214,7 +214,7 @@ console.log(name); // => SOARFLAT
     この問題を解決するために追加された機能が let です。let を使用した場合、同じ変数名を再宣言するとエラーになります。<br/>
   </p>
   <pre class="title"><code class="title">letによる変数の宣言</code></pre>
-  <pre><code>let name = 'soarflat';
+  <pre><code class="copy">let name = 'soarflat';
 console.log(name); // => soarflat
 
 name = 'SoarFlat'; // 再代入する
@@ -226,7 +226,7 @@ let name = 'SOARFLAT'; // 再宣言するとエラーになる
     const は定数を宣言するためのもので、再宣言はもちろんのこと、再代入もできないようになっています。<br/>
   </p>
   <pre class="title"><code class="title">constによる変数の宣言</code></pre>
-  <pre><code>const NAME = 'soarflat';
+  <pre><code class="copy">const NAME = 'soarflat';
 console.log(NAME); // => soarflat
 
 NAME = 'SOARFLAT'; // 再代入するとエラーになる

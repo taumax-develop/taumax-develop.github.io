@@ -89,11 +89,11 @@ const indexList: index[] = [
     <br>
     この設定ができれば、 以下のコードで OBS に接続できるようになります。<br>
     事前に以下コマンドで <a href="https://github.com/obs-websocket-community-projects/obs-websocket-js" target="_blank" rel="noopener noreferrer">obs-websocket-js</a> をインストールしている前提です。<br>
-    <code>npm i obs-websocket-js</code><br>
+    <code class="copy">npm i obs-websocket-js</code><br>
   </p>
 
   <pre class="title"><code class="title">obs_control.js</code></pre>
-  <pre><code>{`const {default: OBSWebSocket} = require('obs-websocket-js');
+  <pre><code class="copy">{`const {default: OBSWebSocket} = require('obs-websocket-js');
 // インスタンス初期化
 const obs = new OBSWebSocket();
 // OBSに接続
@@ -153,7 +153,7 @@ obs.connect(
 
 
   <pre class="title"><code class="title">obs_control.js</code></pre>
-  <pre><code>{`const {default: OBSWebSocket} = require('obs-websocket-js');
+  <pre><code class="copy">{`const {default: OBSWebSocket} = require('obs-websocket-js');
 const {setTimeout} = require("timers/promises");
 
 const sceneNameNormal = 'ノーマル'

@@ -347,7 +347,7 @@
         <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=17" target="_blank">資料より抜粋</a></p>
         <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/254168/b9543666-e1f6-b661-238a-80ac295fc1e6.png" alt="image.png" /><br>
         <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=18" target="_blank">資料より抜粋</a></p>
-        <p>アロー形式で値を返す場合は<code>yield</code>を使う</p>
+        <p>アロー形式で値を返す場合は<code class="copy">yield</code>を使う</p>
         <script src="https://gist.github.com/taumax-github/361b7215d4ffc3adf271652d47cadbda.js"></script>
 
         <h4 id="twitter">twitterの反応</h4>
@@ -427,9 +427,9 @@
         <h3 class="title"><font size ="5">◆ライブラリ</font></h3>
         <h4 class="title">Helpful NullPointerExceptions</h4>
         <a href="https://openjdk.java.net/jeps/358" target="_blank">JEP358:Helpful NullPointerExceptions</a>
-        <p><code>-XX:+ShowCodeDetailsInExceptionMessages</code>オプションを付けて実行する。
+        <p><code class="copy">-XX:+ShowCodeDetailsInExceptionMessages</code>オプションを付けて実行する。
         将来のバージョンではデフォルトに<br>
-        JShellの場合は<code>-R-XX:+ShowCodeDetailsInExceptionMessages</code></p>
+        JShellの場合は<code class="copy">-R-XX:+ShowCodeDetailsInExceptionMessages</code></p>
 
         <h4 id="title">twitterの反応</h4>
         <p>
@@ -471,9 +471,9 @@
         <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/254168/21f113c5-7d62-3be8-9aa1-5e01cd9006a8.png" alt="image.png" /><br>
         <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=48" target="_blank">資料より抜粋</a></p>
         <p>・Java14 カスタムランタイムの作成：
-        <code>jlink --add-modules 'jdeps --print-module-deps App.class' --output myrt</code></p>
+        <code class="copy">jlink --add-modules 'jdeps --print-module-deps App.class' --output myrt</code></p>
         <p>・カスタムランタイムを使ったパッケージの作成：
-        <code>jpackage --name myapp_min --input target --main-jar app.jar --main-class App --runtime-image myrt</code></p>
+        <code class="copy">jpackage --name myapp_min --input target --main-jar app.jar --main-class App --runtime-image myrt</code></p>
 
         <h4 id="title">twitterの反応</h4>
         <p>

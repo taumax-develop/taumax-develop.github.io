@@ -167,7 +167,7 @@
         </p>
 
 <pre class="title"><code class="title">ビルドログ（抜粋）</code></pre>
-<pre><code>Route (pages)                                                      Size     First Load JS
+<pre><code class="copy">Route (pages)                                                      Size     First Load JS
   ├ ○ /romasaga2r/charas/charas_index_csr                        7.06 kB         128 kB
   ├ ● /romasaga2r/charas/charas_index_isr (ISR: 10 Seconds)      1.28 kB         130 kB
   ├ ● /romasaga2r/charas/charas_index_ssg (305 ms)               1.28 kB         130 kB
@@ -244,7 +244,7 @@
         <h4 class="title">SSRの実装サンプル</h4>
 
 <pre class="title"><code class="title">ssr_sample.tsx</code></pre>
-<pre><code>export default function SsrSample(props: any) {
+<pre><code class="copy">export default function SsrSample(props: any) {
   const {result} = props
   // getServerSideProps の結果を元にページを構築する処理
   return (
@@ -298,7 +298,7 @@ export async function getServerSideProps() {
         <h4 class="title">SSGの実装サンプル</h4>
 
 <pre class="title"><code class="title">ssg_sample.tsx</code></pre>
-<pre><code>export default function CharasIndex(props: any) {
+<pre><code class="copy">export default function CharasIndex(props: any) {
   // getStaticProps の結果を元にページを構築する処理
   let {result} = props
   return (
@@ -322,12 +322,12 @@ export async function getStaticProps(): Promise&lt;result&gt; {
 
         <br/>
         <p>
-          getStaticProps はビルド時に実行されるため、上記のコードのように<code>console.log('-----getStaticProps-----')</code>でコンソール出力を行っていた場合、ビルド時にそれが出力される（ビルド時に動いていることの確認）。<br/>
+          getStaticProps はビルド時に実行されるため、上記のコードのように<code class="copy">console.log('-----getStaticProps-----')</code>でコンソール出力を行っていた場合、ビルド時にそれが出力される（ビルド時に動いていることの確認）。<br/>
           その後何度ページにアクセスしても同ログは出力されない。<br/>
         </p>
 
 <pre class="title"><code class="title">ビルド時のログ（抜粋）</code></pre>
-<pre><code>> sagamax_react@0.1.0 build
+<pre><code class="copy">> sagamax_react@0.1.0 build
 > next build
 -----getStaticProps-----
 </code></pre>
@@ -388,7 +388,7 @@ export async function getStaticProps(): Promise&lt;result&gt; {
           例えば以下のようなコードの場合、1/2/3 という名のページが作られ(getStaticPaths)、各ページのビルド時にidが返される(getStaticProps)。
         </p>
 <pre class="title"><code class="title">[test].tsx</code></pre>
-<pre><code>import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+<pre><code class="copy">import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 
 const Post: NextPage&lt;any&gt; = (props) =&gt; {
   const {id} = props
@@ -465,7 +465,7 @@ export default Post
 
 
 <pre class="title"><code class="title">ビルド時のログ</code></pre>
-<pre><code>> sagamax_react@0.1.0 build
+<pre><code class="copy">> sagamax_react@0.1.0 build
 > next build
 1
 2
@@ -474,7 +474,7 @@ export default Post
 
 <br/>
 <pre class="title"><code class="title">サーバ起動後にアクセスした際のログ</code></pre>
-<pre><code>> sagamax_react@0.1.0 start
+<pre><code class="copy">> sagamax_react@0.1.0 start
 > next start
 
 ready - started server on 0.0.0.0:3000, url: http://localhost:3000
@@ -533,7 +533,7 @@ ready - started server on 0.0.0.0:3000, url: http://localhost:3000
 
 
 <pre class="title"><code class="title">isr_sample.tsx</code></pre>
-<pre><code>export default function IsrSample(props: any) {
+<pre><code class="copy">export default function IsrSample(props: any) {
   // getStaticProps の結果を元にページを構築する処理
   let {result} = props
   return (
