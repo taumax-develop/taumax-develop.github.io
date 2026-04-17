@@ -45,7 +45,7 @@ map.set("implicit", imp)
       <li>必要なスコープ：<a href="https://dev.twitch.tv/docs/authentication/scopes/" target="_blank" rel="noopener noreferrer">リンク先を参考に必要なスコープを指定</a></li>
       <li>
         state：任意指定項目。CSRF(Cross-Site Request Forgery)対策なので、セキュリティ的には指定した方が安全。任意の文字列を指定。<br>
-        <a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#authorization-code-grant-flow" target="_blank" rel="noopener noreferrer">リンク先のサンプル</a> では c3ab8aa609ea11e793ae92361f002671 という文字列が設定されている。
+        リダイレクト後に送られてきたstateとセッションに保存したstateを比較することで、CSRF攻撃を防止できる。<br>
       </li>
     </ul>
   </div>

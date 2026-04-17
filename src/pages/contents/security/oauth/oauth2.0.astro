@@ -178,6 +178,8 @@ const indexList: index[] = [
             <li>クライアントシークレットを安全に保存できる環境</li>
             <li>TwitchのAPIサーバーと通信する環境</li>
           </ul>
+          OAuth 2.0では「<a href="#pkce">Authorization Code + PKCE</a>」が推奨されているが、<br>
+          2026/4/18現在、Twitchでは従来のAuthorization code grant flowを使用可能。
         </td>
         <td>あり</td>
         <td>約4時間</td>
@@ -197,6 +199,8 @@ const indexList: index[] = [
             <li>クライアントサイドのJavaScript</li>
             <li>モバイルアプリケーション</li>
           </ul>
+          OAuth 2.0では「<a href="#pkce">Authorization Code + PKCE</a>」が推奨されているが、<br>
+          2026/4/18現在、Twitchでは従来のAuthorization code grant flowを使用可能。
         </td>
         <td>無し</td>
         <td>約2ヶ月</td>
@@ -312,8 +316,8 @@ export async function fetchNewToken(clientID, clientSecret) {
   <h3 class="title" id="auth_code_grant_flow">Authorization code grant flow</h3>
   <p>
     Authorization code grant flowは、バックエンドが存在するシステムで使用する想定のフローです。<br>
-    現在ではAuthorization Code + PKCEを使うのが標準ですが、2026/4/7現在、Twitchでは従来のAuthorization code grant flowを使用しています。<br>
     Authorization code grant flowは以下の図に示す流れになっています。<br>
+    このフローは認可コードを横取りできるケースが存在するため、現在では<a href="#pkce">Authorization Code + PKCE</a>を使うのが標準です。<br>
     <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
     ※<span set:html={RESOURCE_OWNER} />
   </p>
@@ -382,7 +386,8 @@ export async function fetchNewToken(clientID, clientSecret) {
     現在ではAuthorization Code + PKCE を使うのが標準です。<br>
     Implicit grant flow は <a href="#auth_code_grant_flow">Authorization code grant flow</a> と違って認可コードを使用しない方式です。<br>
     認可コードを使う方式に比べて安全性に問題があるため OAuth としては非推奨の方式であり、OAuth 2.1からは Implicit grant は仕様自体から削除されています。<br>
-    2026/4/7現在、Twitch は OAuth 2.0 準拠のため Implicit grant flow でトークンを発行することができます。<br>
+    （ただし、<a href="#auth_code_grant_flow">Authorization code grant flow</a>も認可コードを横取りできるケースが存在するため、現在は<a href="#pkce">Authorization Code + PKCE</a>を使うのが標準です）<br>
+    2026/4/18現在、Twitch は OAuth 2.0 準拠のため Implicit grant flow でトークンを発行することができます。<br>
     Implicit grant flow は以下の図に示す流れでトークンを取得する方式になっています。<br>
     <Image src={implicit_grant_flow} width={650} alt="implicit_grant_flow" /><br>
     ※<span set:html={RESOURCE_OWNER} />
@@ -490,7 +495,7 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
   <AdUnitLandscape />
 
   <br>
-  <h3 class="title" id="pkce">PKCE</h3>
+  <h3 class="title" id="pkce">Authorization Code + PKCE</h3>
   <p>
     PKCEとは、「Proof Key for Code Exchange by OAuth Public Clients」の略称で、「ピクシー」と読みます。<br>
     認可コード横取り攻撃を対策するためのOAuth2.0の拡張仕様で、<a href="https://datatracker.ietf.org/doc/html/rfc7636" target="_blank" rel="noopener noreferrer">RFC7636</a>に定義されています。<br>
