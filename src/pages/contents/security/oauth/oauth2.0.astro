@@ -535,7 +535,7 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
     <br>
     Authorization code grant flowは認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
     iOSでは、同じURL Schemeを持つ複数のアプリを入れることが可能となっています。<br>
-    そのため、攻撃対象者のスマホに同じURL Schemeを持つアプリを入れることで、正規のアプリケーションに成りすまして認可コードを横取りできてしまいます。<br>
+    そのため、攻撃対象者のスマホに、既に入っているアプリケーションと同じURL Schemeを持つアプリケーションを入れることで、正規のアプリケーションに成りすまして認可コードを横取りできてしまいます。<br>
     <Image src={yokodori_img} width={700} alt="yokodori" /><br>
 
     <br>
