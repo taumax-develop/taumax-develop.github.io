@@ -31,13 +31,14 @@ const indexList: index[] = [
   { id: "#auth_code_grant_flow", name: "Authorization code grant flow" },
   { id: "#implicit_grant_flow", name: "Implicit grant flow" },
   { id: "#refresh_token", name: "リフレッシュトークン" },
-  { id: "#pkce", name: "PKCE" }
+  { id: "#pkce", name: "PKCE" },
+  { id: "#pkce_state", name: "PKCEとstate" }
 ];
 ---
 
 <SiteLayout
-  title="OAuth2.0の認証フロー"
-  description="OAuth2.0の認証フローについて説明します。TwitchのAPIを呼び出す際の認証フローを例に、OAuth2.0の認証フローについて説明していきます。"
+  title="OAuth 2.0の認証フロー"
+  description="OAuth 2.0の認証フローについて説明します。TwitchのAPIを呼び出す際の認証フローを例に、OAuth 2.0の認証フローについて説明していきます。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
   breadcrumbList={breadcrumbList}
   indexList={indexList}
@@ -46,8 +47,8 @@ const indexList: index[] = [
   <br>
   <h3 class="title" id="firstly">はじめに</h3>
   <p>
-    このページは、OAuth2.0の認証フローについて説明するページです。<br>
-    机上の理論だけだとなかなか理解が深まらないと思うので、OAuth2.0に準拠しているTwitchの認証フローを追いながら実際にトークンを発行し、OAuth2.0の認証フローについて理解を深めていきます。<br>
+    このページは、OAuth 2.0の認証フローについて説明するページです。<br>
+    机上の理論だけだとなかなか理解が深まらないと思うので、OAuth 2.0に準拠しているTwitchの認証フローを追いながら実際にトークンを発行し、OAuth 2.0の認証フローについて理解を深めていきます。<br>
     発行されたトークンをTwitchでどう使うのかについては<a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × Twitch</a>を参照してください。<br>
     トークンの発行は大まかに以下の2ステップで行います。
   </p>
@@ -66,7 +67,8 @@ const indexList: index[] = [
   <h3 class="title" id="register_application">アプリケーションの登録</h3>
   <p>
     トークンを発行する前に、まずTwitchと連動するアプリケーションを登録してClient IDとClient Secretを発行する必要があります。<br>
-    Client IDはアプリケーションを識別するためのIDで、Client Secretはアプリケーション固有のパスワードのようなものです。トークンを発行する際に必要になります。<br>
+    Client IDはアプリケーションを識別するためのIDで、Client Secretはアプリケーション固有のパスワードのようなものです。<br>
+    トークンを発行する際に必要になります。<br>
     Client IDとClient Secretを発行するには、Twitchのdevelopersサイトでアプリケーションを登録する必要があります。<br>
     リンク先（<a href="https://dev.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch developers</a>）右上の「Log in with Twitch」ボタンからdevelopersサイトにログイン。<br>
     その後、右上の「Your Console」ボタンからコンソール画面に遷移して、「アプリケーションを登録」ボタンを押下。<br>
@@ -75,7 +77,7 @@ const indexList: index[] = [
     <br>
     アプリケーションの管理画面でアプリケーション名、OAuthのリダイレクトURL、カテゴリーを入力。<br>
     「新しい秘密」ボタンを押下するとシークレット(Client Secret)が生成されます。<br>
-    シークレットとクライアントIDを控えて「保存」ボタンを押下すると、アプリケーションの登録が完了です。<br>
+    クライアントIDとシークレットを控えて「保存」ボタンを押下すると、アプリケーションの登録が完了です。<br>
     <Image src={application_info_img} width={500} alt="application_info" /><br>
   </p>
 
@@ -117,7 +119,7 @@ const indexList: index[] = [
           <ul class="inside_table">
             <li>
               リソースオーナーの承認が不要な機能を利用する場合<br>
-              例えば<a href="https://dev.twitch.tv/docs/api/reference#get-videos" target="_blank" rel="noopener noreferrer">Get Videos API</a>は、指定したIDに紐づく情報をリソースオーナーの承認無しで取得することができる。<br>
+              例えば<a href="https://dev.twitch.tv/docs/api/reference#get-videos" target="_blank" rel="noopener noreferrer">Get Videos API</a>は、指定したIDに紐づく情報をリソースオーナーの承認無しで取得することができます。<br>
               App access tokenが使用できるAPIであれば、自分の情報であろうが他人の情報であろうが取得可能だということです。<br>
               <ul style="list-style-type: circle">
                 <li>
@@ -133,7 +135,8 @@ const indexList: index[] = [
                   User access tokenを使用すると、リクエストは失敗します。<br>
                 </li>
                 <li>
-                  イベントの種類によってはリソースオーナーの承認が必要なものもある。<a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe" target="_blank" rel="noopener noreferrer">channel.subscribe</a> イベントはその一つです。<br>
+                  イベントの種類によってはリソースオーナーの承認が必要なものもあります。<br>
+                  <a href="https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe" target="_blank" rel="noopener noreferrer">channel.subscribe</a> イベントはその一つです。<br>
                   channel.subscribeイベントを受信するには、まずリソースオーナーの承認を得るため、channel:read:subscriptionsスコープを含むUser access tokenを取得します。<br>
                   その上で、App access tokenを使用してサブスクリプションの登録リクエストを行います。
                 </li>
@@ -159,7 +162,7 @@ const indexList: index[] = [
       <tr>
         <td>App access token</td>
         <td><a href="#client_cred_grant_flow">Client credentials grant flow</a></td>
-        <td>App access tokenを使用したAPIを呼び出す場合</td>
+        <td>App access tokenを使用したAPIを呼び出す場合に使用します。</td>
         <td>無し</td>
         <td>約2ヶ月</td>
         <td>
@@ -173,13 +176,15 @@ const indexList: index[] = [
         <td rowspan="3">User access token</td>
         <td><a href="#auth_code_grant_flow">Authorization code grant flow</a></td>
         <td>
-          バックエンドが存在するアプリケーションの場合
+          バックエンドが存在するアプリケーションの場合に使用します。<br>
+          以下2点を満たす必要があります。<br>
           <ul class="inside_table">
             <li>クライアントシークレットを安全に保存できる環境</li>
-            <li>TwitchのAPIサーバーと通信する環境</li>
+            <li>TwitchのAPIサーバーと通信できる環境</li>
           </ul>
           OAuth 2.0では「<a href="#pkce">Authorization Code + PKCE</a>」が推奨されているが、<br>
-          2026/4/18現在、Twitchでは従来のAuthorization code grant flowを使用可能。
+          2026/4/18現在、Twitchでは従来のAuthorization code grant flow<br>
+          を使用可能。
         </td>
         <td>あり</td>
         <td>約4時間</td>
@@ -193,14 +198,15 @@ const indexList: index[] = [
       <tr>
         <td><a href="#implicit_grant_flow">Implicit grant flow</a></td>
         <td>
-          バックエンドが存在しないアプリケーションの場合
+          バックエンドが存在しないアプリケーションの場合に使用します。<br>
+          例えば以下のようなアプリケーションが該当します。<br>
           <ul class="inside_table">
             <li><a href=`${BASE_URL}/contents/development/javascript/spa/spa`>SPA(Single Page Application)</a></li>
             <li>クライアントサイドのJavaScript</li>
             <li>モバイルアプリケーション</li>
           </ul>
           OAuth 2.0では「<a href="#pkce">Authorization Code + PKCE</a>」が推奨されているが、<br>
-          2026/4/18現在、Twitchでは従来のAuthorization code grant flowを使用可能。
+          2026/4/18現在、Twitchでは従来のImplicit grant flowを使用可能。
         </td>
         <td>無し</td>
         <td>約2ヶ月</td>
@@ -214,8 +220,8 @@ const indexList: index[] = [
       <tr>
         <td>Device code grant flow</td>
         <td>
-          バックエンドが存在しないスタンドアロンデバイス<br>
-          上で動作するアプリケーションの場合
+          バックエンドが存在しないスタンドアロンデバイス上で動作する<br>
+          アプリケーションの場合
           <ul class="inside_table">
             <li>テレビやゲーム機などのセットトップボックス</li>
             <li>ビデオゲーム機のアプリケーション</li>
@@ -236,8 +242,14 @@ const indexList: index[] = [
   <br>
   <p>
     具体的にどうやってトークンを取得するかは <a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#examples-of-the-four-flows" target="_blank" rel="noopener noreferrer">Examples of the four flows</a> に書いていますが、以下にも記載します。<br>
-    Device code grant flowは私は使ったことがないので他の3つについて説明します。<br>
+    Device code grant flowは私は使ったことがないので他の3つのフローと、2026/4/18現在、OAuthの標準になっているPKCEについて説明します。<br>
   </p>
+  <ul>
+    <li><a href="#client_cred_grant_flow">Client credentials grant flow</a></li>
+    <li><a href="#auth_code_grant_flow">Authorization code grant flow</a></li>
+    <li><a href="#implicit_grant_flow">Implicit grant flow</a></li>
+    <li><a href="#pkce">Authorization Code + PKCE</a></li>
+  </ul>
 
   <br>
   <AdUnitLandscape />
@@ -245,7 +257,8 @@ const indexList: index[] = [
   <br>
   <h3 class="title" id="client_cred_grant_flow">Client credentials grant flow</h3>
   <p>
-    Client credentials grant flowは以下の図に示す流れになっています。見てわかる通りかなりシンプルです。<br>
+    Client credentials grant flowは、App access tokenを発行するためのフローです。<br>
+    以下の図に示す流れになっています。見てわかる通りかなりシンプルです。<br>
     <Image src={client_credentials_grant_flow} width={350} alt="client_credentials_grant_flow" /><br>
 
     <br>
@@ -265,7 +278,8 @@ const indexList: index[] = [
   </div>
 
   <p>
-    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。 access_tokenに記載されているのがApp access tokenです。<br>
+    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。<br>
+    access_tokenに記載されているのがApp access tokenです。<br>
   </p>
 
 <pre><code class="copy">{`{
@@ -280,7 +294,8 @@ const indexList: index[] = [
     有効期限は約2ヶ月です。<br>
     リフレッシュトークンは発行されないため、期限が切れたら再度トークンを取得する必要があります。<br>
     POSTリクエストを送信することでトークンを取得できるので、定期的にトークンを再取得する機能を構築して自動化するのが良いと思います。<br>
-    Node.jsには<code>node-cron</code>というライブラリがあり、<code>npm install node-cron</code>でインストールして使うと、定期的にトークンを再取得する処理を自動化できます。<br>
+    Node.jsであれば<code>node-cron</code>というライブラリがあるので、<code>npm install node-cron</code>でインストールして使うと定期的にトークンを再取得する処理を自動化できます。<br>
+    サンプルコードは以下の通り。<br>
   </p>
 
 <pre class="title"><code class="title">Node.jsサンプル</code></pre>
@@ -295,6 +310,7 @@ cron.schedule('0 1 1 * *', async () => {
     ...
 })
 
+// 新しいトークンを取得する
 export async function fetchNewToken(clientID, clientSecret) {
     const result = await fetch('https://id.twitch.tv/oauth2/token', {
         method: 'POST',
@@ -316,8 +332,8 @@ export async function fetchNewToken(clientID, clientSecret) {
   <h3 class="title" id="auth_code_grant_flow">Authorization code grant flow</h3>
   <p>
     Authorization code grant flowは、バックエンドが存在するシステムで使用する想定のフローです。<br>
-    Authorization code grant flowは以下の図に示す流れになっています。<br>
-    このフローは認可コードを横取りできるケースが存在するため、現在では<a href="#pkce">Authorization Code + PKCE</a>を使うのが標準です。<br>
+    以下の図に示す流れでトークンを取得します。<br>
+    このフローは認可コードを横取りできるケースが存在するため、現在では<a href="#pkce">Authorization Code + PKCE</a>を使うのがOAuthの標準です。<br>
     <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
     ※<span set:html={RESOURCE_OWNER} />
   </p>
@@ -328,8 +344,7 @@ export async function fetchNewToken(clientID, clientSecret) {
   <p>
     <b>5. 認可コード発行</b><br>
     アクセスが許可されると、redirect_uriに指定したURLにリダイレクトされます。<br>
-    リダイレクト先のURLに、以下のような形式でcodeが記載されています。これが認可コードです。<br>
-    クエリパラメータ（?code=xxx）で渡されます。<br>
+    リダイレクト先のURLクエリパラメータ（?code=xxx）部分にcodeが記載されています。これが認可コードです。<br>
     クエリパラメータはリダイレクト先のサーバーに渡るため、サーバー側で認可コードを受け取ってそのまま次のステップを処理することができます。<br>
   </p>
 
@@ -338,6 +353,12 @@ export async function fetchNewToken(clientID, clientSecret) {
 &scope=[指定したスコープ]
 &state=[指定したstate]
 </code></pre>
+
+  <br>
+  <p>
+    「1.認可リクエスト」時に送付したstateも含まれています。<br>
+    送付した時の値と同じであることを確認することで、CSRF（クロスサイトリクエストフォージェリ）を防止します。<br>
+  </p>
 
   <br>
   <p>
@@ -372,7 +393,7 @@ export async function fetchNewToken(clientID, clientSecret) {
 
   <br>
   <p>
-    有効期限は約4時間です。<br>
+    このフローで発行した場合、トークンの有効期限は約4時間です。<br>
     トークンを再取得する場合は、<a href="#refresh_token">リフレッシュトークン</a>を使うか、再度Authorization code grant flowを経てトークンを発行する必要があります。<br>
   </p>
 
@@ -382,13 +403,12 @@ export async function fetchNewToken(clientID, clientSecret) {
   <br>
   <h3 class="title" id="implicit_grant_flow">Implicit grant flow</h3>
   <p>
-    Implicit grant flowは、SPAなど、バックエンドが存在しないクライアントサイドのアプリケーションで使用する想定のフローです。<br>
-    現在ではAuthorization Code + PKCE を使うのが標準です。<br>
-    Implicit grant flow は <a href="#auth_code_grant_flow">Authorization code grant flow</a> と違って認可コードを使用しない方式です。<br>
+    Implicit grant flowは、SPAなどのように、バックエンドが存在しないクライアントサイドのアプリケーションで使用する想定のフローです。<br>
+    <a href="#auth_code_grant_flow">Authorization code grant flow</a>と違って認可コードを使用しない方式です。<br>
     認可コードを使う方式に比べて安全性に問題があるため OAuth としては非推奨の方式であり、OAuth 2.1からは Implicit grant は仕様自体から削除されています。<br>
-    （ただし、<a href="#auth_code_grant_flow">Authorization code grant flow</a>も認可コードを横取りできるケースが存在するため、現在は<a href="#pkce">Authorization Code + PKCE</a>を使うのが標準です）<br>
+    （ただし、<a href="#auth_code_grant_flow">Authorization code grant flow</a>も認可コードを横取りできるケースが存在するため、現在は<a href="#pkce">Authorization Code + PKCE</a>を使うのがOAuthの標準です）<br>
     2026/4/18現在、Twitch は OAuth 2.0 準拠のため Implicit grant flow でトークンを発行することができます。<br>
-    Implicit grant flow は以下の図に示す流れでトークンを取得する方式になっています。<br>
+    以下の図に示す流れでトークンを取得する方式です。<br>
     <Image src={implicit_grant_flow} width={650} alt="implicit_grant_flow" /><br>
     ※<span set:html={RESOURCE_OWNER} />
   </p>
@@ -399,8 +419,7 @@ export async function fetchNewToken(clientID, clientSecret) {
   <p>
     <b>5. アクセストークン発行</b><br>
     アクセスが許可されると、redirect_uriに指定したURLにリダイレクトされます。<br>
-    リダイレクト先のURLに、以下のような形式でaccess_tokenが記載されています。これがUser access tokenです。<br>
-    フラグメント（#access_token=xxx）で渡されます。<br>
+    リダイレクト先URLのフラグメント（#access_token=xxx）部分にaccess_tokenが記載されています。これがUser access tokenです。<br>
     ブラウザがリダイレクトURLにアクセスするとき、フラグメント部分はHTTPリクエストに含まれず、サーバーのアクセスログに残りません。<br>
     Implicit grant flowはクライアントサイドのアプリケーションで使用する想定のフローなので、アクセストークンをどこにも記録させずに、JavaScriptにだけ渡すためにフラグメントにしています。<br>
   </p>
@@ -414,22 +433,24 @@ export async function fetchNewToken(clientID, clientSecret) {
 
   <br>
   <p>
-    有効期限は約2か月です。<br>
+    「1.認可リクエスト」時に送付したstateも含まれています。<br>
+    送付した時の値と同じであることを確認することで、CSRF（クロスサイトリクエストフォージェリ）を防止します。<br>
+
+    <br>
+    このフローで発行した場合、トークンの有効期限は約2か月です。<br>
     リフレッシュトークンは発行されないため、期限が切れたら再度トークンを取得する必要があります。<br>
-    このプロセスを自動化するのはなかなか難しいので、自動化したい場合は<a href="#auth_code_grant_flow">Authorization code grant flow</a>を使用するのが良いでしょう。<br>
-    セキュリティ上の理由でもそちらが推奨されます。<br>
   </p>
 
   <br>
   <AdUnitLandscape />
 
   <br>
-  <h3 class="title" id="refresh_token">リフレッシュトークン</h3>
+  <h3 class="title" id="refresh_token">アクセストークンの更新(refresh token)</h3>
   <p>
-    リフレッシュトークンは、User access token を再取得するためのトークンです。<br>
-    Twitchの公式文書はこちら：<a href="https://dev.twitch.tv/docs/authentication/refresh-tokens/" target="_blank" rel="noopener noreferrer">Refreshing Access Tokens</a><br>
-    <a href="#auth_code_grant_flow">Authorization code grant flow</a>でUser access tokenを発行するとリフレッシュトークンも同時に発行されるため、これを使うことで、User access token の期限が切れる前にトークンを再取得することができます。<br>
-    POSTリクエストを発行することで再取得できます。curl コマンドなら以下のようになります。<br>
+    <a href="#auth_code_grant_flow">Authorization code grant flow</a>でUser access tokenと合わせてrefresh_tokenが発行されます。<br>
+    これを使うと、User access tokenの期限が切れる前にトークンを再取得することができます。<br>
+    （<a href="https://dev.twitch.tv/docs/authentication/refresh-tokens/" target="_blank" rel="noopener noreferrer">Twitchの公式文書はこちら</a>）<br>
+    refresh_tokenを使ってPOSTリクエストを送信することで再取得できます。curl コマンドなら以下のようになります。<br>
   </p>
 
 <pre><code class="copy">curl -X POST 'https://id.twitch.tv/oauth2/token' \
@@ -446,8 +467,9 @@ export async function fetchNewToken(clientID, clientSecret) {
   </div>
 
   <p>
-    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。 access_token に記載されているのが User access token です。<br>
-    リフレッシュトークンも再発行されます。<br>
+    上記コマンドを実行すると、以下の形式でレスポンスが返ってきます。<br>
+    access_tokenに記載されているのが、再発行されたUser access tokenです。<br>
+    refresh_tokenも返却されます。<br>
   </p>
 
 <pre><code class="copy">{`{
@@ -462,7 +484,8 @@ export async function fetchNewToken(clientID, clientSecret) {
   <br>
   <p>
     POSTリクエストを送信することでトークンを取得できるので、定期的にトークンを再取得する機能を構築して自動化するのが良いと思います。<br>
-    Node.jsにはnode-cronというライブラリがあり、<code>npm install node-cron</code>でインストールして使うと、定期的にトークンを再取得する処理を自動化できます。<br>
+    Node.jsであれば<code>node-cron</code>というライブラリがあるので、<code>npm install node-cron</code>でインストールして使うと定期的にトークンを再取得する処理を自動化できます。<br>
+    サンプルコードは以下の通り。<br>
   </p>
 
 <pre class="title"><code class="title">Node.jsサンプル</code></pre>
@@ -477,6 +500,7 @@ cron.schedule('0 */3 * * *', async () => {
     ...
 })
 
+// トークンをリフレッシュする
 export async function refreshToken(clientID, clientSecret, refreshToken) {
     const result = await fetch('https://id.twitch.tv/oauth2/token', {
         method: 'POST',
@@ -498,29 +522,55 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
   <h3 class="title" id="pkce">Authorization Code + PKCE</h3>
   <p>
     PKCEとは、「Proof Key for Code Exchange by OAuth Public Clients」の略称で、「ピクシー」と読みます。<br>
-    認可コード横取り攻撃を対策するためのOAuth2.0の拡張仕様で、<a href="https://datatracker.ietf.org/doc/html/rfc7636" target="_blank" rel="noopener noreferrer">RFC7636</a>に定義されています。<br>
-    <a href="#auth_code_grant_flow">Authorization code grant flow</a>を改良したものです。<br>
-    Authorization code grant flowの概要フローは以下のようになっています。<br>
-    認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
+    認可コード横取り攻撃を対策するためのOAuth 2.0の拡張仕様で、<a href="https://datatracker.ietf.org/doc/html/rfc7636" target="_blank" rel="noopener noreferrer">RFC7636</a>に定義されています。<br>
+    <a href="#auth_code_grant_flow">Authorization code grant flow</a>を改良したものがAuthorization Code + PKCEです。<br>
+    2026/4/18現在Twitchではサポートされていませんが、OAuthの事実上の標準なので、合わせて記載します。<br>
+
+    <br>
+    まずAuthorization code grant flowの問題点から説明します。<br>
+    Authorization code grant flowの概要フローは以下のようになっていました。<br>
     概要フロー（再掲）<br>
     <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
 
     <br>
+    Authorization code grant flowは認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
     iOSでは、同じURL Schemeを持つ複数のアプリを入れることが可能となっています。<br>
-    そのため、攻撃対象者のスマホに悪意のある認可コード横取りするアプリを入れることができれば、比較的簡単に認可コードを乗っ取れます。<br>
+    そのため、攻撃対象者のスマホに同じURL Schemeを持つアプリを入れることで、正規のアプリケーションに成りすまして認可コードを横取りできてしまいます。<br>
     <Image src={yokodori_img} width={700} alt="yokodori" /><br>
 
     <br>
-    この対策としてPKCEでは、認可コードを発行する際に code_challenge と code_challenge_method を追加で指定し、トークン発行の際に code_verifier を指定することで認可コード横取り攻撃を防止します。<br>
+    この対策としてPKCEでは、認可コードを発行する際にcode_challengeとcode_challenge_methodを追加で指定し、トークン発行の際にcode_verifierを指定することでアプリケーションの正当性を確認。<br>
+    認可コード横取りを防止します。<br>
     <img src={pkce_img} width="800" alt="pkce" loading="lazy" /><br>
   </p>
 
   <br>
   <p>
     図の赤字部分が<a href="#auth_code_grant_flow">Authorization code grant flow</a>と異なる点です。<br>
-    （code_challenge_method に S256 を指定した前提で記載しています）<br>
+    各パラメータの説明は以下表の通りです。<br>
   </p>
 
+  <div style="padding-left: 1em;">
+    <table border="1">
+      <tr><th>パラメータ</th><th>説明</th></tr>
+      <tr><td>code_challenge_method</td><td>plainかS256を指定</td></tr>
+      <tr>
+        <td>code_challenge</td>
+        <td>
+          code_challenge_methodがplainの場合はcode_verifierと同じ。<br>
+          S256の場合はcode_verifierをSHA-256によりハッシュ化したもの。<br>
+          S256の使用が強く推奨されます。<br>
+        </td>
+      </tr>
+      <tr><td>code_verifier</td><td>43文字～128文字以内の半角英数字と[-._~]で生成されるもの</td></tr>
+    </table>
+  </div>
+
+  <br>
+  <p>
+    図はcode_challenge_methodにS256を指定した前提で記載しています。<br>
+    図の赤字部分をテキストで説明すると以下の通りです。<br>
+  </p>
   <ul>
     <li>
       1. 認可リクエストで code_challenge_method, code_challenge を認証サーバーに送付します。<br>
@@ -533,24 +583,26 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
     </li>
   </ul>
 
+  <br>
+  <h3 class="title" id="pkce_state">PKCEとstateの違い</h3>
   <p>
-    各パラメータの説明は以下表の通りです。<br>
+    <a href="#auth_code_grant_flow">Authorization code grant flow</a>や<a href="#implicit_grant_flow">Implicit grant flow</a>のフローの認可リクエストで、CSRF（クロスサイトリクエストフォージェリ）対策としてstateというものを送付していました。<br>
+    よく「PKCEを使えばstateは不要か？」という疑問がありますが、これらは検証の主体と目的が異なるため、併用が推奨されます。
   </p>
-  <div style="padding-left: 1em;">
-    <table border="1">
-      <tr><th>パラメータ</th><th>説明</th></tr>
-      <tr><td>code_challenge_method</td><td>plain か S256 を指定</td></tr>
-      <tr>
-        <td>code_challenge</td>
-        <td>
-          code_challenge_method が plain の場合は code_verifier と同じ。<br>
-          S256の場合はcode_verifierをSHA-256によりハッシュ化したもの。<br>
-          S256の使用が強く推奨されます。<br>
-        </td>
-      </tr>
-      <tr><td>code_verifier</td><td>43文字～128文字以内の半角英数字と[-._~]で生成されるもの</td></tr>
-    </table>
-  </div>
+  <ul>
+    <li>
+      state: クライアント側で生成し、リクエスト送信時に認可サーバーに送付します。<br>
+      リダイレクト後にクライアント側で照合することで、CSRFを防止します。<br>
+    </li>
+    <li>
+      PKCE: 認可サーバー側で検証します。<br>
+      認可コード交換時にハッシュ値を検証することで、認可コード横取り攻撃を防止します。
+    </li>
+  </ul>
+
+  <p>
+    つまり、「クライアントを守るためのstate」と「認可コードの正当性を守るためのPKCE」として使い分けるのが最も安全です。<br>
+  </p>
 
   <br>
   <hr>

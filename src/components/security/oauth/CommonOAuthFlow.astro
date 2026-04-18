@@ -4,11 +4,11 @@ import authorize_picture from './authorize_picture.png';
 const { kbn } = Astro.props;
 
 const auth = {
-  link: `<a href="#implicit_grant_flow">Implicit grant flow</a>の response_type が token から code に変わる以外は同じです。`,
+  link: `<a href="#implicit_grant_flow">Implicit grant flow</a>の response_type が token から code に変わる点以外は同じです。`,
   resType: "code",
 }
 const imp = {
-  link: `<a href="#auth_code_grant_flow">Authorization code grant flow</a>の response_type が code から token に変わる以外は同じです。`,
+  link: `<a href="#auth_code_grant_flow">Authorization code grant flow</a>の response_type が code から token に変わる点以外は同じです。`,
   resType: "token",
 }
 
@@ -19,7 +19,6 @@ map.set("implicit", imp)
 
   <p>
     図の手順について以下に説明します。<br>
-    リソースオーナー＝自分という前提で書いています。<br>
   </p>
   <p>
     <b>1. 認可リクエスト</b><br>
@@ -44,7 +43,7 @@ map.set("implicit", imp)
       <li>response_type：{map.get(kbn).resType} を指定します。</li>
       <li>必要なスコープ：<a href="https://dev.twitch.tv/docs/authentication/scopes/" target="_blank" rel="noopener noreferrer">リンク先を参考に必要なスコープを指定</a></li>
       <li>
-        state：任意指定項目。CSRF(Cross-Site Request Forgery)対策なので、セキュリティ的には指定した方が安全。任意の文字列を指定。<br>
+        state：任意指定項目。CSRF（クロスサイトリクエストフォージェリ）対策なので、セキュリティ的には指定した方が安全。任意の文字列を指定。<br>
         リダイレクト後に送られてきたstateとセッションに保存したstateを比較することで、CSRF攻撃を防止できる。<br>
       </li>
     </ul>
@@ -62,7 +61,7 @@ map.set("implicit", imp)
 &redirect_uri=[redirectURI]
 &response_type={map.get(kbn).resType}
 &scope=channel%3Amanage%3Apolls+channel%3Aread%3Apolls
-&state=c3ab8aa609ea11e793ae92361f002671
+&state=[任意の文字列を指定]
 </code></pre>
 
   <br>
@@ -78,6 +77,7 @@ map.set("implicit", imp)
     <Image src={authorize_picture} width={300} alt="authorize_picture" /><br>
   </p>
 
+  <br>
   <p>
     <b>4. アクセス許可</b><br>
     上記画面の「Authorize」ボタンを押下すると、アクセスが許可されます。<br>
