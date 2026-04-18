@@ -37,8 +37,8 @@ const indexList: index[] = [
 ---
 
 <SiteLayout
-  title="OAuth 2.0の認証フロー"
-  description="OAuth 2.0の認証フローについて説明します。TwitchのAPIを呼び出す際の認証フローを例に、OAuth 2.0の認証フローについて説明していきます。"
+  title="OAuth 2.0の認可フロー"
+  description="OAuth 2.0の認可フローについて説明します。TwitchのAPIを呼び出す際の認可フローを例に、OAuth 2.0の認可フローについて説明していきます。"
   twitterCardSize={TWITTER_CARD_SUMMARY}
   breadcrumbList={breadcrumbList}
   indexList={indexList}
@@ -47,8 +47,8 @@ const indexList: index[] = [
   <br>
   <h3 class="title" id="firstly">はじめに</h3>
   <p>
-    このページは、OAuth 2.0の認証フローについて説明するページです。<br>
-    机上の理論だけだとなかなか理解が深まらないと思うので、OAuth 2.0に準拠しているTwitchの認証フローを追いながら実際にトークンを発行し、OAuth 2.0の認証フローについて理解を深めていきます。<br>
+    このページは、OAuth 2.0の認可フローについて説明するページです。<br>
+    机上の理論だけだとなかなか理解が深まらないと思うので、OAuth 2.0に準拠しているTwitchの認可フローを追いながら実際にトークンを発行し、OAuth 2.0の認可フローについて理解を深めていきます。<br>
     発行されたトークンをTwitchでどう使うのかについては<a href=`${BASE_URL}/contents/development/javascript/nodejs/twitch`>Node.js × Twitch</a>を参照してください。<br>
     トークンの発行は大まかに以下の2ステップで行います。
   </p>
@@ -153,12 +153,12 @@ const indexList: index[] = [
 
   <br>
   <p>
-    トークンの取得方法については<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">リンク先にまとまって</a>いる通り、4種類の認証フローがあります。<br>
+    トークンの取得方法については<a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/" target="_blank" rel="noopener noreferrer">リンク先にまとまって</a>いる通り、4種類の認可フローがあります。<br>
   </p>
 
   <div style="padding-left: 1em;" class="slider">
     <table border="1">
-      <tr><th style="z-index: 0">発行するトークン</th><th>認証フロー</th><th>使用するケース</th><th>リフレッシュトークンの発行</th><th>有効期限</th><th>関連リンク</th></tr>
+      <tr><th style="z-index: 0">発行するトークン</th><th>認可フロー</th><th>使用するケース</th><th>リフレッシュトークンの発行</th><th>有効期限</th><th>関連リンク</th></tr>
       <tr>
         <td>App access token</td>
         <td><a href="#client_cred_grant_flow">Client credentials grant flow</a></td>
@@ -573,13 +573,13 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
   </p>
   <ul>
     <li>
-      1. 認可リクエストで code_challenge_method, code_challenge を認証サーバーに送付します。<br>
+      1. 認可リクエストで code_challenge_method, code_challenge を認可サーバーに送付します。<br>
     </li>
     <li>
-      6. トークン発行依頼で code_verifier を認証サーバーに送付します。<br>
+      6. トークン発行依頼で code_verifier を認可サーバーに送付します。<br>
     </li>
     <li>
-      認証サーバーは、code_verifier の hash 値が code_challenge と一致することを確認します。<br>
+      認可サーバーは、code_verifier の hash 値が code_challenge と一致することを確認します。<br>
     </li>
   </ul>
 
