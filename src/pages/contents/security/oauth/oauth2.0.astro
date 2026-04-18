@@ -534,7 +534,7 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
 
     <br>
     Authorization code grant flowは認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
-    iOSでは、同じURL Schemeを持つ複数のアプリを入れることが可能となっています。<br>
+    スマートフォンなどでは、同じURL Schemeを持つ複数のアプリを入れることができるものがあります。<br>
     そのため、攻撃対象者のスマホに、既に入っているアプリケーションと同じURL Schemeを持つアプリケーションを入れることで、正規のアプリケーションに成りすまして認可コードを横取りできてしまいます。<br>
     <Image src={yokodori_img} width={700} alt="yokodori" /><br>
 
@@ -629,6 +629,7 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
     <li><a href="https://qiita.com/ist-n-m/items/992c67b803ff460818ec" target="_blank" rel="noopener noreferrer">Qiita OAuth2.0 PKCEとは 〜Stateとの違い〜</a></li>
     <li><a href="https://auth0.com/docs/ja-jp/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce" target="_blank" rel="noopener noreferrer">auth0 Docs Proof Key for Code Exchange（PKCE）を使った認可コードフロー</a></li>
     <li><a href="https://zenn.dev/hitoe_kami/articles/0060-articles-what-pkce-is" target="_blank" rel="noopener noreferrer">Zenn PKCE なにそれ？おいしいの？</a></li>
+    <li><a href="https://e-words.jp/w/PKCE.html" target="_blank" rel="noopener noreferrer">e-Words PKCE</a></li>
     <li><a href="https://datatracker.ietf.org/doc/html/rfc7636" target="_blank" rel="noopener noreferrer">RFC7636 Proof Key for Code Exchange by OAuth Public Clients</a></li>
   </ul>
 </SiteLayout>
