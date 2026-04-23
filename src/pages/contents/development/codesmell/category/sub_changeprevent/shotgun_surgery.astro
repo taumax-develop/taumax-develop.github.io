@@ -31,22 +31,23 @@ const indexList: index[] = [
 
   <br>
   <h3 id="shotgunsurgery">Shotgun Surgery</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/shotgun-surgery" target="_blank" rel="noopener noreferrer">Shotgun Surgery（ショットガンサージェリー）</a></p>
-  <p>Shotgun Surgeryは、1つの変更が複数のクラスやメソッドにまたがって行われることを指ります。たとえば、ある機能を追加するために複数のクラスのコードを修正しなければならない場合です。</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/shotgun-surgery" target="_blank" rel="noopener noreferrer">Shotgun Surgery（変更の分散）</a></p>
+  <p>※Shotgun Surgeryは、<a href="https://sourcemaking.com/refactoring/smells/divergent-change">Divergent Change</a>という別のCode Smellと似ていますが、Shotgun SurgeryとDivergent Changeは真逆のものです。
+  Divergent Changeは1つのクラスに多くの変更が加えられることです。Shotgun Surgeryは一つの変更が複数クラスに対して同時に行われることを指します。</p>
   <p><strong><em>兆候と症状</em></strong>
-    1つの変更を加えるために、複数のクラスやメソッドを修正する必要がある。</p>
+  変更を行う際、多くの異なるクラスに多くの小さな変更を加える必要がある場合。</p>
   <p><strong><em>問題の理由</em></strong>
-    このような状況は、機能が適切に分割されていなかったり、責任の分担が不明確な場合に発生します。</p>
-  <p><strong><em>対処</em></strong></p>
-  <ul>
-    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method" target="_blank" rel="noopener noreferrer">Move Method</a>」や「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-field" target="_blank" rel="noopener noreferrer">Move Field</a>」を使って、関連する機能を1つのクラスにまとめます。</p></li>
-    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」でクラスを分割し、責任を明確にします。</p></li>
-  </ul>
+  単一の責任が多数のクラスに分割されたことが原因です。これは、<a href="https://sourcemaking.com/refactoring/smells/divergent-change">Divergent Change</a>を熱心に適用した後に発生する可能性があります。</p>
+  <p><strong><em>対処</em></strong>
+  「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method">Move Method</a>」と「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-field">Move Field</a>」を使用して、既存の様々なクラスに分散した振る舞いを、単一のクラスに移動します。これに適したクラスがない場合は、新しいクラスを作成してください。</p>
+  <p>コードを同じクラスに移動して元のクラスをほとんど空のままにした場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#inline-class">Inline Class</a>」を介してこれらの冗長なクラスを削除してみてください。</p>
   <p><strong><em>効果</em></strong></p>
   <ul>
-    <li>修正箇所の局所化</li>
-    <li>責任の明確化</li>
+    <li>コード構成の改善</li>
+    <li>コード重複の削減</li>
+    <li>メンテナンス性の向上</li>
   </ul>
+
   <br/><br/>
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>

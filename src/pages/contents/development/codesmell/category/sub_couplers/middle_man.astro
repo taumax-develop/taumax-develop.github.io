@@ -31,21 +31,19 @@ const indexList: index[] = [
 
   <br>
   <h3 id="middleman">Middle Man</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/middle-man" target="_blank" rel="noopener noreferrer">Middle Man（ミドルマン）</a></p>
-  <p>Middle Manは、クラスが他のクラスのメソッドを単に呼び出すだけになっている場合に発生します。</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/middle-man" target="_blank" rel="noopener noreferrer">Middle Man（仲介人）</a></p>
   <p><strong><em>兆候と症状</em></strong>
-    クラスの多くのメソッドが、他のクラスのメソッドを単に呼び出しているだけ。</p>
+  他クラスのメソッドを呼び出すだけのクラスがあるとしたら、そのクラスの存在意義は何でしょうか？</p>
   <p><strong><em>問題の理由</em></strong>
-    責任の分担が適切でない場合や、設計が複雑化している場合に発生します。</p>
-  <p><strong><em>対処</em></strong></p>
-  <ul>
-    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#remove-middle-man" target="_blank" rel="noopener noreferrer">Remove Middle Man</a>」を使って、不要な委譲を排除します。</p></li>
-  </ul>
+  このCode Smellは、別のCode SmellであるMessage Chainsを熱心に排除した結果である可能性があります。</p>
+  <p>別の可能性としては、クラスの有用な処理が他のクラスに徐々に移動された結果である可能性があります。クラスは、<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate" target="_blank" rel="noopener noreferrer">委譲(delegate)</a>以外の処理を行わない抜け殻として残存しています。</p>
+  <p><strong><em>対処</em></strong>
+  クラスのメソッドが行っていることのほとんどが別のクラスへの処理の<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#委譲delegate">委譲(delegate)</a>である場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#remove-middle-man" target="_blank" rel="noopener noreferrer">Remove Middle Man</a>」を行いましょう。</p>
   <p><strong><em>効果</em></strong></p>
   <ul>
-    <li>設計の単純化</li>
-    <li>保守性の向上</li>
+    <li>Less bulky code.</li>
   </ul>
+
   <br/><br/>
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>

@@ -76,6 +76,8 @@ const indexList: index[] = [
         TimeSpan.FromTicks((long)Math.Sqrt(variance));
   }
 }`}</code></pre>
+
+  <br>
   <p>上記EstimatorクラスのCalculateEstimateメソッド内でdurationsというフィールドを使っています。同時に、CalculateAverageメソッド内ではaverageを使っており、CalculateStandardDeviationメソッド内ではstandardDeviationを使っています。これらのメソッドはCalculateEstimateメソッドで呼ばれているため、CalculateEstimateは、明示的にdurationsを使い、さらに暗黙的にaverage, standardDeviationフィールドも使っています。
   averageとstandardDeviationはdurationsに依存しています。さらに、standardDeviationはaverageに依存しています。
   ここで、CalculateEstimateメソッド内の処理の順番を以下のように変更したらどうなるでしょうか？</p>

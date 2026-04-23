@@ -17,7 +17,7 @@ export const featureEnvyBc: Breadcrumb = {
 };
 export const featureEnvyBcList: Breadcrumb[] = [...couplersBcList, featureEnvyBc];
 const indexList: index[] = [
-  { id: "Home", name: "/" }
+  { id: "#featureenvy", name: "Feature Envy" }
 ];
 ---
 
@@ -31,21 +31,27 @@ const indexList: index[] = [
 
   <br>
   <h3 id="featureenvy">Feature Envy</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/feature-envy" target="_blank" rel="noopener noreferrer">Feature Envy（フィーチャーエンビー）</a></p>
-  <p>Feature Envyは、あるメソッドが自分のクラスよりも他のクラスのデータやメソッドを多用する場合に発生します。</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/feature-envy" target="_blank" rel="noopener noreferrer">Feature Envy（機能の横恋慕）</a></p>
   <p><strong><em>兆候と症状</em></strong>
-    メソッドが他のクラスのフィールドやメソッドを頻繁に参照している。</p>
+  自クラス内のデータよりも、別オブジェクトのデータに頻繁にアクセスするメソッド。</p>
   <p><strong><em>問題の理由</em></strong>
-    責任の分担が適切でない場合や、機能が正しいクラスに配置されていない場合に発生します。</p>
-  <p><strong><em>対処</em></strong></p>
+  このCode Smellは、フィールドがデータクラスに移動された後に発生する場合があります。この場合、データの操作もこのクラスに移動できます。</p>
+  <p><strong><em>対処</em></strong>
+  基本的なルールとして、同時に変化するようなものは同じ場所に保管する必要があります。通常、データとこのデータを使用する機能は一緒に変更されます（ただし、例外はあります）。</p>
   <ul>
-    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method" target="_blank" rel="noopener noreferrer">Move Method</a>」を使って、メソッドを適切なクラスに移動します。</p></li>
+    <li>メソッドを明らかに別の場所に移動する必要がある場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method">Move Method</a>」を使用します。</li>
+    <li>メソッドの一部のみが別オブジェクトのデータにアクセスする場合、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使用して問題の部分を移動します。</li>
+    <li>メソッドが他のいくつかのクラスの機能を使用する場合、まず、最も頻繁に使用するデータがどのクラスのものなのかを判別します。次に、判別したクラスにそのメソッドを移動します。または、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method">Extract Method</a>」を使用して、メソッドを複数の部分に分割し、異なるクラスの異なる場所に配置します。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
-    <li>責任の明確化</li>
-    <li>保守性の向上</li>
+    <li>重複コードの削減（データを操作するコードが適切な場所に配置されていれば）</li>
+    <li>コード構成の改善（データを処理するメソッドがデータの近くに配置されていれば）</li>
   </ul>
+  <p><strong><em>When to Ignore</em></strong>
+  動作は、データを保持するクラスとそれに関連する振る舞いを意図的に分離している場合があります。こうすることで、動作を動的に変更できるという利点が得られます。
+  詳細は<a href="https://sourcemaking.com/design_patterns/strategy" target="_blank" rel="noopener noreferrer">Strategy Design Pattern</a>や<a href="https://sourcemaking.com/design_patterns/visitor" target="_blank" rel="noopener noreferrer">Visitor Design Pattern</a>、および他のデザインパターンを参照してください。</p>
+
   <br/><br/>
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>

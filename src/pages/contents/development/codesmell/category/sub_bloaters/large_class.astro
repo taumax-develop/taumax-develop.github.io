@@ -30,12 +30,12 @@ const indexList: index[] = [
   <br>
   <h3 class="title" id="largeclass">Large Class</h3>
   <p><a href="https://sourcemaking.com/refactoring/smells/large-class" target="_blank" rel="noopener noreferrer">Large Class（巨大なクラス）</a>：</p>
-  <p><strong><em>兆候と症状</em></strong>
+  <p><strong><em>兆候と症状</em></strong><br>
     多くのフィールド、メソッド、コード行数を持つクラス。</p>
-  <p><strong><em>問題の理由</em></strong>
+  <p><strong><em>問題の理由</em></strong><br>
     通常、クラスは最初は小さいものから始まります。しかし、時間の経過と共にプログラムは成長し、肥大化していきます。
     Code Smell の一つである Long Method の場合もそうですが、プログラマーは通常、その機能の新しいクラスを作成するよりも、既存のクラスに新しい機能を配置する方が負担が少ないと考えます。</p>
-  <p><strong><em>対処</em></strong>
+  <p><strong><em>対処</em></strong><br>
     クラスがあまりにも多くの機能を持ってしまっている場合、それを分割することを考えてください。</p>
   <ul>
     <li>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」は、大きなクラスの動作の一部を別のコンポーネントに分割できる場合に役立ちます。</li>

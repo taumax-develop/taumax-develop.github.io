@@ -36,12 +36,12 @@ const indexList: index[] = [
     <li>コーディング情報への定数の使用（管理者権限を持つユーザーを参照するための定数USER<em>ADMIN</em>ROLE = 1など）。</li>
     <li>データ配列で使用するフィールド名としての文字列定数の使用。</li>
   </ul>
-  <p><strong><em>問題の理由</em></strong>
+  <p><strong><em>問題の理由</em></strong><br>
     他のほとんどのCode Smell同様、Primitive Obsessionは弱さの瞬間に生まれます。
     例えば、クラス内にプリミティブフィールドを作成するような行為です。プリミティブフィールドの作成は、新しいクラスを作成するよりもはるかに簡単です。フィールドが必要になるたびにプリミティブフィールドが追加されます。追加を繰り返した結果、クラスは巨大で扱いにくくなっていきます。</p>
   <p>プリミティブは、型に”似せる”ためにもよく使用されます。個別のデータ型の代わりに、いくつかのエンティティの許容値のリストを形成する一連の数値または文字列を定数で宣言します。これらの定数には、わかりやすい名前を付けることができます。これは広く普及してしまっているやり方です。</p>
   <p>プリミティブ型を使用した別の質の悪い例は、フィールドシミュレーションです。多様なデータの大規模な配列をクラスに含め、このデータを取得するための配列インデックスとして、クラスで指定した文字列定数が使用されます。</p>
-  <p><strong><em>対処</em></strong>
+  <p><strong><em>対処</em></strong><br>
     さまざまなプリミティブフィールドがある場合、それらのいくつかを論理的に独自のクラスにグループ化できる場合があります。さらに、このデータに関連付けられた振る舞いもそのクラスに移動するとより良いです。このタスクでは、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-data-value-with-object" target="_blank" rel="noopener noreferrer">Replace Data Value with Object</a>」を試してください。</p>
   <ul>
     <li>プリミティブフィールドの値がメソッド引数で使用されている場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#introduce-parameter-object" target="_blank" rel="noopener noreferrer">Introduce Parameter Object</a>」または「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#preserve-whole-object" target="_blank" rel="noopener noreferrer">Preserve Whole Object</a>」を試してみましょう。</li>

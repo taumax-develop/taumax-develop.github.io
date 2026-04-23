@@ -17,7 +17,7 @@ export const inappropriateIntimacyBc: Breadcrumb = {
 };
 export const inappropriateIntimacyBcList: Breadcrumb[] = [...couplersBcList, inappropriateIntimacyBc];
 const indexList: index[] = [
-  { id: "Home", name: "/" }
+  { id: "#inappropriateintimacy", name: "Inappropriate Intimacy" }
 ];
 ---
 
@@ -31,21 +31,22 @@ const indexList: index[] = [
 
   <br>
   <h3 id="inappropriateintimacy">Inappropriate Intimacy</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/inappropriate-intimacy" target="_blank" rel="noopener noreferrer">Inappropriate Intimacy（不適切な親密さ）</a></p>
-  <p>Inappropriate Intimacyは、2つのクラスが互いの内部情報に過度に依存し合っている場合に発生します。</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/inappropriate-intimacy" target="_blank" rel="noopener noreferrer">Inappropriate Intimacy（不適切な関係）</a></p>
   <p><strong><em>兆候と症状</em></strong>
-    クラス同士が互いのprivateフィールドやメソッドにアクセスしている。</p>
+  別のクラスの内部フィールドとメソッドを使用するクラス。</p>
   <p><strong><em>問題の理由</em></strong>
-    責任の分担が不明確であったり、設計が不十分な場合に発生します。</p>
-  <p><strong><em>対処</em></strong></p>
+  一緒に行動することが多いクラスに注意してください。優れたクラスは、お互いのことをできる限り知らないようにする必要があります。このようなクラスは、保守と再利用が簡単です。</p>
+  <p><strong><em>対処</em></strong>
+  最も簡単な解決策は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method" target="_blank" rel="noopener noreferrer">Move Method</a>」と「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-field" target="_blank" rel="noopener noreferrer">Move Field</a>」を使用して、クラスの一部を、それを使用しているクラスに移動することです。しかし、これは移動前のクラスが本当にその部品を必要としない場合にのみ機能します。</p>
   <ul>
-    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method" target="_blank" rel="noopener noreferrer">Move Method</a>」や「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」を使って、責任を明確に分割します。</p></li>
-    <li><p>クラス間の依存関係を減らすように設計を見直します。</p></li>
+    <li>別の解決策は、クラスに「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-class" target="_blank" rel="noopener noreferrer">Extract Class</a>」と「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#hide-delegate" target="_blank" rel="noopener noreferrer">Hide Delegate</a>」を適用して、コードの関係を適切にすることです。</li>
+    <li>クラスが相互に依存している場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#change-bidirectional-association-to-unidirectional" target="_blank" rel="noopener noreferrer">Change Bidirectional Association to Unidirectional</a>」を適用する必要があります。</li>
+    <li>この”親密性”がサブクラスとスーパークラスの間にある場合は、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#replace-delegation-with-inheritance" target="_blank" rel="noopener noreferrer">Replace Delegation with Inheritance</a>」を検討してください。</li>
   </ul>
   <p><strong><em>効果</em></strong></p>
   <ul>
-    <li>責任の明確化</li>
-    <li>保守性の向上</li>
+    <li>コード構成の改善</li>
+    <li>コードの保守性を再利用性の向上</li>
   </ul>
   <br/><br/>
   書籍としてはこの辺りが参考になると思います。<br/>

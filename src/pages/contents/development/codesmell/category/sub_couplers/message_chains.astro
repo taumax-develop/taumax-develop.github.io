@@ -17,7 +17,7 @@ export const messageChainsBc: Breadcrumb = {
 };
 export const messageChainsBcList: Breadcrumb[] = [...couplersBcList, messageChainsBc];
 const indexList: index[] = [
-  { id: "Home", name: "/" }
+  { id: "#messagechains", name: "Message Chains" }
 ];
 ---
 
@@ -31,21 +31,22 @@ const indexList: index[] = [
 
   <br>
   <h3 id="messagechains">Message Chains</h3>
-  <p><a href="https://sourcemaking.com/refactoring/smells/message-chains" target="_blank" rel="noopener noreferrer">Message Chains（メッセージチェーン）</a></p>
-  <p>Message Chainsは、オブジェクトのメソッド呼び出しが連鎖的に続く場合に発生します。たとえば、a.getB().getC().getD()のようなコードです。</p>
+  <p><a href="https://sourcemaking.com/refactoring/smells/message-chains" target="_blank" rel="noopener noreferrer">Message Chains（メッセージの連鎖）</a></p>
   <p><strong><em>兆候と症状</em></strong>
-    メソッド呼び出しが連鎖的に続き、コードの可読性や保守性が低下する。</p>
+  <code>a-&gt; b（）-&gt; c（）-&gt; d（）</code>というような一連のメソッド呼び出し</p>
   <p><strong><em>問題の理由</em></strong>
-    オブジェクト間の依存関係が強くなり、設計が複雑化する場合に発生します。</p>
-  <p><strong><em>対処</em></strong></p>
-  <ul>
-    <li><p>「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#hide-delegate" target="_blank" rel="noopener noreferrer">Hide Delegate</a>」や「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を使って、メッセージチェーンを隠蔽または分割します。</p></li>
-  </ul>
+  Message Chainsは、クライアントが別のオブジェクトを要求し、そのオブジェクトがさらに別のオブジェクトを要求したときなどに発生します。このような関係の変更には、クライアントの変更が必要です。</p>
+  <p><strong><em>対処</em></strong>
+  Message Chainsを削除するには、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#hide-delegate" target="_blank" rel="noopener noreferrer">Hide Delegate</a>」を使用します。</p>
+  <p>Message Chainsの終端のオブジェクトが使用されている理由を考える方が良い場合があります。おそらく、この機能に「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#extract-method" target="_blank" rel="noopener noreferrer">Extract Method</a>」を使用し、「<a href="https://qiita.com/taumax/items/f192b16676f78fa04849#move-method">Move Method</a>」を使用してチェーンの先頭に移動するのが理にかなっています。</p>
   <p><strong><em>効果</em></strong></p>
   <ul>
-    <li>可読性の向上</li>
-    <li>保守性の向上</li>
+    <li>クラス間の依存関係を減らすことができます。</li>
+    <li>コードのバルクを削減できます。</li>
   </ul>
+  <p><strong><em>When to Ignore</em></strong>
+  <a href="https://qiita.com/taumax/items/f192b16676f78fa04849#hide-delegate" target="_blank" rel="noopener noreferrer">Hide Delegate</a>しすぎた結果、実際に処理が行われる場所の確認が難しくなることがあります。言い方を変えると、Middle ManのCode Smellも避けてください。</p>
+
   <br/><br/>
   書籍としてはこの辺りが参考になると思います。<br/>
   <br/>
