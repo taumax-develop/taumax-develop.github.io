@@ -15,7 +15,6 @@ export const extractVariablesBc: Breadcrumb = {
 };
 export const extractVariablesBcList: Breadcrumb[] = [...composingMethodsBcList, extractVariablesBc];
 const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#extractvariable', name: 'Extract Variable' }
 ];
@@ -47,7 +46,7 @@ const indexList: index[] = [
   <h2 id="extractvariable">Extract Variable</h2>
   <p><a href="https://sourcemaking.com/refactoring/extract-variable" target="_blank" rel="noopener noreferrer">Extract Variable</a>
   複雑で理解が難しい処理がある場合、処理を細かく分割し、わかりやすい変数名を付けるようにしましょう。</p>
-  <pre><code class="language-java">{`void renderBanner() {
+<pre><code class="copy">{`void renderBanner() {
   if ((platform.toUpperCase().indexOf("MAC") > -1) &&
        (browser.toUpperCase().indexOf("IE") > -1) &&
         wasInitialized() && resize > 0 )
@@ -56,7 +55,9 @@ const indexList: index[] = [
   }
 }
 `}</code></pre>
-  <pre><code class="language-java">{`void renderBanner() {
+
+<br>
+<pre><code class="copy">{`void renderBanner() {
   final boolean isMacOs = platform.toUpperCase().indexOf("MAC") > -1;
   final boolean isIE = browser.toUpperCase().indexOf("IE") > -1;
   final boolean wasResized = resize > 0;
@@ -66,6 +67,8 @@ const indexList: index[] = [
   }
 }
 `}</code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#comments" target="_blank" rel="noopener noreferrer">Comments</a></li>

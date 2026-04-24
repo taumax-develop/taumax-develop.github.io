@@ -44,21 +44,25 @@ const indexList: index[] = [
   <h2>Consolidate Duplicate Conditional Fragments</h2>
   <p><a href="https://sourcemaking.com/refactoring/consolidate-duplicate-conditional-fragments" target="_blank" rel="noopener noreferrer">Consolidate Duplicate Conditional Fragments</a>
     条件分岐内で重複コードが存在する場合はその処理を条件分岐の外に配置しましょう。</p>
-  <pre><code class="language-java">{`if (isSpecialDeal()) {
+<pre><code class="copy">{`if (isSpecialDeal()) {
   total = price * 0.95;
   send();
 } else {
   total = price * 0.98;
   send();
 }
-</code></pre>
-  <pre><code class="language-java">if (isSpecialDeal()) {
+`}</code></pre>
+
+<br>
+<pre><code class="copy">{`if (isSpecialDeal()) {
   total = price * 0.95;
 } else {
   total = price * 0.98;
 }
 send();
 `}</code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code</a></li>

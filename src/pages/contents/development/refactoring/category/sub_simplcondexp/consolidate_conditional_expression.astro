@@ -44,7 +44,7 @@ const indexList: index[] = [
   <h2>Consolidate Conditional Expression</h2>
   <p><a href="https://sourcemaking.com/refactoring/consolidate-conditional-expression" target="_blank" rel="noopener noreferrer">Consolidate Conditional Expression</a>
     複数の異なる条件分岐で同じ結果を返すような処理は一つの条件に統合しましょう。</p>
-  <pre><code class="language-java">{`double disabilityAmount() {
+<pre><code class="copy">{`double disabilityAmount() {
   if (seniority < 2) {
     return 0;
   }
@@ -56,12 +56,16 @@ const indexList: index[] = [
   }
 }
 `}</code></pre>
-  <pre><code class="language-java">{`double disabilityAmount() {
+
+<br>
+<pre><code class="copy">{`double disabilityAmount() {
   if (isNotEligableForDisability()) {
     return 0;
   }
 }
 `}</code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code</a></li>

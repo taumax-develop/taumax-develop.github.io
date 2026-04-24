@@ -46,11 +46,13 @@ const indexList: index[] = [
     メソッドの引数をばらばらに渡すのではなく、一つのオブジェクトにまとめて渡す。
     引数となるオブジェクトにわかりやすい名前を付けることでコードが読みやすくなる。
     また、引数が増えた場合でも、オブジェクトにデータを追加するだけでよくなり、呼び出し側の影響を少なくすることができる。</p>
-  <pre><code class="language-java">int low = daysTempRange.getLow();
+<pre><code class="copy">int low = daysTempRange.getLow();
 int high = daysTempRange.getHigh();
 boolean withinPlan = plan.withinRange(low, high);
 </code></pre>
-  <pre><code class="language-java">boolean withinPlan = plan.withinRange(daysTempRange);
+
+<br>
+<pre><code class="copy">boolean withinPlan = plan.withinRange(daysTempRange);
 </code></pre>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>

@@ -47,20 +47,18 @@ const indexList: index[] = [
   <h2>Replace Parameter with Method Call</h2>
   <p><a href="https://sourcemaking.com/refactoring/replace-parameter-with-method-call" target="_blank" rel="noopener noreferrer">Replace Parameter with Method Call</a>
   引数として値を渡す際、事前に何かしらの処理が必要なのであれば、引数ではなくメソッドの中で処理してしまうことで引数を減らすことを検討しましょう。</p>
-  <pre>
-    <code class="java:リファクタリング前 language-java:リファクタリング前">
-      int basePrice = quantity * itemPrice;
-      double seasonDiscount = this.getSeasonalDiscount();
-      double fees = this.getFees();
-      double finalPrice = discountedPrice(basePrice, seasonDiscount, fees);
-    </code>
-  </pre>
-  <pre>
-    <code class="java:リファクタリング後 language-java:リファクタリング後">
-      int basePrice = quantity * itemPrice;
-      double finalPrice = discountedPrice(basePrice);
-    </code>
-  </pre>
+<pre><code class="copy">int basePrice = quantity * itemPrice;
+double seasonDiscount = this.getSeasonalDiscount();
+double fees = this.getFees();
+double finalPrice = discountedPrice(basePrice, seasonDiscount, fees);
+</code></pre>
+
+<br>
+<pre><code class="copy">int basePrice = quantity * itemPrice;
+double finalPrice = discountedPrice(basePrice);
+</code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#long-parameter-list" target="_blank" rel="noopener noreferrer">Long Parameter List</a></li>

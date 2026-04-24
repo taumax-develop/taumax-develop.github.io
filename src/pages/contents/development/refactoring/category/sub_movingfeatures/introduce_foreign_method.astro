@@ -45,7 +45,7 @@ const indexList: index[] = [
   <p><a href="https://sourcemaking.com/refactoring/introduce-foreign-method" target="_blank" rel="noopener noreferrer">Introduce Foreign Method</a></p>
   <p>ライブラリ内のユーティリティクラスには必要なメソッドが含まれておらず、そのクラスにはメソッドを追加することもできません。
   その場合、クライアントクラスにメソッドを追加し、ユーティリティクラスのオブジェクトを引数として渡します。</p>
-  <pre><code class="language-java">{`class Report {
+<pre><code class="copy">{`class Report {
   // ...
   void sendReport() {
     Date nextDay = new Date(previousEnd.getYear(),
@@ -54,7 +54,9 @@ const indexList: index[] = [
   }
 }
 `}</code></pre>
-  <pre><code class="language-java">{`class Report {
+
+<br>
+<pre><code class="copy">{`class Report {
   // ...
   void sendReport() {
     Date newStart = nextDay(previousEnd);
@@ -65,6 +67,8 @@ const indexList: index[] = [
   }
 }
 `}</code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#incomplete-library-class" target="_blank" rel="noopener noreferrer">Incomplete Library Class</a></li>

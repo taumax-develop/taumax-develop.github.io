@@ -14,7 +14,6 @@ export const substituteAlgoBc: Breadcrumb = {
 };
 export const substituteAlgoBcList: Breadcrumb[] = [...composingMethodsBcList, substituteAlgoBc];
 const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#substitutealgorithm', name: 'Substitute Algorithm' }
 ];
@@ -46,7 +45,7 @@ const indexList: index[] = [
   <h2 id="substitutealgorithm">Substitute Algorithm</h2>
   <p><a href="https://sourcemaking.com/refactoring/substitute-algorithm" target="_blank" rel="noopener noreferrer">Substitute Algorithm（アルゴリズムの置き換え）</a>
   メソッドのシグニチャは変えずに本体となるアルゴリズムを新しいものに置き換えましょう。</p>
-  <pre><code class="java:リファクタリング前 language-java:リファクタリング前">{`String foundPerson(String[] people){
+<pre><code class="copy">{`String foundPerson(String[] people){
   for (int i = 0; i < people.length; i++) {
     if (people[i].equals("Don")){
       return "Don";
@@ -61,7 +60,9 @@ const indexList: index[] = [
   return "";
 }
 `}</code></pre>
-<pre><code class="java:リファクタリング後 language-java:リファクタリング後">{`String foundPerson(String[] people) {
+
+<br>
+<pre><code class="copy">{`String foundPerson(String[] people) {
   List candidates =
     Arrays.asList(new String[] {"Don", "John", "Kent"});
   for (int i=0; i < people.length; i++) {
@@ -73,6 +74,7 @@ const indexList: index[] = [
 }
 `}</code></pre>
 
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#duplicate-code" target="_blank" rel="noopener noreferrer">Duplicate Code</a></li>

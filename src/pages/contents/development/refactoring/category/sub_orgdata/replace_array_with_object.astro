@@ -42,16 +42,22 @@ const indexList: index[] = [
   <p><a href="https://sourcemaking.com/refactoring/organizing-data" target="_blank" rel="noopener noreferrer">Organizing Data</a></p>
 
   <h2>Replace Array with Object</h2>
-  <p><a href="https://sourcemaking.com/refactoring/replace-array-with-object" target="_blank" rel="noopener noreferrer">Replace Array with Object</a>：
-  様々なデータ型が1つの配列に含まれている場合、配列をオブジェクトに変換し、型が異なるデータは別のフィールドに持たせましょう。</p>
-  <pre><code class="language-java">String[] row = new String[2];
+  <p>
+    <a href="https://sourcemaking.com/refactoring/replace-array-with-object" target="_blank" rel="noopener noreferrer">Replace Array with Object</a>：<br>
+    様々なデータ型が1つの配列に含まれている場合、配列をオブジェクトに変換し、型が異なるデータは別のフィールドに持たせましょう。
+  </p>
+<pre><code class="copy">String[] row = new String[2];
 row[0] = "Liverpool";
 row[1] = "15";
 </code></pre>
-  <pre><code class="language-java">Performance row = new Performance();
+
+<br>
+<pre><code class="copy">Performance row = new Performance();
 row.setName("Liverpool");
 row.setWins("15");
 </code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#primitive-obsession" target="_blank" rel="noopener noreferrer">Primitive Obsession</a></li>

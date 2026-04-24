@@ -15,7 +15,6 @@ export const inlineMethodBc: Breadcrumb = {
 };
 export const inlineMethodBcList: Breadcrumb[] = [...composingMethodsBcList, inlineMethodBc];
 const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
   { id: '#composingmethods', name: 'Composing Methods' },
   { id: '#inlinemethod', name: 'Inline Method' }
 ];
@@ -47,8 +46,8 @@ const indexList: index[] = [
   <h2 id="inlinemethod">Inline Method</h2>
   <p><a href="https://sourcemaking.com/refactoring/inline-method" target="_blank" rel="noopener noreferrer">Inline Method</a></p>
   <p>メソッドがメソッドを呼び出すような関係になっていてそれが可読性を阻害しているようであればメソッドのインライン化を検討しましょう。</p>
-  <pre><code class="language-java">{`class PizzaDelivery {
-// ...
+<pre><code class="copy">{`class PizzaDelivery {
+  // ...
   int getRating() {
     return moreThanFiveLateDeliveries() ? 2 : 1;
   }
@@ -57,13 +56,16 @@ const indexList: index[] = [
   }
 }
 `}</code></pre>
-  <pre><code class="language-java">{`class PizzaDelivery {
-// ...
+
+<pre><code class="copy">{`class PizzaDelivery {
+  // ...
   int getRating() {
     return numberOfLateDeliveries > 5 ? 2 : 1;
   }
 }
 `}</code></pre>
+
+  <br>
   <p><strong><em>関連するCode Smell</em></strong></p>
   <ul>
     <li><a href="https://qiita.com/taumax/items/f192b16676f78fa04849#speculative-generality" target="_blank" rel="noopener noreferrer">Speculative Generality</a></li>
