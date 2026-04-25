@@ -6,6 +6,7 @@ import imgWhole from './img/whole_image.jpg';
 import { BASE_URL } from '../../../../consts';
 import type { index } from '../../../../components/HeaderIndex.astro';
 import { selfDevelopBreadcrumbList } from '../bymyself.astro';
+import { Gist } from 'astro-embed';
 
 export const scrapingBotPagebc: Breadcrumb = {
   name: "twitterのスクレイピングbot",
@@ -52,7 +53,6 @@ const indexList: index[] = [
     <br/><br/>
     勝手にひとつ前の作品を拾ってリツイート<br/>
     <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今2022/06/16 18:03<br/>木野田 永志さんの1つ前の作品はこちら。<a href="https://twitter.com/hashtag/%E3%83%AD%E3%83%9E%E3%82%B5%E3%82%ACRS?src=hash&amp;ref_src=twsrc%5Etfw">#ロマサガRS</a><a href="https://t.co/lcLGaB0lrW">https://t.co/lcLGaB0lrW</a></p>&mdash; sagamax@サガとレトロゲー (@sagamax__) <a href="https://twitter.com/sagamax__/status/1537360095608451078?ref_src=twsrc%5Etfw">June 16, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </p>
 
   <br/><br/>
   <div id="mechanism"></div>
@@ -65,14 +65,88 @@ const indexList: index[] = [
 
   <br/>
   <h4 class="title">ソースコード(python)</h4>
-  <script src="https://gist.github.com/taumax-github/d29226ea9c744cf13a747ef110c12bd8.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/d29226ea9c744cf13a747ef110c12bd8" />
 
   <br/>
   <h4 class="title">Java servlet</h4>
-  <script src="https://gist.github.com/taumax-github/e015c8ddb37697d34466a3988c333a76.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/e015c8ddb37697d34466a3988c333a76" />
 
   <br/>
   <h4 class="title">JSP</h4>
-  <script src="https://gist.github.com/taumax-github/c422b2b191644bbd2a8c0689606e744a.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/c422b2b191644bbd2a8c0689606e744a" />
 
+  <br/>
+  <div id="whatilearn"></div>
+  <h3 class="title">ぶつかった壁とか学んだこととか</h3>
+  <p>
+    timezone関係。以下のようなエラーが発生した。<br>
+  </p>
+
+<pre class="title"><code class="title">エラー内容</code></pre>
+<pre><code class="copy">Traceback (most recent call last):
+  File "/pythonscheduler.py", line 32, in &ltmodule&gt
+  schedule.run_pending()
+File "/usr/local/lib/python3.10/site-packages/schedule/__init__.py", line 780, in run_pending
+  default_scheduler.run_pending()
+File "/usr/local/lib/python3.10/site-packages/schedule/__init__.py", line 100, in run_pending
+  self._run_job(job)
+File "/usr/local/lib/python3.10/site-packages/schedule/__init__.py", line 172, in _run_job
+  ret = job.run()
+File "/usr/local/lib/python3.10/site-packages/schedule/__init__.py", line 661, in run
+  ret = self.job_func()
+File "/artist_rt/SagaRsPictures.py", line 296, in searchArt
+  searchKoushikiPic(api)
+File "/artist_rt/SagaRsPictures.py", line 38, in searchKoushikiPic
+  if dt_now_bfr > result.created_at.astimezone(datetime.timezone(datetime.timedelta(hours=DIFF_JST_FROM_UTC))):
+TypeError: can't compare offset-naive and offset-aware datetimes
+</code></pre>
+
+  <br>
+  <p>
+    can't compare offset-naive and offset-aware datetimes ？？？何言ってんの？？？状態だったんだけど、どうやらpythonのdatetimeオブジェクト（日時=日付と時刻を扱うオブジェクト）とtimeオブジェクト（時刻を扱うオブジェクト）は<font color="yellow"><strong>naive</strong></font>と<font color="yellow"><strong>aware</strong></font>の2種類に分類されるらしい。<br>
+    ざっくり言うと、
+    <ul>
+      <li>naive：timezone無しのオブジェクト</li>
+      <li>aware：timezone付きのオブジェクト</li>
+    </ul>
+  </p>
+  <p>
+    先に乗せたpythonコードの189行目、今は「datetime.datetime.now(JST)」となっているが、以前は「datetime.datetime.now()」となっていたのでnaiveなオブジェクトだった。<br>
+  </p>
+
+
+<pre><code class="copy"># JSTタイムゾーンの生成
+JST = timezone(timedelta(hours=+9), 'JST')
+# 現在時刻
+dt_now = datetime.datetime.now(JST)
+</code></pre>
+
+  <br>
+  <p>
+    同コードの28行目の「if dt_now_bfr > result.created_at + datetime.timedelta(hours=DIFF_JST_FROM_UTC)」でtwitter apiで取得したツイート時刻(<font color="yellow">UTCが指定されているのでaware</font>)とdatetime.datetime.now()の10分前（<font color="yellow">native</font>）を比較しようとしているが、pythonの仕様でawareとnativeは比較できないのでエラーになっていた。ということらしい。<br>
+  </p>
+
+<pre><code class="copy"># 抽出対象の時間（現在時刻から10分前）
+dt_now_bfr = dt_now - datetime.timedelta(minutes=DURATION_MINUTES)
+if dt_now_bfr > result.created_at + datetime.timedelta(hours=DIFF_JST_FROM_UTC):
+    continue
+</code></pre>
+
+  <br>
+  <p>
+    「datetime.datetime.now()」の前に「JST = timezone(timedelta(hours=+9), 'JST')」でJSTのtimezoneを生成し、それをnowの引数に渡す（dt_now = datetime.datetime.now(JST)）ことでawareなオブジェクトにして対処した。<br>
+  </p>
+
+    <br><br>
+    参考
+    <ul>
+      <li><a href="https://note.nkmk.me/python-datetime-pytz-timezone/" target="_blank">Python, datetime, pytzでタイムゾーンを設定・取得・変換・削除</a></li>
+      <li><a href="https://docs.python.org/ja/3/library/datetime.html" target="_blank">datetime --- 基本的な日付型および時間型</a></li>
+      <li><a href="https://www.javadrive.jp/python/date/index2.html" target="_blank">タイムゾーンのインスタンスを生成する</a></li>
+      <li><a href="https://qiita.com/takaki@github/items/b1a380a0a644170f5885" target="_blank">Pythonのタイムゾーンの扱い</a></li>
+      <li><a href="https://kimuson.dev/blog/python/python_datetime/" target="_blank">Python で Datetime を扱う際に気をつけること</a></li>
+      <li><a href="https://qiita.com/keisuke0508/items/df2594770d63bf124ccd" target="_blank">Python: datetimeで確実に日本時間を取得する方法</a></li>
+      <li><a href="https://docs.python.org/ja/3/library/datetime.html" target="_blank">基本的な日付型および時間型</a></li>
+    </ul>
+  </p>
 </SiteLayout>

@@ -2,6 +2,7 @@
 import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
+import { Gist } from 'astro-embed';
 import imgBfrScheduler from './img/bfr_scheduler.png';
 import imgAftScheduler from './img/aft_scheduler.png';
 import { BASE_URL } from '../../../../consts';
@@ -59,14 +60,14 @@ const indexList: index[] = [
   <p>
     <a href="https://pkg.go.dev/github.com/bamzi/jobrunner" target="_blank">jobrunner</a> というライブラリを使用した。<br/>
   </p>
-  <script src="https://gist.github.com/taumax-github/dfb5cf7a9edfa17844ec891c342e255e.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/dfb5cf7a9edfa17844ec891c342e255e" />
 
   <br/>
   <h4 class="title">python のスケジューラと実装</h4>
   <p>
     <a href="https://schedule.readthedocs.io/en/stable/" target="_blank">schedule</a> というライブラリを使用した。<br/>
   </p>
-  <script src="https://gist.github.com/taumax-github/98db979f9208da2ef655cf5e73c44ff5.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/98db979f9208da2ef655cf5e73c44ff5" />
 
   <br/><br/>
   参考
@@ -79,4 +80,122 @@ const indexList: index[] = [
     <li><a href="https://kakakakakku.hatenablog.com/entry/2017/08/13/122359" target="_blank">Golang でジョブのスケジューリング実行ができる JobRunner を試した</a></li>
   </ul>
 
+  <br>
+  <div id="whatilearn"></div>
+  <h3 class="title">ぶつかった壁とか学んだこととか</h3>
+  <p>
+    Go は割とすんなり行けた。<br>
+  </p>
+<pre class="title"><code class="title">Go の場合</code></pre>
+<pre><code class="nocopy">.
+├── scheduler.go
+└── XXX
+　　　└──XXX1.go
+</code></pre>
+
+  <br>
+  <p>
+    　⇒scheduler.go で XXX1.go を import してしまえばいい感じに呼び出してくれる。何か間違えていたらコンパイルエラーで教えてくれる。<br>
+    python はちょっと苦戦。<br>
+    今までは1つのファイルに全ての処理を書いていたが、 scheduler.py から違うディレクトリにある python プログラムを呼び出す必要があり、その場合の書き方がわからない。<br>
+  </p>
+
+  <br>
+<pre class="title"><code class="title">python の場合</code></pre>
+<pre><code class="nocopy">.
+├── scheduler.py
+└── YYY
+　　　└──YYY1.py
+</code></pre>
+
+  <br>
+  <p>
+    　⇒scheduler.py で YYY1.py を import するだけだとうまくいかない。<br>
+
+    <br>
+    python で別ディレクトリのモジュールを呼び出す場合、以下4つのやり方がある。<br>
+  </p>
+  <ul>
+    <li>絶対インポート／相対インポート</li>
+    <li>sys.path.append で対象ファイルのパスを追加</li>
+    <li>環境変数 PYTHONPATH を設定</li>
+    <li>.pthファイルを作成</li>
+  </ul>
+
+  <br>
+  <h4 class="title">絶対インポート／相対インポート</h4>
+  <p>
+    呼び出したいモジュールの相対パスを指定して import する方法。<br>
+    例：以下のような階層構造の場合。<br>
+  </p>
+
+<pre class="title"><code class="title">階層構造</code></pre>
+<pre><code class="nocopy">.
+├── main.py
+└── lib
+　　　├── liba
+　　　│　　　└── lib_a.py
+　　　└── libb
+　　　　　　　└── lib_b.py
+</code></pre>
+
+  <br>
+  <h5 class="title">絶対インポート</h5>
+  <p>
+    main.py から lib_a.py を import したい。<br>
+  </p>
+
+<br>
+<pre class="title"><code class="title">main.py</code></pre>
+<pre><code class="nocopy">from lib.liba.lib_a import aaa
+aaa.funcA()
+</code></pre>
+
+  <br>
+  <h5 class="title">相対インポート</h5>
+  <p>
+    lib_a.py から、一つ上の階層にある libb を指定したい<br>
+  </p>
+
+<br>
+<pre class="title"><code class="title">lib_a.py</code></pre>
+<pre><code class="nocopy">..libb.lib_b import bbb
+bbb.funcB()
+</code></pre>
+
+  <br>
+  <h4 class="title">sys.path.append で対象ファイルのパスを追加</h4>
+  <p>
+    python が import したモジュールを検索するパスは、標準ライブラリのsysモジュールのsys.pathに格納されている。 sys.path は sys.path.append([対象パスの文字列]) で追加できるので、 import 前にこれを実行すれば別ディレクトリでも import 可能。<br>
+  </p>
+<pre><code class="nocopy">sys.path.append('lib.liba.lib_a')
+from lib_a import aaa
+sys.path.append('..libb.lib_b')
+from lib_b import bbb
+</code></pre>
+
+  <br>
+  <h4 class="title">環境変数 PYTHONPATH を設定</h4>
+  <p>
+    環境変数 PYTHONPATH に読み込んでほしいモジュールのパスを追加すると読み込んでくれるようになる。<br>
+  </p>
+
+  <br>
+  <h4 class="title">.pthファイルを作成</h4>
+  <p>
+    site-packages .pthファイルを作成してそこに対象モジュールのパスを書くと読み込んでくれる。<br>
+  </p>
+
+  <br><br>
+  参考
+  <ul>
+    <li><a href="https://docs.python.org/ja/3/using/cmdline.html?highlight=pythonpath#envvar-PYTHONPATH" target="_blank">1. コマンドラインと環境 1.2. 環境変数</a></li>
+    <li><a href="https://ja.stackoverflow.com/questions/12174/pythonpath%E3%81%A8%E3%81%AF" target="_blank">PYTHONPATHとは</a></li>
+    <li><a href="https://note.com/data_crazy/n/n9a53770ccd04" target="_blank">Pythonプログラムを外部から呼び出す方法</a></li>
+    <li><a href="https://note.nkmk.me/python-import-module-search-path/" target="_blank">Pythonでimportの対象ディレクトリのパスを確認・追加（sys.pathなど）Pythonでimportの対象ディレクトリのパスを確認・追加（sys.pathなど）</a></li>
+    <li><a href="https://teratail.com/questions/65319" target="_blank">Pythonで他のディレクトリからプログラムをimportするやり方</a></li>
+    <li><a href="https://ja.stackoverflow.com/questions/39007/python%E3%81%A7import%E4%BB%95%E7%B5%84%E3%81%BF%E3%81%8C%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%89%E3%81%AA%E3%81%84%E3%81%A7%E3%81%99-%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%82%E5%87%BA%E3%81%BE%E3%81%99importerror-no-module-named-config" target="_blank">Pythonでimport仕組みがよくわからないです。エラーも出ますImportError: No module named 'config'</a></li>
+    <li><a href="https://lightgauge.net/language/python/add-module-path" target="_blank">Pythonで独自モジュールのディレクトリパスを通す方法</a></li>
+    <li><a href="https://qiita.com/papi_tokei/items/bc34d798dc7a6d49df30" target="_blank">Pythonインポート周り徹底理解への道Pythonインポート周り徹底理解への道</a></li>
+  </ul>
 </SiteLayout>

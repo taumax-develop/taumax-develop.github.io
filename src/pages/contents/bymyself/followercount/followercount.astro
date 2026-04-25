@@ -6,6 +6,7 @@ import imgWhole from './img/whole_image.jpg';
 import { BASE_URL } from '../../../../consts';
 import type { index } from '../../../../components/HeaderIndex.astro';
 import { selfDevelopBreadcrumbList } from '../bymyself.astro';
+import { Gist } from 'astro-embed';
 
 export const followerCountPagebc: Breadcrumb = {
   name: "公式アカウントのフォロワー数変化(Goで書いた)",
@@ -29,15 +30,21 @@ const indexList: index[] = [
 >
 
   <br/><br/>
+  <div id="summary"></div>
+  <h3 class="title">公式アカウントのフォロワー数変化(Goで書いた)</h3>
   <p>
     ゲームの公式twitterアカウントのフォロワー数に応じてプレゼントが貰えるというキャンペーンをやっていたので、毎日カウントしてbotで報知してた。
   </p>
+
+  <br/>
   <div id="whatimade"></div>
   <h3 class="title">作ったもの（実際に稼働したときのツイート）</h3>
   <p>
     毎朝フォロワー数を通知してくれるbot
     <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">今2021-12-07 08:00<br>ロマサガ公式垢のフォロワー数をカウントするbotです。<br>現在の <a href="https://twitter.com/romasaga_rs?ref_src=twsrc%5Etfw">@romasaga_rs</a> のフォロワー数は225,178人。<br>あと24,822人でSSポール！<br>21,22,23,24万で海外版の着せ替え衣装も貰えます！<a href="https://twitter.com/romasaga_rs?ref_src=twsrc%5Etfw">@romasaga_rs</a> のフォローお願いします！<a href="https://twitter.com/hashtag/%E3%83%AD%E3%83%9E%E3%82%B5%E3%82%ACRS?src=hash&amp;ref_src=twsrc%5Etfw">#ロマサガRS</a><a href="https://twitter.com/hashtag/%E6%96%B0%E3%83%AD%E3%83%9E%E3%82%B5%E3%82%ACRS?src=hash&amp;ref_src=twsrc%5Etfw">#新ロマサガRS</a><a href="https://twitter.com/hashtag/%E5%85%AC%E5%BC%8F%E3%83%95%E3%82%A9%E3%83%AD%E3%83%AF%E3%83%BC%E6%95%B0?src=hash&amp;ref_src=twsrc%5Etfw">#公式フォロワー数</a> <a href="https://t.co/976eRmJ8pt">pic.twitter.com/976eRmJ8pt</a></p>&mdash; sagamax@サガとレトロゲー (@sagamax__) <a href="https://twitter.com/sagamax__/status/1467992275322273793?ref_src=twsrc%5Etfw">December 6, 2021</a></blockquote>
   </p>
+
+  <br/>
   <div id="mechanism"></div>
   <h3 class="title">どんな仕組み？</h3>
   <p>
@@ -47,13 +54,64 @@ const indexList: index[] = [
   <h4 class="title">ソースコード(Go)</h4>
   <p>
     主処理。31行目の TweetPublicAccount() が入口
+    <Gist id="https://gist.github.com/taumax-github/a52cb94cacb991d7722320c76685a58f" />
   </p>
+
+  <br/>
+  <div id="whatilearn"></div>
+  <h3 class="title">ぶつかった壁とか学んだこととか</h3>
+  <p>
+    エラーで詰まったとかはあんまりないんだけど、これまで python で書いてた twitter bot の Go 版ができた。Go はコンテナと相性がいいんだなという学びはあるんだけど、それに気づくのはまだ先の話。。。<br>
+  </p>
+
+  <br/>
   <h4 class="title">①tweet するためのライブラリ</h4>
   <p>
-    <a href="https://github.com/ChimeraCoder/anaconda" target="_blank">anaconda</a> というライブラリを使ってツイートするプログラム。
-    TweetPublicAccount 関数の中でツイート用のインスタンス生成し、変数 api に格納（36行目）。70行目でツイート実行。
-    画像をツイートしたい場合は54～58行目。ツイート実行の前に api.UploadMedia で画像を upload する必要がある。引数の型が base64String なので画像を base64エンコードしている。
-    そのあと、 url.Values{} の "media_ids" に格納。複数ある場合はカンマ区切りで設定。
+    <a href="https://github.com/ChimeraCoder/anaconda" target="_blank">anaconda</a> というライブラリを使ってツイートするプログラム。<br>
+    TweetPublicAccount 関数の中でツイート用のインスタンス生成し、変数 api に格納（36行目）。70行目でツイート実行。<br>
+  </p>
+
+<pre><code class="copy">{`api := common.GetTweetApi(act)
+defer api.Close()
+
+user, err := api.FollowUser(TARGET_ACCOUNT)
+chechError(err)
+
+con := common.DbConnect()
+defer con.Close()
+
+insData(con, user)
+createGraph(con)
+
+fNames := [3]string{"public_account/kaigai_kisekae.png", "public_account/ss_pole.png", GRAPH_NAME}
+var base64String = [3]string{}
+for i, fName := range fNames {
+  base64String[i] = encode(fName)
+}
+
+media0, _ := api.UploadMedia(base64String[0])
+media1, _ := api.UploadMedia(base64String[1])
+media2, _ := api.UploadMedia(base64String[2])
+v := url.Values{}
+v.Add("media_ids", media0.MediaIDString+","+media1.MediaIDString+","+media2.MediaIDString)
+
+n := time.Now()
+var msg = "今" + timeutil.Strftime(&n, "%Y-%m-%d %H:%M") + "\\r\\n"
+msg += "ロマサガ公式アカウントのフォロワー数をカウントするbotです。\\r\\n"
+msg += "現在の @" + TARGET_ACCOUNT + " のフォロワー数は" + humanize.Comma((int64)(user.FollowersCount)) + "人。\\r\\n"
+msg += "あと" + humanize.Comma((int64)(250000-user.FollowersCount)) + "人でSSポール！\\r\\n"
+msg += "23,24万で海外版の着せ替え衣装も貰えます！\\r\\n"
+msg += "@" + TARGET_ACCOUNT + " のフォローお願いします！\\r\\n"
+msg += "#ロマサガRS\\r\\n"
+msg += "#公式フォロワー数"
+
+_, err = api.PostTweet(msg, v)
+`}</code></pre>
+
+  <br/>
+  <p>
+    画像をツイートしたい場合は54～58行目。ツイート実行の前に api.UploadMedia で画像を upload する必要がある。引数の型が base64String なので画像を base64エンコードしている。<br>
+    そのあと、 url.Values{} の "media_ids" に格納。複数ある場合はカンマ区切りで設定。<br>
     <br/>
     参考
     <ul>
@@ -65,28 +123,144 @@ const indexList: index[] = [
       <li><a href="https://kwmt27.net/index.php/2013/09/29/golang-base64-encode-decode/" target="_blank">#golang 画像ファイルをbase64 encode/decode するには</a></li>
     </ul>
   </p>
+
+  <br>
   <h4 class="title">②グラフ生成するためのライブラリ</h4>
   <p>
-    <a href="https://pkg.go.dev/gonum.org/v1/plot" target="_blank">plot</a> というライブラリを使って画像生成。
-    上記ソースの82行目 createGraph() 関数の中。90行目で呼び出している getData() 関数で2週間分のデータを取得。
-    93行～113行目の処理で縦軸・横軸の設定、115～120行目でグラフの見栄えを調整。
-    124～133行目でグラフを生成。
-    <br/>
-    参考
-    <ul>
-      <li><a href="https://pkg.go.dev/gonum.org/v1/plot#example-Axis-LabelsPosition" target="_blank">gonum.org/v1/plot</a></li>
-      <li><a href="https://text.baldanders.info/golang/chart-with-golang/" target="_blank">Go 言語でもグラフを描きたい！</a></li>
-      <li><a href="https://qiita.com/RuyPKG/items/0a569953e9e24870f527" target="_blank">Go言語で折れ線グラフや棒グラフを描く</a></li>
-    </ul>
+    <a href="https://pkg.go.dev/gonum.org/v1/plot" target="_blank">plot</a> というライブラリを使って画像生成。<br>
+    上記ソースの82行目 createGraph() 関数の中。90行目で呼び出している getData() 関数で2週間分のデータを取得。<br>
   </p>
+
+<pre><code class="copy">{`func createGraph(con *sql.DB) {
+	// インスタンスを生成
+	p := plot.New()
+
+	// 表示項目の設定
+	p.X.Label.Text = "date"
+	p.Y.Label.Text = "Number of followers"
+
+	rows, err := getData(con)
+`}</code></pre>
+
+  <br>
+  <p>
+    93行～113行目の処理で縦軸・横軸の設定、115～120行目でグラフの見栄えを調整。<br>
+  </p>
+
+<pre><code class="copy">{`labelX := []string{}
+axies := []xyAxis{}
+for i := 0; rows.Next(); i++ {
+  var recTime string
+  var cnt int
+  err = rows.Scan(&recTime, &cnt)
+  chechError(err)
+  var num = xyAxis{(float64)(i), (float64)(cnt)}
+  labelX = append(labelX, recTime)
+  axies = append(axies, num)
+}
+
+pts := make(plotter.XYs, len(axies))
+for i, axis := range axies {
+  pts[i].X = axis.x
+  pts[i].Y = axis.y
+}
+
+p.NominalX(labelX...)
+p.Y.Min = 220000
+p.Y.Max = 242000
+
+// グラフの下の枠線を表示
+p.X.Width = p.Y.Width
+// X軸のラベルの傾き
+p.X.Tick.Label.Rotation = math.Pi / 2.5
+// X軸のラベルの位置（draw.XRightは右寄せ）
+p.X.Tick.Label.XAlign = draw.XRight
+`}</code></pre>
+
+  <br>
+  <p>
+    124～133行目でグラフを生成。<br>
+  </p>
+
+<pre><code class="copy">{`err = plotutil.AddLinePoints(p, pts)
+if err != nil {
+  panic(err)
+}
+
+// 描画結果を保存
+// "5*vg.Inch" の数値を変更すれば，保存する画像のサイズを調整できます．
+if err := p.Save(8*vg.Inch, 5*vg.Inch, GRAPH_NAME); err != nil {
+  panic(err)
+}`}</code></pre>
+
+
+  <br>
+  <p>
+    参考
+  </p>
+  <ul>
+    <li><a href="https://pkg.go.dev/gonum.org/v1/plot#example-Axis-LabelsPosition" target="_blank">gonum.org/v1/plot</a></li>
+    <li><a href="https://text.baldanders.info/golang/chart-with-golang/" target="_blank">Go 言語でもグラフを描きたい！</a></li>
+    <li><a href="https://qiita.com/RuyPKG/items/0a569953e9e24870f527" target="_blank">Go言語で折れ線グラフや棒グラフを描く</a></li>
+  </ul>
+
+  <br>
   <h4 class="title">③postgres DB接続のためのライブラリ</h4>
   <p>
-    <a href="https://pkg.go.dev/github.com/lib/pq" target="_blank">pq</a> というライブラリを使って postgres DB 接続。ライブラリは import するだけで、コード上使用するのは <a href="https://pkg.go.dev/database/sql" target="_blank">database/sql</a> という標準ライブラリ。
-    専用のパッケージを import （16行目の _ "github.com/lib/pq" ）して connection 生成(42行目)してあげればあとはSQL文字列を実行するだけ。
-    <br/>
-    参考
-    <ul>
-      <li><a href="https://qiita.com/hiro9/items/e6e41ec822a7077c3568" target="_blank">Go PostgreSQLにつないでみる</a></li>
-    </ul>
+    <a href="https://pkg.go.dev/github.com/lib/pq" target="_blank">pq</a> というライブラリを使って postgres DB 接続。ライブラリは import するだけで、コード上使用するのは <a href="https://pkg.go.dev/database/sql" target="_blank">database/sql</a> という標準ライブラリ。<br>
+    専用のパッケージを import （16行目の _ "github.com/lib/pq" ）して connection 生成(42行目)してあげればあとはSQL文字列を実行するだけ。<br>
   </p>
+
+<pre><code class="copy">"github.com/leekchan/timeutil"
+_ "github.com/lib/pq"
+"gonum.org/v1/plot"
+</code></pre>
+<pre><code class="copy">con := common.DbConnect()
+defer con.Close()
+</code></pre>
+
+  <br>
+  <p>
+    上記42行目の呼び出し先 ※DBとのコネクション生成（抜粋）
+    <Gist id="https://gist.github.com/taumax-github/e3da90e16ea98eee809d06c73e8bc41d" />
+  </p>
+
+  <br>
+  <p>
+    136行目の getData() 関数、141行目の insData() 関数がSQL実行部分の実装例。
+  </p>
+
+<pre><code class="copy">{`func getData(con *sql.DB) (*sql.Rows, error) {
+  sql_statement := "SELECT * FROM (SELECT to_char(record_time, 'yyyy/MM/dd') as record_time, followers_count FROM ACCOUNT_INFO WHERE screen_name = $1 ORDER BY record_time DESC LIMIT 14) as work ORDER BY record_time;"
+  return con.Query(sql_statement, TARGET_ACCOUNT)
+}
+
+func insData(con *sql.DB, user anaconda.User) {
+  tx, _ := con.Begin()
+  insertStmt := "INSERT INTO ACCOUNT_INFO(record_time, user_id, screen_name, followers_count, follows_count, tweet_count, favourites_count) VALUES ($1, $2, $3, $4, $5, $6, $7);"
+  var record_time = time.Now()
+  var user_id = user.IdStr
+  var screen_name = user.ScreenName
+  var followers_count = user.FollowersCount
+  var follows_count = user.FriendsCount
+  var tweet_count = user.StatusesCount
+  var favourites_count = user.FavouritesCount
+
+  _, err := tx.Exec(insertStmt, record_time, user_id, screen_name, followers_count, follows_count, tweet_count, favourites_count)
+  // 何かの処理で問題が起こったとき
+  if err != nil {
+    tx.Rollback()
+    log.Fatal(err)
+  } else {
+    tx.Commit()
+  }
+}`}</code></pre>
+
+  <br>
+  <p>
+    参考
+  </p>
+  <ul>
+    <li><a href="https://qiita.com/hiro9/items/e6e41ec822a7077c3568" target="_blank">Go PostgreSQLにつないでみる</a></li>
+  </ul>
 </SiteLayout>
