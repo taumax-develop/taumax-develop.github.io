@@ -2,6 +2,7 @@
 import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
+import { Gist } from 'astro-embed';
 import img01 from './img/img00/img01.png'
 import img02 from './img/img00/img02.png'
 import img03 from './img/img00/img03.png'
@@ -35,6 +36,33 @@ import img30 from './img/img00/img30.png'
 import img31 from './img/img00/img31.png'
 import img32 from './img/img00/img32.png'
 import img33 from './img/img00/img33.png'
+
+import png05 from './img/05.png'
+import png08 from './img/08.png'
+import png09 from './img/09.png'
+import png10 from './img/10.png'
+import png11 from './img/11.png'
+import png12 from './img/12.png'
+import png14 from './img/14.png'
+import png15 from './img/15.png'
+import png16 from './img/16.png'
+import png17 from './img/17.png'
+import png18 from './img/18.png'
+import png19 from './img/19.png'
+import png20 from './img/20.png'
+import png21 from './img/21.png'
+import png22 from './img/22.png'
+import png23 from './img/23.png'
+import png24 from './img/24.png'
+import png25 from './img/25.png'
+import png26 from './img/26.png'
+import png27 from './img/27.png'
+import png28 from './img/28.png'
+import png29 from './img/29.png'
+import png30 from './img/30.png'
+import png32 from './img/32.png'
+
+import java_openjdk from './img/java_openjdk.jpg'
 import { BASE_URL } from '../../../../../consts';
 import type { index } from '../../../../../components/HeaderIndex.astro';
 import { javaBcList } from '../java_index.astro';
@@ -92,115 +120,157 @@ const indexList: index[] = [
     LTPではない。次のLTSは2021年9月予定のJava 17
   </p>
   <br><br>
-  【言語】
+  <h3 class="title">言語</h3>
+  <table border="1">
+    <tr>
+      <th>JEP（※1）</th><th>概要</th>
+    </tr>
+    <tr>
+      <td>359</td><td><a href="https://openjdk.java.net/jeps/359" target="_blank">Records (Preview)</a></td>
+    </tr>
+    <tr>
+      <td>305</td><td><a href="https://openjdk.java.net/jeps/305" target="_blank">Pattern Matching for instanceof (Preview)</a>（※2）</td>
+    </tr>
+    <tr>
+      <td>368</td><td><a href="https://openjdk.java.net/jeps/368" target="_blank">Text Blocks (Second Preview)</a></td>
+    </tr>
+    <tr>
+      <td>361</td><td><a href="https://openjdk.java.net/jeps/361" target="_blank">Switch Expressions (Standard)</a></td>
+    </tr>
+  </table>
   <h3 class="title">GC</h3>
-  <table border="1" cellpadding="0" cellspacing="0" style="border-color:gray;">
+  <table border="1">
     <tr>
-      <th style="background-color:midnightblue;">JEP（※1）</th><th style="background-color:midnightblue;">概要</th>
+      <th>JEP（※1）</th><th>概要</th>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">364</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/364" target="_blank">ZGC on macOS</a></td>
+      <td>364</td><td><a href="https://openjdk.java.net/jeps/364" target="_blank">ZGC on macOS</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">365</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/365" target="_blank">ZGC on Windows</a>（※2）</td>
+      <td>365</td><td><a href="https://openjdk.java.net/jeps/365" target="_blank">ZGC on Windows</a>（※2）</td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">345</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/345" target="_blank">NUMA-Aware Memory Allocation for G1</a></td>
+      <td>345</td><td><a href="https://openjdk.java.net/jeps/345" target="_blank">NUMA-Aware Memory Allocation for G1</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">363</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/363" target="_blank">Remove the Concurrent Mark Sweep (CMS) Garbage Collector</a></td>
+      <td>363</td><td><a href="https://openjdk.java.net/jeps/363" target="_blank">Remove the Concurrent Mark Sweep (CMS) Garbage Collector</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">366</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/366" target="_blank">Deprecate the ParallelScavenge + SerialOld GC Combination</a></td>
+      <td>366</td><td><a href="https://openjdk.java.net/jeps/366" target="_blank">Deprecate the ParallelScavenge + SerialOld GC Combination</a></td>
     </tr>
   </table>
   <h3 class="title">ライブラリ</h3>
-  <table border="1" cellpadding="0" cellspacing="0" style="border-color:gray;">
+  <table border="1">
     <tr>
-      <th style="background-color:midnightblue;">JEP（※1）</th><th style="background-color:midnightblue;">概要</th>
+      <th>JEP（※1）</th><th>概要</th>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">358</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/358" target="_blank">Helpful NullPointerExceptions</a></td>
+      <td>358</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/358" target="_blank">Helpful NullPointerExceptions</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">349</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/349" target="_blank">JFR Event Streaming</a>（※2）</td>
+      <td>349</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/349" target="_blank">JFR Event Streaming</a>（※2）</td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">370</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/370" target="_blank">Foreign-Memory Access API (Incubator)</a></td>
+      <td>370</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/370" target="_blank">Foreign-Memory Access API (Incubator)</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">352</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/352" target="_blank">Non-Volatile Mapped Byte Buffers</a></td>
+      <td>352</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/352" target="_blank">Non-Volatile Mapped Byte Buffers</a></td>
     </tr>
   </table>
   <h3 class="title">ツール</h3>
-  <table border="1" cellpadding="0" cellspacing="0" style="border-color:gray;">
+  <table border="1">
     <tr>
-      <th style="background-color:midnightblue;">JEP（※1）</th><th style="background-color:midnightblue;">概要</th>
+      <th>JEP（※1）</th><th>概要</th>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">343</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/343" target="_blank">Packaging Tool (Incubator)</a>（※3）</td>
+      <td>343</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/343" target="_blank">Packaging Tool (Incubator)</a>（※3）</td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">367</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/367" target="_blank">Remove the Pack200 Tools and API</a></td>
+      <td>367</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/367" target="_blank">Remove the Pack200 Tools and API</a></td>
     </tr>
   </table>
   <h3 class="title">JDK</h3>
-  <table border="1" cellpadding="0" cellspacing="0" style="border-color:gray;">
+  <table border="1">
     <tr>
-      <th style="background-color:midnightblue;">JEP（※1）</th><th style="background-color:midnightblue;">概要</th>
+      <th>JEP（※1）</th><th>概要</th>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">362</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/362" target="_blank">Deprecate the Solaris and SPARC Ports</a></td>
+      <td>362</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/362" target="_blank">Deprecate the Solaris and SPARC Ports</a></td>
     </tr>
   </table>
   <p>公式は<a href="https://openjdk.java.net/projects/jdk/14/" target="_blank">こちら</a></p>
+
+  ※1 JEP<br>
+  <p>
+    JDK Enhancement Proposalsの略。
+    JDKに対する変更の提案を管理する番号。
+  </p>
+
+  <p>
+    参考<br>
+    <a href="https://www.slideshare.net/AyaEbata/jsrjepjbs" target="_blank">JSRとJEPとJBSの見方や調べ方について</a><br>
+    <a href="https://openjdk.java.net/jeps/0" target="_blank">JEPの目次</a><br>
+  </p>
+
+  ※2 <a href="https://openjdk.java.net/jeps/12" target="_blank">Preview</a><br>
+  <p>
+    プレビュー版のこと。
+    機能としては保証されているが、どのように使うべきかは議論の余地があるもの。開発者が実際に使ってみて、フィードバックを受けて今後もJava SEの基本機能として提供し続けるかどうかが決まる。
+  </p>
+
+  ※3 <a href="https://openjdk.java.net/jeps/11" target="_blank">Incubator</a><br>
+  <p>
+    開発者からのフィードバックを得るために、Java SEに含めた実験的なAPI。
+    <br>参考：<a href="https://xtech.nikkei.com/it/atcl/column/15/120700278/080700044/" target="_blank">Java SE 9はAPI実験の場をIncubator Modulesで提供、第1弾はHTTP/2 Client</a>
+  </p>
+
   <h4 class="title">試用機能について</h4>
   <Image src={img01} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=8" target="_blank">資料より抜粋</a>
   <h4 class="title">今回ご紹介するもの</h4>
-  <table border="1" cellpadding="0" cellspacing="0" style="border-color:gray;">
+  <table border="1">
     <tr>
-      <th style="background-color:midnightblue;">JEP（※1）</th><th style="background-color:midnightblue;">概要</th>
+      <th>JEP（※1）</th><th>概要</th>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">359</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/359" target="_blank">Records (Preview)</a></td>
+      <td>359</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/359" target="_blank">Records (Preview)</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">305</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/305" target="_blank">Pattern Matching for instanceof (Preview)</a>（※2）</td>
+      <td>305</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/305" target="_blank">Pattern Matching for instanceof (Preview)</a>（※2）</td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">368</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/368" target="_blank">Text Blocks (Second Preview)</a></td>
+      <td>368</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/368" target="_blank">Text Blocks (Second Preview)</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">361</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/361" target="_blank">Switch Expressions (Standard)</a></td>
+      <td>361</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/361" target="_blank">Switch Expressions (Standard)</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">358</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/358" target="_blank">Helpful NullPointerExceptions</a></td>
+      <td>358</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/358" target="_blank">Helpful NullPointerExceptions</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">349</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/349" target="_blank">JFR Event Streaming</a>（※2）</td>
+      <td>349</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/349" target="_blank">JFR Event Streaming</a>（※2）</td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">370</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/370" target="_blank">Foreign-Memory Access API (Incubator)</a></td>
+      <td>370</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/370" target="_blank">Foreign-Memory Access API (Incubator)</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">352</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/352" target="_blank">Non-Volatile Mapped Byte Buffers</a></td>
+      <td>352</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/352" target="_blank">Non-Volatile Mapped Byte Buffers</a></td>
     </tr>
     <tr>
-      <td style="background-color:black; text-align:right;">343</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/343" target="_blank">Packaging Tool (Incubator)</a>（※3）</td>
+      <td>343</td><td style="background-color:black;"><a href="https://openjdk.java.net/jeps/343" target="_blank">Packaging Tool (Incubator)</a>（※3）</td>
     </tr>
   </table>
   <h3 class="title"><font size ="5">◆言語</font></h3>
   <h4 id="title">Text Blocks (Second Preview)</h4>
   <a href="https://openjdk.java.net/jeps/368" target="_blank">JEP368:Text Blocks (Second Preview)</a>
   <p>ダブルクォート３つで囲むことで複数行のテキストを書くことができるようになった。</p>
-  <script src="https://gist.github.com/taumax-github/e8314e6cef7f408bdd09cccb874f672d.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/e8314e6cef7f408bdd09cccb874f672d" />
   <p>まだPreview。15でStandardになる予定。
     <a href="https://openjdk.java.net/jeps/378" target="_blank">JEP 378</a>参照</p>
   <h4 id="title">Switch Expressions (Standard)</h4>
   <a href="https://openjdk.java.net/jeps/361" target="_blank">JEP361:Switch Expressions (Standard)</a>
   <p>Switchステートメントとしてだけでなく式として使える。</p>
-  <script src="https://gist.github.com/taumax-github/77a838baf32d4823efccce218e6d3f8b.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/77a838baf32d4823efccce218e6d3f8b" />
   <p>
     Java 12でPreviewとして導入され、Java 13で少し変更が入って今回のJava 14で標準化された。<br/>
     ・caseに複数のラベルを使用できるようになった。<br/>
@@ -212,8 +282,8 @@ const indexList: index[] = [
   <Image src={img03} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=18" target="_blank">資料より抜粋</a><br/>
   <br/>
-  <p>アロー形式で値を返す場合は<code class="copy">yield</code>を使う</p>
-  <script src="https://gist.github.com/taumax-github/361b7215d4ffc3adf271652d47cadbda.js"></script>
+  <p>アロー形式で値を返す場合は<code>yield</code>を使う</p>
+  <Gist id="https://gist.github.com/taumax-github/361b7215d4ffc3adf271652d47cadbda" />
   <h4 id="twitter">twitterの反応</h4>
   <p>
     ・Switch Satementは簡易なFactoryとしてつかえそう<br/>
@@ -226,9 +296,9 @@ const indexList: index[] = [
   <Image src={img04} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=22" target="_blank">資料より抜粋</a>
   <br/>Recordsを使用したクラス定義
-  <script src="https://gist.github.com/taumax-github/5fa36bf3f38c43538876931b4435f443.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/5fa36bf3f38c43538876931b4435f443" />
   <br/>上記クラスはこのようにクラスを宣言下のと同義。
-  <script src="https://gist.github.com/taumax-github/be751009f17a48120d2e3331b432688f.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/be751009f17a48120d2e3331b432688f" />
   <p>Objectメソッドのバイトコード（下記の例はequalsメソッド）<br/>
     <Image src={img05} alt="image.png" /><br/>
     <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=24" target="_blank">資料より抜粋</a></p>
@@ -238,7 +308,7 @@ const indexList: index[] = [
     ・継承するクラスを限定できる（インターフェースでもよい）。<br/>
     ・Switch式でdefaultが不要になる。<br/>
   </p>
-  <script src="https://gist.github.com/taumax-github/05ff84325c8b23107412365cbd362257.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/05ff84325c8b23107412365cbd362257" />
   <h4 class="title">twitterの反応</h4>
   <p>
     ・入れものクラスを作る時にRecordは良いなー<br/>
@@ -248,16 +318,16 @@ const indexList: index[] = [
   <a href="https://openjdk.java.net/jeps/305" target="_blank">JEP305:Pattern Matching for instanceof (Preview)</a>
   <p>Kotlinのスマートキャストのような機能</p>
   これまでのinstanceof<br/>
-  <script src="https://gist.github.com/taumax-github/8e3e285c3b0060edafbea7b53aa02143.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/8e3e285c3b0060edafbea7b53aa02143" />
   <br/>Pattern Matching for instanceof<br/>
-  <script src="https://gist.github.com/taumax-github/e06994f1ce2d4cb2244093912f3aec7b.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/e06994f1ce2d4cb2244093912f3aec7b" />
   <h4 id="title">今後追加される機能</h4>
   <h4 id="title">Pattern with switch</h4>
   <p>switchでパターンマッチを使う</p>
-  <script src="https://gist.github.com/taumax-github/8823e621d0ad2e48bc532e11bee3f219.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/8823e621d0ad2e48bc532e11bee3f219" />
   <h4 id="title">Deconstruction</h4>
   <p>レコードの分解</p>
-  <script src="https://gist.github.com/taumax-github/2cdad48cb0f9e74ea6db9cf5ff5e3d25.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/2cdad48cb0f9e74ea6db9cf5ff5e3d25" />
   <h4 id="title">twitterの反応</h4>
   <p>
     ・PatternMatching for instance-of。  パターンマッチングというよりまだ今はKotlinのスマートキャストみたいな感じ。今、普通にキャストしたほうがバイトコードが短くなる<br/>
@@ -267,9 +337,9 @@ const indexList: index[] = [
   <h3 class="title"><font size ="5">◆ライブラリ</font></h3>
   <h4 class="title">Helpful NullPointerExceptions</h4>
   <a href="https://openjdk.java.net/jeps/358" target="_blank">JEP358:Helpful NullPointerExceptions</a>
-  <p><code class="copy">-XX:+ShowCodeDetailsInExceptionMessages</code>オプションを付けて実行する。
+  <p><code>-XX:+ShowCodeDetailsInExceptionMessages</code>オプションを付けて実行する。
     将来のバージョンではデフォルトに<br/>
-    JShellの場合は<code class="copy">-R-XX:+ShowCodeDetailsInExceptionMessages</code></p>
+    JShellの場合は<code>-R-XX:+ShowCodeDetailsInExceptionMessages</code></p>
   <h4 id="title">twitterの反応</h4>
   <p>
     ・メッセージが親切になって皆がもっとNullPointerException大好きになるらしい<br/>
@@ -280,7 +350,7 @@ const indexList: index[] = [
   <Image src={img06} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=39" target="_blank">資料より抜粋</a>
   <p>イベントとして処理できるようになったので監視に使いやすくなった。</p>
-  <script src="https://gist.github.com/taumax-github/723e7fb1a239ab115d3e6bcf0d27f24e.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/723e7fb1a239ab115d3e6bcf0d27f24e" />
   <h4 id="title">twitterの反応</h4>
   <p>
     ・JFR Event Streamingは興味深い機能ですね。いろいろ応用が効きそう。<br/>
@@ -291,7 +361,7 @@ const indexList: index[] = [
   <Image src={img07} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=42" target="_blank">資料より抜粋</a><br/>
   <br/>
-  <script src="https://gist.github.com/taumax-github/1a6a82f6036721f63b774e3ceed5cd10.js"></script>
+  <Gist id="https://gist.github.com/taumax-github/1a6a82f6036721f63b774e3ceed5cd10" />
   <Image src={img08} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/kishida/breaf-introduction-of-java-14?slide=43" target="_blank">資料より抜粋</a><br/>
   <br/>
@@ -313,9 +383,9 @@ const indexList: index[] = [
   <br/>
 
   <p>・Java14 カスタムランタイムの作成：
-    <code class="copy">jlink --add-modules 'jdeps --print-module-deps App.class' --output myrt</code></p>
+    <code>jlink --add-modules 'jdeps --print-module-deps App.class' --output myrt</code></p>
   <p>・カスタムランタイムを使ったパッケージの作成：
-    <code class="copy">jpackage --name myapp_min --input target --main-jar app.jar --main-class App --runtime-image myrt</code></p>
+    <code>jpackage --name myapp_min --input target --main-jar app.jar --main-class App --runtime-image myrt</code></p>
   <h4 id="title">twitterの反応</h4>
   <p>
     ・なに？rpmでパッケージングできるとな！？リリース楽になりそう！<br/>
@@ -335,9 +405,17 @@ const indexList: index[] = [
   </div>
   <h4 class="title">開発環境に必須のツール</h4>
   <Image src={img13} alt="image.png" /><br/>
-  <a href="https://speakerdeck.com/irof/ideqi-dian-de2020nian-dai-falsekai-fa-huan-jing-wotiao-metemiru?slide=20" target="_blank">資料より抜粋</a>
+  <a href="https://speakerdeck.com/irof/ideqi-dian-de2020nian-dai-falsekai-fa-huan-jing-wotiao-metemiru?slide=20" target="_blank">資料より抜粋</a><br/>
+
   <!-- みんなのJava　OpenJDKから始まる大変革期 -->
-  <a target="_blank"  href="https://www.amazon.co.jp/gp/product/B085H7BKGY/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B085H7BKGY&linkCode=as2&tag=sagamax-22&linkId=819f9a7352a3af72b978650b222925ef"><img style="border: solid 1px #FFFFFF" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B085H7BKGY&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sagamax-22" ></a><br/>
+  <br/>
+  お勧めの本
+  <br/>
+  <a target="_blank"  href="https://amzn.to/4mN0etc" >
+    <Image src={java_openjdk} width="300" alt="java_openjdk" />
+  </a>
+
+  <br/><br/>
   <h4 class="title">IDEに期待すること</h4>
   <Image src={img14} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/irof/ideqi-dian-de2020nian-dai-falsekai-fa-huan-jing-wotiao-metemiru?slide=23" target="_blank">資料より抜粋</a><br/>
@@ -390,6 +468,7 @@ const indexList: index[] = [
   <b>①IDE自身が使うJDK</b>
   <Image src={img21} alt="image.png" /><br/>
   <a href="https://speakerdeck.com/irof/ideqi-dian-de2020nian-dai-falsekai-fa-huan-jing-wotiao-metemiru?slide=44" target="_blank">資料より抜粋</a>
+  <br>
   <b>②作る時に使うJDK</b>
   <p>
     ・IDEがビルドするときに使う<br/>
@@ -482,68 +561,68 @@ const indexList: index[] = [
   <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ChihiroIto1/ss-234535540" title="システムのモダナイズ 落ちても良いアプリの作り方" target="_blank">システムのモダナイズ 落ちても良いアプリの作り方</a> </strong> from <strong><a href="https://www.slideshare.net/ChihiroIto1" target="_blank">Chihiro Ito</a></strong> </div>
   <h4 class="title">内容</h4>
   <h3 class="title">アプリのScaleについて</h3>
-  <img src="img/05.png" alt="scale" /><br/>
+  <Image src={png05} alt="scale" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(5/45)</a><br/>
   <h3 class="title">ステート</h3>
-  <img src="img/08.png" alt="state" /><br/>
+  <Image src={png08} alt="state" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(8/45)</a><br/>
-  <img src="img/09.png" alt="state2" /><br/>
+  <Image src={png09} alt="state2" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(9/45)</a><br/>
-  <img src="img/10.png" alt="state3" /><br/>
+  <Image src={png10} alt="state3" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(10/45)</a><br/>
-  <img src="img/11.png" alt="state4" /><br/>
+  <Image src={png11} alt="state4" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(11/45)</a><br/>
-  <img src="img/12.png" alt="state5" /><br/>
+  <Image src={png12} alt="state5" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(12/45)</a><br/>
   <h4 class="title">twitterの反応</h4>
   <p>・む？Java新機能のRecordとHttpSessionへの格納、実は相性が良い？<br/></p>
-  <img src="img/14.png" alt="twitter1" /><br/>
+  <Image src={png14} alt="twitter1" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(14/45)</a><br/>
-  <img src="img/15.png" alt="twitter2" /><br/>
+  <Image src={png15} alt="twitter2" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(15/45)</a><br/>
-  <img src="img/16.png" alt="twitter3" /><br/>
+  <Image src={png16} alt="twitter3" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(16/45)</a><br/>
-  <img src="img/17.png" alt="twitter4" /><br/>
+  <Image src={png17} alt="twitter4" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(17/45)</a><br/>
   <h3 class="title">可用性と性能を改善する３つの技術</h3>
-  <img src="img/18.png" alt="tech1" /><br/>
+  <Image src={png18} alt="tech1" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(18/45)</a><br/>
   <p>・セッション外部化<br/>・<a href="https://docs.oracle.com/cd/E23332_01/coh.360/b61369/nearcache.htm" target="_blank">ニアキャッシュ</a><br/>・スティッキーセッション<br/></p>
   <h3 class="title">スティッキーセッションの話</h3>
-  <img src="img/19.png" alt="sticky1" /><br/>
+  <Image src={png19} alt="sticky1" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(19/45)</a><br/>
-  <img src="img/20.png" alt="sticky2" /><br/>
+  <Image src={png20} alt="sticky2" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(20/45)</a><br/>
-  <img src="img/21.png" alt="sticky3" /><br/>
+  <Image src={png21} alt="sticky3" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(21/45)</a><br/>
-  <img src="img/22.png" alt="sticky4" /><br/>
+  <Image src={png22} alt="sticky4" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(22/45)</a><br/>
-  <img src="img/23.png" alt="sticky5" /><br/>
+  <Image src={png23} alt="sticky5" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(23/45)</a><br/>
   <h4 class="title">twitterの反応</h4>
   <p>・LoadBalancerを設定して、スティッキーセッションでセッションを効率的にAPサーバーで状態を保持できる。<br/>　だが、アプリが落ちるとメモリが消えてしまうから、そこがよくない。</p>
-  <img src="img/24.png" alt="sticky6" /><br/>
+  <Image src={png24} alt="sticky6" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(24/45)</a><br/>
   <h3 class="title">セッション外部化の話</h3>
-  <img src="img/25.png" alt="external1" /><br/>
+  <Image src={png25} alt="external1" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(25/45)</a><br/>
   <h4 class="title">twitterの反応</h4>
   <p>・DBにステートを持たせると、アプリもランタイムもステートレスになり、アプリとしてはステートフルになる。でもレスポンスはとことん遅くなる。<br/>　スケールアウトの限界に達するとディスクフルで落ちる</p>
   <h3 class="title">ニアキャッシュの話</h3>
-  <img src="img/26.png" alt="nearcache1" /><br/>
+  <Image src={png26} alt="nearcache1" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(26/45)</a><br/>
   <h3 class="title">ニアキャッシュ＋スティッキーセッション</h3>
-  <img src="img/27.png" alt="nearcache2" /><br/>
+  <Image src={png27} alt="nearcache2" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(27/45)</a><br/>
-  <img src="img/28.png" alt="nearcache3" /><br/>
+  <Image src={png28} alt="nearcache3" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(28/45)</a><br/>
-  <img src="img/29.png" alt="nearcache4" /><br/>
+  <Image src={png29} alt="nearcache4" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(29/45)</a><br/>
   <h4 class="title">twitterの反応</h4>
   <p>・外部ストアの性能劣化にはスティッキーセッション（時間を短くする）で行き先を固定の上で、セッション情報をニアキャッシュさせる。<br/>　よく使用するセッションをAPにキャッシュ</p>
-  <img src="img/30.png" alt="nearcache5" /><br/>
+  <Image src={png30} alt="nearcache5" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(30/45)</a><br/>
-  <img src="img/32.png" alt="nearcache6" /><br/>
+  <Image src={png32} alt="nearcache6" /><br/>
   <a href="https://www.slideshare.net/ChihiroIto1/ss-234535540" target="_blank">資料より抜粋(32/45)</a><br/>
   <p>サンプルソース<br/>
     <a href="https://github.com/chiroito/wildfly-session-sample" target="_blank">https://github.com/chiroito/wildfly-session-sample</a><br/>

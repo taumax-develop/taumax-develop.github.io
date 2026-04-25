@@ -3,13 +3,13 @@ import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astr
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import type { index } from '../../../../components/HeaderIndex.astro';
 import { BASE_URL } from '../../../../consts';
-import { developmentBcList } from '../development_index.astro';
+import { indexPagebcList } from '../../../index.astro';
 
 export const databaseBc: Breadcrumb = {
   name: "Database",
   item: `${BASE_URL}/contents/development/database/database_index`
 };
-export const databaseBcList: Breadcrumb[] = [...developmentBcList, databaseBc];
+export const databaseBcList: Breadcrumb[] = [...indexPagebcList, databaseBc];
 const indexList: index[] = [];
 ---
 <SiteLayout
@@ -21,7 +21,9 @@ const indexList: index[] = [];
 >
 
   <br>
-  <li><a href=`${BASE_URL}/contents/development/database/event/db_design_night_no6`>DB設計したいNight #6 正規化 [online]</a></li>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/development/database/event/db_design_night_no6`>DB設計したいNight #6 正規化 [online]</a></li>
+  </ul>
 
   <br><br><br><br><br><br><br>
 </SiteLayout>

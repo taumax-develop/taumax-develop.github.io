@@ -87,7 +87,7 @@ code {
   border-radius: 3px;
 }
 
-code.copy {
+code.copy, code.nocopy {
   display: inline-block;
   padding: 3px 3px;
   color: #444; /* 文字色 */
