@@ -3,6 +3,7 @@ import { SITE_TITLE, BASE_URL } from '../consts';
 import { TWITTER_CARD_SUMMARY } from '../components/BaseHead.astro';
 import SiteLayout, { type Breadcrumb } from '../layouts/SiteLayout.astro';
 import type { index } from '../components/HeaderIndex.astro';
+import { originPagebc } from './contents/network/origin.astro';
 
 export const indexPagebc: Breadcrumb = {
   name: "トップページ",
@@ -17,7 +18,8 @@ const indexList: index[] = [
   { id: "#develop_method", name: "開発手法" },
   { id: "#database", name: "データベース" },
   { id: "#test", name: "テスト" },
-  { id: "#security", name: "セキュリティ" }
+  { id: "#network", name: "ネットワーク" },
+  { id: "#security", name: "セキュリティ" },
 ];
 ---
 
@@ -185,12 +187,18 @@ const indexList: index[] = [
   </ul>
 
   <br>
+  <h3 class="title" id="network">ネットワーク</h3>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/network/origin`>オリジン(Origin)</a></li>
+  </ul>
+
+  <br>
   <h3 class="title" id="security">セキュリティ</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/security/csrf/csrf`>CSRF（Cross-Site Request Forgeries: クロスサイトリクエストフォージェリ）</a></li>
     <li><a href=`${BASE_URL}/contents/security/cors/cors`>CORS（Cross-Origin Resource Sharing: オリジン間リソース共有）</a></li>
     <li><a href=`${BASE_URL}/contents/security/sop/sop`>SOP（Same-Origin Policy: 同一生成元ポリシー）</a></li>
-    <li><a href=`${BASE_URL}/contents/security/cvss/cvss`>CVSS</a></li>
+    <li><a href=`${BASE_URL}/contents/security/cvss/cvss`>CVSS（Common Vulnerability Scoring System: 共通脆弱性評価システム）</a></li>
     <li><a href=`${BASE_URL}/contents/security/oauth/oauth2.0`>OAuth</a></li>
   </ul>
 

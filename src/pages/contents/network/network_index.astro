@@ -1,0 +1,30 @@
+---
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../consts';
+import { indexPagebcList } from '../../index.astro';
+import type { index } from '../../../components/HeaderIndex.astro';
+import { originPagebc } from './origin.astro';
+
+export const networkPagebc: Breadcrumb = {
+  name: "ネットワーク",
+  item: `${BASE_URL}/contents/network/network_index`
+};
+export const networkPagebcList: Breadcrumb[] = [...indexPagebcList, networkPagebc];
+const indexList = [] as index[];
+---
+
+<SiteLayout
+  title="ネットワーク"
+  description="ネットワークに関する解説ページ。オリジン(Origin)やその他のネットワーク関連情報を提供します。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={networkPagebcList}
+  indexList={indexList}
+>
+
+  <br/>
+  <h3 class="title">ネットワーク</h3>
+  <ul>
+    <li><a href={originPagebc.item}>{originPagebc.name}</a></li>
+  </ul>
+</SiteLayout>

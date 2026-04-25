@@ -4,8 +4,8 @@ import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astr
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
 import cors_pathproxy from './img/cors_pathproxy.png';
-import sec_2017_spring from './img/sec_2017_spring.jpg';
-import sec_2018_spring from './img/sec_2018_spring.jpg';
+import sec_2017_spring from '../img/sec_2017_spring.jpg';
+import sec_2018_spring from '../img/sec_2018_spring.jpg';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
 import { securityBreadcrumbList } from '../security.astro';
 import type { index } from '../../../../components/HeaderIndex.astro';
@@ -115,13 +115,16 @@ const indexList: index[] = [
     <li>参考書</li>
     <ol style="padding-left: 1em;">
       <li>
-        <a href="https://amzn.to/4qXnPYX" target="_blank" rel="noopener noreferrer">絶対わかる情報処理安全確保支援士 2017年春版</a><br>
-        <Image src={sec_2017_spring} alt="絶対わかる情報処理安全確保支援士 2017年春版" width="200"/></a>
+        <a href="https://amzn.to/4qXnPYX" target="_blank" rel="noopener noreferrer">
+          絶対わかる情報処理安全確保支援士 2017年春版<br>
+          <Image src={sec_2017_spring} alt="絶対わかる情報処理安全確保支援士 2017年春版" width="200"/>
+        </a>
       </li>
       <li>
         <a href="https://amzn.to/4s8DUfh" target="_blank" rel="noopener noreferrer">
-        絶対わかる情報処理安全確保支援士 2018年春版<br>
-        <Image src={sec_2018_spring} alt="絶対わかる情報処理安全確保支援士 2018年春版" width="200"/></a>
+          絶対わかる情報処理安全確保支援士 2018年春版<br>
+          <Image src={sec_2018_spring} alt="絶対わかる情報処理安全確保支援士 2018年春版" width="200"/>
+        </a>
       </li>
     </ol>
   </ul>
