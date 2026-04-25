@@ -78,18 +78,18 @@ const indexList: index[] = [
   <h3 class="title">非同期のイベント駆動型ランタイム</h3>
   <p>
     Node.jsは「ファイルの読み込みを開始した」など、OS側のイベントを監視し、Node.js側で受け取ることが可能になっており、このようなイベントをトリガーとして処理を開始することができるようになっています。<br>
-    これは先の「Node.jsとは」の章で記載した libuv というライブラリを使って実現しています。<br>
+    これは先の「<a href="#what_is_nodejs">Node.jsとは</a>」の章で記載した libuv というライブラリを使って実現しています。<br>
     実装レベルの話としては、EventEmitter（及びそれを継承したStream）という仕組みを利用します。EventEmitterの基本的な使い方は以下の通り。
   </p>
   <br>
   <ul>
-    <li><code class="copy">on(eventName, listener)</code>関数：イベントのlistenerを登録（第二引数のlistenerにコールバック関数を実装）</li>
-    <li><code class="copy">emit(eventName, [args])</code>関数：イベント発動。第二引数以降のargsを引数としてlistenerに渡す。</li>
+    <li><code>on(eventName, listener)</code>関数：イベントのlistenerを登録（第二引数のlistenerにコールバック関数を実装）</li>
+    <li><code>emit(eventName, [args])</code>関数：イベント発動。第二引数以降のargsを引数としてlistenerに渡す。</li>
   </ul>
 
   <br>
   <p>
-    <code class="copy">on()</code>関数でイベントを登録し、<code class="copy">emit()</code>関数で登録されていた処理が実行されます。<code class="copy">on()</code>を使って登録されたlistenerは、そのイベントが発火される度に実行されます。<br>
+    <code>on()</code>関数でイベントを登録し、<code>emit()</code>関数で登録されていた処理が実行されます。<code>on()</code>を使って登録されたlistenerは、そのイベントが発火される度に実行されます。<br>
   </p>
 
 <pre class="title"><code class="title">eventemitter.js</code></pre>
@@ -202,9 +202,9 @@ console.log(3)
 
   <br>
   <p>
-    <code class="copy">fs.readFile</code>はファイルを読み込むためのI/Oを発生させます。ブロッキングI/Oを採用している場合、I/Oが完了するまで次の処理を行わないため、1→2→3の順に出力されますが、<br>
+    <code>fs.readFile</code>はファイルを読み込むためのI/Oを発生させます。ブロッキングI/Oを採用している場合、I/Oが完了するまで次の処理を行わないため、1→2→3の順に出力されますが、<br>
     Non-Blocking-I/Oの場合はファイルの読み込みが終わるのを待たずに次の処理が始まります。このため、出力順が1→3→2になっています。これがNon-Blocking-I/Oです。<br>
-    I/Oが完了してから処理を行いたい場合はCallback関数を使います。<code class="copy">fs.readFile</code>の第二引数に渡された関数がCallback関数で、ファイル読み込みが<span style="color: yellow">いつか終わったら実行されます</span>。Callback関数を使わずに、以下のようにファイルの中身を取得してコンソールに出力しようとしてもうまく出力されません。undefinedになります。<br>
+    I/Oが完了してから処理を行いたい場合はCallback関数を使います。<code>fs.readFile</code>の第二引数に渡された関数がCallback関数で、ファイル読み込みが<span style="color: yellow">いつか終わったら実行されます</span>。Callback関数を使わずに、以下のようにファイルの中身を取得してコンソールに出力しようとしてもうまく出力されません。undefinedになります。<br>
   </p>
 
 <pre class="title"><code class="title">test.js</code></pre>
@@ -255,9 +255,9 @@ nodejs_testファイルの中
   <span id="single_thread_event_loop"></span>
   <h3 class="title">シングルスレッド・イベントループモデル</h3>
   <p>
-    Node.js はシングルスレッドのイベントループモデルを採用しており、1つのメインスレッドでイベントループを実行します。これにより、効率的にタスクを処理するためです。イベントループは libuv というライブラリを使って実現しています。<br>
-    イベントループモデルについては以下の記事がわかりやすいと思ったのでリンクを張っておきます。<br>
-    <a href="https://qiita.com/ist-ko-su/items/a985864fc767d8bdfc4a" target="_blank" rel="noopener noreferrer">描いて理解するイベントループ</a><br>
+    Node.js はシングルスレッドのイベントループモデルを採用しており、1つのメインスレッドでイベントループを実行します。これは処理の直列化によって効率的にタスクを処理するためです。イベントループは、先の『<a href="#what_is_nodejs">Node.jsとは</a>』の章で記載した libuv というライブラリを使って実現しています。<br/>
+    イベントループモデルについては以下の記事がわかりやすいと思ったのでリンクを張っておきます。<br/>
+    <a href="https://qiita.com/ist-ko-su/items/a985864fc767d8bdfc4a" target="_blank" rel="noopener noreferrer">描いて理解するイベントループ</a><br/>
 
     <br>
     また、シングルスレッドとは言っても、非同期的な処理を実現するために、I/O 操作や非同期処理を別のスレッドで実行することはあります。しかしこれらのスレッドは裏側で動作する補助的なスレッドであり、メインスレッドはブロックされることなく処理を続けます。<br>

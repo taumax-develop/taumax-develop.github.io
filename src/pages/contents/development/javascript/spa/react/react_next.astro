@@ -144,9 +144,9 @@ const indexList: index[] = [
   <h4 class="title">JSX(JavaScript XML)</h4>
   <p>
     JSXはJavaScriptの構文拡張で、JavaScriptファイル内にHTMLのようなコードを記述できるようにするものです。Meta（旧Facebook社）によって開発されました。たとえば、次のようなコードを書くことが出来ます。<br/>
-    <code class="copy">const heading = &lt;h1&gt;Hello, JSX!&lt;/h1&gt;;</code><br/>
+    <code>const heading = &lt;h1&gt;Hello, JSX!&lt;/h1&gt;;</code><br/>
     このコードはHTMLのようにも見えますが、JavaScriptのコードです。headingという定数を作り、その定数にHTMLの要素（React要素）を代入しています。<br/>
-    JSXを記述する場合、ファイルの拡張子は<code class="copy">.jsx</code>とします。これに<a href=`${BASE_URL}/contents/development/javascript/typescript`>TypeScript</a>を適用する場合、拡張子は<code class="copy">.tsx</code>とします。<br/>
+    JSXを記述する場合、ファイルの拡張子は<code>.jsx</code>とします。これに<a href=`${BASE_URL}/contents/development/javascript/typescript`>TypeScript</a>を適用する場合、拡張子は<code>.tsx</code>とします。<br/>
     JSXでは中括弧 { } を使うことで、以下のようにReact要素内にJavaScriptの値を埋め込むことができます。<br/>
     <br/>
     <code class="copy">{`
@@ -160,7 +160,7 @@ const indexList: index[] = [
   <h4 class="title">コンポーネント</h4>
   <p>
     Reactでは、自分が書いたマークアップ、CSS、JavaScript を、アプリのための再利用可能な UI 要素にまとめることができます。これを『コンポーネント』と呼びます。<br/>
-    以下コンポーネントの例です。 <code class="copy">CommonFooter</code> という名前のコンポーネントを作っています。<br/>
+    以下コンポーネントの例です。 <code>CommonFooter</code> という名前のコンポーネントを作っています。<br/>
   </p>
 
 <pre class="title"><code class="title">common_footer.tsx</code></pre>
@@ -252,17 +252,17 @@ const indexList: index[] = [
   <h4 class="title">ファイルベースルーティング</h4>
   <p>
     Next.jsの「ファイルベースルーティング」は、pagesディレクトリ内のファイル構成がそのままアプリケーションのページ構成になるという機能です。pages ディレクトリ配下にスクリプトファイルを配置すると、それを使って画面表示を行います。<br/>
-    例えば以下の画像のように配置した場合、 <code class="copy">http://[ホスト名]/saga1/ability/ability_detail</code> というurlで <code class="copy">ability_detail.tsx</code> の内容が表示されます。<br/>
+    例えば以下の画像のように配置した場合、 <code>http://[ホスト名]/saga1/ability/ability_detail</code> というurlで <code>ability_detail.tsx</code> の内容が表示されます。<br/>
 
     <br/>
     <Image src={next_project} style="border: solid 1px #FFFFFF" alt="next_project" /><br/>
 
     <br/>
-    Next.js では、すべてのページの初期化に App というコンポーネントを使用しています。<code class="copy">pages/_app.tsx</code> を作成することで、Appコンポーネントをカスタマイズできます。全ページに共通のcssを適応するなど、すべてのページで共通な処理などを書くことができます。<br/>
+    Next.js では、すべてのページの初期化に App というコンポーネントを使用しています。<code>pages/_app.tsx</code> を作成することで、Appコンポーネントをカスタマイズできます。全ページに共通のcssを適応するなど、すべてのページで共通な処理などを書くことができます。<br/>
     <Image src={_app} style="border: solid 1px #FFFFFF" alt="_app" /><br/>
 
     <br/>
-    以下のコードは<code class="copy">_app.tsx</code>の中身です。1行目で<code class="copy">import '../styles/style.css'</code>を記述することで、pages配下のすべてのページに <code class="copy">style.css</code> が適応されます。<br/>
+    以下のコードは<code>_app.tsx</code>の中身です。1行目で<code>import '../styles/style.css'</code>を記述することで、pages配下のすべてのページに <code>style.css</code> が適応されます。<br/>
   </p>
 
 <pre class="title"><code class="title">_app.tsx</code></pre>
@@ -287,7 +287,7 @@ export default MyApp
     <Image src={コンポーネント構造} width="500" alt="コンポーネント構造" /><br/>
 
     <br/><br/>
-    以下はWebサイトに表示するページのフッター部分を <code class="copy">CommonFooter</code> という名前でコンポーネント化したものです。<br/>
+    以下はWebサイトに表示するページのフッター部分を <code>CommonFooter</code> という名前でコンポーネント化したものです。<br/>
   </p>
 
 
@@ -305,9 +305,9 @@ export default MyApp
 
   <br/>
   <p>
-    コンポーネント化したフッターを呼び出す際は <code class="copy">&lt;CommonFooter /&gt;</code> と記述します。<br/>
+    コンポーネント化したフッターを呼び出す際は <code>&lt;CommonFooter /&gt;</code> と記述します。<br/>
     以下は同じくコンポーネント化した CommonBody から CommonFooter を呼び出しているサンプルです。<br/>
-    また、 CommonBody の呼び出し元から引数で渡された内容をbody部に設定しています（<code class="copy">{`{body.message}`}</code>の部分）。<br/>
+    また、 CommonBody の呼び出し元から引数で渡された内容をbody部に設定しています（<code>{`{body.message}`}</code>の部分）。<br/>
   </p>
 
 <pre class="title"><code class="title">common_body.tsx</code></pre>
@@ -329,7 +329,7 @@ export default function CommonBody(body: any): JSX.Element {
   <p>
     共通のコンポーネントはこんな感じで、あとは各ページ個別の内容を pages ディレクトリ配下に配置し、作成したコンポーネントをその中で呼び出して使うようにしていました。<br/>
     今回は pages 直下に monster_trans_mechanism.tsx というファイル名で配置しているので、サーバ起動後、 http://ホスト名:3000/monster_trans_mechanism でアクセスできます。<br/>
-    以下が monster_trans_mechanism.tsx の中身です。<code class="copy">{`<CommonBody message={this.CreateBody()} />`}</code>の部分で CommonBody コンポーネントを呼び出し、 message という名前の変数に CreateBody() 関数の戻り値を設定しています。<br/>
+    以下が monster_trans_mechanism.tsx の中身です。<code>{`<CommonBody message={this.CreateBody()} />`}</code>の部分で CommonBody コンポーネントを呼び出し、 message という名前の変数に CreateBody() 関数の戻り値を設定しています。<br/>
   </p>
 
 <pre class="title"><code class="title">pages/monster_trans_mechanism.tsx</code></pre>

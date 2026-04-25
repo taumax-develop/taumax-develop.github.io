@@ -71,29 +71,28 @@ const indexList: index[] = [
   </p>
 
 <pre class="title"><code class="title">.vueファイル構造</code></pre>
-<pre><code class="copy">&lt;script setup lang="ts"&gt;
-...
-&lt;/script&gt;
+<pre><code class="copy">{`<script setup lang="ts">
+  /* ここにJavaScriptを記載 */
+</script>
+<template>
+  /* ブラウザのbody部に表示する内容 */
+</template>
 
-&lt;template&gt;
-...
-&lt;/template&gt;
-
-&lt;style&gt;
-...
-&lt;/style&gt;
-</code></pre>
+<style>
+  /* ここにCSSを記載 */
+</style>
+`}</code></pre>
 
   <br/>
   <p>
-    <code class="copy">&lt;script&gt;&lt;/script&gt;</code>内にJavaScriptを、<code class="copy">&lt;template&gt;&lt;/template&gt;</code>にブラウザのbody部に表示する内容を、<code class="copy">&lt;style&gt;&lt;/style&gt;</code>に適応するCSSをコーディングしていきます。<br/>
+    <code>{`<script></script>`}</code>内にJavaScriptを、<code>{`<template></template>`}</code>にブラウザのbody部に表示する内容を、<code>{`<style></style>`}</code>に適応するCSSをコーディングしていきます。<br/>
   </p>
 
   <br/>
   <span id="hooks"></span>
   <h4>ライフサイクルフック</h4>
   <p>
-    この<code class="copy">&lt;script&gt;&lt;/script&gt;</code>内でVueインスタンスを生成し、Vueインスタンスを介して<code class="copy">&lt;template&gt;&lt;/template&gt;</code>を操作することでリアクティブなシステムを実現しています。<br/>
+    この<code>{`<script></script>`}</code>内でVueインスタンスを生成し、Vueインスタンスを介して<code>{`<template></template>`}</code>を操作することでリアクティブなシステムを実現しています。<br/>
     操作するにはVueのライフサイクルフック及び、Vueインスタンス内に定義した関数を使用する必要があり、以下のようなものがあります。<br/>
 
     <br/>
@@ -182,7 +181,7 @@ const indexList: index[] = [
     Vueインスタンスに定義したdataをtemplateに埋め込み、フックや関数を介してdataを操作することでリアクティブなシステムを構築することができます。<br/>
     以下はVue.jsのコード例です。VueインスタンスにoutMsgとinMsgを定義し、ライフサイクルフックの created でデフォルト値を設定。<br/>
     textに入力すると「だよ」という文字列を付与してブラウザに表示します。<br/>
-    ※ created なんて使わずに <code class="copy">outMsg: 'default message.'</code> と定義すればいいのですが、サンプルなので無理矢理ですが created を使ってみました。<br/>
+    ※ created なんて使わずに <code>outMsg: 'default message.'</code> と定義すればいいのですが、サンプルなので無理矢理ですが created を使ってみました。<br/>
 
     <br/>
     恐ろしく簡素なページですが、一応以下のリンク先で実際に触ることができます。<br/>
@@ -193,35 +192,35 @@ const indexList: index[] = [
   </p>
 
 
-<pre><code class="copy">{`&lt;script lang="ts"&gt;
-export default {
-data() {
-return {
-  outMsg: '',
-  inMsg: ''
-}
-},
-created: function() {
-this.outMsg = 'default message.'
-},
-methods: {
-execFunc: function() {
-  if (this.inMsg !== '') {
-    this.outMsg = this.inMsg + 'だよ'
-  } else {
-    this.outMsg = 'no message.'
+<pre><code class="copy">{`<script lang="ts">
+  export default {
+    data() {
+      return {
+        outMsg: '',
+        inMsg: ''
+      }
+    },
+    created: function() {
+      this.outMsg = 'default message.'
+    },
+    methods: {
+      execFunc: function() {
+        if (this.inMsg !== '') {
+          this.outMsg = this.inMsg + 'だよ'
+        } else {
+          this.outMsg = 'no message.'
+        }
+      }
+    }
   }
-}
-}
-}
-&lt;/script&gt;
+</script>
 
-&lt;template&gt;
-&lt;div id="app"&gt;
-&lt;input type='text' v-model="inMsg" v-on:input="execFunc" placeholder='何か入力' style="color: black"/&gt;
-&lt;p style="color: black"&gt;{{ outMsg }}&lt;/p&gt;
-&lt;/div&gt;
-&lt;/template&gt;
+<template>
+  <div id="app">
+    <input type='text' v-model="inMsg" v-on:input="execFunc" placeholder='何か入力' style="color: black"/>
+    <p style="color: black">{{ outMsg }}</p>
+  </div>
+</template>
 `}</code></pre>
 
 
@@ -235,14 +234,14 @@ execFunc: function() {
   <span id="mustache"></span>
   <h4 class="title">マスタッシュ構文</h4>
   <p>
-    上記コードの<code class="copy">{`{{ outMsg }}`}</code> はマスタッシュ構文と呼ばれるもので、スクリプトブロックで用意した変数を表示するための構文です。ここではスクリプトブロック内で宣言した変数 outMsg を表示しています。タグとタグに囲まれた部分（要素のテキスト部分）にしか使えません。<br/>
+    上記コードの<code>{`{{ outMsg }}`}</code> はマスタッシュ構文と呼ばれるもので、スクリプトブロックで用意した変数を表示するための構文です。ここではスクリプトブロック内で宣言した変数 outMsg を表示しています。タグとタグに囲まれた部分（要素のテキスト部分）にしか使えません。<br/>
   </p>
 
   <br/>
   <span id="directive"></span>
   <h4 class="title">ディレクティブ</h4>
   <p>
-    <code class="copy">v-model</code> や <code class="copy">v-on</code> という属性はディレクティブと呼ばれるもので、 template 内の属性にデータや関数などをバインドするものです。主なディレクティブには以下のようなものがあります。
+    <code>v-model</code> や <code>v-on</code> という属性はディレクティブと呼ばれるもので、 template 内の属性にデータや関数などをバインドするものです。主なディレクティブには以下のようなものがあります。
   </p>
 
   <table border="1">
@@ -301,44 +300,44 @@ execFunc: function() {
 
 
 <pre class="title"><code class="title">CommonFooter.vue</code></pre>
-<pre><code class="copy">&lt;template&gt;
-&lt;div&gt;
-&lt;footer&gt;
-"フッターに記載する内容をここに書く"
-&lt;/footer&gt;
-&lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
+<pre><code class="copy">{`<template>
+  <div>
+    <footer>
+      /* フッターに記載する内容をここに書く */
+    </footer>
+  </div>
+</template>
+`}</code></pre>
 
 
 
   <br/><br/>
   <p>
-    以下は共通のbody部。<code class="copy">&lt;CommonFooter /&gt;</code>の所で上記CommonFooterコンポーネントを呼び出し。<br/>
-    CommonBodyを呼び出した側で pageTitle を設定し、<code class="copy">{`&lt;h2&gt;{{ pageTitle }}&lt;/h2&gt;`}</code>に代入。<br/>
-    <code class="copy">&lt;slot name="body"&gt;&lt;/slot&gt;</code>の部分に、呼び出し側の<code class="copy">&lt;template v-slot:body&gt;</code>の内容を埋め込む。
+    以下は共通のbody部。<code>{`<CommonFooter />`}</code>の所で上記CommonFooterコンポーネントを呼び出し。<br/>
+    CommonBodyを呼び出した側で pageTitle を設定し、<code>{`<h2>{{ pageTitle }}</h2>`}</code>に代入。<br/>
+    <code>{`<slot name="body"></slot>`}</code>の部分に、呼び出し側の<code>{`<template v-slot:body>`}</code>の内容を埋め込む。
   </p>
 
 
 <br/>
 <pre class="title"><code class="title">CommonBody.vue</code></pre>
-<pre><code class="copy">{`&lt;script setup lang="ts"&gt;
-interface Props {
-pageTitle: string   // 当コンポーネントの呼び出し元で設定する変数を定義
-}
-defineProps&lt;Props&gt;()
-&lt;/script&gt;
+<pre><code class="copy">{`<script setup lang="ts">
+  interface Props {
+    pageTitle: string   // 当コンポーネントの呼び出し元で設定する変数を定義
+  }
+  defineProps<Props>()
+</script>
 
-&lt;template&gt;
-&lt;body&gt;
-&lt;section&gt;
-&lt;h2&gt;{{ pageTitle }}&lt;/h2&gt;  // 定義した変数を設定
-&lt;slot name="body"&gt;&lt;/slot&gt;
-&lt;br/&gt;
-&lt;/section&gt;
-&lt;CommonFooter /&gt;  // 上で定義したFooterをここに読み込む
-&lt;/body&gt;
-&lt;/template>
+<template>
+  <body>
+    <section>
+      <h2>{{ pageTitle }}</h2>  // 定義した変数を設定
+      <slot name="body"></slot>
+      <br/>
+    </section>
+    <CommonFooter />  // 上で定義したFooterをここに読み込む
+  </body>
+</template>
 `}</code></pre>
 
 
@@ -349,19 +348,19 @@ defineProps&lt;Props&gt;()
   </p>
 
 <pre class="title"><code class="title">pages/page.vue</code></pre>
-<pre><code class="copy">&lt;template&gt;
-&lt;CommonBody v-bind:pageTitle="ページのタイトルをここに入れる"&gt;
-&lt;template v-slot:body&gt;
-ページ毎の内容をここに書く。
-v-slot:body としているため、CommonBody.vueの「&lt;slot name="body"&gt;&lt;/slot&gt;」に埋め込まれる。
-&lt;/template&gt;
-&lt;/CommonBody&gt;
-&lt;/template&gt;
+<pre><code class="copy">{`<template>
+  <CommonBody v-bind:pageTitle="ページのタイトルをここに入れる">
+    <template v-slot:body>
+      /* ページ毎の内容をここに書く。 */
+      /* v-slot:body としているため、CommonBody.vueの「<slot name="body"></slot>」に埋め込まれる。 */
+    </template>
+  </CommonBody>
+</template>
 
-&lt;script setup lang="ts"&gt;
-スクリプトをここに書く
-&lt;/script&gt;
-</code></pre>
+<script setup lang="ts">
+  /* スクリプトをここに書く */
+</script>
+`}</code></pre>
 
 
   <br/><br/>

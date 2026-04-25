@@ -5,6 +5,9 @@ import { BASE_URL } from '../../../../consts';
 import { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import type { index } from '../../../../components/HeaderIndex.astro';
 import { javaScriptBcList } from './js_index.astro';
+import { Image  } from 'astro:assets'
+import typescript_react_next from './spa/img/typescript_react_next.jpg'
+import typescript_practical from './img/実践TypeScript.jpg'
 
 export const typeScriptBc: Breadcrumb = {
   name: "TypeScript",
@@ -88,33 +91,32 @@ const indexList: index[] = [
 }
 
 let name: string = 'aaa'
-sayHello(name)
-</code></pre>
+sayHello(name)`}</code></pre>
 
-        <br/>
-        <span id="variables"></span>
-        <h4 class="title">変数の型定義</h4>
-<pre><code class="copy">const age: number = 30
+  <br/>
+  <span id="variables"></span>
+  <h4 class="title">変数の型定義</h4>
+
+<pre><code class="copy">{`const age: number = 30
 let isDone: boolean = true
 let name: string = 'abc'
 `}</code></pre>
 
-
-        <br/>
-        <span id="list"></span>
-        <h4 class="title">配列の型定義</h4>
+  <br/>
+  <span id="list"></span>
+  <h4 class="title">配列の型定義</h4>
 
 <pre><code class="copy">const array: string[] = ['aaa', 'bbb']
 array.push('ccc')
 array.push(1) // ←型が合わないためエラー
 </code></pre>
 
-        <br/>
-        <span id="object_type"></span>
-        <h4 class="title">オブジェクト型の型定義</h4>
+  <br/>
+  <span id="object_type"></span>
+  <h4 class="title">オブジェクト型の型定義</h4>
 <pre><code class="copy">{`{ キー名1: 型1, キー名2: 型2, キー名3: 型3 }`}</code></pre>
 
-        <br/>
+  <br/>
 
 <pre><code class="copy">{`const user: { name: string, age: number } = {
   name: 'aaa',
@@ -129,22 +131,22 @@ console.log(user.age)
   <span id="function"></span>
   <h4 class="title">関数の型定義</h4>
 
-<pre><code class="copy">function(引数1: 型1, 引数2: 型2): 戻り値 {
-  // 
+<pre><code class="copy">{`function(引数1: 型1, 引数2: 型2): 戻り値 {
+  //
 }
-</code></pre>
+`}</code></pre>
 
-        <br/>
+  <br/>
 <pre><code class="copy">{`function sayHello(name: string): string {
   return \`こんにちは\${name}\`
 }
 sayHello('aaa') // こんにちはaaa
 `}</code></pre>
 
-        <br/>
-        <p>
-          オプショナルや引数のデフォルト値を使用することもできます<br/>
-        </p>
+  <br/>
+  <p>
+    オプショナルや引数のデフォルト値を使用することもできます<br/>
+  </p>
 
 <pre class="title"><code class="title">オプショナル</code></pre>
 <pre><code class="copy">{`function sayHello(name: string, greeting?: string): string {
@@ -154,7 +156,7 @@ sayHello('aaa') // aaa
 sayHello('aaa', 'hello') // hello aaa
 `}</code></pre>
 
-        <br/>
+  <br/>
 <pre class="title"><code class="title">引数にデフォルト値指定</code></pre>
 <pre><code class="copy">{`function sayHello(name: string, greeting: string = 'hello'): string {
   return \`\${greeting} \${name}\`
@@ -169,7 +171,7 @@ sayHello('aaa', 'hey') // hey aaa
   <h3 class="title">tsconfig.json</h3>
   <p>
     TypeScriptではコンパイルに必要なオプションやコンパイル対象となるファイルの情報をtsconfig.jsonに記述します。<br/>
-    <code class="copy">tsc --init</code>コマンドを実行することでデフォルトのtsconfig.jsonが作成されます。プロジェクトルートに配置しましょう。<br/>
+    <code>tsc --init</code>コマンドを実行することでデフォルトのtsconfig.jsonが作成されます。プロジェクトルートに配置しましょう。<br/>
     tsconfig.jsonの詳細なオプションについては以下公式ドキュメント参照<br/>
     <a href="https://www.typescriptlang.org/tsconfig" target="_blank" rel="noopener noreferrer">TypeScript Compiler Options</a>
   </p>
@@ -215,8 +217,16 @@ sayHello('aaa', 'hey') // hey aaa
   <br/>
   参考書籍<br/>
   <ul>
-    <li><a href="https://amzn.to/4as09nr" target="_blank" rel="noopener noreferrer"><img src="./spa/img/typescript_react_next.jpg" width="200"/><br/>TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発</a></li>
-    <li><a href="https://amzn.to/3TPf5Xr" target="_blank" rel="noopener noreferrer"><img src="./img/実践TypeScript.jpg" width="200"/><br/>実践TypeScript</a></li>
+    <li>
+      <a href="https://amzn.to/4as09nr" target="_blank" rel="noopener noreferrer">
+        <Image src={typescript_react_next} alt="TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発" width="200"/><br/>TypeScriptとReact/Next.jsでつくる実践Webアプリケーション開発
+      </a>
+    </li>
+    <li>
+      <a href="https://amzn.to/3TPf5Xr" target="_blank" rel="noopener noreferrer">
+        <Image src={typescript_practical} alt="実践TypeScript" width="200"/><br/>実践TypeScript
+      </a>
+    </li>
   </ul>
 
   <br/>
