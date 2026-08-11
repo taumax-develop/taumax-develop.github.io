@@ -307,11 +307,13 @@ const indexList: index_pcsp[] = [
     コレクターはOpenTelemetry固有の概念なのでここを深掘る。<br>
 
     <br>
-    コレクターは、先にも書いた通り、アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）。<br>
-    アプリケーションからデータを送信する際の通信プロトコルはgRPC / HTTPが使用できる。<br>
-    送信するデータフォーマットはOTLP (OpenTelemetry Protocol) というプロトコルに準拠している。<br>
-    <a href="https://www.w3.org/" target="_blank" rel="noopener noreferrer">W3C</a>（Web技術の標準化を進める国際組織）の仕様として定義されている（なので今後どんどんこのフォーマットが当たり前のものになると思われる）。<br>
-    <a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener noreferrer">Trace Context</a><br>
+    コレクターは、先にも書いた通り、アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）です。<br>
+    アプリケーションからコレクタへデータを送信する際の通信プロトコルはgRPC / HTTPが使用できます。<br>
+    送信するデータフォーマットはOTLP (OpenTelemetry Protocol) というプロトコルに準拠しています。<br>
+    OTLP はアプリケーションからコレクター、またはコレクターからバックエンドへテレメトリデータを送信・転送するためのプロトコル/データ構造を定めたものです。<br>
+    また、サービス間（HTTPヘッダーやgRPCメタデータ）でトレースの文脈( <code>traceparent</code> , <code>tracestate</code> )を伝播するための標準仕様として <a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener noreferrer">Trace Context</a> が定義されています。<br>
+    これは <a href="https://www.w3.org/" target="_blank" rel="noopener noreferrer">W3C</a> （Web技術の標準化を進める国際組織）の仕様として定義されているものです。<br>
+    今後このフォーマットが当たり前になっていくものと思われます。<br>
 
     <br>
     アプリケーションからコレクターへの通信は基本的にはgRPCを使い、gRPCが使用できない環境下ではHTTPを使用する。
@@ -362,6 +364,7 @@ const indexList: index_pcsp[] = [
       <td>
         アプリと同一Podに常駐させる構成。<br>
         アプリとコレクターが同一Podのためlocalhostでデータを送信。<br>
+        アプリごとの独立性が高いが、ポッド数に比例してメモリ/CPU消費が増える。<br>
         <Image src={sidecar} alt="サイドカー構成" width="600" /><br>
       </td>
     </tr>
@@ -372,6 +375,7 @@ const indexList: index_pcsp[] = [
       <td>
         ノードに1つだけ配置し、ノード上で稼働する複数のアプリPodが共同で利用する構成。<br>
         同一ノード上のコレクターへNode IP経由で送信。<br>
+        ノードあたりのリソース効率が良いが、マルチテナントでの分離や設定変更の柔軟性に制限あり。<br>
         <Image src={daemonset} alt="DaemonSet構成" width="600" /><br>
       </td>
     </tr>
@@ -381,7 +385,8 @@ const indexList: index_pcsp[] = [
         コレクター専用のDeploymentを構成し、負荷状況に応じてオートスケール。<br>
         データ送信元はデーモンセット/サイドカー混合可。<br>
         ClusterIP Service経由でGateway Collectorへ集約。<br>
-        <Image src={gateway} alt="Gateway構成" width="600" /><br>
+        重い処理（Tail-based Sampling や集約処理）を担当させるのに向いている。<br>
+        <Image src={gateway} alt="Gateway構成" width="800" /><br>
       </td>
     </tr>
   </table>
@@ -389,11 +394,10 @@ const indexList: index_pcsp[] = [
   <br>
   <p>
     デーモンセット構成の場合、アプリケーションPodからコレクターPodへの通信はNode IP経由で行うので、NodeのIPアドレスを取得する必要がある。<br>
-    k8sであれば<code>deployment.yml</code>に以下のような設定をすることでNode IPを環境変数に設定することができる。<br>
+    k8sであれば <code>deployment.yml</code> に以下のような設定をすることでNode IPを環境変数に設定することができる。<br>
   </p>
 
 <br>
-<span style="color: yellow">k8sのdeploymentだっけ？</span>
 <pre class="title"><code class="title">k8s設定</code></pre>
 <pre><code class="copy">env:
   - name: DD_AGENT_HOST
@@ -676,7 +680,6 @@ latency.Record(ctx, latencyMs,
         <td>
           WithUnitで単位指定<br>
           指定する単位の形式はUCUM系式に準じている。<br>
-          （読む気しないリンク）<br>
           <a href="https://ucum.org/ucum" target="_blank" rel="noopener noreferrer">UCUM Specification</a><br>
           例：
           <ul>
@@ -783,8 +786,9 @@ latency.Record(ctx, latencyMs,
   <br>
   <h3 class="title" id="temporality">テンポラリティ</h3>
   <p>
-    OTelにはテンポラリティ（時間性）というものがあり、カウンターやヒストグラムなどのメトリクスが、時間経過に対してどのように集計・報告されるかを定義する概念。<br>
-    cumulative（累積）とdelta（差分）の2つがあり、影響するのはCounter, Histgram。<br>
+    OTelにはテンポラリティ（時間性）というものがあります。<br>
+    カウンターやヒストグラムなどのメトリクスが、時間経過に対してどのように集計・報告されるかを定義する概念です。<br>
+    cumulative（累積）とdelta（差分）の2つがあり、Counter, Histogram が影響を受けます。<br>
   </p>
 
   <ul>
@@ -794,7 +798,12 @@ latency.Record(ctx, latencyMs,
 
   <p>
     <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code>という環境変数の値を cumulativeまたはdeltaに設定することで処理方式を切り替えることができる。<br>
-    デフォルトはcumulative。<br>
+    OpenTelemetry のデフォルトは cumulative です。<br>
+    注意点として、Prometheus や Datadog など、受ける側の監視ツールによって推奨・対応しているテンポラリティが異なります。<br>
+    具体的には、Prometheus は Cumulative 選好、Datadog 等のメトリクスAPIは Delta が扱いやすいケースがあるようです。<br>
+    システムの要件や監視ツールの仕様に応じて、適切なテンポラリティを選択することが重要です。<br>
+
+    <br>
     参考：<a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/#temporality-and-cardinality-limits" target="_blank" rel="noopener noreferrer">OpenTelemetry テンポラリティとカーディナリティ制限</a><br>
   </p>
 
