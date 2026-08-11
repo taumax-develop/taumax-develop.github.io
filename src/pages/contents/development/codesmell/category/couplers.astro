@@ -3,7 +3,7 @@ import SiteLayout, { type Breadcrumb } from '../../../../../layouts/SiteLayout.a
 import refactoringImg from '../../img/refactoring.jpg';
 import legacyCodeImg from '../../img/legacy_code.jpg';
 import { BASE_URL } from '../../../../../consts';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 import { codesmellBcList } from '../codesmells.astro';
 
 export const couplersBc: Breadcrumb = {
@@ -11,13 +11,13 @@ export const couplersBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/codesmell/category/couplers`
 };
 export const couplersBcList: Breadcrumb[] = [...codesmellBcList, couplersBc];
-const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#couplers', name: 'Couplers' },
-  { id: '#featureenvy', name: 'Feature Envy' },
-  { id: '#inappropriateintimacy', name: 'Inappropriate Intimacy' },
-  { id: '#messagechains', name: 'Message Chains' },
-  { id: '#middleman', name: 'Middle Man' }
+const indexList: index_pcsp[] = [
+  { id: '#pagetop', name_pc: 'ページトップ' },
+  { id: '#couplers', name_pc: 'Couplers' },
+  { id: '#featureenvy', name_pc: 'Feature Envy' },
+  { id: '#inappropriateintimacy', name_pc: 'Inappropriate Intimacy' },
+  { id: '#messagechains', name_pc: 'Message Chains' },
+  { id: '#middleman', name_pc: 'Middle Man' }
 ];
 ---
 <SiteLayout

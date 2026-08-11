@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { organizeDataBcList } from '../organizing_data.astro';
 
 export const typeCodeClassBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const typeCodeClassBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/replace_type_code_with_class`
 };
 export const typeCodeClassBcList: Breadcrumb[] = [...organizeDataBcList, typeCodeClassBc];
-const indexList: index[] = [
-  { id: '#replacetypecodewithclass', name: 'Replace Type Code with Class' }
+const indexList: index_pcsp[] = [
+  { id: '#replacetypecodewithclass', name_pc: 'Replace Type Code with Class' }
 ];
 ---
 

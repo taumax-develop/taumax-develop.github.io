@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { generalisationBcList } from '../dealing_with_generalisation.astro';
 
 export const pushDownMethodBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const pushDownMethodBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_dealgeneral/push_down_method`
 };
 export const pushDownMethodBcList: Breadcrumb[] = [...generalisationBcList, pushDownMethodBc];
-const indexList: index[] = [
-  { id: '#pushdownmethod', name: 'Push Down Method' }
+const indexList: index_pcsp[] = [
+  { id: '#pushdownmethod', name_pc: 'Push Down Method' }
 ];
 ---
 

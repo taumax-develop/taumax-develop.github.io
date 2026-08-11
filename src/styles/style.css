@@ -176,6 +176,11 @@ td {
   padding: 6px;
   white-space: nowrap;
 }
+
+.slider th {
+  text-align: left;
+}
+
 .slider tr:first-child th,
 .slider tr th:first-child {
 /* .slider tr th { */

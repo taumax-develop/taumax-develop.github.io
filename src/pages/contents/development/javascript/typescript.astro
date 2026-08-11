@@ -3,7 +3,7 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
 import { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import { javaScriptBcList } from './js_index.astro';
 import { Image  } from 'astro:assets'
 import typescript_react_next from './spa/img/typescript_react_next.jpg'
@@ -14,16 +14,16 @@ export const typeScriptBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/typescript`
 };
 export const typeScriptBcList: Breadcrumb[] = [...javaScriptBcList, typeScriptBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#altjs', name: 'AltJS' },
-  { id: '#typescript', name: 'TypeScript' },
-  { id: '#define_type', name: '型の定義' },
-  { id: '#variables', name: '変数' },
-  { id: '#list', name: '配列' },
-  { id: '#object_type', name: 'オブジェクト型' },
-  { id: '#function', name: '関数' },
-  { id: '#tsconfig', name: 'tsconfig.json' }
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#altjs', name_pc: 'AltJS' },
+  { id: '#typescript', name_pc: 'TypeScript' },
+  { id: '#define_type', name_pc: '型の定義' },
+  { id: '#variables', name_pc: '変数' },
+  { id: '#list', name_pc: '配列' },
+  { id: '#object_type', name_pc: 'オブジェクト型' },
+  { id: '#function', name_pc: '関数' },
+  { id: '#tsconfig', name_pc: 'tsconfig.json' }
 ];
 ---
 <SiteLayout

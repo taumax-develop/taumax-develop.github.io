@@ -6,7 +6,7 @@ import img01 from './img/hide_delegate/img01.png'
 import img02 from './img/hide_delegate/img02.png'
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { movingFeaturesBcList } from '../moving_features_between_objects.astro';
 
 export const hideDelegateBc: Breadcrumb = {
@@ -14,8 +14,8 @@ export const hideDelegateBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/hide_delegate`
 };
 export const hideDelegateBcList: Breadcrumb[] = [...movingFeaturesBcList, hideDelegateBc];
-const indexList: index[] = [
-  { id: '#hidedelegate', name: 'Hide Delegate' }
+const indexList: index_pcsp[] = [
+  { id: '#hidedelegate', name_pc: 'Hide Delegate' }
 ];
 ---
 

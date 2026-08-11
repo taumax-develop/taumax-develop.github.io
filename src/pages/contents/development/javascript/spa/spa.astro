@@ -12,20 +12,20 @@ import ggg from './img/nuxt3.jpg';
 import hhh from './img/vuejs入門.jpg';
 import { BASE_URL } from '../../../../../consts';
 import { javaScriptBcList } from '../js_index.astro';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 
 export const spaBc: Breadcrumb = {
   name: "SPA",
   item: `${BASE_URL}/contents/development/javascript/spa/spa`
 };
 export const spaBcList: Breadcrumb[] = [...javaScriptBcList, spaBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#spa', name: 'SPA' },
-  { id: '#fw', name: 'フレームワーク' },
-  { id: '#rendering', name: 'Next, Nuxtのレンダリング' },
-  { id: '#detail', name: 'React, Vue詳細' },
-  { id: '#thoughts', name: '感想' }
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#spa', name_pc: 'SPA' },
+  { id: '#fw', name_pc: 'フレームワーク' },
+  { id: '#rendering', name_pc: 'Next, Nuxtのレンダリング' },
+  { id: '#detail', name_pc: 'React, Vue詳細' },
+  { id: '#thoughts', name_pc: '感想' }
 ];
 ---
 

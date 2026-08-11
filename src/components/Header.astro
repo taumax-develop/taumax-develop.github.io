@@ -2,7 +2,21 @@
 import { Image } from 'astro:assets';
 import ICON_TWITTER_CARD from '../assets/images/icon_twitter_card.png';
 import HeaderIndex from './HeaderIndex.astro';
-let { indexList } = Astro.props;
+import {type index} from './HeaderIndex.astro';
+
+export type index_pcsp = {
+  id: string;
+  name_pc: string;
+  name_sp?: string;
+};
+
+let { indexList: index_pcsp } = Astro.props;
+let indexListPc: index[] = index_pcsp?.map((item: index_pcsp) => {
+  return { id: item.id, name: item.name_pc }
+})
+let indexListSp: index[] = index_pcsp?.map((item: index_pcsp) => {
+  return { id: item.id, name: item.name_sp ? item.name_sp : item.name_pc }
+})
 ---
 
 <!--PC用（801px以上端末）メニュー-->
@@ -14,7 +28,7 @@ let { indexList } = Astro.props;
       <li class="menuimg menu1"><a href="https://taumax-develop.github.io/"><span>Home</span></a></li>
     </ul>
   </nav>
-  <HeaderIndex indexList={indexList}/>
+  <HeaderIndex indexList={indexListPc}/>
 </header>
 <!--/.pc-->
 
@@ -27,7 +41,7 @@ let { indexList } = Astro.props;
         <li class="menuimg menu1"><a href="https://taumax-develop.github.io/"><span>Home</span></a></li>
       </ul>
     </nav>
-    <HeaderIndex indexList={indexList}/>
+    <HeaderIndex indexList={indexListSp}/>
   </div><!--/#menubar-s-->
 </header>
 <!--/.sh-->

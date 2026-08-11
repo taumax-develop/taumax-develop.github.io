@@ -2,7 +2,7 @@
 import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import { indexPagebcList } from '../../../index.astro';
 
 export const javaBc: Breadcrumb = {
@@ -10,8 +10,8 @@ export const javaBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/java/java_index`
 };
 export const javaBcList: Breadcrumb[] = [...indexPagebcList, javaBc];
-const indexList: index[] = [
-  { id: 'jjug', name: 'jjug Java 25周年記念' }
+const indexList: index_pcsp[] = [
+  { id: 'jjug', name_pc: 'jjug Java 25周年記念' }
 ];
 ---
 <SiteLayout

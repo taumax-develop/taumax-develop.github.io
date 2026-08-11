@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { smplCondExpressBcList } from '../simplifying_conditional_expressions.astro';
 
 export const introAssertBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const introAssertBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/introduce_assertion`
 };
 export const introAssertBcList: Breadcrumb[] = [...smplCondExpressBcList, introAssertBc];
-const indexList: index[] = [
-  { id: '#introduceassertion', name: 'Introduce Assertion' }
+const indexList: index_pcsp[] = [
+  { id: '#introduceassertion', name_pc: 'Introduce Assertion' }
 ];
 ---
 

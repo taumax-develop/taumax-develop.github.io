@@ -7,7 +7,7 @@ import img2nd from './img/2nd_step.jpg';
 import img3rd from './img/3rd_step.jpg';
 import imgNext from './img/next_step.jpg';
 import { BASE_URL } from '../../../consts';
-import type { index } from '../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../components/Header.astro';
 import { indexPagebcList } from '../../index.astro';
 import AdUnitLandscape from '../../../components/AdUnitLandscape.astro';
 
@@ -16,12 +16,12 @@ export const selfDevelopPagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/bymyself/bymyself`
 };
 export const selfDevelopBreadcrumbList: Breadcrumb[] = [...indexPagebcList, selfDevelopPagebc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#first", name: "初期構築" },
-  { id: "#second", name: "二次" },
-  { id: "#now", name: "現状" },
-  { id: "#doing", name: "今後" }
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#first", name_pc: "初期構築" },
+  { id: "#second", name_pc: "二次" },
+  { id: "#now", name_pc: "現状" },
+  { id: "#doing", name_pc: "今後" }
 ];
 ---
 

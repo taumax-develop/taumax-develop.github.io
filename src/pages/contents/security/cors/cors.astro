@@ -8,20 +8,20 @@ import sec_2017_spring from '../img/sec_2017_spring.jpg';
 import sec_2018_spring from '../img/sec_2018_spring.jpg';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
 import { securityBreadcrumbList } from '../security.astro';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 
 export const corsPagebc: Breadcrumb = {
   name: "CORS",
   item: `${BASE_URL}/contents/security/cors/cors`
 };
 const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, corsPagebc];
-const indexList: index[] = [
-  { id: "#cors", name: "CORS" },
-  { id: "#soa_cors", name: "SOA,CORS" },
-  { id: "#access_control_allow_origin", name: "Access-Control-Allow-Origin" },
-  { id: "#proxy_flow", name: "脆弱性" },
-  { id: "#attack_conditions", name: "攻撃が成立する条件" },
-  { id: "#reference", name: "参考" }
+const indexList: index_pcsp[] = [
+  { id: "#cors", name_pc: "CORS" },
+  { id: "#soa_cors", name_pc: "SOA,CORS" },
+  { id: "#access_control_allow_origin", name_pc: "Access-Control-Allow-Origin" },
+  { id: "#proxy_flow", name_pc: "脆弱性" },
+  { id: "#attack_conditions", name_pc: "攻撃が成立する条件" },
+  { id: "#reference", name_pc: "参考" }
 ];
 ---
 

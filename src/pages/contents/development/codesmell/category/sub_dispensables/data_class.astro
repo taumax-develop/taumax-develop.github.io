@@ -3,7 +3,7 @@ import SiteLayout, { type Breadcrumb } from '../../../../../../layouts/SiteLayou
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { BASE_URL } from '../../../../../../consts';
 import { dispensablesBcList } from '../dispensables.astro';
 
@@ -16,8 +16,8 @@ export const dataClassBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/codesmell/category/sub_dispensables/data_class`
 };
 export const dataClassBcList: Breadcrumb[] = [...dispensablesBcList, dataClassBc];
-const indexList: index[] = [
-  { id: '#dataclass', name: 'Data Class' }
+const indexList: index_pcsp[] = [
+  { id: '#dataclass', name_pc: 'Data Class' }
 ];
 ---
 <SiteLayout

@@ -5,7 +5,7 @@ import { BASE_URL } from '../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../img/refactoring.jpg';
 import legacy_code from '../img/legacy_code.jpg';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import { codesmellRefactorBcList } from '../codesmell_refactoring.astro';
 
 export const codesmellPagebc: Breadcrumb = {
@@ -13,16 +13,16 @@ export const codesmellPagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/codesmell/codesmells`
 };
 export const codesmellBcList: Breadcrumb[] = [...codesmellRefactorBcList, codesmellPagebc];
-const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#codesmell', name: 'Code Smellとは？' },
-  { id: '#bloaters', name: 'Bloaters' },
-  { id: '#Object-Orientation Abusers', name: 'Object-Orientation Abusers' },
-  { id: '#changepreventers', name: 'Change Preventers' },
-  { id: '#dispensables', name: 'Dispensables' },
-  { id: '#couplers', name: 'Couplers' },
-  { id: '#other', name: 'Other Smells' },
-  { id: '#codesmell-1', name: 'その他参考' }
+const indexList: index_pcsp[] = [
+  { id: '#pagetop', name_pc: 'ページトップ' },
+  { id: '#codesmell', name_pc: 'Code Smellとは？' },
+  { id: '#bloaters', name_pc: 'Bloaters' },
+  { id: '#Object-Orientation Abusers', name_pc: 'Object-Orientation Abusers' },
+  { id: '#changepreventers', name_pc: 'Change Preventers' },
+  { id: '#dispensables', name_pc: 'Dispensables' },
+  { id: '#couplers', name_pc: 'Couplers' },
+  { id: '#other', name_pc: 'Other Smells' },
+  { id: '#codesmell-1', name_pc: 'その他参考' }
 ];
 ---
 

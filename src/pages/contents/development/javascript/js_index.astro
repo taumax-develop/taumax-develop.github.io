@@ -8,7 +8,7 @@ import vue3 from './spa/img/vue3.jpg';
 import vuejs入門 from './spa/img/vuejs入門.jpg';
 import popularity_2006q4 from './img/popularity_2006q4.jpg';
 import popularity_2025q1 from './img/popularity_2025q1.jpg';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import { developmentBcList } from '../development_index.astro';
 
 export const javaScriptBc: Breadcrumb = {
@@ -16,17 +16,17 @@ export const javaScriptBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/js_index`
 };
 export const javaScriptBcList: Breadcrumb[] = [...developmentBcList, javaScriptBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#history', name: '歴史' },
-  { id: '#html5', name: 'HTML5' },
-  { id: '#nodejs', name: 'Node.js' },
-  { id: '#CJS_ES6', name: 'CJS, ES6' },
-  { id: '#cjs', name: 'CJS' },
-  { id: '#es6', name: 'ES6' },
-  { id: '#altjs', name: 'AltJS' },
-  { id: '#front', name: 'フロントエンドライブラリ' },
-  { id: '#detail', name: '関連技術詳細' }
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#history', name_pc: '歴史' },
+  { id: '#html5', name_pc: 'HTML5' },
+  { id: '#nodejs', name_pc: 'Node.js' },
+  { id: '#CJS_ES6', name_pc: 'CJS, ES6' },
+  { id: '#cjs', name_pc: 'CJS' },
+  { id: '#es6', name_pc: 'ES6' },
+  { id: '#altjs', name_pc: 'AltJS' },
+  { id: '#front', name_pc: 'フロントエンドライブラリ' },
+  { id: '#detail', name_pc: '関連技術詳細' }
 ];
 ---
 <SiteLayout

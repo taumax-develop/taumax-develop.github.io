@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { smplCondExpressBcList } from '../simplifying_conditional_expressions.astro';
 
 export const introNullObjBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const introNullObjBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/introduce_null_object`
 };
 export const introNullObjBcList: Breadcrumb[] = [...smplCondExpressBcList, introNullObjBc];
-const indexList: index[] = [
-  { id: '#introducenullobject', name: 'Introduce Null Object' }
+const indexList: index_pcsp[] = [
+  { id: '#introducenullobject', name_pc: 'Introduce Null Object' }
 ];
 ---
 

@@ -2,7 +2,7 @@
 import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../consts';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import { requirementBreadcrumbList } from '../requirement.astro';
 import { Image } from 'astro:assets';
 import ccsr02 from './img/ccsr/02_ccsr.png';
@@ -41,10 +41,10 @@ export const requirementPagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/requirement/ccsr/bpstudy_ccsr`
 };
 export const breadcrumbList: Breadcrumb[] = [...requirementBreadcrumbList, requirementPagebc];
-const indexList: index[] = [
-  { id: "#improve_software_develop", name: "ソフトウェア開発のやり方の改善" },
-  { id: "#rdra_with_ccsr", name: "CCSRを実現するRDRA活用法" },
-  { id: "#qa", name: "QA" }
+const indexList: index_pcsp[] = [
+  { id: "#improve_software_develop", name_pc: "ソフトウェア開発のやり方の改善" },
+  { id: "#rdra_with_ccsr", name_pc: "CCSRを実現するRDRA活用法" },
+  { id: "#qa", name_pc: "QA" }
 ];
 ---
 

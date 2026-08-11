@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { movingFeaturesBcList } from '../moving_features_between_objects.astro';
 
 export const inlineClassBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const inlineClassBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/inline_class`
 };
 export const inlineClassBcList: Breadcrumb[] = [...movingFeaturesBcList, inlineClassBc];
-const indexList: index[] = [
-  { id: '#inlineclass', name: 'Inline Class' }
+const indexList: index_pcsp[] = [
+  { id: '#inlineclass', name_pc: 'Inline Class' }
 ];
 ---
 

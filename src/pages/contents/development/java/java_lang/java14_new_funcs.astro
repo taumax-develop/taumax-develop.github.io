@@ -10,7 +10,7 @@ import eee from './img/eee.png'
 import fff from './img/fff.png'
 import ggg from './img/ggg.png'
 import { BASE_URL } from '../../../../../consts';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 import { javaBcList } from '../java_index.astro';
 
 export const java14Bc: Breadcrumb = {
@@ -18,8 +18,8 @@ export const java14Bc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/java_lang/java14_new_funcs`
 };
 export const java14BcList: Breadcrumb[] = [...javaBcList, java14Bc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
 ];
 ---
 <SiteLayout

@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { movingFeaturesBcList } from '../moving_features_between_objects.astro';
 
 export const extractClassBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const extractClassBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_movingfeatures/extract_class`
 };
 export const extractClassBcList: Breadcrumb[] = [...movingFeaturesBcList, extractClassBc];
-const indexList: index[] = [
-  { id: '#extractclass', name: 'Extract Class' }
+const indexList: index_pcsp[] = [
+  { id: '#extractclass', name_pc: 'Extract Class' }
 ];
 ---
 <SiteLayout

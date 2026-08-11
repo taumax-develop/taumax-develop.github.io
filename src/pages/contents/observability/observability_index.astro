@@ -1,0 +1,34 @@
+---
+import type { index_pcsp } from '../../../components/Header.astro';
+import { BASE_URL } from '../../../consts';
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { indexPagebcList } from '../../index.astro';
+
+const title = "可観測性";
+const description = "要件定義";
+const twitterCardSize = "summary";
+
+export const observabilityPagebc: Breadcrumb = {
+  name: "可観測性",
+  item: `${BASE_URL}/contents/observability/observability_index`
+};
+export const observabilityBreadcrumbList: Breadcrumb[] = [...indexPagebcList, observabilityPagebc];
+const indexList: index_pcsp[] = [];
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  twitterCardSize={twitterCardSize}
+  breadcrumbList={observabilityBreadcrumbList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title">可観測性</h3>
+  <p>
+    <a href={`${BASE_URL}/contents/observability/otel/opentelemetry`}>OpenTelemetry</a><br>
+  </p>
+
+  <br><br><br><br><br><br>
+</SiteLayout>

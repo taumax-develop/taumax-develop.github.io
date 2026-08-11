@@ -6,7 +6,7 @@ import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
 import type { Breadcrumb } from '../../../../../../layouts/SiteLayout.astro';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { composingMethodsBcList } from '../composing_methods.astro';
 
 export const inlineMethodBc: Breadcrumb = {
@@ -14,9 +14,9 @@ export const inlineMethodBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_compmeth/inline_method`
 };
 export const inlineMethodBcList: Breadcrumb[] = [...composingMethodsBcList, inlineMethodBc];
-const indexList: index[] = [
-  { id: '#composingmethods', name: 'Composing Methods' },
-  { id: '#inlinemethod', name: 'Inline Method' }
+const indexList: index_pcsp[] = [
+  { id: '#composingmethods', name_pc: 'Composing Methods' },
+  { id: '#inlinemethod', name_pc: 'Inline Method' }
 ];
 ---
 

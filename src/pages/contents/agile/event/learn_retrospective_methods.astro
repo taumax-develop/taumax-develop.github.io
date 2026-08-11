@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../consts';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
 import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import imgAgileRetro from './img/agile_retro.jpg';
 import imgFractar from './img/fractar.png';
 import imgKpt from './img/kpt.jpg';
@@ -14,46 +14,46 @@ export const agilePagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/agile/event/learn_retrospective_methods`
 };
 export const breadcrumbList: Breadcrumb[] = [...agileBreadcrumbList, agilePagebc];
-const indexList: index[] = [
-  {id: "#firstly", name: "はじめに"},
-  {id: "#movie", name: "動画"},
-  {id: "#how_to_search", name: "振り返り手法の調べ方"},
-  {id: "#zou_sakana_outo", name: "象、死んだ魚、嘔吐"},
-  {id: "#shanikamaeru", name: "斜に構える、構えないを繰り返す"},
-  {id: "#radar", name: "Happiness Radar"},
-  {id: "#s_starfish", name: "Happiness Small Starfish"},
-  {id: "#door", name: "Happiness Door"},
-  {id: "#ondokei", name: "温度計"},
-  {id: "#color", name: "カラーコードドット"},
-  {id: "#fractaru", name: "フラクタル"},
-  {id: "#555", name: "555"},
-  {id: "#story_story", name: "story of a story"},
-  {id: "#effort_and_pain", name: "effort & pain"},
-  {id: "#vsm", name: "VSM"},
-  {id: "", name: "音声だけでも可能"},
-  {id: "#taiwa", name: "対話による学びの抽出"},
-  {id: "#q_wa", name: "質問の輪"},
-  {id: "", name: "お絵かき系"},
-  {id: "#netsukikyu", name: "熱気球・スピードカー・帆船"},
-  {id: "", name: "一人でできる"},
-  {id: "#ywt", name: "YWT"},
-  {id: "#orid", name: "ORID"},
-  {id: "#kotsu", name: "一人でも振り返りを続けるコツ"},
-  {id: "", name: "短時間でできる"},
-  {id: "#good_and_new", name: "Good & New"},
-  {id: "#kpt_as_art", name: "KPT as ART"},
-  {id: "", name: "KPTに飽きたら"},
-  {id: "#kansha", name: "360度感謝"},
-  {id: "#thanks", name: "サンクスカード"},
-  {id: "#kudos_wall", name: "kudos wall"},
-  {id: "#yaminabe", name: "闇鍋"},
-  {id: "", name: "何かをやめる"},
-  {id: "#ssc", name: "SSC"},
-  {id: "#starfish", name: "Starfish"},
-  {id: "#f_up_items", name: "Following up on Action Items"},
-  {id: "", name: "ﾁｰﾄｼｰﾄ以外"},
-  {id: "#daily_hassle", name: "デイリーハッスル"},
-  {id: "#sankou", name: "参考"}
+const indexList: index_pcsp[] = [
+  {id: "#firstly", name_pc: "はじめに"},
+  {id: "#movie", name_pc: "動画"},
+  {id: "#how_to_search", name_pc: "振り返り手法の調べ方"},
+  {id: "#zou_sakana_outo", name_pc: "象、死んだ魚、嘔吐"},
+  {id: "#shanikamaeru", name_pc: "斜に構える、構えないを繰り返す"},
+  {id: "#radar", name_pc: "Happiness Radar"},
+  {id: "#s_starfish", name_pc: "Happiness Small Starfish"},
+  {id: "#door", name_pc: "Happiness Door"},
+  {id: "#ondokei", name_pc: "温度計"},
+  {id: "#color", name_pc: "カラーコードドット"},
+  {id: "#fractaru", name_pc: "フラクタル"},
+  {id: "#555", name_pc: "555"},
+  {id: "#story_story", name_pc: "story of a story"},
+  {id: "#effort_and_pain", name_pc: "effort & pain"},
+  {id: "#vsm", name_pc: "VSM"},
+  {id: "", name_pc: "音声だけでも可能"},
+  {id: "#taiwa", name_pc: "対話による学びの抽出"},
+  {id: "#q_wa", name_pc: "質問の輪"},
+  {id: "", name_pc: "お絵かき系"},
+  {id: "#netsukikyu", name_pc: "熱気球・スピードカー・帆船"},
+  {id: "", name_pc: "一人でできる"},
+  {id: "#ywt", name_pc: "YWT"},
+  {id: "#orid", name_pc: "ORID"},
+  {id: "#kotsu", name_pc: "一人でも振り返りを続けるコツ"},
+  {id: "", name_pc: "短時間でできる"},
+  {id: "#good_and_new", name_pc: "Good & New"},
+  {id: "#kpt_as_art", name_pc: "KPT as ART"},
+  {id: "", name_pc: "KPTに飽きたら"},
+  {id: "#kansha", name_pc: "360度感謝"},
+  {id: "#thanks", name_pc: "サンクスカード"},
+  {id: "#kudos_wall", name_pc: "kudos wall"},
+  {id: "#yaminabe", name_pc: "闇鍋"},
+  {id: "", name_pc: "何かをやめる"},
+  {id: "#ssc", name_pc: "SSC"},
+  {id: "#starfish", name_pc: "Starfish"},
+  {id: "#f_up_items", name_pc: "Following up on Action Items"},
+  {id: "", name_pc: "ﾁｰﾄｼｰﾄ以外"},
+  {id: "#daily_hassle", name_pc: "デイリーハッスル"},
+  {id: "#sankou", name_pc: "参考"}
 ]
 ---
 

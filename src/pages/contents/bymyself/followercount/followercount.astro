@@ -4,7 +4,7 @@ import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
 import { Image } from 'astro:assets';
 import imgWhole from './img/whole_image.jpg';
 import { BASE_URL } from '../../../../consts';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 import { selfDevelopBreadcrumbList } from '../bymyself.astro';
 import { Gist } from 'astro-embed';
 
@@ -13,11 +13,11 @@ export const followerCountPagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/bymyself/followercount/followercount`
 };
 export const breadcrumbList: Breadcrumb[] = [...selfDevelopBreadcrumbList, followerCountPagebc];
-const indexList: index[] = [
-  { id: "#summary", name: "概要" },
-  { id: "#whatimade", name: "作成物" },
-  { id: "#mechanism", name: "仕組み" },
-  { id: "#whatilearn", name: "学び" }
+const indexList: index_pcsp[] = [
+  { id: "#summary", name_pc: "概要" },
+  { id: "#whatimade", name_pc: "作成物" },
+  { id: "#mechanism", name_pc: "仕組み" },
+  { id: "#whatilearn", name_pc: "学び" }
 ];
 ---
 

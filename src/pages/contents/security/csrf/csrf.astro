@@ -10,21 +10,21 @@ import shienshi_2019 from '../img/shienshi_2019.jpg';
 import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
 import { BASE_URL } from '../../../../consts';
 import { securityBreadcrumbList } from '../security.astro';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 
 export const csrfPagebc: Breadcrumb = {
   name: "CSRF",
   item: `${BASE_URL}/contents/security/csrf/csrf`
 };
 const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, csrfPagebc];
-const indexList: index[] = [
-  { id: "#csrf", name: "CSRF" },
-  { id: "#reference", name: "参考" },
-  { id: "#csrf_damage", name: "CSRF攻撃を受けるどういった被害に合うのか？" },
-  { id: "#why", name: "なぜこのようなことが起きてしまうのか？" },
-  { id: "#what_kind", name: "どのようなWebサイトで注意が必要なのか？" },
-  { id: "#countermeasure", name: "対策" },
-  { id: "#actual_case", name: "実際に起こった事例" },
+const indexList: index_pcsp[] = [
+  { id: "#csrf", name_pc: "CSRF" },
+  { id: "#reference", name_pc: "参考" },
+  { id: "#csrf_damage", name_pc: "CSRF攻撃を受けるどういった被害に合うのか？" },
+  { id: "#why", name_pc: "なぜこのようなことが起きてしまうのか？" },
+  { id: "#what_kind", name_pc: "どのようなWebサイトで注意が必要なのか？" },
+  { id: "#countermeasure", name_pc: "対策" },
+  { id: "#actual_case", name_pc: "実際に起こった事例" },
 ];
 ---
 

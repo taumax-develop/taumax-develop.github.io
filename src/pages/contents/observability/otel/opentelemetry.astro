@@ -1,0 +1,825 @@
+---
+import SiteLayout, { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
+import AdUnitLandscape from '../../../../components/AdUnitLandscape.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../../consts';
+import type { index_pcsp } from '../../../../components/Header.astro';
+import { observabilityBreadcrumbList } from '../observability_index.astro';
+import { Image } from 'astro:assets';
+import overallStruct from './img/otel概念図.png';
+import k8sConfig from './img/k8s_configuration.png';
+import sidecar from './img/sidecar.png';
+import daemonset from './img/daemonset.png';
+import gateway from './img/gateway.png';
+
+export const oTelPagebc: Breadcrumb = {
+  name: "OpenTelemetry",
+  item: `${BASE_URL}/contents/observability/otel/opentelemetry`
+};
+export const breadcrumbList: Breadcrumb[] = [...observabilityBreadcrumbList, oTelPagebc];
+const indexList: index_pcsp[] = [
+  { id: "#what_id_otel", name_pc: "OTelとは", name_sp: "OpenTelemetryとは" },
+  { id: "#otel_overall_structure", name_pc: "OTelの構成", name_sp: "OpenTelemetryの全体構成" },
+  { id: "#what_id_collector", name_pc: "コレクター", name_sp: "コレクター" },
+  { id: "#k8s_otel_collector", name_pc: "コレクター配置", name_sp: "k8s環境下でOpenTelemetryコレクターはどこに置くのか" },
+  { id: "#app_go_implementation", name_pc: "Goの実装", name_sp: "アプリケーションの話（Goの実装の話）" },
+  { id: "#trace_and_span", name_pc: "Trace,Span", name_sp: "TraceとSpan" },
+  { id: "#propagator", name_pc: "プロパゲータ", name_sp: "プロパゲーター" },
+  { id: "#metrics", name_pc: "メトリクス", name_sp: "メトリクス" },
+  { id: "#custom_metrics", name_pc: "カスタムメトリクス", name_sp: "カスタムメトリクス" },
+  { id: "#temporality", name_pc: "テンポラリティ", name_sp: "テンポラリティ" },
+  { id: "#reference", name_pc: "参考", name_sp: "" },
+];
+---
+
+<SiteLayout
+  title="OpenTelemetry"
+  description="OpenTelemetryの解説"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
+  indexList={indexList}
+>
+
+  <AdUnitLandscape />
+
+  <br/>
+  <h3 class="title" id="what_id_otel">OpenTelemetryとは</h3>
+  <p>
+    <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry(OTel)</a>とは、Googleが主導して作成したOpenCensusと、<a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer">CNCF</a>（Cloud Native Computing Foundation コンテナ技術の推進を目的とした組織）が主導していたOpenTracingを統一し、テレメトリ仕様の業界標準としたもの。<br>
+    （テレメトリ：サーバーの稼働状況（メトリクス）やエラーログを収集し、システムの安定稼働や障害の早期解決（オブザーバビリティ）に利用されます）<br>
+    テレメトリの三本柱と呼ばれているログ、トレース、メトリクスに加え、バゲッジ、プロファイルというデータの標準仕様をOTLP(OpenTelemetry Protocol)というプロトコルとして定めた。<br>
+    ログ、トレース、メトリクスはシグナルとも呼ばれる。システムやアプリケーションの動作状況やパフォーマンスを把握するために外部へ出力されるデータの種類のこと。<br>
+    プロファイルもシグナルだが、現在(2026/7/13)開発中のステータス。<br>
+    バゲッジは補助的なデータを伝播させる仕組み。<br>
+    各データ分類の概要と役割は以下の通り。<br>
+  </p>
+
+  <div class="slider">
+    <table border="1">
+      <tr><th style="z-index: 0">データ分類</th><th>概要と役割</th></tr>
+      <tr>
+        <td style="white-space: nowrap;">ログ</td>
+        <td>
+          <ul class="indent_no">
+            <li>概要: アプリケーションやシステムが吐き出す、タイムスタンプ付きのテキストレコードです。</li>
+            <li>役割: 「その瞬間、具体的に何が起きたのか」という詳細な事実・デバッグ情報を提供します。</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="white-space: nowrap;">トレース</td>
+        <td>
+          <ul class="indent_no">
+            <li>概要: リクエストが分散システム（マイクロサービスなど）を通過する際の一連の流れ、経路を記録します。</li>
+            <li>役割: 「どこで遅延が発生しているか」「どのサービス間でエラーが起きたか」という文脈（コンテキスト）を特定します。</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="white-space: nowrap;">メトリクス</td>
+        <td>
+          <ul class="indent_no">
+            <li>概要: CPU使用率、メモリ消費量、リクエスト数、エラー率など、一定時間ごとに集計された数値データです。</li>
+            <li>役割: 「システムの調子は良いか悪いか」「システム全体で何が起きているか」という統計的な傾向や異常の検知に使います。</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="white-space: nowrap;">バゲッジ</td>
+        <td>
+          <ul class="indent_no">
+            <li>概要: トレースの「コンテキスト（文脈）」に含めて、サービス間で引き継ぎたい任意のキー・バリューのペア（メタデータ）です。</li>
+            <li>
+              役割: 例えば「ユーザーID」や「テナントID」をバゲッジに入れることで、リクエストがどれだけ多くのマイクロサービスを経由しても、<br>
+              下流のサービスまでその情報を伝播させることができます（ログやトレースの分析が格段に楽になります）。
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="white-space: nowrap;">プロファイル</td>
+        <td>
+          <ul class="indent_no">
+            <li>概要: コードレベルでのCPU利用時間やメモリ割り当ての詳細な内訳（コールスタックなど）を定期的に収集します。</li>
+            <li>
+              役割: メトリクスやトレースで「この処理が遅い」と分かった後、「コードの何行目が原因か」まで<br>
+              ピンポイントで特定します（近年、OpenTelemetryでも標準化が急ピッチで進んでいます）。
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+  <p>
+    これらの概念自体はOpenTelemetry登場前から存在していたが、ベンダー（DatadogやPrometheus, Jeagerなど）によって仕様が異なっていた。<br>
+    それらをベンダーに依存しない統一フォーマットとして提供し、データの生成から転送までの方式を標準化した。<br>
+    さらに、これらのシグナルをトレースIDというユニークなIDで、コンテキスト（Goなら <code>context.Context</code> ）を介して紐づけることで、障害などが発生した際のログ、トレース、メトリクスなどの紐付けが容易にできるようにした。<br>
+    これまでは、例えば障害があった時に各シグナルを結びつけるためには、おおよその時間から推測するというのが主な調査方法だったが、コンテキストで結びつけることで、明確な紐付けをすることができるようになった。<br>
+    （これまでも一部繋がってはいるが、それはベンダーの仕様に依存している。OTelはそれを全面的に標準化した。）<br>
+
+    <br>
+    ここまでがOpenTelemetryの概要です。<br>
+  </p>
+
+  <AdUnitLandscape />
+
+  <br/>
+  <h3 class="title" id="otel_overall_structure">OpenTelemetryの全体構成</h3>
+  <p>
+    OpenTelemetryの構成を俯瞰して見ると以下の図のようになっている。<br>
+    <Image src={overallStruct} alt="OpenTelemetryの全体構成" width="1000" /><br>
+
+    <br>
+    それぞれの役割は以下の通り。<br>
+  </p>
+
+  <div class="slider">
+    <table border="1">
+      <tr><th style="z-index: 0">機能</th><th>役割</th><th>具体例</th></tr>
+      <tr>
+        <td>コレクター</td>
+        <td>
+          アプリケーションから送られてきたシグナルを受け取り、<br>
+          加工して、次の場所へ送り出す中継地点（プロキシ）。<br>
+          コレクターの役割は大きく以下3つ<br>
+          <ul class="indent_no">
+            <li>受信: アプリケーションからデータを受け取る</li>
+            <li>
+              処理: データを扱いやすいようにフィルタリングしたり、<br>
+              個人情報をマスキングしたりする
+            </li>
+            <li>
+              送信: 後続のストレージや、Datadog, Prometheus<br>
+              といった外部の監視ツールへ送信する
+            </li>
+          </ul>
+        </td>
+        <td>Datadog Agent</td>
+      </tr>
+      <tr>
+        <td>ストレージ</td>
+        <td>送信されたテレメトリーデータを蓄積する場所</td>
+        <td>Datadog</td>
+      </tr>
+      <tr>
+        <td>バックエンド</td>
+        <td>
+          エンドユーザー（我々）に対してUIを通して<br>
+          データを見えるようにする場所
+        </td>
+        <td>Datadog</td>
+      </tr>
+    </table>
+  </div>
+
+  <br>
+  <br>
+  <p>
+    具体的な構成例があったほうがよりピンと来る気がするので以下構成例
+  </p>
+
+  <div class="slider">
+    <table border="1">
+      <tr><th style="z-index: 0">構成例</th><th>コレクター</th><th>ストレージ</th><th>バックエンド（UI/クエリ）</th><th>備考</th></tr>
+      <tr><td>SaaS活用</td><td>Datadog Agent</td><td>Datadog</td><td>Datadog</td><td>Datadogはストレージとバックエンドを兼務できる</td></tr>
+      <tr>
+        <td rowspan="5">
+          OSSを駆使した<br>
+          自前運用<br>
+          （無料でローカル<br>
+          環境で構築できる<br>
+          ということ）
+        </td>
+        <td rowspan="5">
+          <a href="https://github.com/open-telemetry/opentelemetry-collector" target="_blank" rel="noopener noreferrer">
+            OpenTelemetry Collector
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Loki</td><td>Grafana</td><td>Lokiはログ専用ストレージ</td>
+      </tr>
+      <tr>
+        <td>ElasticSearch</td><td>Kibana / Grafana</td><td>ログ・トレース両対応</td>
+      </tr>
+      <tr>
+        <td>Prometheus</td>
+        <td>
+          Grafana or<br>
+          Prometheusコンソール
+        </td>
+        <td>
+          Prometheusはメトリクス特化。<br>
+          ストレージとバックエンドを兼務可。
+        </td>
+      </tr>
+      <tr>
+        <td>Jaeger</td><td>Jaeger</td>
+        <td>
+          Jaegerはトレース特化。<br>
+          ストレージとバックエンドを兼務可。
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="5">
+          AWS構成
+        </td>
+        <td rowspan="5">
+          ADOT<br>
+          (AWS Distro for OpenTelemetry)
+        </td>
+      </tr>
+      <tr>
+        <td>X-Ray</td><td>X-Ray</td><td>X-Rayはトレース専用</td>
+      </tr>
+      <tr>
+        <td>CloudWatch</td><td>CloudWatch</td><td>メトリクス・ログ兼務</td>
+      </tr>
+      <tr>
+        <td>Prometheus</td>
+        <td>
+          Grafana or<br>
+          Prometheusコンソール
+        </td>
+        <td>
+          Prometheusはメトリクス特化。<br>
+          ストレージとバックエンドを兼務可。
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Amazon Managed<br>
+          Prometheus
+        </td>
+        <td>Grafana</td>
+        <td>
+          メトリクス専用。<br>
+          バックエンドはGrafanaが多い。
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="4">
+          GCP構成
+        </td>
+        <td rowspan="4">
+          <ul class="indent_no">
+            <li>
+              <a href="https://docs.cloud.google.com/stackdriver/docs/instrumentation/google-built-otel?hl=ja" target="_blank" rel="noopener noreferrer">
+                Google が構築した<br>OpenTelemetry Collector
+              </a>
+            </li>
+            <li>
+              <a href="https://docs.cloud.google.com/kubernetes-engine/docs/concepts/managed-otel-gke?hl=ja" target="_blank" rel="noopener noreferrer">
+                GKE 用マネージド<br>OpenTelemetry
+              </a>
+            </li>
+            <li>
+              <a href="https://zenn.dev/makocchan/articles/gke_mng_otelcol" target="_blank" rel="noopener noreferrer">
+                GKEでマネージドな<br>OpenTelemetry Collector が登場
+              </a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Cloud Trace</td><td>Cloud Trace</td><td>トレース専用</td>
+      </tr>
+      <tr>
+        <td>Cloud Logging</td><td>Cloud Logging</td><td>ログ専用</td>
+      </tr>
+      <tr>
+        <td>Cloud Monitoring</td><td>Cloud Monitoring</td><td>メトリクス専用</td>
+      </tr>
+    </table>
+  </div>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="what_id_collector">コレクター</h3>
+  <p>
+    コレクターとの通信について整理します。<br>
+    ストレージとバックエンドはDatadogのことだと思えば大体わかると思われる。<br>
+    コレクターはOpenTelemetry固有の概念なのでここを深掘る。<br>
+
+    <br>
+    コレクターは、先にも書いた通り、アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）。<br>
+    アプリケーションからデータを送信する際の通信プロトコルはgRPC / HTTPが使用できる。<br>
+    送信するデータフォーマットはOTLP (OpenTelemetry Protocol) というプロトコルに準拠している。<br>
+    <a href="https://www.w3.org/" target="_blank" rel="noopener noreferrer">W3C</a>（Web技術の標準化を進める国際組織）の仕様として定義されている（なので今後どんどんこのフォーマットが当たり前のものになると思われる）。<br>
+    <a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener noreferrer">Trace Context</a><br>
+
+    <br>
+    アプリケーションからコレクターへの通信は基本的にはgRPCを使い、gRPCが使用できない環境下ではHTTPを使用する。
+    通信手段と使用するポート番号は以下の通り。
+  </p>
+
+  <br>
+  <table border="1">
+    <tr><th>プロトコル</th><th>ポート</th><th>用途・特徴</th></tr>
+    <tr><td>OTLP/gRPC</td><td>4317</td><td>ほとんどの言語用SDKで標準的に使用される高速なバイナリ通信</td></tr>
+    <tr>
+      <td>OTLP/HTTP</td>
+      <td>4318</td>
+      <td>
+        gRPCに未対応の環境向け<br>
+        （Webブラウザなどのフロントエンドやスマホアプリなど）
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  <p>
+    コレクターへの通信手段の話はこれぐらいで、次はインフラ構成の話
+  </p>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="k8s_otel_collector">k8s環境下でOpenTelemetryコレクターはどこに置くのか</h3>
+  <h4 class="title" id="k8s_otel_collector_overview">その前にKubernetesの構成について一瞬おさらい</h4>
+  <p>
+    k8sは、Clusterの中にNodeがあってNodeの中にPodがいくつかあってPodの中に1つ以上のコンテナが入ってるという構成になっている。<br>
+    スケールイン、スケールアウトはPod単位（hpaのminReplicas/maxReplicas）。
+    <Image src={k8sConfig} alt="Kubernetesの構成" width="600" /><br>
+    図は<a href="https://www.rworks.jp/cloud/kubernetes-op-support/kubernetes-column/kubernetes-entry/29324/" target="_blank" rel="noopener noreferrer">リンク先</a>のもの。<br>
+  </p>
+
+  <br>
+  <h4 class="title" id="then_k8s_otel_collector">で、k8s環境下でOpenTelemetryコレクターはどこに置くの</h4>
+  <p>
+    k8s環境でOpenTelemetry Collectorを構成する際の主要パターンは以下の通り。<br>
+  </p>
+
+  <table border="1">
+    <tr><th>パターン</th><th>構成</th></tr>
+    <tr>
+      <td>サイドカー構成</td>
+      <td>
+        アプリと同一Podに常駐させる構成。<br>
+        アプリとコレクターが同一Podのためlocalhostでデータを送信。<br>
+        <Image src={sidecar} alt="サイドカー構成" width="600" /><br>
+      </td>
+    </tr>
+    <tr>
+      <td>デーモンセット構成<br>
+        （ノードエージェントモデル）
+      </td>
+      <td>
+        ノードに1つだけ配置し、ノード上で稼働する複数のアプリPodが共同で利用する構成。<br>
+        同一ノード上のコレクターへNode IP経由で送信。<br>
+        <Image src={daemonset} alt="DaemonSet構成" width="600" /><br>
+      </td>
+    </tr>
+    <tr>
+      <td>ゲートウェイ構成</td>
+      <td>
+        コレクター専用のDeploymentを構成し、負荷状況に応じてオートスケール。<br>
+        データ送信元はデーモンセット/サイドカー混合可。<br>
+        ClusterIP Service経由でGateway Collectorへ集約。<br>
+        <Image src={gateway} alt="Gateway構成" width="600" /><br>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+  <p>
+    デーモンセット構成の場合、アプリケーションPodからコレクターPodへの通信はNode IP経由で行うので、NodeのIPアドレスを取得する必要がある。<br>
+    k8sであれば<code>deployment.yml</code>に以下のような設定をすることでNode IPを環境変数に設定することができる。<br>
+  </p>
+
+<br>
+<span style="color: yellow">k8sのdeploymentだっけ？</span>
+<pre class="title"><code class="title">k8s設定</code></pre>
+<pre><code class="copy">env:
+  - name: DD_AGENT_HOST
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+</code></pre>
+
+  <br>
+  <p>
+    <code>status.hostIP</code>でKubernetesの機能を使って、このアプリPodが今乗っているワーカーノードの物理IPアドレスを環境変数<code>DD_AGENT_HOST</code>に設定している。<br>
+    アプリケーションでは <code>DD_AGENT_HOST:4317</code> をデータの送信先とすることで、Datadog Agentにデータを送信し、これを受けたDatadog AgentがDatadog本体にデータを転送する。<br>
+    <br>
+    <br>
+    コレクターの話はこれぐらいにして次は実装の話
+  </p>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="app_go_implementation">アプリケーションの話（Goの実装の話）</h3>
+  <p>
+    各シグナルをアプリケーションで計測する際の実装方法の話。<br>
+    以下にトレースとメトリクスについて記載する。<br>
+    OTel宛のログの実装についてはよくわかっていない。<br>
+  </p>
+
+  <br>
+  <h3 class="title" id="trace_and_span">TraceとSpan</h3>
+  <p>
+    トレースは3本柱の一つ。セットで覚えるべき概念としてスパン。<br>
+    トレースは、リクエストが分散システム（マイクロサービスなど）を通過する際の一連の流れ、経路を記録するもの。<br>
+    ユーザーの1回の操作（リクエスト）から始まる処理は、どれだけ多くのサーバーやマイクロサービスをまたいでも、すべて同じ「1つのTrace ID」を共有します。<br>
+    スパンは、システム内で行われた「単一の処理」の記録。<br>
+    例えば、「認証APIを呼び出す」「データベースからユーザー情報を取得する」「関数Aを実行する」といった個々の作業が1つのスパンになります。<br>
+    <span style="color: yellow">Datadog APMの画面で言うとこんな感じ。</span><br>
+    トレースはスパンの集合とも言える。<br>
+  </p>
+
+  <br>
+  <h4 class="title">どう実装するのか</h4>
+  <p>
+    呼び出し元から受け取ったコンテキストを元にSpanを生成すると、それは同一トレース内のスパンという扱いになる。<br>
+    サンプルコードを以下に示す。<br>
+    <code>ctx, span := tracer.Start(ctx, "xxx")</code>でSpan生成。<br>
+    以下のコードがDatadog APMのスパン1行分にあたる。<br>
+  </p>
+
+<pre class="title"><code class="title">サンプルコード(Go)</code></pre>
+<pre><code class="copy">{`import "go.opentelemetry.io/otel"
+var tracer = otel.Tracer("yyy")
+
+func (a *aAdapter) GetAaa(ctx context.Context) error {
+    ctx, span := tracer.Start(ctx, "xxx")
+    defer span.End()
+    ...
+}`}
+</code></pre>
+
+  <br>
+  <p>
+    他にも以下のようなコードのパターンもある。<br>
+    （コンテキストの取り出し方が違うだけではある）<br>
+    usecase層では、paramsに格納されたコンテキストを<code>params.HTTPRequest.Context()</code>で取り出し（nilなら新規生成）、それを元にSpanを生成。<br>
+    <code>ctx, span := tracer.Start(ctx, "xxx")</code>の部分。<br>
+  </p>
+
+<pre class="title"><code class="title">サンプルコード(Go)</code></pre>
+<pre><code class="copy">{`import "go.opentelemetry.io/otel"
+var tracer = otel.Tracer("yyy")
+
+func (s *service) GetAaa(params aaa.PostXxxParams) aaa {
+    ctx := params.HTTPRequest.Context()
+    ctx, span := tracer.Start(ctx, "xxx")
+    defer span.End()
+    ...
+}`}
+</code></pre>
+
+  <br>
+  <p>
+    このような形で、受け取ったコンテキストを元にスパンを生成していく。<br>
+    引数で受け取ったコンテキストを無視して、新規にコンテキストを生成してSpanを開始したら、それは別のトレースになるし、そこがルートスパンになると言うこと。<br>
+  </p>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="propagator">プロパゲーター</h3>
+  <p>
+    プロパゲーターは、分散トレーシング用のデータ伝播形式。<br>
+    OpenTelemetryは<code>TraceContext</code>や<code>Baggage</code>というW3Cの標準フォーマットに準拠しており、HTTP/gRPCのヘッダーなどを介してコンテキストを受け渡すことができる。<br>
+    追加で<code>b3</code>などのベンダー固有のフォーマットにも、上記と合わせて複合的に対応できるようになっている。<br>
+    OpenTelemetryライブラリの<code>NewCompositeTextMapPropagator</code>を使って、複数の分散トレース用伝播形式（Propagator）を1つにまとめ、異なる規格（W3C TraceContextやBaggage、b3）を同時に扱えるように合成することもできる。<br>
+    <br>
+    <code>TextMapPropagator</code> の概要
+  </p>
+
+  <ul>
+    <li>役割: 渡された複数の <code>TextMapPropagator</code> を統合し、1つの統一された<code>Propagator</code>として機能させる。</li>
+    <li>用途: 異なるシステムやベンダー（Datadog、GCP Cloud Trace、標準のW3Cなど）が混在する環境で、トレース情報を正しく引き継ぐために使用する。</li>
+
+  </ul>
+  <br>
+
+<pre class="title"><code class="title">実装イメージ</code></pre>
+<pre class="copy"><code class="copy">{`package main
+import (
+    "go.opentelemetry.io/otel"
+    otelpropagation "go.opentelemetry.io/otel/propagation"
+)
+
+// b3形式で伝播されたトレース情報をコンテキストに読み込むためのPropagator
+type propagationStruct struct {
+    b3 otelpropagation.TextMapPropagator
+}
+
+// b3形式で伝播されたトレース情報をコンテキストに読み込む
+func (p *propagationStruct) Extract(ctx context.Context, carrier otelpropagation.TextMapCarrier) context.Context {
+    return p.b3.Extract(ctx, carrier)
+}
+
+// b3形式のトレース情報をキャリア（HTTPヘッダー等）へ書き込む
+func (p *propagationStruct) Inject(ctx context.Context, carrier otelpropagation.TextMapCarrier) {
+    p.b3.Inject(ctx, carrier)
+}
+
+// b3で利用するヘッダーキー一覧を返す
+func (p *propagationStruct) Fields() []string {
+    return p.b3.Fields()
+}
+
+// propagatorの設定を返す。OTelのHTTPサーバー/クライアントのミドルウェアで使用
+func newPropagation() otelpropagation.TextMapPropagator {
+    // OTelの標準伝播であるTraceContext/Baggageを優先しつつ、
+    // 既存(OpenCensus)との互換性維持のためb3も受け付ける。
+    return otelpropagation.NewCompositeTextMapPropagator(
+        otelpropagation.TraceContext{},
+        otelpropagation.Baggage{},
+        &propagationStruct{b3: b3.New()},
+    )
+}`}
+</code></pre>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="metrics">メトリクス</h3>
+  <p>
+    ランタイムのメトリクス自動収集<br>
+    OpenTelemetryでは、アプリケーションの初期化時に <code>go.opentelemetry.io/contrib/instrumentation/runtime</code> パッケージを使用して、ランタイムメトリクスの収集を開始することができる。<br>
+    GoのGCの状況とかgoroutineの数とかを自動収集してくれる。<br>
+  </p>
+
+<pre class="title"><code class="title">初期化コードの例</code></pre>
+<pre><code class="copy">{`import (
+    "go.opentelemetry.io/contrib/instrumentation/runtime"
+    "go.opentelemetry.io/otel"
+)
+func initRuntimeMetrics() {
+    // runtime.Start() を呼ぶだけで、バックグラウンドで
+    // heap_alloc_bytes を含むランタイム統計の収集が始まります。
+    err := runtime.Start(
+      runtime.WithMinimumReadMemStatsInterval(time.Second * 10), // 収集間隔の設定（任意）
+    )
+    if err != nil {
+      log.Fatalf("failed to start runtime metrics: %v", err)
+    }
+}`}</code></pre>
+
+  <br>
+  <p>
+    上記は収集間隔を10秒に設定しているが、省略した場合は15秒。<br>
+    （<a href="https://github.com/open-telemetry/opentelemetry-go-contrib/blob/main/instrumentation/runtime/options.go#L41" target="_blank" rel="noopener noreferrer">リンク先</a>のコードで15秒が設定されている）<br>
+    単にGoのランタイム統計を取りたい場合は、この <code>runtime.Start()</code> への移行が最も推奨される方法。<br>
+    特定のメトリクスだけ取りたい場合や、上記で取得できないメトリクスを収集したい場合は、メトリクス名を指定して収集する。<br>
+    メトリクス名はこちら：
+  </p>
+
+  <ul>
+    <li><a href="https://docs.datadoghq.com/ja/opentelemetry/integrations/runtime_metrics/?tab=java" target="_blank" rel="noopener noreferrer">OpenTelemetry ランタイムメトリクス</a></li>
+    <li><a href="https://opentelemetry.io/docs/specs/semconv/runtime/go-metrics/" target="_blank" rel="noopener noreferrer">Semantic conventions for Go runtime metrics</a></li>
+  </ul>
+
+  <p>以下サンプルコード。</p>
+
+<pre class="title"><code class="title">サンプルコード</code></pre>
+<pre><code class="copy">{`// 1. Goアプリのアロケートヒープメモリ量
+// OTel標準名: process.runtime.go.mem.heap_alloc
+goMemstatsHeapAllocBytes, err = meter.Float64ObservableGauge(
+    "process.runtime.go.mem.heap_alloc",
+    metric.WithDescription("Go application allocated heap memory"),
+    metric.WithUnit("by"), // OTelのバイト単位の標準表記は小文字の "by" です
+)
+if err != nil {
+    return err
+}
+// 2. GoアプリのGC所要時間
+// OTel標準名: process.runtime.go.gc.duration
+// ※ 累積時間(Sum)として扱う場合は、Gaugeではなく「Counter (Sum)」として定義するのがOTelの標準的なアプローチですが、
+// 既存の非同期(Observable)な値をそのまま移送する場合は ObservableCounter または ObservableGauge を使用します。
+// ここでは単純な名前と単位の置換を行っています。
+goGcDurationSecondsSum, err = meter.Float64ObservableGauge(
+    "process.runtime.go.gc.duration",
+    metric.WithDescription("Go application total duration time of GC"),
+    metric.WithUnit("s"),
+)
+if err != nil {
+    return err
+}
+// 3. Goアプリのgoroutine数
+// OTel標準名: process.runtime.go.goroutines
+goGoroutines, err = meter.Int64ObservableGauge(
+    "process.runtime.go.goroutines",
+    metric.WithDescription("Go number of goroutines"),
+)
+if err != nil {
+    return err
+}`}</code></pre>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="custom_metrics">カスタムメトリクス</h3>
+  <p>
+    収集するメトリクスを独自実装してデータ収集することもできる。<br>
+    メトリクスにもいくつか種類があるのでその話。<br>
+    公式は<a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/" target="_blank" rel="noopener noreferrer">リンク先</a>参照。<br>
+    <br>
+    メトリクスの計装の種類は以下の通り。<br>
+  </p>
+
+  <div class="slider">
+    <table border="1">
+      <tr><th style="z-index: 0">大分類</th><th>概要</th><th>interfaceの例</th><th>初期化</th><th>データ記録</th><th>備考</th></tr>
+      <tr>
+        <td>
+          Gauge<br>
+        </td>
+        <td>
+          読み取った時点の状態をスナップショットとして記録する。<br>
+          メモリ使用量や時間などを記録する。<br>
+          種類：<br>
+          <ul class="indent_no">
+            <li>Gauge</li>
+            <li>Asynchronous Gauge</li>
+          </ul>
+        </td>
+        <td>
+          Int64Gauge<br>
+          Float64Gauge<br>
+        </td>
+        <td>
+<pre class="copy"><code class="copy">latency, err := meter.Int64Gauge(
+  "aaa",
+  metric.WithDescription("Description"),
+  metric.WithUnit("ms"),
+)
+</code></pre>
+どの名前、単位で記録するのかと説明文を定義
+        </td>
+        <td>
+<pre class="copy"><code class="copy">var (
+  iDKey = attribute.Key("id")
+  status = attribute.Key("status")
+)
+latency.Record(ctx, latencyMs,
+  metric.WithAttributes(
+    iDKey.String(id),
+    StatusKey.String(status),
+  ),
+)
+</code></pre>
+記録する値。
+上記はID、ステータス毎の処理時間。
+        </td>
+        <td>
+          WithUnitで単位指定<br>
+          指定する単位の形式はUCUM系式に準じている。<br>
+          （読む気しないリンク）<br>
+          <a href="https://ucum.org/ucum" target="_blank" rel="noopener noreferrer">UCUM Specification</a><br>
+          例：
+          <ul>
+            <li>
+              時間:
+              <ul>
+                <li>ms (ミリ秒)</li>
+                <li>s (秒)</li>
+              </ul>
+            </li>
+            <li>
+              データ量:
+              <ul>
+                <li>By (バイト)</li>
+                <li>KiB (キビバイト)</li>
+              </ul>
+            </li>
+            <li>
+              割合/比率:
+              <ul>
+                <li>1 (単位なし/比率)</li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Counter<br>
+        </td>
+        <td>
+          時間と共に蓄積される値。<br>
+          Counterは増加のみ。<br>
+          UpDownCounterは増減させることができる。<br>
+          種類：<br>
+          <ul class="indent_no">
+            <li>Counter</li>
+            <li>Asynchronous Counter</li>
+            <li>UpDownCounter</li>
+            <li>Asynchronous UpDownCounter</li>
+          </ul>
+          <br>
+        </td>
+        <td>
+          Int64Counter<br>
+          Int64UpDownCounter<br>
+        </td>
+        <td>
+<pre class="copy"><code class="copy">counter, err := meter.Int64Counter(
+  "bbb",
+  metric.WithDescription("Description"),
+)
+</code></pre>
+        </td>
+        <td>
+<pre class="copy"><code class="copy">counter.Add(ctx, 1,
+  metric.WithAttributes(
+    iDKey.String(id),
+    statusKey.String(status),
+  ),
+)
+</code></pre>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Histogram</td>
+        <td>
+          値の分布を表す。<br>
+          例: レイテンシ、レスポンスサイズなど<br>
+          リクエストのレイテンシーなどの値をクライアント側で集約したもの。<br>
+          どれぐらいのリクエストが1秒未満かなどを知りたい場合に使う。<br>
+        </td>
+        <td>
+          Int64Histogram<br>
+          Float64Histogram<br>
+        </td>
+        <td>
+<pre class="copy"><code class="copy">duration, err := meter.Float64Histogram(
+  "ccc",
+  metric.WithDescription("Description"),
+  metric.WithUnit("ms"),
+)
+</code></pre>
+        </td>
+        <td>
+<pre class="copy"><code class="copy">duration.Record(ctx, latencyMs,
+  metric.WithAttributes(
+    operationKey.String(operation),
+  ),
+)
+</code></pre>
+          特にOpenTelemetryなどの可観測性ライブラリや、<br>
+          Go言語の内部ランタイムなどで広く活用されています。
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="temporality">テンポラリティ</h3>
+  <p>
+    OTelにはテンポラリティ（時間性）というものがあり、カウンターやヒストグラムなどのメトリクスが、時間経過に対してどのように集計・報告されるかを定義する概念。<br>
+    cumulative（累積）とdelta（差分）の2つがあり、影響するのはCounter, Histgram。<br>
+  </p>
+
+  <ul>
+    <li>cumulative: アプリケーション起動時からの合計値を送信し続ける方式。途中でメトリクスがリセットされないため、長期的な傾向分析時に使用。</li>
+    <li>delta: 測定期間内に変化した値のみを送信する方式。データ送信毎に状態がリセットされる。</li>
+  </ul>
+
+  <p>
+    <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code>という環境変数の値を cumulativeまたはdeltaに設定することで処理方式を切り替えることができる。<br>
+    デフォルトはcumulative。<br>
+    参考：<a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/#temporality-and-cardinality-limits" target="_blank" rel="noopener noreferrer">OpenTelemetry テンポラリティとカーディナリティ制限</a><br>
+  </p>
+
+  <AdUnitLandscape />
+
+  <br>
+  <h3 class="title" id="reference">参考</h3>
+  <h4 class="title" id="reference">書籍</h4>
+  <ul>
+    <li><a href="https://link.amazon/B0iFvYKDf" target="_blank" rel="noopener noreferrer">入門 OpenTelemetry ―現代的なオブザーバビリティシステムの構築と運用</a></li>
+    <li><a href="https://link.amazon/B02jUGEHm" target="_blank" rel="noopener noreferrer">実践 OpenTelemetry ―オープンなオブザーバビリティ標準を組織に導入する</a></li>
+    <li><a href="https://link.amazon/B0htzSEKB" target="_blank" rel="noopener noreferrer">OpenTelemetryではじめるテレメトリーサンプリング ――シグナルデータ膨張に対応しながらオブザーバビリティを確保する</a></li>
+  </ul>
+  <h4 class="title" id="reference">サイト</h4>
+  <ul>
+    <li><a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry</a></li>
+    <li><a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener noreferrer">OpenTelemetry Documentation</a></li>
+    <li><a href="https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/" target="_blank" rel="noopener noreferrer">OpenTelemetry Metrics Exporter - OTLP</a></li>
+    <li><a href="https://opentelemetry.io/ja/docs/languages/sdk-configuration/otlp-exporter/" target="_blank" rel="noopener noreferrer">OpenTelemetry OTLPエクスポーター設定</a></li>
+    <li><a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/#temporality-and-cardinality-limits" target="_blank" rel="noopener noreferrer">OpenTelemetry テンポラリティとカーディナリティ制限</a></li>
+    <li><a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/" target="_blank" rel="noopener noreferrer">OpenTelemetry メトリクス</a></li>
+    <li><a href="https://docs.datadoghq.com/ja/opentelemetry/integrations/runtime_metrics/?tab=java" target="_blank" rel="noopener noreferrer">Datadog OpenTelemetry ランタイムメトリクス</a></li>
+    <li><a href="https://docs.datadoghq.com/ja/metrics/open_telemetry/otlp_metric_types/?tab=sum" target="_blank" rel="noopener noreferrer">Datadog OTLP メトリクスタイプ</a></li>
+    <li><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/" target="_blank" rel="noopener noreferrer">Datadog Metrics Data Model</a></li>
+    <li><a href="https://opentelemetry.io/docs/specs/semconv/runtime/go-metrics/" target="_blank" rel="noopener noreferrer">Semantic conventions for Go runtime metrics</a></li>
+    <li><a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer">CNCF</a></li>
+    <li><a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener noreferrer">W3C Trace Context</a></li>
+    <li><a href="https://www.rworks.jp/cloud/kubernetes-op-support/kubernetes-column/kubernetes-entry/29324/" target="_blank" rel="noopener noreferrer">Rworks Kubernetesの重要な構成要素である「Node」について解説します！</a></li>
+    <li><a href="https://docs.cloud.google.com/stackdriver/docs/instrumentation/google-built-otel?hl=ja" target="_blank" rel="noopener noreferrer">Google が構築した OpenTelemetry Collector</a></li>
+    <li><a href="https://docs.cloud.google.com/kubernetes-engine/docs/concepts/managed-otel-gke?hl=ja" target="_blank" rel="noopener noreferrer">GKE 用マネージド OpenTelemetry</a></li>
+    <li><a href="https://zenn.dev/makocchan/articles/gke_mng_otelcol" target="_blank" rel="noopener noreferrer">GKEでマネージドな OpenTelemetry Collector が登場</a></li>
+    <li><a href="https://ucum.org/ucum" target="_blank" rel="noopener noreferrer">UCUM Specification</a></li>
+  </ul>
+</SiteLayout>

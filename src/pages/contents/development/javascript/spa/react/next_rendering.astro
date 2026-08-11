@@ -16,7 +16,7 @@ import what_i_made2_isgdetail_build from './img/rendering/what_i_made2_isgdetail
 import what_i_made2_isgdetail_rendering from './img/rendering/what_i_made2_isgdetail_rendering.jpg';
 import typescript_react_next from '../img/typescript_react_next.jpg';
 import { BASE_URL } from '../../../../../../consts';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { reactNextBcList } from './react_next.astro';
 
 export const nextRenderingBc: Breadcrumb = {
@@ -24,18 +24,18 @@ export const nextRenderingBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/spa/react/next_rendering`
 };
 export const nextRenderingBcList: Breadcrumb[] = [...reactNextBcList, nextRenderingBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#rendering', name: 'Next.jsのレンダリング' },
-  { id: '#ssr', name: 'SSR' },
-  { id: '#ssg', name: 'SSG' },
-  { id: '#isg', name: 'ISG' },
-  { id: '#isr', name: 'ISR' },
-  { id: '#odisr', name: 'On Demand ISR' },
-  { id: '#csr', name: 'CSR' },
-  { id: '#what_i_made1', name: '作った物①' },
-  { id: '#what_i_made2', name: '作った物②' },
-  { id: '#finally', name: '終わりに' },
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#rendering', name_pc: 'Next.jsのレンダリング' },
+  { id: '#ssr', name_pc: 'SSR' },
+  { id: '#ssg', name_pc: 'SSG' },
+  { id: '#isg', name_pc: 'ISG' },
+  { id: '#isr', name_pc: 'ISR' },
+  { id: '#odisr', name_pc: 'On Demand ISR' },
+  { id: '#csr', name_pc: 'CSR' },
+  { id: '#what_i_made1', name_pc: '作った物①' },
+  { id: '#what_i_made2', name_pc: '作った物②' },
+  { id: '#finally', name_pc: '終わりに' },
 ];
 ---
 

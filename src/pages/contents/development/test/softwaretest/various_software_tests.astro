@@ -18,7 +18,7 @@ import software_test_textbook from './img/software_test_textbook.jpg';
 import my_first_autotest from './img/my_first_autotest.jpg';
 import { BASE_URL } from '../../../../../consts';
 import type { Breadcrumb } from '../../../../../layouts/SiteLayout.astro';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 import { testBcList } from '../test_index.astro';
 
 export const softwareTestBc: Breadcrumb = {
@@ -26,24 +26,24 @@ export const softwareTestBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/test/softwaretest/various_software_tests`
 };
 export const softwareTestBcList: Breadcrumb[] = [...testBcList, softwareTestBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#quality', name: '品質とは' },
-  { id: '#test_objectives', name: 'テストの目的' },
-  { id: '#7principles', name: 'テストの7原則' },
-  { id: '#vwmodel', name: 'Vモデル、Wモデル' },
-  { id: '#test_views', name: 'テスト観点' },
-  { id: '#quality_charas', name: '品質特性' },
-  { id: '#test_levels', name: 'テストレベル' },
-  { id: '#check_testing', name: 'Checking と Testing' },
-  { id: '#validation_verification', name: 'Validation と Verification' },
-  { id: '#objetive_test_design', name: 'テスト設計の目的' },
-  { id: '#intro_test_design', name: 'テスト設計の紹介' },
-  { id: '#high_low_testcase', name: 'ハイレベルテストケースとローレベルテストケース' },
-  { id: '#piramid_auto_test', name: '自動テストのピラミッド' },
-  { id: '#8principles_auto_test', name: '自動テストの8原則' },
-  { id: '#e2etest', name: 'E2Eテストとは' },
-  { id: '#search_test', name: '探索的テスト' }
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#quality', name_pc: '品質とは' },
+  { id: '#test_objectives', name_pc: 'テストの目的' },
+  { id: '#7principles', name_pc: 'テストの7原則' },
+  { id: '#vwmodel', name_pc: 'Vモデル、Wモデル' },
+  { id: '#test_views', name_pc: 'テスト観点' },
+  { id: '#quality_charas', name_pc: '品質特性' },
+  { id: '#test_levels', name_pc: 'テストレベル' },
+  { id: '#check_testing', name_pc: 'Checking と Testing' },
+  { id: '#validation_verification', name_pc: 'Validation と Verification' },
+  { id: '#objetive_test_design', name_pc: 'テスト設計の目的' },
+  { id: '#intro_test_design', name_pc: 'テスト設計の紹介' },
+  { id: '#high_low_testcase', name_pc: 'ハイレベルテストケースとローレベルテストケース' },
+  { id: '#piramid_auto_test', name_pc: '自動テストのピラミッド' },
+  { id: '#8principles_auto_test', name_pc: '自動テストの8原則' },
+  { id: '#e2etest', name_pc: 'E2Eテストとは' },
+  { id: '#search_test', name_pc: '探索的テスト' }
 ];
 ---
 

@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { smplCondExpressBcList } from '../simplifying_conditional_expressions.astro';
 
 export const replaceCondBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const replaceCondBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/replace_conditional_with_polymorphism`
 };
 export const replaceCondBcList: Breadcrumb[] = [...smplCondExpressBcList, replaceCondBc];
-const indexList: index[] = [
-  { id: '#replaceconditionalwithpolymorphism', name: 'Replace Conditional with Polymorphism' }
+const indexList: index_pcsp[] = [
+  { id: '#replaceconditionalwithpolymorphism', name_pc: 'Replace Conditional with Polymorphism' }
 ];
 ---
 

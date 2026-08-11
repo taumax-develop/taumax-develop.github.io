@@ -5,7 +5,7 @@ import play_with_nodejs_twitter from './img/twitter/play_with_nodejs_twitter.jpg
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
-import type { index } from "../../../../../components/HeaderIndex.astro";
+import type { index_pcsp } from "../../../../../components/Header.astro";
 import { whatimadeBcList } from "./what_i_made.astro";
 
 export const twitterBc: Breadcrumb = {
@@ -13,10 +13,10 @@ export const twitterBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/nodejs/twitter`
 };
 export const twitterBcList: Breadcrumb[] = [...whatimadeBcList, twitterBc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#twitter", name: "Node.js × X(旧twitter)" },
-  { id: "#others", name: "その他の実装" },
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#twitter", name_pc: "Node.js × X(旧twitter)" },
+  { id: "#others", name_pc: "その他の実装" },
 ];
 ---
 

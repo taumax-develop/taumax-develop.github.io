@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { smplCondExpressBcList } from '../simplifying_conditional_expressions.astro';
 
 export const replaceNestedCondBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const replaceNestedCondBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_simplcondexp/replace_nested_conditional_with_guard_clauses`
 };
 export const replaceNestedCondBcList: Breadcrumb[] = [...smplCondExpressBcList, replaceNestedCondBc];
-const indexList: index[] = [
-  { id: '#replacenestedconditionalwithguardclauses', name: 'Replace Nested Conditional with Guard Clauses' }
+const indexList: index_pcsp[] = [
+  { id: '#replacenestedconditionalwithguardclauses', name_pc: 'Replace Nested Conditional with Guard Clauses' }
 ];
 ---
 

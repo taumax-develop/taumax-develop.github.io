@@ -7,7 +7,7 @@ import auto_post from './img/made/auto_post.jpg';
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
-import type { index } from "../../../../../components/HeaderIndex.astro";
+import type { index_pcsp } from "../../../../../components/Header.astro";
 import { nodejsBcList } from "./nodejs.astro";
 
 export const whatimadeBc: Breadcrumb = {
@@ -15,10 +15,10 @@ export const whatimadeBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/nodejs/what_i_made`
 };
 export const whatimadeBcList: Breadcrumb[] = [...nodejsBcList, whatimadeBc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#what_i_made", name: "作った物" },
-  { id: "#implementation", name: "実装" },
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#what_i_made", name_pc: "作った物" },
+  { id: "#implementation", name_pc: "実装" },
 ];
 ---
 

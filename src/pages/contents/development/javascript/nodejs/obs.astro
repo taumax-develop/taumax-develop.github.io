@@ -10,7 +10,7 @@ import obs2 from './img/obs/obs2.jpg'
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
-import type { index } from "../../../../../components/HeaderIndex.astro";
+import type { index_pcsp } from "../../../../../components/Header.astro";
 import { whatimadeBcList } from "./what_i_made.astro";
 
 export const obsBc: Breadcrumb = {
@@ -18,11 +18,11 @@ export const obsBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/nodejs/obs`
 };
 export const obsBcList: Breadcrumb[] = [...whatimadeBcList, obsBc];
-const indexList: index[] = [
-  { id: "#obs", name: "Node.js × OBS" },
-  { id: "#twitch", name: "Node.js × twitch" },
-  { id: "#twitter", name: "Node.js × twitter" },
-  { id: "#what_i_made", name: "Node.js × Twitch, Twitter, OBS" },
+const indexList: index_pcsp[] = [
+  { id: "#obs", name_pc: "Node.js × OBS" },
+  { id: "#twitch", name_pc: "Node.js × twitch" },
+  { id: "#twitter", name_pc: "Node.js × twitter" },
+  { id: "#what_i_made", name_pc: "Node.js × Twitch, Twitter, OBS" },
 ];
 ---
 

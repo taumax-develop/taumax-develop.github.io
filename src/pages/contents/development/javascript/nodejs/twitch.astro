@@ -5,7 +5,7 @@ import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from "../../../../../consts";
 import AdUnitLandscape from "../../../../../components/AdUnitLandscape.astro";
 import play_with_nodejs_twitch from './img/twitch/play_with_nodejs_twitch.jpg';
-import type { index } from "../../../../../components/HeaderIndex.astro";
+import type { index_pcsp } from "../../../../../components/Header.astro";
 import { whatimadeBcList } from "./what_i_made.astro";
 
 export const twitchBc: Breadcrumb = {
@@ -13,14 +13,14 @@ export const twitchBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/nodejs/twitch`
 };
 export const twitchBcList: Breadcrumb[] = [...whatimadeBcList, twitchBc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#authorization_flow", name: "認証の流れ" },
-  { id: "#token_flow", name: "トークン発行までの流れ" },
-  { id: "#user", name: "Twitch のユーザー" },
-  { id: "#tmijs", name: "Node.js × tmi.js" },
-  { id: "#webhook", name: "Node.js × Webhook" },
-  { id: "#api", name: "Node.js × Twitch API" },
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#authorization_flow", name_pc: "認証の流れ" },
+  { id: "#token_flow", name_pc: "トークン発行までの流れ" },
+  { id: "#user", name_pc: "Twitch のユーザー" },
+  { id: "#tmijs", name_pc: "Node.js × tmi.js" },
+  { id: "#webhook", name_pc: "Node.js × Webhook" },
+  { id: "#api", name_pc: "Node.js × Twitch API" },
 ];
 ---
 

@@ -12,7 +12,7 @@ import ラジオボタン2 from './img/vue_nuxt/ラジオボタン2.jpg';
 import vue3 from '../img/vue3.jpg';
 import nuxt3 from '../img/nuxt3.jpg';
 import vuejs入門 from '../img/vuejs入門.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { spaBcList } from '../spa.astro';
 
 export const vueNuxtBc: Breadcrumb = {
@@ -20,17 +20,17 @@ export const vueNuxtBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/spa/vue/vue_nuxt`
 };
 export const vueNuxtBcList: Breadcrumb[] = [...spaBcList, vueNuxtBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#vue', name: 'Vue.js' },
-  { id: '#sfc', name: 'SFC' },
-  { id: '#hooks', name: 'フック' },
-  { id: '#mustache', name: 'ﾏｽﾀｯｼｭ構文' },
-  { id: '#directive', name: 'ﾃﾞｨﾚｸﾃｨﾌﾞ' },
-  { id: '#file_path_router', name: 'ファイルパスルータ' },
-  { id: '#nuxt', name: 'Nuxt' },
-  { id: '#rendering', name: 'レンダリング' },
-  { id: '#what_i_made', name: '作った物' },
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#vue', name_pc: 'Vue.js' },
+  { id: '#sfc', name_pc: 'SFC' },
+  { id: '#hooks', name_pc: 'フック' },
+  { id: '#mustache', name_pc: 'ﾏｽﾀｯｼｭ構文' },
+  { id: '#directive', name_pc: 'ﾃﾞｨﾚｸﾃｨﾌﾞ' },
+  { id: '#file_path_router', name_pc: 'ファイルパスルータ' },
+  { id: '#nuxt', name_pc: 'Nuxt' },
+  { id: '#rendering', name_pc: 'レンダリング' },
+  { id: '#what_i_made', name_pc: '作った物' },
 ];
 ---
 

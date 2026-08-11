@@ -4,7 +4,7 @@ import { BASE_URL, TWITTER_CARD_SUMMARY } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { organizeDataBcList } from '../organizing_data.astro';
 
 export const encapsulateCollectionBc: Breadcrumb = {
@@ -12,8 +12,8 @@ export const encapsulateCollectionBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_orgdata/encapsulate_collection`
 };
 export const encapsulateCollectionBcList: Breadcrumb[] = [...organizeDataBcList, encapsulateCollectionBc];
-const indexList: index[] = [
-  { id: '#encapsulatecollection', name: 'Encapsulate Collection' }
+const indexList: index_pcsp[] = [
+  { id: '#encapsulatecollection', name_pc: 'Encapsulate Collection' }
 ];
 ---
 

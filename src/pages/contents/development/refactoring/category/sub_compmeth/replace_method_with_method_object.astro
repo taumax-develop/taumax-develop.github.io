@@ -5,7 +5,7 @@ import { BASE_URL } from '../../../../../../consts';
 import { Image } from 'astro:assets';
 import refactoring from '../../../img/refactoring.jpg';
 import legacy_code from '../../../img/legacy_code.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { composingMethodsBcList } from '../composing_methods.astro';
 
 export const replaceMethodBc: Breadcrumb = {
@@ -13,9 +13,9 @@ export const replaceMethodBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/refactoring/category/sub_compmeth/replace_method_with_method_object`
 };
 export const replaceMethodBcList: Breadcrumb[] = [...composingMethodsBcList, replaceMethodBc];
-const indexList: index[] = [
-  { id: '#composingmethods', name: 'Composing Methods' },
-  { id: '#replacemethodwithmethodobject', name: 'Replace Method with Method Object' }
+const indexList: index_pcsp[] = [
+  { id: '#composingmethods', name_pc: 'Composing Methods' },
+  { id: '#replacemethodwithmethodobject', name_pc: 'Replace Method with Method Object' }
 ];
 ---
 

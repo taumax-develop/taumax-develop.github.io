@@ -2,7 +2,7 @@
 import { SITE_TITLE, BASE_URL } from '../consts';
 import { TWITTER_CARD_SUMMARY } from '../components/BaseHead.astro';
 import SiteLayout, { type Breadcrumb } from '../layouts/SiteLayout.astro';
-import type { index } from '../components/HeaderIndex.astro';
+import type { index_pcsp } from '../components/Header.astro';
 
 export const indexPagebc: Breadcrumb = {
   name: "トップページ",
@@ -10,15 +10,16 @@ export const indexPagebc: Breadcrumb = {
 };
 export const indexPagebcList: Breadcrumb[] = [indexPagebc];
 
-const indexList: index[] = [
-  { id: "#programming", name: "言語、プログラミング" },
-  { id: "#self_development", name: "個人開発" },
-  { id: "#requirement", name: "要件定義" },
-  { id: "#develop_method", name: "開発手法" },
-  { id: "#database", name: "データベース" },
-  { id: "#test", name: "テスト" },
-  { id: "#network", name: "ネットワーク" },
-  { id: "#security", name: "セキュリティ" },
+const indexList: index_pcsp[] = [
+  { id: "#programming", name_pc: "言語、プログラミング" },
+  { id: "#self_development", name_pc: "個人開発" },
+  { id: "#requirement", name_pc: "要件定義" },
+  { id: "#develop_method", name_pc: "開発手法" },
+  { id: "#database", name_pc: "データベース" },
+  { id: "#test", name_pc: "テスト" },
+  { id: "#observability", name_pc: "可観測性" },
+  { id: "#network", name_pc: "ネットワーク" },
+  { id: "#security", name_pc: "セキュリティ" },
 ];
 ---
 
@@ -183,6 +184,12 @@ const indexList: index[] = [
   <h3 class="title" id="test">テスト</h3>
   <ul>
     <li><a href=`${BASE_URL}/contents/development/test/softwaretest/various_software_tests`>ソフトウェアテストについていろいろ調べたことを書いた記事</a></li>
+  </ul>
+
+  <br>
+  <h3 class="title" id="observability">可観測性</h3>
+  <ul>
+    <li><a href=`${BASE_URL}/contents/observability/otel/opentelemetry`>OpenTelemetry</a></li>
   </ul>
 
   <br>

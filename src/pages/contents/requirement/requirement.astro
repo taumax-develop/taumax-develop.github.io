@@ -1,5 +1,5 @@
 ---
-import type { index } from '../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../components/Header.astro';
 import { BASE_URL } from '../../../consts';
 import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
 import { indexPagebcList } from '../../index.astro';
@@ -13,7 +13,7 @@ export const requirementPagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/requirement/requirement`
 };
 export const requirementBreadcrumbList: Breadcrumb[] = [...indexPagebcList, requirementPagebc];
-const indexList: index[] = [];
+const indexList: index_pcsp[] = [];
 ---
 
 <SiteLayout

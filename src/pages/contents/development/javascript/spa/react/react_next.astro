@@ -12,7 +12,7 @@ import 能力詳細 from './img/react_next/能力詳細.jpg';
 import { BASE_URL } from '../../../../../../consts';
 import react_next from '../img/react_next.jpg';
 import typescript_react_next from '../img/typescript_react_next.jpg';
-import type { index } from '../../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../../components/Header.astro';
 import { spaBcList } from '../spa.astro';
 
 const reactCode = `
@@ -48,16 +48,16 @@ export const reactNextBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/spa/react/react_next`
 };
 export const reactNextBcList: Breadcrumb[] = [...spaBcList, reactNextBc];
-const indexList: index[] = [
-  { id: '#firstly', name: 'はじめに' },
-  { id: '#react', name: 'React' },
-  { id: '#jsx', name: 'JSX' },
-  { id: '#component', name: 'コンポーネント' },
-  { id: '#hooks', name: 'React Hooks' },
-  { id: '#next', name: 'Next.js' },
-  { id: '#rendering', name: 'レンダリング' },
-  { id: '#filebase_routing', name: 'ファイルベースルーティング' },
-  { id: '#what_i_made', name: '作った物' },
+const indexList: index_pcsp[] = [
+  { id: '#firstly', name_pc: 'はじめに' },
+  { id: '#react', name_pc: 'React' },
+  { id: '#jsx', name_pc: 'JSX' },
+  { id: '#component', name_pc: 'コンポーネント' },
+  { id: '#hooks', name_pc: 'React Hooks' },
+  { id: '#next', name_pc: 'Next.js' },
+  { id: '#rendering', name_pc: 'レンダリング' },
+  { id: '#filebase_routing', name_pc: 'ファイルベースルーティング' },
+  { id: '#what_i_made', name_pc: '作った物' },
 ];
 
 ---

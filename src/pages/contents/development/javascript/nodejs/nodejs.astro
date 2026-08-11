@@ -8,7 +8,7 @@ import nodejsBookImg from "./img/nodejs入門.jpg";
 import { TWITTER_CARD_SUMMARY } from '../../../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../../../consts';
 import AdUnitLandscape from '../../../../../components/AdUnitLandscape.astro';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 import { javaScriptBcList } from '../js_index.astro';
 
 export const nodejsBc: Breadcrumb = {
@@ -16,15 +16,15 @@ export const nodejsBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/nodejs/nodejs`
 };
 export const nodejsBcList: Breadcrumb[] = [...javaScriptBcList, nodejsBc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#what_is_nodejs", name: "Node.jsとは" },
-  { id: "#feature", name: "特徴" },
-  { id: "#async", name: "非同期" },
-  { id: "#c10k", name: "C10K問題" },
-  { id: "#non_blocking", name: "Non-Blocking" },
-  { id: "#single_thread_event_loop", name: "シングルスレッド・イベントループ" },
-  { id: "#implementation", name: "作った物" }
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#what_is_nodejs", name_pc: "Node.jsとは" },
+  { id: "#feature", name_pc: "特徴" },
+  { id: "#async", name_pc: "非同期" },
+  { id: "#c10k", name_pc: "C10K問題" },
+  { id: "#non_blocking", name_pc: "Non-Blocking" },
+  { id: "#single_thread_event_loop", name_pc: "シングルスレッド・イベントループ" },
+  { id: "#implementation", name_pc: "作った物" }
 ];
 ---
 

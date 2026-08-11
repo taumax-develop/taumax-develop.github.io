@@ -6,7 +6,7 @@ import { BASE_URL } from "../../../../consts";
 import AdUnitLandscape from "../../../../components/AdUnitLandscape.astro";
 import CommonOAuthFlow from "../../../../components/security/oauth/CommonOAuthFlow.astro";
 import { securityBreadcrumbList } from "../security.astro";
-import type { index } from "../../../../components/HeaderIndex.astro";
+import type { index_pcsp } from "../../../../components/Header.astro";
 import authorization_code_grant_flow from './img/authorization_code_grant_flow.jpg';
 import client_credentials_grant_flow from './img/client_credentials_grant_flow.jpg';
 import implicit_grant_flow from './img/implicit_grant_flow.jpg';
@@ -23,16 +23,16 @@ export const oauth20Pagebc: Breadcrumb = {
   item: `${BASE_URL}/contents/security/security/oauth/oauth2.0`
 };
 const breadcrumbList: Breadcrumb[] = [...securityBreadcrumbList, oauth20Pagebc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#register_application", name: "アプリケーションの登録" },
-  { id: "#token", name: "トークン発行" },
-  { id: "#client_cred_grant_flow", name: "Client credentials grant flow" },
-  { id: "#auth_code_grant_flow", name: "Authorization code grant flow" },
-  { id: "#implicit_grant_flow", name: "Implicit grant flow" },
-  { id: "#refresh_token", name: "リフレッシュトークン" },
-  { id: "#pkce", name: "PKCE" },
-  { id: "#pkce_state", name: "PKCEとstate" }
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#register_application", name_pc: "アプリケーションの登録" },
+  { id: "#token", name_pc: "トークン発行" },
+  { id: "#client_cred_grant_flow", name_pc: "Client credentials grant flow" },
+  { id: "#auth_code_grant_flow", name_pc: "Authorization code grant flow" },
+  { id: "#implicit_grant_flow", name_pc: "Implicit grant flow" },
+  { id: "#refresh_token", name_pc: "リフレッシュトークン" },
+  { id: "#pkce", name_pc: "PKCE" },
+  { id: "#pkce_state", name_pc: "PKCEとstate" }
 ];
 ---
 

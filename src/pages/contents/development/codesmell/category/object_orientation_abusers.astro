@@ -4,7 +4,7 @@ import refactoringImg from '../../img/refactoring.jpg';
 import legacyCodeImg from '../../img/legacy_code.jpg';
 import { BASE_URL } from '../../../../../consts';
 import {  Image } from 'astro:assets';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 import { codesmellBcList } from '../codesmells.astro';
 
 export const objectOrientationAbusersBc: Breadcrumb = {
@@ -12,13 +12,13 @@ export const objectOrientationAbusersBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/codesmell/category/object_orientation_abusers`
 };
 export const objectAbusersBcList: Breadcrumb[] = [...codesmellBcList, objectOrientationAbusersBc];
-const indexList: index[] = [
-  { id: '#pagetop', name: 'ページトップ' },
-  { id: '#objectorientationabusers', name: 'Object-Orientation Abusers' },
-  { id: '#switchstatements', name: 'Switch Statements' },
-  { id: '#temporaryfield', name: 'Temporary Field' },
-  { id: '#refusedbequest', name: 'Refused Bequest' },
-  { id: '#alternativeclasseswithdifferentinterfaces', name: 'Alternative Classes with Different Interfaces' }
+const indexList: index_pcsp[] = [
+  { id: '#pagetop', name_pc: 'ページトップ' },
+  { id: '#objectorientationabusers', name_pc: 'Object-Orientation Abusers' },
+  { id: '#switchstatements', name_pc: 'Switch Statements' },
+  { id: '#temporaryfield', name_pc: 'Temporary Field' },
+  { id: '#refusedbequest', name_pc: 'Refused Bequest' },
+  { id: '#alternativeclasseswithdifferentinterfaces', name_pc: 'Alternative Classes with Different Interfaces' }
 ];
 ---
 <SiteLayout

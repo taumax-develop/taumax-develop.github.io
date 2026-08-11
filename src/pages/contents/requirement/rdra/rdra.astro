@@ -5,31 +5,31 @@ import { BASE_URL } from '../../../../consts';
 import { Image } from 'astro:assets';
 import rdra_book from '../img/rdra_book.jpg';
 import { requirementBreadcrumbList } from '../requirement.astro';
-import type { index } from '../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../components/Header.astro';
 
 export const requirementPagebc: Breadcrumb = {
   name: "RDRA",
   item: `${BASE_URL}/contents/requirement/rdra/rdra`
 };
 export const breadcrumbList: Breadcrumb[] = [...requirementBreadcrumbList, requirementPagebc];
-const indexList: index[] = [
-  { id: "#firstly", name: "はじめに" },
-  { id: "#rdra_overview", name: "RDRA概要" },
-  { id: "#goals_requirements", name: "要件定義の目標" },
-  { id: "#requirements_problems", name: "要件定義にまつわる問題" },
-  { id: "#basic_diagram", name: "基本ダイアグラム" },
-  { id: "#relationship_diagram", name: "関係ダイアグラム" },
-  { id: "#about_rdra", name: "イベント本編" },
-  { id: "#relartionship_requirements", name: "各種要求と関係" },
-  { id: "#reference_books", name: "要件定義で参考になる本" },
-  { id: "#commit_communication", name: "合意形成とコミュニケーション" },
-  { id: "#diagrams", name: "各種ダイアグラム" },
-  { id: "#requirement_elements", name: "要件定義の構成要素" },
-  { id: "#context_diagram", name: "コンテキスト図" },
-  { id: "#model_integrity", name: "モデルの整合性" },
-  { id: "#statechange", name: "状態遷移について" },
-  { id: "#qa", name: "QA" },
-  { id: "#references", name: "参考資料集" }
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに" },
+  { id: "#rdra_overview", name_pc: "RDRA概要" },
+  { id: "#goals_requirements", name_pc: "要件定義の目標" },
+  { id: "#requirements_problems", name_pc: "要件定義にまつわる問題" },
+  { id: "#basic_diagram", name_pc: "基本ダイアグラム" },
+  { id: "#relationship_diagram", name_pc: "関係ダイアグラム" },
+  { id: "#about_rdra", name_pc: "イベント本編" },
+  { id: "#relartionship_requirements", name_pc: "各種要求と関係" },
+  { id: "#reference_books", name_pc: "要件定義で参考になる本" },
+  { id: "#commit_communication", name_pc: "合意形成とコミュニケーション" },
+  { id: "#diagrams", name_pc: "各種ダイアグラム" },
+  { id: "#requirement_elements", name_pc: "要件定義の構成要素" },
+  { id: "#context_diagram", name_pc: "コンテキスト図" },
+  { id: "#model_integrity", name_pc: "モデルの整合性" },
+  { id: "#statechange", name_pc: "状態遷移について" },
+  { id: "#qa", name_pc: "QA" },
+  { id: "#references", name_pc: "参考資料集" }
 ];
 ---
 

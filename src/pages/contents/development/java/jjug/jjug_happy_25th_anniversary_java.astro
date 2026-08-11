@@ -64,7 +64,7 @@ import png32 from './img/32.png'
 
 import java_openjdk from './img/java_openjdk.jpg'
 import { BASE_URL } from '../../../../../consts';
-import type { index } from '../../../../../components/HeaderIndex.astro';
+import type { index_pcsp } from '../../../../../components/Header.astro';
 import { javaBcList } from '../java_index.astro';
 
 export const jjug25thBc: Breadcrumb = {
@@ -72,13 +72,13 @@ export const jjug25thBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/jjug/jjug_happy_25th_anniversary_java`
 };
 export const jjug25thBcList: Breadcrumb[] = [...javaBcList, jjug25thBc];
-const indexList: index[] = [
-  { id: '#movie', name: '当日の動画' },
-  { id: '#twitter', name: 'twitterまとめ' },
-  { id: '#java14', name: 'Java14 の新機能を軽く' },
-  { id: '#ide_2020', name: 'IDE起点で2020年代の開発環境を眺めてみる' },
-  { id: '#microprofile', name: 'Jakarta EE/Microprofileを利用したクラウド・ネイティブ・アプリの開発' },
-  { id: '#modernize', name: 'システムのモダナイズ　落ちても良いアプリのつくり方' }
+const indexList: index_pcsp[] = [
+  { id: '#movie', name_pc: '当日の動画' },
+  { id: '#twitter', name_pc: 'twitterまとめ' },
+  { id: '#java14', name_pc: 'Java14 の新機能を軽く' },
+  { id: '#ide_2020', name_pc: 'IDE起点で2020年代の開発環境を眺めてみる' },
+  { id: '#microprofile', name_pc: 'Jakarta EE/Microprofileを利用したクラウド・ネイティブ・アプリの開発' },
+  { id: '#modernize', name_pc: 'システムのモダナイズ　落ちても良いアプリのつくり方' }
 ];
 ---
 <SiteLayout
