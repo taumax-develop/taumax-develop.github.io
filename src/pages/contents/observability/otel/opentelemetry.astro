@@ -18,6 +18,7 @@ export const oTelPagebc: Breadcrumb = {
 };
 export const breadcrumbList: Breadcrumb[] = [...observabilityBreadcrumbList, oTelPagebc];
 const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "はじめに", name_sp: "" },
   { id: "#what_id_otel", name_pc: "OTelとは", name_sp: "OpenTelemetryとは" },
   { id: "#otel_overall_structure", name_pc: "OTelの構成", name_sp: "OpenTelemetryの全体構成" },
   { id: "#what_id_collector", name_pc: "コレクター", name_sp: "コレクター" },
@@ -42,6 +43,13 @@ const indexList: index_pcsp[] = [
 
   <br>
   <AdUnitLandscape />
+
+  <br/>
+  <h3 class="title" id="firstly">はじめに</h3>
+  <p>
+    最近 OpenTelemetry を使ったシステム監視機能を構築する機会がありました。<br>
+    ほぼ何も知らない状態からの構築で、いろいろ調べながら推進したのですが、その際に得られた知見をまとめてみました。<br>
+  </p>
 
   <br/>
   <h3 class="title" id="what_id_otel">OpenTelemetryとは</h3>
