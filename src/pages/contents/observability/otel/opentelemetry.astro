@@ -11,6 +11,7 @@ import k8sConfig from './img/k8s_configuration.png';
 import sidecar from './img/sidecar.png';
 import daemonset from './img/daemonset.png';
 import gateway from './img/gateway.png';
+import datadogTraces from './img/datadog_traces.png';
 
 export const oTelPagebc: Breadcrumb = {
   name: "OpenTelemetry",
@@ -48,24 +49,24 @@ const indexList: index_pcsp[] = [
   <h3 class="title" id="firstly">はじめに</h3>
   <p>
     最近 OpenTelemetry を使ったシステム監視機能を構築する機会がありました。<br>
-    ほぼ何も知らない状態からの構築で、いろいろ調べながら推進したのですが、その際に得られた知見をまとめてみました。<br>
+    ほぼ何も知らない状態から、いろいろ調べながら推進する過程で得られた知見をまとめたのがこの記事です。<br>
   </p>
 
   <br/>
   <h3 class="title" id="what_id_otel">OpenTelemetryとは</h3>
   <p>
-    <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry(OTel)</a>とは、Googleが主導して作成したOpenCensusと、<a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer">CNCF</a>（Cloud Native Computing Foundation コンテナ技術の推進を目的とした組織）が主導していたOpenTracingを統一し、テレメトリ仕様の業界標準としたもの。<br>
-    （テレメトリ：サーバーの稼働状況（メトリクス）やエラーログを収集し、システムの安定稼働や障害の早期解決（オブザーバビリティ）に利用されます）<br>
-    テレメトリの三本柱と呼ばれているログ、トレース、メトリクスに加え、バゲッジ、プロファイルというデータの標準仕様をOTLP(OpenTelemetry Protocol)というプロトコルとして定めた。<br>
-    ログ、トレース、メトリクスはシグナルとも呼ばれる。システムやアプリケーションの動作状況やパフォーマンスを把握するために外部へ出力されるデータの種類のこと。<br>
-    プロファイルもシグナルだが、現在(2026/7/13)開発中のステータス。<br>
-    バゲッジは補助的なデータを伝播させる仕組み。<br>
-    各データ分類の概要と役割は以下の通り。<br>
+    <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry(OTel)</a> は、テレメトリデータを生成・収集・処理・出力するためのベンダー非依存なオブザーバビリティフレームワークです。<br>
+    Google が主導して作成した OpenCensus と、<a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer">CNCF</a>（Cloud Native Computing Foundation コンテナ技術の推進を目的とした組織）が主導していた OpenTracing を統一し、テレメトリ仕様の業界標準としたものです。<br>
+    テレメトリとはサーバーの稼働状況（メトリクス）やエラーログを収集したもので、システムの安定稼働や障害の早期解決に利用されます。<br>
+    ログ、トレース、メトリクス、プロファイル、トレースコンテキスト、バゲッジなどがあります。<br>
+    このうちログ、トレース、メトリクス、プロファイルはシグナルとも呼ばれます。<br>
+    シグナルとは、システムやアプリケーションの動作状況やパフォーマンスを把握するために外部へ出力されるデータの種類のことです。<br>
+    各テレメトリの分類と概要・役割は以下の通り。<br>
   </p>
 
   <div class="slider">
     <table border="1">
-      <tr><th style="z-index: 0">データ分類</th><th>概要と役割</th></tr>
+      <tr><th style="z-index: 0">テレメトリの分類</th><th>概要・役割</th></tr>
       <tr>
         <td style="white-space: nowrap;">ログ</td>
         <td>
@@ -85,6 +86,19 @@ const indexList: index_pcsp[] = [
         </td>
       </tr>
       <tr>
+        <td style="white-space: nowrap;">トレースコンテキスト</td>
+        <td>
+          <ul class="indent_no">
+            <li>
+              概要: トレースの標準仕様、およびそのデータ構造のことで、<a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener noreferrer">W3C Trace Context</a> として標準化されています。
+            </li>
+            <li>
+              役割: 異なるシステムやベンダー間でも一連の処理を正確につなぐ役割を持ちます。
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
         <td style="white-space: nowrap;">メトリクス</td>
         <td>
           <ul class="indent_no">
@@ -100,7 +114,8 @@ const indexList: index_pcsp[] = [
             <li>概要: トレースの「コンテキスト（文脈）」に含めて、サービス間で引き継ぎたい任意のキー・バリューのペア（メタデータ）です。</li>
             <li>
               役割: 例えば「ユーザーID」や「テナントID」をバゲッジに入れることで、リクエストがどれだけ多くのマイクロサービスを経由しても、<br>
-              下流のサービスまでその情報を伝播させることができます（ログやトレースの分析が格段に楽になります）。
+              下流のサービスまでその情報を伝播させることができます（ログやトレースの分析が格段に楽になります）。<br>
+              ただし、個人情報・認証情報・秘密情報などを安易に格納しないよう注意が必要です。<br>
             </li>
           </ul>
         </td>
@@ -122,11 +137,11 @@ const indexList: index_pcsp[] = [
 
   <br>
   <p>
-    これらの概念自体はOpenTelemetry登場前から存在していたが、ベンダー（DatadogやPrometheus, Jeagerなど）によって仕様が異なっていた。<br>
-    それらをベンダーに依存しない統一フォーマットとして提供し、データの生成から転送までの方式を標準化した。<br>
-    さらに、これらのシグナルをトレースIDというユニークなIDで、コンテキスト（Goなら <code>context.Context</code> ）を介して紐づけることで、障害などが発生した際のログ、トレース、メトリクスなどの紐付けが容易にできるようにした。<br>
-    これまでは、例えば障害があった時に各シグナルを結びつけるためには、おおよその時間から推測するというのが主な調査方法だったが、コンテキストで結びつけることで、明確な紐付けをすることができるようになった。<br>
-    （これまでも一部繋がってはいるが、それはベンダーの仕様に依存している。OTelはそれを全面的に標準化した。）<br>
+    これらの概念自体はOpenTelemetry登場前から存在していたが、ベンダー（DatadogやPrometheus, Jeagerなど）によって仕様が異なっていました。<br>
+    それらをベンダーに依存しない統一フォーマットとして提供し、データの生成から転送までの方式を標準化しました。<br>
+    さらに、これらのシグナルをトレースIDというユニークなIDで、コンテキスト（Goなら <code>context.Context</code> ）を介して紐づけることで、障害などが発生した際のログ、トレース、メトリクスなどの紐付けが容易にできるようにしました。<br>
+    これまでは、例えば障害があった時に各シグナルを結びつけるためには、おおよその時間から各データの関連性を推測するというのが主な調査方法でしたが、各データをコンテキストで結びつけることで、明確な紐付けをすることができるようになりました。<br>
+    （これまでも一部繋がってはいましたが、それはベンダーの仕様に依存していました。OTelはそれを全面的に標準化しました。）<br>
 
     <br>
     ここまでがOpenTelemetryの概要です。<br>
@@ -137,51 +152,42 @@ const indexList: index_pcsp[] = [
   <br/>
   <h3 class="title" id="otel_overall_structure">OpenTelemetryの全体構成</h3>
   <p>
-    OpenTelemetryの構成を俯瞰して見ると以下の図のようになっている。<br>
+    OpenTelemetryの構成を俯瞰して見ると以下の図のようになっています。<br>
     <Image src={overallStruct} alt="OpenTelemetryの全体構成" width="1000" /><br>
 
     <br>
     それぞれの役割は以下の通り。<br>
   </p>
 
-  <div class="slider">
-    <table border="1">
-      <tr><th style="z-index: 0">機能</th><th>役割</th><th>具体例</th></tr>
-      <tr>
-        <td>コレクター</td>
-        <td>
-          アプリケーションから送られてきたシグナルを受け取り、<br>
-          加工して、次の場所へ送り出す中継地点（プロキシ）。<br>
-          コレクターの役割は大きく以下3つ<br>
-          <ul class="indent_no">
-            <li>受信: アプリケーションからデータを受け取る</li>
-            <li>
-              処理: データを扱いやすいようにフィルタリングしたり、<br>
-              個人情報をマスキングしたりする
-            </li>
-            <li>
-              送信: 後続のストレージや、Datadog, Prometheus<br>
-              といった外部の監視ツールへ送信する
-            </li>
-          </ul>
-        </td>
-        <td>Datadog Agent</td>
-      </tr>
-      <tr>
-        <td>ストレージ</td>
-        <td>送信されたテレメトリーデータを蓄積する場所</td>
-        <td>Datadog</td>
-      </tr>
-      <tr>
-        <td>バックエンド</td>
-        <td>
-          エンドユーザー（我々）に対してUIを通して<br>
-          データを見えるようにする場所
-        </td>
-        <td>Datadog</td>
-      </tr>
-    </table>
-  </div>
+  <table border="1">
+    <tr><th style="z-index: 0">機能</th><th>役割</th></tr>
+    <tr>
+      <td>コレクター</td>
+      <td>
+        アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）。<br>
+        コレクターの役割は大きく以下3つ<br>
+        <ul class="indent_no">
+          <li>受信: アプリケーションからデータを受け取る</li>
+          <li>
+            処理: データを扱いやすいようにフィルタリングしたり、個人情報をマスキングしたりする
+          </li>
+          <li>
+            送信: 後続のストレージや、Datadog, Prometheus といった外部の監視ツールへ送信する
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>ストレージ</td>
+      <td>送信されたテレメトリーデータを蓄積する場所</td>
+    </tr>
+    <tr>
+      <td>バックエンド</td>
+      <td>
+        エンドユーザー（我々）に対してUIを通してデータを見えるようにする場所
+      </td>
+    </tr>
+  </table>
 
   <br>
   <br>
@@ -310,12 +316,7 @@ const indexList: index_pcsp[] = [
   <br>
   <h3 class="title" id="what_id_collector">コレクター</h3>
   <p>
-    コレクターとの通信について整理します。<br>
-    ストレージとバックエンドはDatadogのことだと思えば大体わかると思われる。<br>
-    コレクターはOpenTelemetry固有の概念なのでここを深掘る。<br>
-
-    <br>
-    コレクターは、先にも書いた通り、アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）です。<br>
+    コレクターは先にも書いた通り、アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）です。<br>
     アプリケーションからコレクタへデータを送信する際の通信プロトコルはgRPC / HTTPが使用できます。<br>
     送信するデータフォーマットはOTLP (OpenTelemetry Protocol) というプロトコルに準拠しています。<br>
     OTLP はアプリケーションからコレクター、またはコレクターからバックエンドへテレメトリデータを送信・転送するためのプロトコル/データ構造を定めたものです。<br>
@@ -324,21 +325,21 @@ const indexList: index_pcsp[] = [
     今後このフォーマットが当たり前になっていくものと思われます。<br>
 
     <br>
-    アプリケーションからコレクターへの通信は基本的にはgRPCを使い、gRPCが使用できない環境下ではHTTPを使用する。
     通信手段と使用するポート番号は以下の通り。
   </p>
 
   <br>
   <table border="1">
     <tr><th>プロトコル</th><th>ポート</th><th>用途・特徴</th></tr>
-    <tr><td>OTLP/gRPC</td><td>4317</td><td>ほとんどの言語用SDKで標準的に使用される高速なバイナリ通信</td></tr>
+    <tr>
+      <td>OTLP/gRPC</td>
+      <td>4317</td>
+      <td>ほとんどの言語用SDKで標準的に使用される高速なバイナリ通信</td>
+    </tr>
     <tr>
       <td>OTLP/HTTP</td>
       <td>4318</td>
-      <td>
-        gRPCに未対応の環境向け<br>
-        （Webブラウザなどのフロントエンドやスマホアプリなど）
-      </td>
+      <td>Webブラウザなどのフロントエンドやスマホアプリなどで使用されることが多い</td>
     </tr>
   </table>
 
@@ -408,7 +409,7 @@ const indexList: index_pcsp[] = [
 <br>
 <pre class="title"><code class="title">k8s設定</code></pre>
 <pre><code class="copy">env:
-  - name: DD_AGENT_HOST
+  - name: COLLECTOR_HOST
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
@@ -416,8 +417,8 @@ const indexList: index_pcsp[] = [
 
   <br>
   <p>
-    <code>status.hostIP</code>でKubernetesの機能を使って、このアプリPodが今乗っているワーカーノードの物理IPアドレスを環境変数<code>DD_AGENT_HOST</code>に設定している。<br>
-    アプリケーションでは <code>DD_AGENT_HOST:4317</code> をデータの送信先とすることで、Datadog Agentにデータを送信し、これを受けたDatadog AgentがDatadog本体にデータを転送する。<br>
+    <code>status.hostIP</code>でKubernetesの機能を使って、このアプリPodが今乗っているワーカーノードの物理IPアドレスを環境変数 <code>COLLECTOR_HOST</code> に設定している。<br>
+    アプリケーションでは <code>COLLECTOR_HOST:4317</code> をデータの送信先とすることで、コレクターにデータを送信し、これを受けたコレクターがバックエンドにデータを転送する。<br>
     <br>
     <br>
     コレクターの話はこれぐらいにして次は実装の話
@@ -438,11 +439,12 @@ const indexList: index_pcsp[] = [
   <p>
     トレースは3本柱の一つ。セットで覚えるべき概念としてスパン。<br>
     トレースは、リクエストが分散システム（マイクロサービスなど）を通過する際の一連の流れ、経路を記録するもの。<br>
-    ユーザーの1回の操作（リクエスト）から始まる処理は、どれだけ多くのサーバーやマイクロサービスをまたいでも、すべて同じ「1つのTrace ID」を共有します。<br>
+    ユーザーの1回の操作（リクエスト）から始まる処理は、どれだけ多くのサーバーやマイクロサービスをまたいでもTraceは複数のSpanから構成され、それらが同じTrace IDによって関連付けられます。<br>
     スパンは、システム内で行われた「単一の処理」の記録。<br>
     例えば、「認証APIを呼び出す」「データベースからユーザー情報を取得する」「関数Aを実行する」といった個々の作業が1つのスパンになります。<br>
-    <span style="color: yellow">Datadog APMの画面で言うとこんな感じ。</span><br>
+    Datadog APM でトレースを確認すると以下画像のような画面になりますが、この1つ1つの横棒がスパンを表し、全体が1つのトレースを構成します。<br>
     トレースはスパンの集合とも言える。<br>
+    <Image src={datadogTraces} alt="Datadog APMの画面" width="800" /><br>
   </p>
 
   <br>
@@ -467,26 +469,6 @@ func (a *aAdapter) GetAaa(ctx context.Context) error {
 
   <br>
   <p>
-    他にも以下のようなコードのパターンもある。<br>
-    （コンテキストの取り出し方が違うだけではある）<br>
-    usecase層では、paramsに格納されたコンテキストを<code>params.HTTPRequest.Context()</code>で取り出し（nilなら新規生成）、それを元にSpanを生成。<br>
-    <code>ctx, span := tracer.Start(ctx, "xxx")</code>の部分。<br>
-  </p>
-
-<pre class="title"><code class="title">サンプルコード(Go)</code></pre>
-<pre><code class="copy">{`import "go.opentelemetry.io/otel"
-var tracer = otel.Tracer("yyy")
-
-func (s *service) GetAaa(params aaa.PostXxxParams) aaa {
-    ctx := params.HTTPRequest.Context()
-    ctx, span := tracer.Start(ctx, "xxx")
-    defer span.End()
-    ...
-}`}
-</code></pre>
-
-  <br>
-  <p>
     このような形で、受け取ったコンテキストを元にスパンを生成していく。<br>
     引数で受け取ったコンテキストを無視して、新規にコンテキストを生成してSpanを開始したら、それは別のトレースになるし、そこがルートスパンになると言うこと。<br>
   </p>
@@ -499,6 +481,25 @@ func (s *service) GetAaa(params aaa.PostXxxParams) aaa {
   <p>
     プロパゲーターは、分散トレーシング用のデータ伝播形式。<br>
     OpenTelemetryは<code>TraceContext</code>や<code>Baggage</code>というW3Cの標準フォーマットに準拠しており、HTTP/gRPCのヘッダーなどを介してコンテキストを受け渡すことができる。<br>
+  </p>
+
+<pre class="title"><code class="title">実装イメージ</code></pre>
+<pre class="copy"><code class="copy">{`package main
+import (
+    otelpropagation "go.opentelemetry.io/otel/propagation"
+)
+
+// propagatorの設定を返す。OTelのHTTPサーバー/クライアントのミドルウェアで使用
+func newPropagation() otelpropagation.TextMapPropagator {
+    return otelpropagation.NewCompositeTextMapPropagator(
+        otelpropagation.TraceContext{},
+        otelpropagation.Baggage{},
+    )
+}`}
+</code></pre>
+
+  <br><br>
+  <p>
     追加で<code>b3</code>などのベンダー固有のフォーマットにも、上記と合わせて複合的に対応できるようになっている。<br>
     OpenTelemetryライブラリの<code>NewCompositeTextMapPropagator</code>を使って、複数の分散トレース用伝播形式（Propagator）を1つにまとめ、異なる規格（W3C TraceContextやBaggage、b3）を同時に扱えるように合成することもできる。<br>
     <br>
@@ -515,7 +516,6 @@ func (s *service) GetAaa(params aaa.PostXxxParams) aaa {
 <pre class="title"><code class="title">実装イメージ</code></pre>
 <pre class="copy"><code class="copy">{`package main
 import (
-    "go.opentelemetry.io/otel"
     otelpropagation "go.opentelemetry.io/otel/propagation"
 )
 
@@ -542,7 +542,7 @@ func (p *propagationStruct) Fields() []string {
 // propagatorの設定を返す。OTelのHTTPサーバー/クライアントのミドルウェアで使用
 func newPropagation() otelpropagation.TextMapPropagator {
     // OTelの標準伝播であるTraceContext/Baggageを優先しつつ、
-    // 既存(OpenCensus)との互換性維持のためb3も受け付ける。
+    // OpenCensusなどで使用されているB3との互換性維持のためb3も受け付ける。
     return otelpropagation.NewCompositeTextMapPropagator(
         otelpropagation.TraceContext{},
         otelpropagation.Baggage{},
@@ -559,7 +559,7 @@ func newPropagation() otelpropagation.TextMapPropagator {
   <p>
     ランタイムのメトリクス自動収集<br>
     OpenTelemetryでは、アプリケーションの初期化時に <code>go.opentelemetry.io/contrib/instrumentation/runtime</code> パッケージを使用して、ランタイムメトリクスの収集を開始することができる。<br>
-    GoのGCの状況とかgoroutineの数とかを自動収集してくれる。<br>
+    GoのGCの状況とかgoroutineの数などを自動収集してくれる。<br>
   </p>
 
 <pre class="title"><code class="title">初期化コードの例</code></pre>
@@ -582,51 +582,8 @@ func initRuntimeMetrics() {
   <p>
     上記は収集間隔を10秒に設定しているが、省略した場合は15秒。<br>
     （<a href="https://github.com/open-telemetry/opentelemetry-go-contrib/blob/main/instrumentation/runtime/options.go#L41" target="_blank" rel="noopener noreferrer">リンク先</a>のコードで15秒が設定されている）<br>
-    単にGoのランタイム統計を取りたい場合は、この <code>runtime.Start()</code> への移行が最も推奨される方法。<br>
-    特定のメトリクスだけ取りたい場合や、上記で取得できないメトリクスを収集したい場合は、メトリクス名を指定して収集する。<br>
-    メトリクス名はこちら：
+    単にGoのランタイム統計を取りたい場合は、この <code>runtime.Start()</code> への移行が最も推奨される方法です。<br>
   </p>
-
-  <ul>
-    <li><a href="https://docs.datadoghq.com/ja/opentelemetry/integrations/runtime_metrics/?tab=java" target="_blank" rel="noopener noreferrer">OpenTelemetry ランタイムメトリクス</a></li>
-    <li><a href="https://opentelemetry.io/docs/specs/semconv/runtime/go-metrics/" target="_blank" rel="noopener noreferrer">Semantic conventions for Go runtime metrics</a></li>
-  </ul>
-
-  <p>以下サンプルコード。</p>
-
-<pre class="title"><code class="title">サンプルコード</code></pre>
-<pre><code class="copy">{`// 1. Goアプリのアロケートヒープメモリ量
-// OTel標準名: process.runtime.go.mem.heap_alloc
-goMemstatsHeapAllocBytes, err = meter.Float64ObservableGauge(
-    "process.runtime.go.mem.heap_alloc",
-    metric.WithDescription("Go application allocated heap memory"),
-    metric.WithUnit("by"), // OTelのバイト単位の標準表記は小文字の "by" です
-)
-if err != nil {
-    return err
-}
-// 2. GoアプリのGC所要時間
-// OTel標準名: process.runtime.go.gc.duration
-// ※ 累積時間(Sum)として扱う場合は、Gaugeではなく「Counter (Sum)」として定義するのがOTelの標準的なアプローチですが、
-// 既存の非同期(Observable)な値をそのまま移送する場合は ObservableCounter または ObservableGauge を使用します。
-// ここでは単純な名前と単位の置換を行っています。
-goGcDurationSecondsSum, err = meter.Float64ObservableGauge(
-    "process.runtime.go.gc.duration",
-    metric.WithDescription("Go application total duration time of GC"),
-    metric.WithUnit("s"),
-)
-if err != nil {
-    return err
-}
-// 3. Goアプリのgoroutine数
-// OTel標準名: process.runtime.go.goroutines
-goGoroutines, err = meter.Int64ObservableGauge(
-    "process.runtime.go.goroutines",
-    metric.WithDescription("Go number of goroutines"),
-)
-if err != nil {
-    return err
-}`}</code></pre>
 
   <br>
   <AdUnitLandscape />
@@ -702,7 +659,7 @@ latency.Record(ctx, latencyMs,
               データ量:
               <ul>
                 <li>By (バイト)</li>
-                <li>KiB (キビバイト)</li>
+                <li>KiBy (キビバイト)</li>
               </ul>
             </li>
             <li>
@@ -808,8 +765,7 @@ latency.Record(ctx, latencyMs,
     <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code>という環境変数の値を cumulativeまたはdeltaに設定することで処理方式を切り替えることができる。<br>
     OpenTelemetry のデフォルトは cumulative です。<br>
     注意点として、Prometheus や Datadog など、受ける側の監視ツールによって推奨・対応しているテンポラリティが異なります。<br>
-    具体的には、Prometheus は Cumulative 選好、Datadog 等のメトリクスAPIは Delta が扱いやすいケースがあるようです。<br>
-    システムの要件や監視ツールの仕様に応じて、適切なテンポラリティを選択することが重要です。<br>
+    どのバックエンドでどちらが推奨されるかはバックエンドの仕様を確認する必要があります。<br>
 
     <br>
     参考：<a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/#temporality-and-cardinality-limits" target="_blank" rel="noopener noreferrer">OpenTelemetry テンポラリティとカーディナリティ制限</a><br>
@@ -833,6 +789,7 @@ latency.Record(ctx, latencyMs,
     <li><a href="https://opentelemetry.io/ja/docs/languages/sdk-configuration/otlp-exporter/" target="_blank" rel="noopener noreferrer">OpenTelemetry OTLPエクスポーター設定</a></li>
     <li><a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/#temporality-and-cardinality-limits" target="_blank" rel="noopener noreferrer">OpenTelemetry テンポラリティとカーディナリティ制限</a></li>
     <li><a href="https://opentelemetry.io/ja/docs/concepts/signals/metrics/" target="_blank" rel="noopener noreferrer">OpenTelemetry メトリクス</a></li>
+    <li><a href="https://opentelemetry.io/docs/concepts/semantic-conventions/" target="_blank" rel="noopener noreferrer">OpenTelemetry Semantic Conventions</a></li>
     <li><a href="https://docs.datadoghq.com/ja/opentelemetry/integrations/runtime_metrics/?tab=java" target="_blank" rel="noopener noreferrer">Datadog OpenTelemetry ランタイムメトリクス</a></li>
     <li><a href="https://docs.datadoghq.com/ja/metrics/open_telemetry/otlp_metric_types/?tab=sum" target="_blank" rel="noopener noreferrer">Datadog OTLP メトリクスタイプ</a></li>
     <li><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/" target="_blank" rel="noopener noreferrer">Datadog Metrics Data Model</a></li>
