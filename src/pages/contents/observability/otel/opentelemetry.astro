@@ -42,9 +42,6 @@ const indexList: index_pcsp[] = [
   indexList={indexList}
 >
 
-  <br>
-  <AdUnitLandscape />
-
   <br/>
   <h3 class="title" id="firstly">はじめに</h3>
   <p>
@@ -52,14 +49,18 @@ const indexList: index_pcsp[] = [
     ほぼ何も知らない状態から、いろいろ調べながら推進する過程で得られた知見をまとめたのがこの記事です。<br>
   </p>
 
+  <br>
+  <AdUnitLandscape />
+
   <br/>
   <h3 class="title" id="what_id_otel">OpenTelemetryとは</h3>
   <p>
     <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry(OTel)</a> は、テレメトリデータを生成・収集・処理・出力するためのベンダー非依存なオブザーバビリティフレームワークです。<br>
     Google が主導して作成した OpenCensus と、<a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer">CNCF</a>（Cloud Native Computing Foundation コンテナ技術の推進を目的とした組織）が主導していた OpenTracing を統一し、テレメトリ仕様の業界標準としたものです。<br>
     テレメトリとはサーバーの稼働状況（メトリクス）やエラーログを収集したもので、システムの安定稼働や障害の早期解決に利用されます。<br>
-    ログ、トレース、メトリクス、プロファイル、トレースコンテキスト、バゲッジなどがあります。<br>
-    このうちログ、トレース、メトリクス、プロファイルはシグナルとも呼ばれます。<br>
+    テレメトリとして扱われる主なデータにはログ、トレース、メトリクス、プロファイルがあります。<br>
+    また、これらを関連付けたりサービス間で伝播したりする仕組みとして、トレースコンテキストやバゲッジがあります。<br>
+    ログ、トレース、メトリクス、プロファイルはシグナルとも呼ばれます。<br>
     シグナルとは、システムやアプリケーションの動作状況やパフォーマンスを把握するために外部へ出力されるデータの種類のことです。<br>
     各テレメトリの分類と概要・役割は以下の通り。<br>
   </p>
@@ -139,7 +140,7 @@ const indexList: index_pcsp[] = [
   <p>
     これらの概念自体はOpenTelemetry登場前から存在していたが、ベンダー（DatadogやPrometheus, Jeagerなど）によって仕様が異なっていました。<br>
     それらをベンダーに依存しない統一フォーマットとして提供し、データの生成から転送までの方式を標準化しました。<br>
-    さらに、これらのシグナルをトレースIDというユニークなIDで、コンテキスト（Goなら <code>context.Context</code> ）を介して紐づけることで、障害などが発生した際のログ、トレース、メトリクスなどの紐付けが容易にできるようにしました。<br>
+    さらに、ログやトレースなど、関連するテレメトリをコンテキスト情報によって関連付けて調査しやすくしました。<br>
     これまでは、例えば障害があった時に各シグナルを結びつけるためには、おおよその時間から各データの関連性を推測するというのが主な調査方法でしたが、各データをコンテキストで結びつけることで、明確な紐付けをすることができるようになりました。<br>
     （これまでも一部繋がってはいましたが、それはベンダーの仕様に依存していました。OTelはそれを全面的に標準化しました。）<br>
 
@@ -198,7 +199,18 @@ const indexList: index_pcsp[] = [
   <div class="slider">
     <table border="1">
       <tr><th style="z-index: 0">構成例</th><th>コレクター</th><th>ストレージ</th><th>バックエンド（UI/クエリ）</th><th>備考</th></tr>
-      <tr><td>SaaS活用</td><td>Datadog Agent</td><td>Datadog</td><td>Datadog</td><td>Datadogはストレージとバックエンドを兼務できる</td></tr>
+      <tr>
+        <td>SaaS活用</td>
+        <td>
+          Datadog Agent<br>
+          ※私が担当したシステムの構成ではDatadog Agentをコレクターとして利用していました
+        </td>
+        <td>Datadog</td>
+        <td>Datadog</td>
+        <td>
+          Datadogはストレージとバックエンドを兼務できる
+        </td>
+      </tr>
       <tr>
         <td rowspan="5">
           OSSを駆使した<br>
