@@ -1,0 +1,81 @@
+---
+import { SITE_TITLE, BASE_URL } from '../consts';
+import { TWITTER_CARD_SUMMARY } from '../components/BaseHead.astro';
+import { indexPagebc } from './index.astro';
+import SiteLayout, { type Breadcrumb } from '../layouts/SiteLayout.astro';
+import type { index_pcsp } from '../components/Header.astro';
+
+export const whoAreYouPagebc: Breadcrumb = {
+  name: "自己紹介",
+  item: `${BASE_URL}/who_are_you`
+};
+export const indexPagebcList: Breadcrumb[] = [indexPagebc, whoAreYouPagebc];
+
+const indexList: index_pcsp[] = [];
+---
+
+<SiteLayout
+  title="自己紹介ページ"
+  description="自己紹介ページ"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={indexPagebcList}
+  indexList={indexList}
+>
+
+  <br>
+  自己紹介ページです。<br>
+
+  <br>
+  <table border="1">
+    <tr>
+      <th>名前</th>
+      <td>
+        <a href="https://x.com/taumax_" target="_blank" rel="noopener noreferrer">taumax</a><br>
+        別名: <a href="https://x.com/sagamax__" target="_blank" rel="noopener noreferrer">sagamax</a>
+      </td>
+    </tr>
+    <tr>
+      <th>保有<br>資格</th>
+      <td>
+        <ul>
+          <li>
+            マネジメント、アジャイル
+            <ul>
+              <li>プロジェクトマネージャ（情報処理試験）</li>
+              <li>Advanced Certified Scrum Developer (A-CSD)</li>
+            </ul>
+          </li>
+          <li>
+            データベース、データ
+            <ul>
+              <li>データベーススペシャリスト（情報処理試験）</li>
+              <li>Oracle Gold 11g</li>
+              <li>DB2 Advanced Expert</li>
+              <li>DB2 Expert（管理、開発）</li>
+              <li>Google Cloud Certified - Professional Data Engineer (PDE)</li>
+              <li>Google Cloud Certified - Professional Cloud Database Engineer (PCDBE)</li>
+            </ul>
+          </li>
+          <li>
+            アーキテクチャ、開発
+            <ul>
+              <li>システムアーキテクト（情報処理試験）</li>
+              <li>Java Gold SE 7, 8, 11, 17</li>
+              <li>HTML5 プロフェッショナル認定試験レベル1, レベル2</li>
+              <li>Google Cloud Certified - Professional Cloud Developer (PCD)</li>
+            </ul>
+          </li>
+          <li>
+            インフラ、ネットワーク、セキュリティ
+            <ul>
+              <li>ネットワークスペシャリスト（情報処理試験）</li>
+              <li>情報処理安全確保支援士（情報処理試験　試験合格のみ）</li>
+              <li>LinuC レベル1, レベル2</li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
+</SiteLayout>

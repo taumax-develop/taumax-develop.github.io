@@ -96,7 +96,8 @@ const indexList: index_pcsp[] = [
     EventEmitter については<a href=`${BASE_URL}/contents/development/javascript/nodejs/nodejs#async`>非同期のイベント駆動型ランタイム</a>を参照してください。<br>
 
     <br>
-    tmi.js はチャット以外にも様々なイベントを拾って処理を開始することができます。ここではそのすべてについては説明しません。イベントの全量は以下リンク先を参照して下さい。<br>
+    tmi.js はチャット以外にも様々なイベントを拾って処理を開始することができます。<br>
+    イベントの全量は以下リンク先を参照して下さい。<br>
     <a href="https://github.com/tmijs/docs/blob/gh-pages/_posts/v1.4.2/2019-03-03-Events.md" target="_blank" rel="noopener noreferrer">github tmijs/docs</a><br>
 
     <br>
@@ -104,7 +105,8 @@ const indexList: index_pcsp[] = [
     Webhook よりは tmi.js を使った方が（たぶん）早いので基本的に tmi.js を使えばいいと思いますが、raid は Webhook の方が使い勝手が良いと思います。<br>
     tmi.js の raid だと、 display_name を設定しているユーザーの場合、display_name のみが返され user_name を取得できないからです。display_name をキーに user_name を返してくれるAPI は（たぶん）ないので、結構困ります。<br>
     Webhook であれば user_name と display_name の両方を取得できます。<br>
-    tmi.js を改造して両方取得するやり方を紹介しているブログ記事もありますが、外部ライブラリを改造するとバージョンアップの度に書き直す必要があったり、改造が原因で予期せぬ挙動をすることも考えられるのであまりお勧めできません。一応当該記事のリンクを張っておきます。<br>
+    tmi.js を改造して両方取得するやり方を紹介しているブログ記事もありますが、外部ライブラリを改造するとバージョンアップの度に書き直す必要があったり、改造が原因で予期せぬ挙動をすることも考えられるのであまりお勧めできません。<br>
+    一応当該記事のリンクを張っておきます。<br>
     <a href="https://zenn.dev/sushat4692/scraps/7c25d4050fcb3b" target="_blank" rel="noopener noreferrer">Zenn tmi.jsでRaidのユーザ名・表示名を別々に取得したい</a><br>
 
     <br>
@@ -146,7 +148,7 @@ twClientBot.connect();`}
     "[ ]" 内には以下の値を設定します。
   </p>
   <ul>
-    <li>access_token：<a href="#token">Tokenの発行</a>で取得した User access token</li>
+    <li>access_token：<a href="#token_flow">トークン発行までの流れ</a>で取得した User access token</li>
     <li>channel_name：対象チャンネルのチャンネル名（＝user_name）</li>
     <li>message：投稿するメッセージ</li>
   </ul>
@@ -157,8 +159,10 @@ twClientBot.connect();`}
 });`}
 </code></pre>
 
+  <br>
   <p>
-    の部分はチャットが入力される度に稼働する処理です。channel にはチャンネル名、 userstate にはチャットしてくれたユーザーの情報、 msg にはチャットに入力された文言、 self は自分自身かどうかを示す bool 型の値が入っています。<br>
+    の部分はチャットが入力される度に稼働する処理です。<br>
+    channel にはチャンネル名、 userstate にはチャットしてくれたユーザーの情報、 msg にはチャットに入力された文言、 self は自分自身かどうかを示す bool 型の値が入っています。<br>
     第2引数の userstate には以下のようなユーザー情報が json 形式で入っているので、主にこの userstate と msg（ユーザーがチャットに投げた文言） を使って自由に処理を組み立てることができます。<br>
   </p>
 
@@ -207,7 +211,8 @@ twClientBot.connect();`}
   <span id="webhook"></span>
   <h3 class="title">Node.js × Webhook</h3>
   <p>
-    Webhook でイベントの通知を受け取るためには、まず受け取るサーバを構築する必要があります。以下リンク先で詳細に解説されていますが、ここでも記載します。<br>
+    Webhook でイベントの通知を受け取るためには、まず受け取るサーバを構築する必要があります。<br>
+    以下リンク先で詳細に解説されていますが、ここでも記載します。<br>
     <a href="https://dev.twitch.tv/docs/eventsub/handling-webhook-events/" target="_blank" rel="noopener noreferrer">Getting Events Using Webhook Callbacks</a><br>
 
     <br>
@@ -245,7 +250,7 @@ https://api.twitch.tv/helix/eventsub/subscriptions
       ※指定するURLは443番ポートでSSL通信を使用している必要があります。
     </li>
     <li>secret：Webhook を受け取ったサーバで認証に使用する値</li>
-    <li>access_token：<a href="#token">Tokenの発行</a>で取得した App access token</li>
+    <li>access_token：<a href="#token_flow">トークン発行までの流れ</a>で取得した App access token</li>
     <li>client_id：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
   </ul>
   <br>
@@ -490,7 +495,7 @@ function verifyMessage(hmac, verifySignature) {
     "[ ]" には以下の値を設定します。
   </p>
   <ul>
-    <li>access_token：<a href="#token">Tokenの発行</a>で取得した User access token</li>
+    <li>access_token：<a href="#token_flow">トークン発行までの流れ</a>で取得した User access token</li>
     <li>clientID：<a href="#register_application">アプリケーションの登録</a>で取得したクライアントID</li>
   </ul>
 

@@ -273,6 +273,14 @@ table.vertical_td_top td {
   vertical-align: top;
 }
 
+ul ul {
+  list-style-type: circle;
+}
+
+table ul {
+  padding-left: 1.5em;
+}
+
 caption {
   text-align: left;
 }

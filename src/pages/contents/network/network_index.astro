@@ -4,14 +4,14 @@ import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
 import { BASE_URL } from '../../../consts';
 import { indexPagebcList } from '../../index.astro';
 import type { index_pcsp } from '../../../components/Header.astro';
-import { originPagebc } from './origin.astro';
+import { originPagebc } from './network_basic_term.astro';
 
 export const networkPagebc: Breadcrumb = {
   name: "ネットワーク",
   item: `${BASE_URL}/contents/network/network_index`
 };
 export const networkPagebcList: Breadcrumb[] = [...indexPagebcList, networkPagebc];
-const indexList = [] as index[];
+const indexList = [] as index_pcsp[];
 ---
 
 <SiteLayout
@@ -27,4 +27,6 @@ const indexList = [] as index[];
   <ul>
     <li><a href={originPagebc.item}>{originPagebc.name}</a></li>
   </ul>
+
+  <br><br><br><br><br><br>
 </SiteLayout>

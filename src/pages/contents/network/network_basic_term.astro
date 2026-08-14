@@ -1,0 +1,93 @@
+---
+import SiteLayout, { type Breadcrumb } from '../../../layouts/SiteLayout.astro';
+import { TWITTER_CARD_SUMMARY } from '../../../components/BaseHead.astro';
+import { BASE_URL } from '../../../consts';
+import { Image } from 'astro:assets';
+import type { index_pcsp } from '../../../components/Header.astro';
+import { networkPagebcList } from './network_index.astro';
+import host_etc from './img/host_etc.png';
+
+export const originPagebc: Breadcrumb = {
+  name: "ネットワーク基本用語",
+  item: `${BASE_URL}/contents/network/network_basic_term`
+};
+const breadcrumbList = [...networkPagebcList, originPagebc];
+const indexList: index_pcsp[] = [
+  { id: "#firstly", name_pc: "初めに" },
+  { id: "#url_structure", name_pc: "URLから見る", name_sp: "URL構成から見る用語" },
+  { id: "#origin", name_pc: "オリジン" },
+  { id: "#reference", name_pc: "参考" }
+];
+---
+
+<SiteLayout
+  title="ネットワーク基本用語"
+  description="ネットワーク基本用語の解説ページ。スキーム、ホスト、ドメイン名、FQDN、オリジンについて。"
+  twitterCardSize={TWITTER_CARD_SUMMARY}
+  breadcrumbList={breadcrumbList}
+  indexList={indexList}
+>
+
+  <br>
+  <h3 class="title" id="firstly">初めに</h3>
+  <p>
+    ネットワーク関連の基本的な用語として以下まとめてみました。<br>
+  </p>
+  <ul>
+    <li>スキーム（プロトコル）</li>
+    <li>ホスト名</li>
+    <li>ドメイン名</li>
+    <li>FQDN（Fully Qualified Domain Name 完全修飾ドメイン名）</li>
+    <li>オリジン</li>
+  </ul>
+
+  <br>
+  <h3 class="title" id="url_structure">URLから見る用語</h3>
+  <p>
+    https://www.xxx.com:443 というURLがあったとして、構成要素ごとに分解すると以下の図のようになります。<br>
+    <Image src={host_etc} width={400} alt="ホスト、スキーム、ポートの例" /><br/>
+  </p>
+  <ul>
+    <li>https：スキーム（プロトコル）</li>
+    <li>www：ホスト名（サブドメイン）</li>
+    <li>xxx.com：ドメイン名</li>
+    <li>www.xxx.com：FQDN（Fully Qualified Domain Name 完全修飾ドメイン名）</li>
+    <li>443：ポート番号</li>
+  </ul>
+
+  <p>
+    ※httpsの場合、ポート番号は443がデフォルトで設定されているため、URLに明示的に書かれていなくても443が使われます。<br>
+  </p>
+
+  <br>
+  <h3 class="title" id="origin">オリジン (Origin)</h3>
+  <p>
+    オリジン (Origin) は、スキーム、ホスト名、ポート番号の組み合わせです。<br>
+    下記は全て同じオリジンとみなされます（Same-Origin）。<br>
+  </p>
+
+  <ol>
+    <li>http://site-a.example.com/</li>
+    <li>http://site-a.example.com:80/</li>
+    <li>http://site-a.example.com/example.html?x=1</li>
+  </ol>
+
+  <p>
+    ※httpのデフォルトポートは80なので、上記はすべて同じとみなされます。<br>
+    また、パス（/example.html）やクエリ（?x=1）はオリジンの判定には関係ありません。<br>
+
+    <br>
+    逆に、下記は異なるオリジンとみなされます（Cross-Origin）。
+  </p>
+  <ol>
+    <li>https://site-a.example.com/      ← スキームが異なる（httpとhttps）</li>
+    <li>http://site-b.example.com/       ← ホスト名が異なる（site-aとsite-b）</li>
+    <li>http://site-a.example.com:8080/  ← ポート番号が異なる（ポート80と8080）</li>
+  </ol>
+
+  <br>
+  <h3 class="title" id="reference">参考</h3>
+  <ul>
+    <li><a href="https://www.onamae.com/column/domain/55/" target="_blank" rel="noopener noreferrer">GMO ドメイン名とホストって何が違うの？FQDNやIPアドレスの役割についても解説</a></li>
+  </ul>
+</SiteLayout>

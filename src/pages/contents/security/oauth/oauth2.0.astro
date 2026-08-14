@@ -533,9 +533,10 @@ export async function refreshToken(clientID, clientSecret, refreshToken) {
     <Image src={authorization_code_grant_flow} width={700} alt="oauth" /><br>
 
     <br>
-    Authorization code grant flowは認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
-    スマートフォンなどでは、同じURL Schemeを持つ複数のアプリを入れることができるものがあります。<br>
-    そのため、攻撃対象者のスマホに、既に入っているアプリケーションと同じURL Schemeを持つアプリケーションを入れることで、正規のアプリケーションに成りすまして認可コードを横取りできてしまいます。<br>
+    Authorization code grant flow は認可コードを使ってアプリケーションの正当性を確認するフローですが、その認可コードを横取りできるケースが存在します。<br>
+    スマートフォンなどでは、同じ URL スキーム（※）を持つ複数のアプリを入れることができるものがあります。<br>
+    （※URLの“://”より前の部分。http://xxx.com なら http の部分）<br>
+    そのため、攻撃対象者のスマホに、既に入っているアプリケーションと同じ URL スキームを持つアプリケーションを入れることで、正規のアプリケーションに成りすまして認可コードを横取りできてしまいます。<br>
     <Image src={yokodori_img} width={700} alt="yokodori" /><br>
 
     <br>

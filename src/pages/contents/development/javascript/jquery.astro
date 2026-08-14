@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import { TWITTER_CARD_SUMMARY } from '../../../../components/BaseHead.astro';
-import { type index } from '../../../../components/Header.astro';
+import { type index_pcsp } from '../../../../components/Header.astro';
 import { BASE_URL } from '../../../../consts';
 import { type Breadcrumb } from '../../../../layouts/SiteLayout.astro';
 import { javaScriptBcList } from './js_index.astro';
@@ -11,7 +11,7 @@ export const jQueryBc: Breadcrumb = {
   item: `${BASE_URL}/contents/development/javascript/jquery`
 };
 export const jQueryBcList: Breadcrumb[] = [...javaScriptBcList, jQueryBc];
-const indexList = [] as index[];
+const indexList = [] as index_pcsp[];
 ---
 
 <SiteLayout
