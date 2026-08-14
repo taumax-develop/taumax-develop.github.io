@@ -52,7 +52,7 @@ const indexList: index_pcsp[] = [
   <AdUnitLandscape />
 
   <br/>
-  <h3 class="title" id="what_id_otel">OpenTelemetryとは</h3>
+  <h3 class="title" id="what_id_otel">OpenTelemetry とは</h3>
   <p>
     <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry(OTel)</a> は、テレメトリデータを生成・収集・処理・出力するためのベンダー非依存なオブザーバビリティフレームワークです。<br>
     Google が主導して作成した OpenCensus と、<a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer">CNCF</a>（Cloud Native Computing Foundation コンテナ技術の推進を目的とした組織）が主導していた OpenTracing を統一し、テレメトリ仕様の業界標準としたものです。<br>
@@ -150,9 +150,9 @@ const indexList: index_pcsp[] = [
   <AdUnitLandscape />
 
   <br/>
-  <h3 class="title" id="otel_overall_structure">OpenTelemetryの全体構成</h3>
+  <h3 class="title" id="otel_overall_structure">OpenTelemetry の全体構成</h3>
   <p>
-    OpenTelemetryの構成を俯瞰して見ると以下の図のようになっています。<br>
+    OpenTelemetry の構成を俯瞰して見ると以下の図のようになっています。<br>
     <Image src={overallStruct} alt="OpenTelemetryの全体構成" width="1000" /><br>
 
     <br>
@@ -192,9 +192,9 @@ const indexList: index_pcsp[] = [
   <br>
   <br>
   <p>
-    コレクターには、公式が提供している OpenTelemetry Collector の他、各ベンダーが提供するAgentを利用する構成もあります。<br>
+    コレクターには、公式が提供している OpenTelemetry Collector の他、各ベンダーが提供する Agent を利用する構成もあります。<br>
     具体的な構成例があったほうがイメージしやすいため、以下に構成例を示します。<br>
-    なお、私が担当したシステムではDatadogを利用していたため、Datadog Agentを利用した構成例も記載しています。<br>
+    なお、私が担当したシステムでは Datadog を利用していたため、Datadog Agent を利用した構成例も記載しています。<br>
   </p>
 
   <div class="slider">
@@ -202,7 +202,7 @@ const indexList: index_pcsp[] = [
       <tr><th style="z-index: 0">構成例</th><th>コレクター</th><th>ストレージ</th><th>バックエンド（UI/クエリ）</th><th>備考</th></tr>
       <tr>
         <td>
-          Datadogを利用<br>
+          Datadog を利用<br>
           する場合の一例
         </td>
         <td>
@@ -211,12 +211,12 @@ const indexList: index_pcsp[] = [
         <td>Datadog</td>
         <td>Datadog</td>
         <td>
-          Datadogはストレージとバックエンドを兼務できる
+          Datadog はストレージとバックエンドを兼務できる
         </td>
       </tr>
       <tr>
         <td rowspan="5">
-          OSSを駆使した<br>
+          OSS を駆使した<br>
           自前運用<br>
           （無料でローカル<br>
           環境で構築できる<br>
@@ -333,7 +333,7 @@ const indexList: index_pcsp[] = [
   <p>
     コレクターは先にも書いた通り、アプリケーションから送られてきたシグナルを受け取り、加工して、次の場所へ送り出す中継地点（プロキシ）です。<br>
     アプリケーションからコレクタへデータを送信する際の通信プロトコルはgRPC / HTTPが使用できます。<br>
-    送信するデータフォーマットはOTLP (OpenTelemetry Protocol) というプロトコルに準拠しています。<br>
+    送信するデータフォーマットは OTLP (OpenTelemetry Protocol) というプロトコルに準拠しています。<br>
     OTLP はアプリケーションからコレクター、またはコレクターからバックエンドへテレメトリデータを送信・転送するためのプロトコル/データ構造を定めたものです。<br>
     また、サービス間（HTTPヘッダーやgRPCメタデータ）でトレースの文脈( <code>traceparent</code> , <code>tracestate</code> )を伝播するための標準仕様として <a href="https://www.w3.org/TR/trace-context/" target="_blank" rel="noopener noreferrer">Trace Context</a> が定義されています。<br>
     これは <a href="https://www.w3.org/" target="_blank" rel="noopener noreferrer">W3C</a> （Web技術の標準化を進める国際組織）の仕様として定義されているものです。<br>
@@ -345,7 +345,7 @@ const indexList: index_pcsp[] = [
 
   <br>
   <table border="1">
-    <tr><th>プロトコル</th><th>ポート</th><th>用途・特徴</th></tr>
+    <tr><th>プロトコル</th><th style="white-space: nowrap;">ポート</th><th>用途・特徴</th></tr>
     <tr>
       <td>OTLP/gRPC</td>
       <td>4317</td>
@@ -366,19 +366,19 @@ const indexList: index_pcsp[] = [
   <AdUnitLandscape />
 
   <br>
-  <h3 class="title" id="k8s_otel_collector">k8s環境下でOpenTelemetryコレクターはどこに置くのか</h3>
-  <h4 class="title" id="k8s_otel_collector_overview">その前にKubernetesの構成について一瞬おさらい</h4>
+  <h3 class="title" id="k8s_otel_collector">k8s 環境下で OpenTelemetry コレクターはどこに置くのか</h3>
+  <h4 class="title" id="k8s_otel_collector_overview">その前に Kubernetes の構成について一瞬おさらい</h4>
   <p>
-    k8sは、Clusterの中にNodeがあってNodeの中にPodがいくつかあってPodの中に1つ以上のコンテナが入ってるという構成になっている。<br>
-    スケールイン、スケールアウトはPod単位（hpaのminReplicas/maxReplicas）。<br>
+    k8s は、Cluster の中に Node があって Node の中に Pod がいくつかあって Pod の中に1つ以上のコンテナが入ってるという構成になっている。<br>
+    スケールイン、スケールアウトは Pod 単位（hpa の minReplicas/maxReplicas）。<br>
     <Image src={k8sConfig} alt="Kubernetesの構成" width="600" /><br>
     図は<a href="https://www.rworks.jp/cloud/kubernetes-op-support/kubernetes-column/kubernetes-entry/29324/" target="_blank" rel="noopener noreferrer">リンク先</a>のもの。<br>
   </p>
 
   <br>
-  <h4 class="title" id="then_k8s_otel_collector">で、k8s環境下でOpenTelemetryコレクターはどこに置くの</h4>
+  <h4 class="title" id="then_k8s_otel_collector">で、k8s 環境下で OpenTelemetry コレクターはどこに置くの</h4>
   <p>
-    k8s環境でOpenTelemetry Collectorを構成する際の主要パターンは以下の通り。<br>
+    k8s 環境で OpenTelemetry Collector を構成する際の主要パターンは以下の通り。<br>
   </p>
 
   <table border="1">
@@ -386,8 +386,8 @@ const indexList: index_pcsp[] = [
     <tr>
       <td>サイドカー構成</td>
       <td>
-        アプリと同一Podに常駐させる構成。<br>
-        アプリとコレクターが同一Podのためlocalhostでデータを送信。<br>
+        アプリと同一 Pod に常駐させる構成。<br>
+        アプリとコレクターが同一 Pod のため localhost でデータを送信。<br>
         アプリごとの独立性が高いが、ポッド数に比例してメモリ/CPU消費が増える。<br>
         <Image src={sidecar} alt="サイドカー構成" width="600" /><br>
       </td>
@@ -397,8 +397,8 @@ const indexList: index_pcsp[] = [
         （ノードエージェントモデル）
       </td>
       <td>
-        ノードに1つだけ配置し、ノード上で稼働する複数のアプリPodが共同で利用する構成。<br>
-        同一ノード上のコレクターへNode IP経由で送信。<br>
+        ノードに1つだけ配置し、ノード上で稼働する複数のアプリ Pod が共同で利用する構成。<br>
+        同一ノード上のコレクターへ Node IP 経由で送信。<br>
         ノードあたりのリソース効率が良いが、マルチテナントでの分離や設定変更の柔軟性に制限あり。<br>
         <Image src={daemonset} alt="DaemonSet構成" width="600" /><br>
       </td>
@@ -406,9 +406,9 @@ const indexList: index_pcsp[] = [
     <tr>
       <td>ゲートウェイ構成</td>
       <td>
-        コレクター専用のDeploymentを構成し、負荷状況に応じてオートスケール。<br>
+        コレクター専用の Deployment を構成し、負荷状況に応じてオートスケール。<br>
         データ送信元はデーモンセット/サイドカー混合可。<br>
-        ClusterIP Service経由でGateway Collectorへ集約。<br>
+        ClusterIP Service 経由で Gateway Collector へ集約。<br>
         重い処理（Tail-based Sampling や集約処理）を担当させるのに向いている。<br>
         <Image src={gateway} alt="Gateway構成" width="800" /><br>
       </td>
@@ -417,8 +417,8 @@ const indexList: index_pcsp[] = [
 
   <br>
   <p>
-    デーモンセット構成の場合、アプリケーションPodからコレクターPodへの通信はNode IP経由で行うので、NodeのIPアドレスを取得する必要がある。<br>
-    k8sであれば <code>deployment.yml</code> に以下のような設定をすることでNode IPを環境変数に設定することができる。<br>
+    デーモンセット構成の場合、アプリケーション Pod からコレクター Pod への通信は Node IP 経由で行うので、Node の IP アドレスを取得する必要がある。<br>
+    k8s であれば <code>deployment.yml</code> に以下のような設定をすることで Node IP を環境変数に設定することができる。<br>
   </p>
 
 <br>
@@ -432,7 +432,7 @@ const indexList: index_pcsp[] = [
 
   <br>
   <p>
-    <code>status.hostIP</code>でKubernetesの機能を使って、このアプリPodが今乗っているワーカーノードの物理IPアドレスを環境変数 <code>COLLECTOR_HOST</code> に設定している。<br>
+    <code>status.hostIP</code> で Kubernetes の機能を使って、このアプリ Pod が今乗っているワーカーノードの物理 IP アドレスを環境変数 <code>COLLECTOR_HOST</code> に設定している。<br>
     アプリケーションでは <code>COLLECTOR_HOST:4317</code> をデータの送信先とすることで、コレクターにデータを送信し、これを受けたコレクターがバックエンドにデータを転送する。<br>
     <br>
     <br>
@@ -445,7 +445,7 @@ const indexList: index_pcsp[] = [
   <h3 class="title" id="app_go_implementation">アプリケーションの話（Goの実装の話）</h3>
   <p>
     ここからは、各シグナルをアプリケーションで計測する際の実装方法の話をして行きます。<br>
-    OTel宛のログの実装については私はよくわかっていないので、トレースとメトリクスについて記載します。<br>
+    OpenTelemetry のログの実装については私はよくわかっていないので、トレースとメトリクスについて記載します。<br>
   </p>
 
   <br>
@@ -494,7 +494,7 @@ func (a *aAdapter) GetAaa(ctx context.Context) error {
   <h3 class="title" id="propagator">プロパゲーター</h3>
   <p>
     プロパゲーターは、分散トレーシング用のデータ伝播形式です。<br>
-    OpenTelemetryは<code>TraceContext</code>や<code>Baggage</code>というW3Cの標準フォーマットに準拠しており、HTTP/gRPCのヘッダーなどを介してコンテキストを受け渡すことができます。<br>
+    OpenTelemetry は <code>TraceContext</code> や <code>Baggage</code> という W3C の標準フォーマットに準拠しており、HTTP/gRPC のヘッダーなどを介してコンテキストを受け渡すことができます。<br>
   </p>
 
 <pre class="title"><code class="title">実装イメージ</code></pre>
@@ -514,8 +514,8 @@ func newPropagation() otelpropagation.TextMapPropagator {
 
   <br><br>
   <p>
-    追加で<code>b3</code>などのベンダー固有のフォーマットにも、上記と合わせて複合的に対応できるようになっています。<br>
-    OpenTelemetryライブラリの<code>NewCompositeTextMapPropagator</code>を使って、複数の分散トレース用伝播形式（Propagator）を1つにまとめ、異なる規格（W3C TraceContextやBaggage、b3）を同時に扱えるように合成することもできます。<br>
+    追加で <code>b3</code> などのベンダー固有のフォーマットにも、上記と合わせて複合的に対応できるようになっています。<br>
+    OpenTelemetry ライブラリの <code>NewCompositeTextMapPropagator</code> を使って、複数の分散トレース用伝播形式（Propagator）を1つにまとめ、異なる規格（W3C TraceContextやBaggage、b3）を同時に扱えるように合成することもできます。<br>
     <br>
     <code>TextMapPropagator</code> の概要
   </p>
@@ -772,7 +772,7 @@ duration.Record(ctx, latencyMs,
   <br>
   <h3 class="title" id="temporality">テンポラリティ</h3>
   <p>
-    OTelにはテンポラリティ（時間性）というものがあります。<br>
+    OpenTelemetry にはテンポラリティ（時間性）というものがあります。<br>
     カウンターやヒストグラムなどのメトリクスが、時間経過に対してどのように集計・報告されるかを定義する概念です。<br>
     cumulative（累積）とdelta（差分）の2つがあり、Counter, Histogram が影響を受けます。<br>
   </p>
