@@ -193,17 +193,21 @@ const indexList: index_pcsp[] = [
   <br>
   <br>
   <p>
-    具体的な構成例があったほうがよりピンと来る気がするので以下構成例
+    コレクターには、公式が提供している OpenTelemetry Collector の他、各ベンダーが提供するAgentを利用する構成もあります。<br>
+    具体的な構成例があったほうがイメージしやすいため、以下に構成例を示します。<br>
+    なお、私が担当したシステムではDatadogを利用していたため、Datadog Agentを利用した構成例も記載しています。<br>
   </p>
 
   <div class="slider">
     <table border="1">
       <tr><th style="z-index: 0">構成例</th><th>コレクター</th><th>ストレージ</th><th>バックエンド（UI/クエリ）</th><th>備考</th></tr>
       <tr>
-        <td>SaaS活用</td>
         <td>
-          Datadog Agent<br>
-          ※私が担当したシステムの構成ではDatadog Agentをコレクターとして利用していました
+          Datadogを利用<br>
+          する場合の一例
+        </td>
+        <td>
+          Datadog Agent
         </td>
         <td>Datadog</td>
         <td>Datadog</td>
