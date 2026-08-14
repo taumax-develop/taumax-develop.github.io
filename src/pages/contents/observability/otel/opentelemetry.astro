@@ -28,7 +28,6 @@ const indexList: index_pcsp[] = [
   { id: "#trace_and_span", name_pc: "Trace,Span", name_sp: "TraceとSpan" },
   { id: "#propagator", name_pc: "プロパゲータ", name_sp: "プロパゲーター" },
   { id: "#metrics", name_pc: "メトリクス", name_sp: "メトリクス" },
-  { id: "#custom_metrics", name_pc: "カスタムメトリクス", name_sp: "カスタムメトリクス" },
   { id: "#temporality", name_pc: "テンポラリティ", name_sp: "テンポラリティ" },
   { id: "#reference", name_pc: "参考", name_sp: "" },
 ];
@@ -445,19 +444,18 @@ const indexList: index_pcsp[] = [
   <br>
   <h3 class="title" id="app_go_implementation">アプリケーションの話（Goの実装の話）</h3>
   <p>
-    各シグナルをアプリケーションで計測する際の実装方法の話。<br>
-    以下にトレースとメトリクスについて記載する。<br>
-    OTel宛のログの実装についてはよくわかっていない。<br>
+    ここからは、各シグナルをアプリケーションで計測する際の実装方法の話をして行きます。<br>
+    OTel宛のログの実装については私はよくわかっていないので、トレースとメトリクスについて記載します。<br>
   </p>
 
   <br>
   <h3 class="title" id="trace_and_span">TraceとSpan</h3>
   <p>
-    トレースは3本柱の一つ。セットで覚えるべき概念としてスパン。<br>
-    トレースは、リクエストが分散システム（マイクロサービスなど）を通過する際の一連の流れ、経路を記録するもの。<br>
-    ユーザーの1回の操作（リクエスト）から始まる処理は、どれだけ多くのサーバーやマイクロサービスをまたいでもTraceは複数のSpanから構成され、それらが同じTrace IDによって関連付けられます。<br>
-    スパンは、システム内で行われた「単一の処理」の記録。<br>
+    トレース (Trace) は、リクエストが分散システム（マイクロサービスなど）を通過する際の一連の流れ、経路を記録するものです。<br>
+    セットで覚えるべき概念としてスパン (Span) があります。<br>
+    スパンは、システム内で行われた「単一の処理」の記録です。<br>
     例えば、「認証APIを呼び出す」「データベースからユーザー情報を取得する」「関数Aを実行する」といった個々の作業が1つのスパンになります。<br>
+    ユーザーの1回の操作（リクエスト）から始まる処理は、どれだけ多くのサーバーやマイクロサービスをまたいでも Trace は複数の Span から構成され、それらが同じ Trace ID によって関連付けられます。<br>
     Datadog APM でトレースを確認すると以下画像のような画面になりますが、この1つ1つの横棒がスパンを表し、全体が1つのトレースを構成します。<br>
     トレースはスパンの集合とも言える。<br>
     <Image src={datadogTraces} alt="Datadog APMの画面" width="800" /><br>
@@ -466,10 +464,10 @@ const indexList: index_pcsp[] = [
   <br>
   <h4 class="title">どう実装するのか</h4>
   <p>
-    呼び出し元から受け取ったコンテキストを元にSpanを生成すると、それは同一トレース内のスパンという扱いになる。<br>
-    サンプルコードを以下に示す。<br>
-    <code>ctx, span := tracer.Start(ctx, "xxx")</code>でSpan生成。<br>
-    以下のコードがDatadog APMのスパン1行分にあたる。<br>
+    呼び出し元から受け取ったコンテキストを元にSpanを生成すると、それは同一トレース内のスパンという扱いになります。<br>
+    Goのサンプルコードは以下。<br>
+    <code>ctx, span := tracer.Start(ctx, "xxx")</code> で Span を生成しています。<br>
+    以下のコードがDatadog APMのスパン1行分にあたります。<br>
   </p>
 
 <pre class="title"><code class="title">サンプルコード(Go)</code></pre>
@@ -485,8 +483,8 @@ func (a *aAdapter) GetAaa(ctx context.Context) error {
 
   <br>
   <p>
-    このような形で、受け取ったコンテキストを元にスパンを生成していく。<br>
-    引数で受け取ったコンテキストを無視して、新規にコンテキストを生成してSpanを開始したら、それは別のトレースになるし、そこがルートスパンになると言うこと。<br>
+    このような形で、受け取ったコンテキストを元にスパンを生成していきます。<br>
+    引数で受け取ったコンテキストを無視して、新規にコンテキストを生成してSpanを開始したら、それは別のトレースになるし、そこがルートスパンになります。<br>
   </p>
 
   <br>
@@ -495,8 +493,8 @@ func (a *aAdapter) GetAaa(ctx context.Context) error {
   <br>
   <h3 class="title" id="propagator">プロパゲーター</h3>
   <p>
-    プロパゲーターは、分散トレーシング用のデータ伝播形式。<br>
-    OpenTelemetryは<code>TraceContext</code>や<code>Baggage</code>というW3Cの標準フォーマットに準拠しており、HTTP/gRPCのヘッダーなどを介してコンテキストを受け渡すことができる。<br>
+    プロパゲーターは、分散トレーシング用のデータ伝播形式です。<br>
+    OpenTelemetryは<code>TraceContext</code>や<code>Baggage</code>というW3Cの標準フォーマットに準拠しており、HTTP/gRPCのヘッダーなどを介してコンテキストを受け渡すことができます。<br>
   </p>
 
 <pre class="title"><code class="title">実装イメージ</code></pre>
@@ -516,8 +514,8 @@ func newPropagation() otelpropagation.TextMapPropagator {
 
   <br><br>
   <p>
-    追加で<code>b3</code>などのベンダー固有のフォーマットにも、上記と合わせて複合的に対応できるようになっている。<br>
-    OpenTelemetryライブラリの<code>NewCompositeTextMapPropagator</code>を使って、複数の分散トレース用伝播形式（Propagator）を1つにまとめ、異なる規格（W3C TraceContextやBaggage、b3）を同時に扱えるように合成することもできる。<br>
+    追加で<code>b3</code>などのベンダー固有のフォーマットにも、上記と合わせて複合的に対応できるようになっています。<br>
+    OpenTelemetryライブラリの<code>NewCompositeTextMapPropagator</code>を使って、複数の分散トレース用伝播形式（Propagator）を1つにまとめ、異なる規格（W3C TraceContextやBaggage、b3）を同時に扱えるように合成することもできます。<br>
     <br>
     <code>TextMapPropagator</code> の概要
   </p>
@@ -572,8 +570,8 @@ func newPropagation() otelpropagation.TextMapPropagator {
 
   <br>
   <h3 class="title" id="metrics">メトリクス</h3>
+  <h4 class="title" id="runtime_metrics">ランタイムのメトリクス自動収集</h4>
   <p>
-    ランタイムのメトリクス自動収集<br>
     OpenTelemetryでは、アプリケーションの初期化時に <code>go.opentelemetry.io/contrib/instrumentation/runtime</code> パッケージを使用して、ランタイムメトリクスの収集を開始することができる。<br>
     GoのGCの状況とかgoroutineの数などを自動収集してくれる。<br>
   </p>
@@ -605,7 +603,7 @@ func initRuntimeMetrics() {
   <AdUnitLandscape />
 
   <br>
-  <h3 class="title" id="custom_metrics">カスタムメトリクス</h3>
+  <h4 class="title" id="custom_metrics">カスタムメトリクス</h4>
   <p>
     収集するメトリクスを独自実装してデータ収集することもできる。<br>
     メトリクスにもいくつか種類があるのでその話。<br>
@@ -615,7 +613,7 @@ func initRuntimeMetrics() {
   </p>
 
   <div class="slider">
-    <table border="1">
+    <table border="1" class="vertical_td_top">
       <tr><th style="z-index: 0">大分類</th><th>概要</th><th>interfaceの例</th><th>初期化</th><th>データ記録</th><th>備考</th></tr>
       <tr>
         <td>
@@ -636,7 +634,7 @@ func initRuntimeMetrics() {
         </td>
         <td>
 <pre class="copy"><code class="copy">latency, err := meter.Int64Gauge(
-  "aaa",
+  "matrics_name",
   metric.WithDescription("Description"),
   metric.WithUnit("ms"),
 )
@@ -646,12 +644,12 @@ func initRuntimeMetrics() {
         <td>
 <pre class="copy"><code class="copy">var (
   iDKey = attribute.Key("id")
-  status = attribute.Key("status")
+  statusKey = attribute.Key("status")
 )
 latency.Record(ctx, latencyMs,
   metric.WithAttributes(
     iDKey.String(id),
-    StatusKey.String(status),
+    statusKey.String(status),
   ),
 )
 </code></pre>
@@ -710,13 +708,17 @@ latency.Record(ctx, latencyMs,
         </td>
         <td>
 <pre class="copy"><code class="copy">counter, err := meter.Int64Counter(
-  "bbb",
+  "matrics_name",
   metric.WithDescription("Description"),
 )
 </code></pre>
         </td>
         <td>
-<pre class="copy"><code class="copy">counter.Add(ctx, 1,
+<pre class="copy"><code class="copy">var (
+  iDKey = attribute.Key("id")
+  statusKey = attribute.Key("status")
+)
+counter.Add(ctx, 1,
   metric.WithAttributes(
     iDKey.String(id),
     statusKey.String(status),
@@ -740,14 +742,17 @@ latency.Record(ctx, latencyMs,
         </td>
         <td>
 <pre class="copy"><code class="copy">duration, err := meter.Float64Histogram(
-  "ccc",
+  "matrics_name",
   metric.WithDescription("Description"),
   metric.WithUnit("ms"),
 )
 </code></pre>
         </td>
         <td>
-<pre class="copy"><code class="copy">duration.Record(ctx, latencyMs,
+<pre class="copy"><code class="copy">var (
+  operationKey = attribute.Key("operationKey")
+)
+duration.Record(ctx, latencyMs,
   metric.WithAttributes(
     operationKey.String(operation),
   ),
